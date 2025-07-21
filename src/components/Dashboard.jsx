@@ -23,14 +23,10 @@ export default function Dashboard() {
     useFetchPropertiesForSaleCurrentUser(id);
 
   return (
-    <div className="flex flex-col  gap-28  sm:px-[auto] max-w-full text-lg mb-[15rem]">
-      <div className="">
-        {documents && <ProductCart documents={documents} />}
-      </div>
+    <div className="flex flex-col  gap-28   text-lg mb-[15rem]">
+      {documents && <ProductCart documents={documents} />}
 
-      <div className="">
-        {propToLet && <PropertiesToLet propToLet={propToLet} />}
-      </div>
+      {propToLet && <PropertiesToLet propToLet={propToLet} />}
     </div>
   );
 }

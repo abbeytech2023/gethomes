@@ -22,7 +22,7 @@ export const FlexInnerDiv = styled.div`
 
 export const StyledIconDiv = styled.div`
   padding: 1rem;
-  width: 10rem;
+  max-width: 10rem;
   height: 10rem;
   ${(props) =>
     props.as === "merchants" &&

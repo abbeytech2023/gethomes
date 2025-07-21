@@ -13,7 +13,7 @@ export default function PropertiesToLet({ propToLet }) {
   });
 
   return (
-    <div className="text-center  w-full">
+    <div className="text-center ">
       {/* {error && <p>{error}</p>} */}
       <Heading as="h2" className=" uppercase text-center ">
         Properties to let
