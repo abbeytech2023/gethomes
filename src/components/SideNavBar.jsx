@@ -24,9 +24,9 @@ const StyledMyAccountLink = styled(NavLink)`
   }
 `;
 
-function SideBarTabbed() {
+function SideNavBar() {
   return (
-    <div className="flex bg-[#dfebef] py-6 px-1   border-[rgba(20,76,111)]   flex-col   font-semibold cursor-pointer justify-center items-center  ">
+    <div className="flex bg-[#dfebef]  px-1   border-[rgba(20,76,111)]   flex-col   font-semibold cursor-pointer justify-center items-center  ">
       <StyledMyAccountLink to="dashboard">
         <p>Dashboard</p>
         <FaAngleRight />
@@ -44,4 +44,4 @@ function SideBarTabbed() {
   );
 }
 
-export default SideBarTabbed;
+export default SideNavBar;

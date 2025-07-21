@@ -8,7 +8,7 @@ import PropertyToLetForm from "./components/PropertiesToLetForm";
 import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import MyAccount from "./pages/MyAccount";
-import Header from "./Components/Header";
+import Header from "./components/Header";
 
 //Pages
 import Homepage from "./pages/Homepage";

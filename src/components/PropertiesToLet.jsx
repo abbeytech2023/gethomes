@@ -15,7 +15,7 @@ export default function PropertiesToLet({ propToLet }) {
   return (
     <div className="text-center  w-full">
       {/* {error && <p>{error}</p>} */}
-      <Heading as="h2" className=" uppercase text-center mb-16">
+      <Heading as="h2" className=" uppercase text-center ">
         Properties to let
       </Heading>
 

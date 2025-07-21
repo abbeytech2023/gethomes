@@ -15,7 +15,6 @@ import MyAccountLinks from "./MyAccountLinks";
 // Hooks
 import { useUser } from "../hooks/useUser";
 import useLogout from "../hooks/useLogout";
-import Logout from "./Logout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Button from "./Button";
 import { IoArrowBack } from "react-icons/io5";

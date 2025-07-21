@@ -11,7 +11,7 @@ const IconDiv = styled.div`
 
 export default function Footer() {
   return (
-    <div className="bg-[#666]  xl:flex-row mt-[12rem] lg:flex-row text-white flex sm:flex-col gap-8 sm:gap-5 min-[0px]:px-[4%] min-[0px]:flex-col text-center text-[1rem] justify-center py-6">
+    <div className="bg-[#666] mt-12 xl:flex-row  lg:flex-row text-white flex sm:flex-col gap-8 sm:gap-5 min-[0px]:px-[4%] min-[0px]:flex-col text-center text-[1rem] justify-center py-6">
       <div>
         <p>Fair housing opportunity for everyone | &#169; 2025</p>
       </div>

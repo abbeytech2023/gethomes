@@ -48,9 +48,9 @@ export default function PropertyToLetForm() {
   };
 
   return (
-    <div className=" ">
+    <div className="mb-20 ">
       <div className=" flex  flex-col gap-8  ">
-        <div className="flex justify-center mt-14 items-center">
+        <div className="flex justify-center  items-center">
           <Form onSubmit={onSubmit} handleSubmit={handleSubmit}>
             <FormRow
               label="Property Description"
