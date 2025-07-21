@@ -1,5 +1,4 @@
 import Button from "../components/Button";
-import IMAGE from "../assets/images/logo.jpg";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCallOutline } from "react-icons/io5";
 import { IoTimeOutline } from "react-icons/io5";
