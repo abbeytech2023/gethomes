@@ -1,20 +1,28 @@
-// import CartCard from "./CartCard";
-import { GridInner } from "./Grid";
-
 import { Heading } from "./HeadingText";
 import CartCard from "./CartCard";
 import { FlexDiv } from "./FlexDiv";
+import { useEffect, useState } from "react";
+import { useUser } from "../hooks/useUser";
+import supabase from "../services/supabaseClients";
 
-//HOOKS
+export default function CurrentUserForSale() {
+  const [documents, setdocuments] = useState();
+  const user = useUser();
+  const id = user?.id;
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase
+        .from("ForSale")
+        .select("")
+        .eq("uid", id);
 
-// const ProductDiv = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   gap: 2rem;
-// `;
+      if (error) console.log(error);
+      if (data) setdocuments(data);
+    };
 
-function ProductCart({ documents }) {
+    fetchData();
+  }, [id]);
+
   return (
     <div className="mb-[8rem] flex flex-col items-center justify-center  ">
       {/* {error && <p>{error}</p>} */}
@@ -26,7 +34,7 @@ function ProductCart({ documents }) {
       {
         <FlexDiv className="">
           <>
-            {documents.map((document) => {
+            {documents?.map((document) => {
               return (
                 <div key={document.uid}>
                   <CartCard document={document} />
@@ -39,5 +47,3 @@ function ProductCart({ documents }) {
     </div>
   );
 }
-
-export default ProductCart;

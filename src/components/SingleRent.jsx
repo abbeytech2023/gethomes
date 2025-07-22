@@ -18,7 +18,6 @@ export default function SingleRent() {
 
   const navigate = useNavigate();
 
-  const { singleToLet, isPending } = useFetchSinglePropertiesToLet();
   // const { propToLet, isPending: isLoading } = useFetchPropertiesTolet();
 
   useEffect(() => {

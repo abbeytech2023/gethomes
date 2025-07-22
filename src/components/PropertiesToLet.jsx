@@ -20,11 +20,7 @@ export default function PropertiesToLet({ propToLet }) {
       </Heading>
 
       {isPending && <SpinnerMini />}
-      {propToLet?.length === 0 && (
-        <p className="uppercase text-3xl">
-          You do not have a property listed to let
-        </p>
-      )}
+
       <div>
         {propToLet && <ToLetCart documents={propToLet} isPending={isPending} />}
       </div>

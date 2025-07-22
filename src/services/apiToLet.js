@@ -13,10 +13,7 @@ export async function getToLet() {
 }
 
 export const getToLetCurrentUser = async (id) => {
-  const { data, error } = await supabase
-    .from("ToLet")
-    .select("*")
-    .eq("uid", id);
+  const { data, error } = await supabase.from("ToLet").select("").eq("uid", id);
 
   if (error) console.log(error);
 

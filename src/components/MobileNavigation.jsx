@@ -170,10 +170,7 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
       <StyledMainNavList>
         {/* {user && ( */}
 
-        <StyledNavLink
-          to="/myaccount/profile"
-          onClick={() => setIsOpenAcct(false)}
-        >
+        <StyledNavLink to="/myaccount" onClick={() => setIsOpenAcct(false)}>
           <div>My account</div>
 
           <StyledIconDiv>
