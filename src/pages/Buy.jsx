@@ -6,6 +6,8 @@ import { Heading } from "../components/HeadingText";
 import { StyledSpinner } from "../components/Spinner";
 import SpinnerMini from "../components/SpinnerMini";
 import { useFetchPropertiesForSale } from "../hooks/useProperties";
+import { useEffect, useState } from "react";
+import supabase from "../services/supabaseClients";
 
 const BuySection = styled.section`
   height: 70vh;
@@ -22,9 +24,23 @@ const BuyHeaderBox = styled.div`
 `;
 
 export default function Buy() {
+  const [forSale, setForSale] = useState();
   const { documents, isPending: isLoading } = useFetchPropertiesForSale();
 
-  console.log(documents);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("ForSale").select("*");
+
+      if (error) {
+        console.error(error);
+        throw new Error("cabins could not be loaded");
+      }
+
+      if (data) setForSale(data);
+    };
+
+    fetchData();
+  });
 
   if (isLoading) return <SpinnerMini />;
 
@@ -50,9 +66,7 @@ export default function Buy() {
         {!documents ? (
           <StyledSpinner />
         ) : (
-          <section>
-            {documents && <ProductCart documents={documents} />}
-          </section>
+          <section>{forSale && <ProductCart documents={forSale} />}</section>
         )}
       </div>
     </>

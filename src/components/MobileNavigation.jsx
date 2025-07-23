@@ -192,12 +192,12 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
           </StyledIconDiv>
         </StyledNavLink>
 
-        <StyledNavLink to="/sell">
+        {/* <StyledNavLink to="/sell">
           <div>Sell</div>
           <StyledIconDiv>
             <MdOutlineSell />
           </StyledIconDiv>
-        </StyledNavLink>
+        </StyledNavLink> */}
 
         <StyledNavLink to="/buy">
           <div> Buy</div>
