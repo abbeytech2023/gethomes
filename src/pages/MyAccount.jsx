@@ -3,8 +3,13 @@ import { Outlet, useLocation } from "react-router-dom";
 import SideNavBar from "../components/SideNavBar";
 import ProfileDisPlayPicture from "../components/ProfileDisPlayPicture";
 import MyAccountMobile from "../components/MyAccountMobile";
+import { useUser } from "../hooks/useUser";
 
 export default function MyAccount() {
+  const { user } = useUser();
+  const userDetails = user?.user_metadata;
+  console.log(userDetails);
+
   const location = useLocation();
 
   const myAccount = location.pathname === "/myaccount";
@@ -24,7 +29,7 @@ export default function MyAccount() {
           className={` flex flex-col  min-[0px]:hidden md:flex  xl:flex lg:flex sm:hidden  sm:w-[45%] lg:w-[35%] xl:w-[38%]   `}
         >
           <div className=" w-[30%] fixed top-0 left-0  h-[65%]">
-            <ProfileDisPlayPicture />
+            <ProfileDisPlayPicture userDetails={userDetails} />
           </div>
           <div className="fixed h-[35%] bottom-0 w-[30%] overflow-y-scroll ">
             <SideNavBar />

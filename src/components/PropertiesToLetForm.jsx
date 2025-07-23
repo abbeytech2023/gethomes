@@ -49,7 +49,7 @@ export default function PropertyToLetForm() {
 
   return (
     <div className="mb-20 ">
-      <div className=" flex  flex-col gap-8  ">
+      <div className="h-[70rem] flex  flex-col gap-8  ">
         <div className="flex justify-center  items-center">
           <Form onSubmit={onSubmit} handleSubmit={handleSubmit}>
             <FormRow
