@@ -28,7 +28,7 @@ function ProductCart({ documents }) {
           <>
             {documents.map((document) => {
               return (
-                <div key={document.uid}>
+                <div key={document.id}>
                   <CartCard document={document} />
                 </div>
               );

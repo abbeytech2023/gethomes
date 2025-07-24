@@ -21,7 +21,7 @@ export default function MyAccount() {
     <>
       {myAccount && (
         <div className="md:hidden lg:hidden xl:hidden">
-          <MyAccountMobile />
+          <MyAccountMobile userDetails={userDetails} />
         </div>
       )}
       <div className="relative flex min-[0px]:mx-auto  xl:mx-0 lg:mx-0 sm:mx-auto md:mx-0 ">

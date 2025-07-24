@@ -4,31 +4,37 @@ import { FlexDiv } from "./FlexDiv";
 import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
 import supabase from "../services/supabaseClients";
+import { useFetchPropertiesForSaleCurrentUser } from "../hooks/useProperties";
 
 export default function CurrentUserForSale() {
-  const [documents, setdocuments] = useState();
-  const user = useUser();
+  const { user } = useUser();
+  console.log("forsaleuser", user);
+
   const id = user?.id;
+  const [documents, setdocuments] = useState();
+
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (id) => {
       const { data, error } = await supabase
         .from("ForSale")
-        .select("")
+        .select("*")
         .eq("uid", id);
 
       if (error) console.log(error);
       if (data) setdocuments(data);
+
+      // return data;
     };
 
-    fetchData();
+    fetchData(id);
   }, [id]);
+
+  console.log(documents);
 
   return (
     <div className="mb-[8rem] flex flex-col items-center justify-center  ">
       {/* {error && <p>{error}</p>} */}
-      <Heading as="h2" className=" uppercase text-center mb-16">
-        Properties for sale
-      </Heading>
+
       {/* {isPending && <SpinnerMini />} */}
 
       {
@@ -36,7 +42,7 @@ export default function CurrentUserForSale() {
           <>
             {documents?.map((document) => {
               return (
-                <div key={document.uid}>
+                <div key={document.id}>
                   <CartCard document={document} />
                 </div>
               );

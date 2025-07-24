@@ -4,6 +4,7 @@ import { GridContainer, GridInner } from "./Grid";
 import styled from "styled-components";
 import { CgProfile } from "react-icons/cg";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 const ToLetContainer = styled.div`
   display: flex;
@@ -24,8 +25,6 @@ export const StyledDivProperty = styled.div`
   > div img {
     width: 100%;
     height: 100%;
-
-    background-color: green;
   }
 `;
 
@@ -33,11 +32,16 @@ export const ToLetCart = ({ documents }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const URL = location.pathname;
+  const { user } = useUser();
+
+  console.log(user);
 
   return (
     <ToLetContainer className="">
       {documents &&
         documents.map((doc) => {
+          console.log(doc.uid);
+
           return (
             <StyledDivProperty
               key={doc.id}

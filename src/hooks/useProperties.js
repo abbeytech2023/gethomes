@@ -34,11 +34,13 @@ export const useFetchPropertiesForSaleCurrentUser = (id) => {
   return { data, isPending };
 };
 
-export const useFetchPropertiesToletCurrentUser = () => {
+export const useFetchPropertiesToletCurrentUser = (id) => {
   const { data, isPending } = useQuery({
     queryKey: ["ToLet"],
-    queryFn: (id) => getToLetCurrentUser(id),
+    queryFn: () => getToLetCurrentUser(id),
   });
+
+  console.log(data);
 
   return { data, isPending };
 };

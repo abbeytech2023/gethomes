@@ -35,21 +35,9 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col text-center  gap-28   text-lg mb-[15rem]">
-      {documents && documents.length === 0 ? (
-        <p className="text-center text-2xl uppercase">
-          you do not have a property listed for sale
-        </p>
-      ) : (
-        documents && <CurrentUserForSale />
-      )}
+      {<CurrentUserForSale />}
 
-      {propToLet?.length === 0 ? (
-        <p className="uppercase text-2xl">
-          You do not have a property listed to let
-        </p>
-      ) : (
-        propToLet && <CurrentUserToLet />
-      )}
+      {<CurrentUserToLet />}
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { data, useLocation } from "react-router-dom";
 import { ToLetCart } from "./ToLetCart";
 import { useMutation } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiForSale";
@@ -7,26 +7,31 @@ import { Heading } from "./HeadingText";
 import { useEffect, useState } from "react";
 import supabase from "../services/supabaseClients";
 import { useUser } from "../hooks/useUser";
+import { useFetchPropertiesToletCurrentUser } from "../hooks/useProperties";
 
 export default function CurrentUserToLet() {
-  const [toLet, setToLet] = useState();
+  const [documents, setdocuments] = useState();
   const location = useLocation();
   const { user } = useUser();
 
   const id = user?.id;
+  const { data } = useFetchPropertiesToletCurrentUser(id);
+  console.log(data);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async (id) => {
       const { data, error } = await supabase
         .from("ToLet")
-        .select("")
+        .select("*")
         .eq("uid", id);
 
       if (error) console.log(error);
-      if (data) setToLet(data);
+      if (data) setdocuments(data);
     };
-    fetchData();
+    fetchData(id);
   }, [id]);
+
+  console.log("id", id);
 
   const { isPending, mutate } = useMutation({
     mutationFn: deleteProperty,
@@ -40,13 +45,13 @@ export default function CurrentUserToLet() {
       </Heading>
 
       {isPending && <SpinnerMini />}
-      {toLet?.length === 0 && (
-        <p className="uppercase text-3xl">
+      {documents?.length === 0 && (
+        <p className="uppercase text-2xl">
           You do not have a property listed to let
         </p>
       )}
       <div>
-        {toLet && <ToLetCart documents={toLet} isPending={isPending} />}
+        {documents && <ToLetCart documents={documents} isPending={isPending} />}
       </div>
     </div>
   );
