@@ -63,7 +63,7 @@ export default function HomeEssentials() {
         <FlexDiv>
           {merchants.map((merchant, index) => {
             return (
-              <FlexInnerDiv key={index}>
+              <FlexInnerDiv key={index} className="">
                 <div className=" flex flex-col items-center justify-center gap-3">
                   <StyledIconDiv>
                     <img src={merchant.imgLink} />

@@ -17,7 +17,7 @@ const StyledLogo = styled.div`
 export default function Logo({ type }) {
   return (
     <StyledLogo type={type} className={``}>
-      <div className="bg-[#fff] flex text-lg text-[1.4rem]">
+      <div className="bg-[#fff] flex text-lg text-[1.3rem]">
         <p className=" text-[#43425b]">GETHOMES</p>
         <p className=" text-[#19380f]">.NG</p>
       </div>

@@ -12,11 +12,10 @@ export const FlexDiv = styled.div`
 export const FlexInnerDiv = styled.div`
   border-radius: 1rem;
   background-color: #fff;
-  width: 25rem;
-  min-width: 12rem;
+
   max-width: 20rem;
   position: relative;
-  overflow: hidden;
+  /* overflow: hidden; */
   box-shadow: 7px 3px 8px rgba(85, 85, 85, 0.487);
 `;
 

@@ -58,7 +58,7 @@ export default function Homepage() {
       <section className="mt-[16rem] flex justify-center text-center py-16 ">
         {/* <Heading as="h5">Our Services</Heading> */}
         <FlexDiv className="">
-          <FlexInnerDiv>
+          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
             <div className=" flex flex-col items-center justify-center gap-3">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[13rem] lg:h-[11rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconSell}`} />

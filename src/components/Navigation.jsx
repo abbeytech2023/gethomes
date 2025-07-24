@@ -11,7 +11,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 export const StyledNavLink = styled(NavLink)`
   padding: 0.4rem 0.2rem;
   text-align: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
   &:link,
   &:visited {
