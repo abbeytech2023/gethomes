@@ -8,7 +8,7 @@ const StyledMyAccountLink = styled(NavLink)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 16.5px;
+  font-size: 16px;
   width: 100%;
   padding: 0 8px;
   /* background-color: red; */

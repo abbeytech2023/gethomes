@@ -2,7 +2,7 @@ export default function ProfileDisPlayPicture({ userDetails }) {
   console.log(userDetails);
 
   return (
-    <div className="mt-32 mb-12  tracking-wide gap-7 flex flex-col items-center ">
+    <div className="mt-22 mb-12  tracking-wide gap-7 flex flex-col items-center ">
       <h2 className="font-medium  md:text-2xl tracking-wider">
         Account Profile
       </h2>
