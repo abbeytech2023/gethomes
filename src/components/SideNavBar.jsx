@@ -15,7 +15,7 @@ const StyledMyAccountLink = styled(NavLink)`
   border-top: 1px solid gray;
   border-bottom: 1px solid gray;
 
-  height: 5.5rem;
+  height: 4.8rem;
 
   &.active {
     outline: 4px solid #144c6f;
