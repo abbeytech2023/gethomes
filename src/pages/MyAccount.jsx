@@ -35,7 +35,7 @@ export default function MyAccount() {
             <SideNavBar />
           </div>
         </div>
-        <div className="min-[0px]:w-[80%]  min-[0px]:mx-auto md:w-[65%] sm:w-[100%] mt-32 ">
+        <div className="md:w-[screen]  min-[0px]:mx-auto  mt-32 ">
           <Outlet />
         </div>
       </div>
