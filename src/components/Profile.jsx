@@ -13,7 +13,7 @@ import ProfileFormEdit from "./ProfileFormEdit";
 function Profile() {
   return (
     <>
-      <div className=" items-center justify-center flex-col text-lg mb-[10rem] ">
+      <div className="text-lg mb-[10rem] ">
         <ProfileFormEdit />
       </div>
     </>

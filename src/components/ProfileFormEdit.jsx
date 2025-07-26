@@ -9,7 +9,6 @@ const StyledFormDivBox = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-template-rows: auto;
-  margin-right: 3rem;
   /* max-width: 65rem; */
   min-width: 20rem;
   grid-gap: 3rem;
@@ -24,6 +23,7 @@ const StyledFormDiv = styled.div`
 
   & label {
     margin-bottom: 0.4rem;
+    font-size: 0.9rem;
   }
 
   & input {
@@ -124,7 +124,7 @@ const ProfileFormEdit = ({ user }) => {
   let onsubmit;
 
   return (
-    <form onSubmit={handleSubmit(onsubmit)} className="">
+    <form onSubmit={handleSubmit(onsubmit)} className="w-[100%]">
       <StyledFormDivBox>
         <StyledFormDiv>
           <LabelInputDiv className=" flex flex-col">
