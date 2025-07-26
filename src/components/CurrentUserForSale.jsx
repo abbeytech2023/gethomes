@@ -43,11 +43,11 @@ export default function CurrentUserForSale() {
       {documents?.map((doc) => {
         return (
           <GridInner key={doc.id}>
-            <div className="">
+            <div className="flex justify-center items-center">
               <div className=" text-center  py-8  flex flex-col gap-1 justify-center items-center">
-                <div className="flex items-center justify-center ">
+                <div className=" ">
                   <iframe
-                    width="2000"
+                    width="260"
                     height="265"
                     src="https://www.youtube.com/embed/K54Kg-QE1MY?si=t_aLDJyiblJciPwA"
                     title="YouTube video player"

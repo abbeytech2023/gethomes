@@ -4,9 +4,10 @@ export const GridContainer = styled.div`
   display: grid;
   margin-top: 2rem;
   /* max-width: 1200rem; */
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
   grid-template-rows: auto;
   grid-gap: 2rem;
+  row-gap: 3rem;
 `;
 
 // .work {
@@ -23,5 +24,6 @@ export const GridInner = styled.div`
   overflow-x: hidden;
   box-shadow: 4px 3px 6px rgba(85, 85, 85, 0.487);
   /* width: 70%; */
+
   height: 100%;
 `;

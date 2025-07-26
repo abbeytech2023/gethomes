@@ -28,9 +28,13 @@ export default function Dashboard() {
   // if (isPending) return <SpinnerMini />;
 
   return (
-    <section className=" flex flex-col items-center gap-[12rem]">
-      <CurrentUserForSale />
-      <CurrentUserToLet />;
-    </section>
+    <>
+      <section className="mb-[15rem]">
+        <CurrentUserForSale />
+      </section>
+      <section>
+        <CurrentUserToLet />;
+      </section>
+    </>
   );
 }
