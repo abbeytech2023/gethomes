@@ -6,38 +6,31 @@ import {
 
 import { useUser } from "../hooks/useUser";
 
-import ProductCart from "./ProductCart";
-import PropertiesToLet from "./PropertiesToLet";
 import SpinnerMini from "./SpinnerMini";
+import { Navigate } from "react-router-dom";
 import CurrentUserToLet from "./CurrentUserToLet";
 import CurrentUserForSale from "./CurrentUserForSale";
 
 export default function Dashboard() {
-  const [id, setId] = useState();
+  const [documents, setDocuments] = useState();
   const { user } = useUser();
-
-  useEffect(() => {
-    const id = user?.id;
-
-    setId(id);
-  }, [user?.id]);
+  const id = user?.id;
 
   const { data: propToLet, isPending: isLoading } =
     useFetchPropertiesToletCurrentUser(id);
   console.log("Dashboard", propToLet);
 
-  const { data: documents, isPending } =
-    useFetchPropertiesForSaleCurrentUser(id);
+  // const { data: documents, isPending } =
+  //   useFetchPropertiesForSaleCurrentUser(id);
   console.log("documents", documents);
 
   if (isLoading) return <SpinnerMini />;
-  if (isPending) return <SpinnerMini />;
+  // if (isPending) return <SpinnerMini />;
 
   return (
-    <div className="flex flex-col text-center  gap-28   text-lg mb-[15rem]">
-      {<CurrentUserForSale />}
-
-      {<CurrentUserToLet />}
-    </div>
+    <section className=" flex flex-col items-center gap-[12rem]">
+      <CurrentUserForSale />
+      <CurrentUserToLet />;
+    </section>
   );
 }

@@ -76,7 +76,7 @@ export default function Homepage() {
               </StyledLinkButton>
             </div>
           </FlexInnerDiv>
-          <FlexInnerDiv>
+          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
             <div className=" flex flex-col items-center justify-center gap-3">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconBuy}`} />
@@ -94,7 +94,7 @@ export default function Homepage() {
               </StyledLinkButton>
             </div>
           </FlexInnerDiv>
-          <FlexInnerDiv>
+          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
             <div className=" flex flex-col items-center justify-center gap-3">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconRent}`} />
@@ -110,7 +110,7 @@ export default function Homepage() {
               <StyledLinkButton to="/rent">Find Rentals</StyledLinkButton>
             </div>
           </FlexInnerDiv>
-          <FlexInnerDiv>
+          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
             <div className=" flex flex-col items-center justify-center gap-3">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconSurvey}`} />
@@ -123,7 +123,9 @@ export default function Homepage() {
                 boundary mapping, topographic surveys, and more. Reliable data
                 for your property decisions.
               </p>
-              <StyledLinkButton to="/rent">See your options </StyledLinkButton>
+              <StyledLinkButton to="/rent" className="min-[0px]:mx-[2rem]">
+                See your options{" "}
+              </StyledLinkButton>
             </div>
           </FlexInnerDiv>
         </FlexDiv>

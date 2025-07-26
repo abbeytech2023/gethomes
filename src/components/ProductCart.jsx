@@ -1,9 +1,9 @@
 // import CartCard from "./CartCard";
-import { GridInner } from "./Grid";
+import { GridContainer, GridInner } from "./Grid";
 
 import { Heading } from "./HeadingText";
 import CartCard from "./CartCard";
-import { FlexDiv } from "./FlexDiv";
+import { FlexDiv, FlexInnerDiv } from "./FlexDiv";
 
 //HOOKS
 
@@ -16,26 +16,15 @@ import { FlexDiv } from "./FlexDiv";
 
 function ProductCart({ documents }) {
   return (
-    <div className="mb-[8rem] flex flex-col items-center justify-center  ">
+    <div className="mb-[8rem] w-[70%] text-center mx-auto ">
       {/* {error && <p>{error}</p>} */}
       <Heading as="h2" className=" uppercase text-center mb-16">
         Properties for sale
       </Heading>
       {/* {isPending && <SpinnerMini />} */}
-
-      {
-        <FlexDiv className="">
-          <>
-            {documents.map((document) => {
-              return (
-                <div key={document.id}>
-                  <CartCard document={document} />
-                </div>
-              );
-            })}
-          </>
-        </FlexDiv>
-      }
+      <GridContainer className="mx-auto">
+        <CartCard document={documents} />
+      </GridContainer>
     </div>
   );
 }

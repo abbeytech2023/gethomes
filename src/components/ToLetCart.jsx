@@ -6,7 +6,7 @@ import { CgProfile } from "react-icons/cg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 
-const ToLetContainer = styled.div`
+export const ToLetContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -20,7 +20,6 @@ export const StyledDivProperty = styled.div`
   box-shadow: 3px 3px 8px rgba(85, 85, 85, 0.487);
   margin-bottom: 6rem;
   padding: 2rem;
-  width: 40rem;
 
   > div img {
     width: 100%;

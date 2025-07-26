@@ -63,11 +63,7 @@ export default function Buy() {
       </div>
       {/* ------------------- BUY RENT SELL SECTION -------------  */}
       <div className="mt-[15rem]">
-        {!documents ? (
-          <StyledSpinner />
-        ) : (
-          <section>{forSale && <ProductCart documents={forSale} />}</section>
-        )}
+        <section>{forSale && <ProductCart documents={forSale} />}</section>
       </div>
     </>
   );
