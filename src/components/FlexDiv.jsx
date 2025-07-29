@@ -13,7 +13,7 @@ export const FlexInnerDiv = styled.div`
   border-radius: 1rem;
   background-color: #fff;
 
-  max-width: 20rem;
+  max-width: 17rem;
   position: relative;
   /* overflow: hidden; */
   box-shadow: 7px 3px 8px rgba(85, 85, 85, 0.487);
