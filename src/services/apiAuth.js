@@ -1,6 +1,12 @@
 import supabase from "./supabaseClients";
 
-export async function signup({ email, password, fullName, profession }) {
+export async function signup({
+  email,
+  password,
+  fullName,
+  profession,
+  googleBusiness,
+}) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -9,6 +15,7 @@ export async function signup({ email, password, fullName, profession }) {
         fullName,
         avatar: "",
         profession,
+        googleBusiness,
       },
     },
   });
@@ -31,6 +38,7 @@ export async function signup({ email, password, fullName, profession }) {
       email: email,
       displayName: user.user_metadata.fullName,
       profession: profession,
+      googleBusiness: googleBusiness,
     },
   ]);
 

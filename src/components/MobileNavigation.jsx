@@ -175,17 +175,14 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
       <StyledMainNavList>
         {/* {user && ( */}
 
-        <StyledNavLink to="/myaccount" onClick={() => setIsOpenAcct(false)}>
-          <div>My account</div>
+        {user && (
+          <StyledNavLink to="/myaccount" onClick={() => setIsOpenAcct(false)}>
+            <div>My account</div>
 
-          <StyledIconDiv>
-            <CgProfile />
-          </StyledIconDiv>
-        </StyledNavLink>
-        {isOpenAcct && (
-          <div className="">
-            <MyAccountLinks bgColor="#fff" color="#43525b" />
-          </div>
+            <StyledIconDiv>
+              <CgProfile />
+            </StyledIconDiv>
+          </StyledNavLink>
         )}
 
         {/* )} */}

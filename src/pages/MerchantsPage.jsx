@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import Button from "../components/Button";
+import SpinnerMini from "../components/SpinnerMini";
 import { CiLocationOn } from "react-icons/ci";
 import { IoCallOutline } from "react-icons/io5";
 import { IoTimeOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import supabase from "../services/supabaseClients";
-import { login } from "../services/apiAuth";
-import { merchants } from "../components/Merchants";
 
 export default function MerchantsPage() {
   const [document, setDocument] = useState();
+  const [isLoading, setIsLoading] = useState();
   const { id } = useParams();
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async (id) => {
       const { data, error } = await supabase
         .from("Users")
@@ -21,10 +22,12 @@ export default function MerchantsPage() {
 
       if (error) {
         console.log(error);
+        setIsLoading(false);
       }
 
       if (data) {
         setDocument(data);
+        setIsLoading(false);
       }
     };
     fetchData(id);
@@ -37,14 +40,13 @@ export default function MerchantsPage() {
       <h2 className="mt-[10rem] uppercase text-2xl text-center m-7">
         {`The best ${id} near you`}
       </h2>
-
+      {isLoading && <SpinnerMini />}
       {document?.length === 0 && (
         <p className="text-center text-[1.3rem] text-red-600">
           we are sorry!!! we currently do not <br /> have available
           professionals this time, please check back later
         </p>
       )}
-
       {document &&
         document.map((doc, i) => {
           return (
@@ -55,6 +57,11 @@ export default function MerchantsPage() {
             </div>
           );
         })}
+      <div className="mt-[9rem] w-[7rem] mx-auto">
+        <Button to="/homeessentials" type="primary">
+          Back
+        </Button>
+      </div>
     </>
   );
 }

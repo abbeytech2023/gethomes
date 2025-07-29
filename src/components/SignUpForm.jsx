@@ -26,8 +26,8 @@ function SignUpForm() {
 
   const { errors } = formState;
 
-  function onSubmit({ email, password, fullName, profession }) {
-    console.log(email, password, fullName, profession);
+  function onSubmit({ email, password, fullName, profession, googleBusiness }) {
+    console.log(email, password, fullName, profession, googleBusiness);
 
     signup(
       { email, fullName, password, profession },
@@ -119,6 +119,21 @@ function SignUpForm() {
                 );
               })}
             </select>
+          </FormRow>
+          <FormRow
+            label="Google business profile"
+            error={errors?.googleBusiness?.message}
+          >
+            <StyledInput
+              minLength="48"
+              type="Google-business-profile"
+              id="Google-business-profile"
+              name="Google-business-profile"
+              {...register("googleBusiness", {
+                required:
+                  "please enter your business profile page link on google",
+              })}
+            />
           </FormRow>
 
           <FormRow>
