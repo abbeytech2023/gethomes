@@ -1,5 +1,5 @@
 import { MdDelete, MdDialerSip } from "react-icons/md";
-import { GridContainer, GridInner } from "./Grid";
+// import { GridContainer, GridInner } from "./Grid";
 // import { useDeleteMutateToLets } from "../hooks/useDeleteMutate";
 import styled from "styled-components";
 import { CgProfile } from "react-icons/cg";
@@ -11,6 +11,8 @@ export const ToLetContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
+  max-width: 70rem;
+  margin: 0 auto;
 `;
 
 export const StyledDivProperty = styled.div`
@@ -20,6 +22,7 @@ export const StyledDivProperty = styled.div`
   box-shadow: 3px 3px 8px rgba(85, 85, 85, 0.487);
   margin-bottom: 6rem;
   padding: 2rem;
+  max-width: 25rem;
 
   > div img {
     width: 100%;
@@ -36,7 +39,7 @@ export const ToLetCart = ({ documents }) => {
   console.log(user);
 
   return (
-    <ToLetContainer className="">
+    <ToLetContainer>
       {documents &&
         documents.map((doc) => {
           console.log(doc.uid);
@@ -49,8 +52,14 @@ export const ToLetCart = ({ documents }) => {
                 navigate(`${URL}/${doc.id}`);
               }}
             >
-              <div className="w-35% h-[16rem] ">
-                <img src={doc.image} className="property-image" alt="" />
+              <div className="  ">
+                <img
+                  src={doc.image}
+                  height="100px"
+                  width="200px"
+                  className="property-image"
+                  alt=""
+                />
               </div>
               <div className="flex gap-3.5 w-[35%]  flex-col  px-2 py-4">
                 <p className="text-2xl font-medium">

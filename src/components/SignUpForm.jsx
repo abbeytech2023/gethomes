@@ -7,6 +7,18 @@ import { useForm } from "react-hook-form";
 import StyledInput from "./StyledInput";
 import { useSignup } from "../hooks/useSignup";
 
+const options = [
+  { value: "", text: "select a profession" },
+  { value: "houseAgents", text: "houseAgents" },
+  { value: "welder", text: "welder" },
+  { value: "electrical-engineer", text: "electrical-engineer" },
+  { value: "plumber", text: "plumber" },
+  { value: "furniture", text: "furniture" },
+  { value: "electronic-store", text: "electronic-store" },
+  { value: "solar-engineer", text: "solar-engineer" },
+  { value: "electroni-store", text: "welder" },
+];
+
 function SignUpForm() {
   const { signup, isPending } = useSignup();
   const { register, formState, handleSubmit, reset, getValues, watch } =
@@ -14,11 +26,11 @@ function SignUpForm() {
 
   const { errors } = formState;
 
-  function onSubmit({ email, password, fullName }) {
-    console.log(email, password, fullName);
+  function onSubmit({ email, password, fullName, profession }) {
+    console.log(email, password, fullName, profession);
 
     signup(
-      { email, fullName, password },
+      { email, fullName, password, profession },
       {
         onSettled: reset,
       }
@@ -86,16 +98,31 @@ function SignUpForm() {
               })}
             />
           </FormRow>
-          {/* <FormRow label="Phone">
-            <StyledInput
-              minLength="11"
-              placeHolder="Enter your phone Number"
-              id="phone"
-              {...register("phoneNumber", {
-                required: "this field is required",
+          <FormRow label="Profession" error={errors?.profession?.message}>
+            <select
+              name="profession"
+              id="profession"
+              onChange={(e) => e.target.value}
+              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+              {...register("profession", {
+                required: "This field is required",
+                minLength: {
+                  message: "select one profession from the list below",
+                },
               })}
-            />
-          </FormRow> */}
+            >
+              {options.map((option, i) => {
+                console.log(i);
+
+                return (
+                  <option key={i} value={option.value}>
+                    {option.text}
+                  </option>
+                );
+              })}
+            </select>
+          </FormRow>
+
           <FormRow>
             <Button type="primary">
               {isPending ? <SpinnerMini /> : "Create a new user"}

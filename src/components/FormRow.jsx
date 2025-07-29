@@ -3,7 +3,7 @@
 function FormRow({ children, label, error }) {
   return (
     <div className="flex flex-col gap-4 mb-4 text-[0.7rem]">
-      {label && <Label htmlFor={children.props.id}>{label}</Label>}
+      {label && <Label htmlFor={children.props?.id}>{label}</Label>}
       {children}
       {error && <Error>{error}</Error>}
     </div>

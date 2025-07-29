@@ -76,7 +76,7 @@ export default function HomeEssentials() {
                     and unbeatable prices your perfect haven awaits start
                     searching now and make it yours
                   </p>
-                  <StyledLinkButton to="/merchants">
+                  <StyledLinkButton to={`/merchants/${merchant.craftsMenLink}`}>
                     {merchant.crafMenButton}
                   </StyledLinkButton>
                 </div>

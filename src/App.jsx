@@ -54,7 +54,7 @@ function App() {
                 <Route path="/buy" element={<Buy />} />
                 <Route path="/rent/" element={<Rent />} />
                 <Route path="/rent/:id" element={<SingleRent />} />
-                <Route path="merchants" element={<MerchantsPage />} />
+                <Route path="merchants/:id" element={<MerchantsPage />} />
                 <Route path="/homeessentials" element={<HomeEssentials />} />
                 <Route
                   path="/myaccount"

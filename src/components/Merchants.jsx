@@ -5,7 +5,7 @@ export const merchants = [
     craftGroup: "House Agents",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "house-agents",
     crafMenButton: "Find an Agent",
   },
   {
@@ -14,7 +14,7 @@ export const merchants = [
     craftGroup: "Furniture Makers",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "furniture",
     crafMenButton: "Our CraftsMen",
   },
   {
@@ -23,7 +23,7 @@ export const merchants = [
     craftGroup: "Welder",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "welder",
     crafMenButton: "Find a Welder",
   },
   {
@@ -32,7 +32,7 @@ export const merchants = [
     craftGroup: "Plumbers",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "plumber",
     crafMenButton: "Find a Plumber",
   },
   {
@@ -42,7 +42,7 @@ export const merchants = [
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
     craftsMenLink: "",
-    crafMenButton: "Our Engineers",
+    crafMenButton: "electrical-engineer",
   },
   {
     imgLink:
@@ -50,7 +50,7 @@ export const merchants = [
     craftGroup: "Borehole Drillers",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "borehole",
     crafMenButton: "Our Engineers",
   },
 
@@ -60,7 +60,7 @@ export const merchants = [
     craftGroup: "Solar Engineers",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "solar-engineer",
     crafMenButton: "See your options",
   },
 
@@ -70,7 +70,7 @@ export const merchants = [
     craftGroup: "Electronics stores",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "electronic-store",
     crafMenButton: "See your options",
   },
 ];
