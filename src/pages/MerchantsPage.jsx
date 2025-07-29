@@ -38,7 +38,7 @@ export default function MerchantsPage() {
         {`The best ${id} near you`}
       </h2>
 
-      {document.length === 0 && (
+      {document?.length === 0 && (
         <p className="text-center text-[1.3rem] text-red-600">
           we are sorry!!! we currently do not <br /> have available
           professionals this time, please check back later

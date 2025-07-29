@@ -112,8 +112,6 @@ function SignUpForm() {
               })}
             >
               {options.map((option, i) => {
-                console.log(i);
-
                 return (
                   <option key={i} value={option.value}>
                     {option.text}

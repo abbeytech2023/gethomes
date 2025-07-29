@@ -41,7 +41,7 @@ export const merchants = [
     craftGroup: "Electrical Engineer ",
     description:
       "Find your dream home today! Expert guidance, endless options and unbeatable prices your perfect haven awaits start searching now and make it yours",
-    craftsMenLink: "",
+    craftsMenLink: "electrical-engineer",
     crafMenButton: "electrical-engineer",
   },
   {
