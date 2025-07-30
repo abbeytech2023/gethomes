@@ -3,7 +3,6 @@ import { ToLetCart } from "./ToLetCart";
 import { useMutation } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiForSale";
 import SpinnerMini from "./SpinnerMini";
-import { Heading } from "./HeadingText";
 import { useEffect, useState } from "react";
 import supabase from "../services/supabaseClients";
 import { useUser } from "../hooks/useUser";
@@ -39,11 +38,6 @@ export default function CurrentUserToLet() {
 
   return (
     <div className="text-center ">
-      {/* {error && <p>{error}</p>} */}
-      <Heading as="h2" className=" uppercase text-center ">
-        Properties to let
-      </Heading>
-
       {isPending && <SpinnerMini />}
       {documents?.length === 0 && (
         <p className="uppercase text-2xl">

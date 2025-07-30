@@ -23,6 +23,7 @@ export const Heading = styled.h1`
       font-weight: 500;
       color: #144c6f;
       text-align: center;
+      margin-bottom: 5rem;
     `}
 
 ${(props) =>

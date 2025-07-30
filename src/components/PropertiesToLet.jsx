@@ -6,8 +6,6 @@ import SpinnerMini from "./SpinnerMini";
 import { Heading } from "./HeadingText";
 
 export default function PropertiesToLet({ propToLet }) {
-  const location = useLocation();
-
   const { isPending, mutate } = useMutation({
     mutationFn: deleteProperty,
   });

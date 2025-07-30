@@ -31,7 +31,6 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export default function Navigation() {
-  const [isOpen, setIsOpen] = useState(false);
   const { user } = useAuthContext();
 
   return (
@@ -58,22 +57,12 @@ export default function Navigation() {
 
         {/* <div className="flex items-center justify-between  basis-1/3"> */}
         {user && (
-          <div
+          <StyledNavLink
+            to="/myaccount/dashboard"
             className=" gap-4 flex  flex-col"
-            onClick={() => setIsOpen((open) => !open)}
           >
-            <StyledNavLink
-              className={`text-white flex text-[1.3rem] font-medium `}
-            >
-              <button>My account</button>
-              <FaAngleDown className="text-white mt-2" />
-            </StyledNavLink>
-          </div>
-        )}
-        {isOpen && user && (
-          <div className="absolute top-[6rem]" onClick={() => setIsOpen(false)}>
-            {<MyAccountLinks bgColor="#144c6f" color="#fff" />}
-          </div>
+            My account
+          </StyledNavLink>
         )}
 
         <StyledNavLink to="advertisement">Advertisement</StyledNavLink>

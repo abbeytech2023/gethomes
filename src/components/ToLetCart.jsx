@@ -2,9 +2,9 @@ import { MdDelete, MdDialerSip } from "react-icons/md";
 // import { GridContainer, GridInner } from "./Grid";
 // import { useDeleteMutateToLets } from "../hooks/useDeleteMutate";
 import styled from "styled-components";
-import { CgProfile } from "react-icons/cg";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
+import { Heading } from "./HeadingText";
 
 export const ToLetContainer = styled.div`
   display: flex;
@@ -39,38 +39,43 @@ export const ToLetCart = ({ documents }) => {
   console.log(user);
 
   return (
-    <ToLetContainer>
-      {documents &&
-        documents.map((doc) => {
-          console.log(doc.uid);
+    <>
+      <Heading as="h2" className=" uppercase text-center ">
+        Properties to let
+      </Heading>
+      <ToLetContainer>
+        {documents &&
+          documents.map((doc) => {
+            console.log(doc.uid);
 
-          return (
-            <StyledDivProperty
-              key={doc.id}
-              className="border-[#144c6f] flex min-[0px]:flex-col md:flex-row lg:flex-row xl:flex-row "
-              onClick={() => {
-                navigate(`${URL}/${doc.id}`);
-              }}
-            >
-              <div className="  ">
-                <img
-                  src={doc.image}
-                  height="100px"
-                  width="200px"
-                  className="property-image"
-                  alt=""
-                />
-              </div>
-              <div className="flex gap-3.5 w-[35%]  flex-col  px-2 py-4">
-                <p className="text-2xl font-medium">
-                  {doc.propertyDescription}
-                </p>
-                <p>{doc.propertyLocation}</p>
-              </div>
-              <div className="w-[30%] ">{doc.phoneNumber}</div>
-            </StyledDivProperty>
-          );
-        })}
-    </ToLetContainer>
+            return (
+              <StyledDivProperty
+                key={doc.id}
+                className="border-[#144c6f] flex min-[0px]:flex-col md:flex-row lg:flex-row xl:flex-row "
+                onClick={() => {
+                  navigate(`${URL}/${doc.id}`);
+                }}
+              >
+                <div className="">
+                  <img
+                    src={doc.image}
+                    height="100px"
+                    width="200px"
+                    className="property-image"
+                    alt=""
+                  />
+                </div>
+                <div className="flex gap-3.5 w-[35%]  flex-col  px-2 py-4">
+                  <p className="text-2xl font-medium">
+                    {doc.propertyDescription}
+                  </p>
+                  <p>{doc.propertyLocation}</p>
+                </div>
+                <div className="w-[30%] ">{doc.phoneNumber}</div>
+              </StyledDivProperty>
+            );
+          })}
+      </ToLetContainer>
+    </>
   );
 };

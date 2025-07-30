@@ -1,15 +1,12 @@
 import { useLocation } from "react-router-dom";
 
-import { MdDelete } from "react-icons/md";
-import { StyledDivProperty } from "./ToLetCart";
+import { CiMenuKebab } from "react-icons/ci";
 
-import styled from "styled-components";
 // import { useDeleteMutateForSale } from "../hooks/useDeleteMutate";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiForSale";
 import toast from "react-hot-toast";
 
-import { FlexInnerDiv } from "./FlexDiv";
 import { GridInner } from "./Grid";
 
 function CartCard({ document }) {
@@ -105,7 +102,7 @@ function CartCard({ document }) {
                     }}
                     disabled={isPending}
                   >
-                    <MdDelete className="text-gray-400" />
+                    <CiMenuKebab className="text-gray-400" />
                   </button>
                 </div>
               </div>
