@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 import { GridInner } from "./Grid";
 
-function CartCard({ document }) {
+function ForSaleCart({ document }) {
   const { propertyDetails, price, title, id: propertyId } = document;
 
   const queryClient = useQueryClient();
@@ -24,10 +24,6 @@ function CartCard({ document }) {
     },
     onError: () => toast.error("property could not be deleted"),
   });
-
-  // const { deleteDocument, response } = useFirestore("Outlets");
-
-  //propertydetail, title, price
 
   const location = useLocation();
 
@@ -89,13 +85,6 @@ function CartCard({ document }) {
                   </div>
                 </div>
                 <div className="2xl  absolute right-3 top-3">
-                  {/* <button
-              onClick={() => {
-                setIsOpenForm(!isOpenForm);
-              }}
-            >
-              <CiEdit />
-            </button> */}
                   <button
                     onClick={() => {
                       mutate(propertyId);
@@ -114,4 +103,4 @@ function CartCard({ document }) {
   );
 }
 
-export default CartCard;
+export default ForSaleCart;

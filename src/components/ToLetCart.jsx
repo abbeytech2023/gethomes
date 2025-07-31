@@ -40,9 +40,6 @@ export const ToLetCart = ({ documents }) => {
 
   return (
     <>
-      <Heading as="h2" className=" uppercase text-center ">
-        Properties to let
-      </Heading>
       <ToLetContainer>
         {documents &&
           documents.map((doc) => {

@@ -116,12 +116,11 @@ function MobileNavigation() {
       <StyledMainNav className="xl:hidden z-[99]  lg:hidden px-2 py-4 flex items-center justify-between relative  xl:text-4xl sm:text-2xl bg-[#144c6f]  text-[#fff]">
         <div className="flex gap-2 ">
           <div className="md:hidden">
-            {myAccount ||
-              (merchants && (
-                <Button to={`${myAccount ? "/myaccount" : "/homeessentials"}`}>
-                  <IoArrowBack className="rounded z-30 text-3xl" />
-                </Button>
-              ))}
+            {myAccount && (
+              <Button to="/myaccount">
+                <IoArrowBack className="rounded z-30 text-3xl" />
+              </Button>
+            )}
           </div>
 
           <NavLink to="/" className="  top-3 left-4 ">

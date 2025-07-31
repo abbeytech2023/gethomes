@@ -24,23 +24,8 @@ import supabase from "../services/supabaseClients";
 import { data } from "react-router-dom";
 
 export default function Rent() {
-  const [toLet, setToLet] = useState();
   const { propToLet, isPending: isLoading } = useFetchPropertiesTolet();
   console.log("RENT", propToLet);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("ToLet").select("*");
-
-      if (error) {
-        console.error(error);
-        throw new Error("properties could not be loaded");
-      }
-      if (data) setToLet(data);
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <>
@@ -68,7 +53,7 @@ export default function Rent() {
       </div>
 
       <div className="mt-[15rem]">
-        {toLet && <PropertiesToLet propToLet={toLet} isPending={isLoading} />}
+        <PropertiesToLet />
       </div>
       {/* <div className="mt-32">
         <CreatePropertiesToLetForm />

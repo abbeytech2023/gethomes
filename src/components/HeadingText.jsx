@@ -19,9 +19,10 @@ export const Heading = styled.h1`
   ${(props) =>
     props.as === "h2" &&
     css`
-      font-size: 1.6rem;
+      font-size: 1.3rem;
       font-weight: 500;
       color: #144c6f;
+      text-transform: uppercase;
       text-align: center;
       margin-bottom: 5rem;
     `}

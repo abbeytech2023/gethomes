@@ -57,7 +57,7 @@ export default function MerchantsPage() {
             </div>
           );
         })}
-      <div className="mt-[9rem] w-[7rem] mx-auto">
+      <div className="mt-[9rem]  mx-auto">
         <Button to="/homeessentials" type="primary">
           Back
         </Button>
@@ -104,7 +104,7 @@ function MerchantProfile({ doc }) {
           rem dignissimos?
         </p>
       </div>
-      <div className=" px-7">
+      <div>
         <Button type="secondary">
           {OpenGoogleInNewTab(doc.googleBusiness)}
         </Button>

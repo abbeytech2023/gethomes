@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BgOverlay } from "../components/BgOverlay";
-import ProductCart from "../components/ProductCart";
+import PropertiesForSale from "../components/PropertiesForSale";
 
 import { Heading } from "../components/HeadingText";
 import { StyledSpinner } from "../components/Spinner";
@@ -25,24 +25,6 @@ const BuyHeaderBox = styled.div`
 
 export default function Buy() {
   const [forSale, setForSale] = useState();
-  const { documents, isPending: isLoading } = useFetchPropertiesForSale();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data, error } = await supabase.from("ForSale").select("*");
-
-      if (error) {
-        console.error(error);
-        throw new Error("cabins could not be loaded");
-      }
-
-      if (data) setForSale(data);
-    };
-
-    fetchData();
-  });
-
-  if (isLoading) return <SpinnerMini />;
 
   return (
     <>
@@ -62,9 +44,10 @@ export default function Buy() {
         </div>
       </div>
       {/* ------------------- BUY RENT SELL SECTION -------------  */}
-      <div className="mt-[15rem]">
-        <section>{forSale && <ProductCart documents={forSale} />}</section>
-      </div>
+
+      <section className="mt-[9rem]">
+        <PropertiesForSale />
+      </section>
     </>
   );
 }

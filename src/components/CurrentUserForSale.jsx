@@ -43,7 +43,7 @@ export default function CurrentUserForSale() {
   return (
     <>
       <Heading as="h2" className=" uppercase text-center ">
-        Properties for sale
+        your Properties for sale
       </Heading>
       <Menus>
         <GridContainer className="mt-32">
