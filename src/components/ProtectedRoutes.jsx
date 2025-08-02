@@ -4,14 +4,6 @@ import { Spinner } from "./Spinner";
 import styled from "styled-components";
 import { useEffect } from "react";
 
-// const FullPage = styled.div`
-//   height: 100vh;
-//   background-color: grey;
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `;
-
 function ProtectedRoutes({ children }) {
   const navigate = useNavigate();
   // 1 load the authenticated user

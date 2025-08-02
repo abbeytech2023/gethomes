@@ -6,6 +6,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ProtectedRoutes from "./components/ProtectedRoutes";
 
 //Components
 import HomeEssentials from "./pages/HomeEssentials";
@@ -74,9 +75,9 @@ function App() {
               <Route
                 path="/myaccount"
                 element={
-                  // <ProtectedRoutes>
-                  <MyAccount />
-                  // </ProtectedRoutes>
+                  <ProtectedRoutes>
+                    <MyAccount />
+                  </ProtectedRoutes>
                 }
               >
                 <Route path="profile" element={<Profile />} />
@@ -107,7 +108,7 @@ function App() {
                 duration: 3000,
               },
               error: {
-                duration: 5000,
+                duration: 3000,
               },
               style: {
                 fontSize: "16px",
