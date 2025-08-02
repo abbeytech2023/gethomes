@@ -2,12 +2,7 @@ import styled from "styled-components";
 import { BgOverlay } from "../components/BgOverlay";
 import PropertiesForSale from "../components/PropertiesForSale";
 
-import { Heading } from "../components/HeadingText";
-import { StyledSpinner } from "../components/Spinner";
 import SpinnerMini from "../components/SpinnerMini";
-import { useFetchPropertiesForSale } from "../hooks/useProperties";
-import { useEffect, useState } from "react";
-import supabase from "../services/supabaseClients";
 
 const BuySection = styled.section`
   height: 70vh;
@@ -23,8 +18,8 @@ const BuyHeaderBox = styled.div`
   letter-spacing: 4px;
 `;
 
-export default function Buy() {
-  const [forSale, setForSale] = useState();
+function BuyPage() {
+  // const [forSale, setForSale] = useState();
 
   return (
     <>
@@ -51,3 +46,5 @@ export default function Buy() {
     </>
   );
 }
+
+export default BuyPage;

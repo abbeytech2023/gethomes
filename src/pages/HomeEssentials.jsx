@@ -33,9 +33,9 @@ const EssentialHeaderBox = styled.div`
 export default function HomeEssentials() {
   return (
     <>
-      <section className="flex items-center mt-[2rem] h-dvh ">
-        <div className="flex flex-col   xl:items-end justify-end min-[0px]:items-center sm:items-center sm:w-[100%] ">
-          <div className="flex flex-col gap-[2rem] w-[60%]  ">
+      <section className="flex items-center max-[767px]:bg-[#cce1f6] mt-[2rem] h-dvh ">
+        <div className="flex flex-col   xl:items-end justify-end min-[0px]:items-center sm:items-center  sm:w-[100%] ">
+          <div className="flex flex-col   gap-[2rem] w-[60%]  ">
             <EssentialHeaderBox className="uppercase text-5xl  ">
               Perfect your home
             </EssentialHeaderBox>

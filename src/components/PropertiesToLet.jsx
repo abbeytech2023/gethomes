@@ -6,32 +6,14 @@ import SpinnerMini from "./SpinnerMini";
 import { Heading } from "./HeadingText";
 import { useEffect, useState } from "react";
 import supabase from "../services/supabaseClients";
+import { useFetchProperties } from "../hooks/useFetchProperties";
 
 export default function PropertiesToLet() {
-  const [document, setDocuments] = useState();
-  const [isLoading, setIsLoading] = useState(false);
   const { isPending, mutate } = useMutation({
     mutationFn: deleteProperty,
   });
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const { data, error } = await supabase.from("ToLet").select("*");
-
-      if (error) {
-        console.error(error);
-        setIsLoading(false);
-        throw new Error("properties could not be loaded");
-      }
-      if (data) {
-        setDocuments(data);
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { documents, isLoading, error } = useFetchProperties("ToLet");
 
   if (isLoading) return <SpinnerMini />;
 
@@ -43,7 +25,7 @@ export default function PropertiesToLet() {
       </Heading>
 
       <div>
-        {document && <ToLetCart documents={document} isPending={isLoading} />}
+        {documents && <ToLetCart documents={documents} isPending={isLoading} />}
       </div>
     </div>
   );

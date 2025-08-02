@@ -29,12 +29,7 @@ function SignUpForm() {
   function onSubmit({ email, password, fullName, profession, googleBusiness }) {
     console.log(email, password, fullName, profession, googleBusiness);
 
-    signup(
-      { email, fullName, password, profession },
-      {
-        onSettled: reset,
-      }
-    );
+    signup({ email, fullName, password, profession });
   }
 
   return (

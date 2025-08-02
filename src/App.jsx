@@ -19,7 +19,7 @@ import Header from "./components/Header";
 //Pages
 import Homepage from "./pages/Homepage";
 import Sell from "./pages/Sell";
-import Buy from "./pages/Buy";
+import BuyPage from "./pages/BuyPage";
 import SignIn from "./pages/SignIn";
 import Rent from "./pages/Rent";
 import Footer from "./components/Footer";
@@ -66,7 +66,7 @@ function App() {
               <Route path="/" element={<Navigate replace to="/homepage" />} />
               <Route path="/homepage" element={<Homepage />} />
               {/* <Route path="/sell" element={<Sell />} /> */}
-              <Route path="/buy" element={<Buy />} />
+              <Route path="/buy" element={<BuyPage />} />
               <Route path="/rent/" element={<Rent />} />
               <Route path="/rent/:id" element={<SingleRent />} />
               <Route path="merchants/:id" element={<MerchantsPage />} />

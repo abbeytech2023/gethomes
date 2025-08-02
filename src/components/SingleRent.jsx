@@ -1,8 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import {
-  useFetchPropertiesTolet,
-  useFetchSinglePropertiesToLet,
-} from "../hooks/useProperties";
+
 import { useEffect, useState } from "react";
 import { Spinner } from "./Spinner";
 import { getSingleRent } from "../services/apiToLet";

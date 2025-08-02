@@ -6,8 +6,8 @@ import ForSaleCart from "./ForSaleCart";
 import { FlexDiv, FlexInnerDiv } from "./FlexDiv";
 import { useEffect, useState } from "react";
 import supabase from "../services/supabaseClients";
-import { set } from "react-hook-form";
 import SpinnerMini from "./SpinnerMini";
+import { useFetchProperties } from "../hooks/useFetchProperties";
 
 //HOOKS
 
@@ -19,27 +19,31 @@ import SpinnerMini from "./SpinnerMini";
 // `;
 
 function PropertiesForSale() {
-  const [documents, setDocuments] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      const { data, error } = await supabase.from("ForSale").select("*");
+  const { documents, isLoading, error } = useFetchProperties("ForSale");
 
-      if (error) {
-        console.error(error);
-        setIsLoading(false);
-        throw new Error("cabins could not be loaded");
-      }
+  // console.log(documents);
 
-      if (data) {
-        setDocuments(data);
-        setIsLoading(false);
-      }
-    };
+  // const [documents, setDocuments] = useState();
+  // const [isLoading, setIsLoading] = useState(false);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setIsLoading(true);
+  //     const { data, error } = await supabase.from("ForSale").select("*");
 
-    fetchData();
-  }, []);
+  //     if (error) {
+  //       console.error(error);
+  //       setIsLoading(false);
+  //       throw new Error("cabins could not be loaded");
+  //     }
+
+  //     if (data) {
+  //       setDocuments(data);
+  //       setIsLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   if (isLoading) return <SpinnerMini />;
 
@@ -49,7 +53,7 @@ function PropertiesForSale() {
       <Heading as="h2" className=" uppercase text-center mb-16">
         Properties for sale
       </Heading>
-      {/* {isPending && <SpinnerMini />} */}
+      {!documents && <SpinnerMini />}
       {documents && (
         <GridContainer className="mx-auto">
           <ForSaleCart document={documents} />

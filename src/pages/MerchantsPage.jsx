@@ -5,33 +5,13 @@ import { CiLocationOn } from "react-icons/ci";
 import { IoCallOutline } from "react-icons/io5";
 import { IoTimeOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
-import supabase from "../services/supabaseClients";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
+import { useFetchPropertiesWithId } from "../hooks/useFetchProperties";
 
 export default function MerchantsPage() {
-  const [document, setDocument] = useState();
-  const [isLoading, setIsLoading] = useState();
   const { id } = useParams();
 
-  useEffect(() => {
-    setIsLoading(true);
-    const fetchData = async (id) => {
-      const { data, error } = await supabase
-        .from("Users")
-        .select()
-        .eq("profession", id);
-
-      if (error) {
-        console.log(error);
-        setIsLoading(false);
-      }
-
-      if (data) {
-        setDocument(data);
-        setIsLoading(false);
-      }
-    };
-    fetchData(id);
-  }, [id]);
+  const { documents, isLoading, error } = useFetchUsersWithId(id);
 
   console.log(document);
 
@@ -47,8 +27,8 @@ export default function MerchantsPage() {
           professionals this time, please check back later
         </p>
       )}
-      {document &&
-        document.map((doc, i) => {
+      {documents &&
+        documents.map((doc, i) => {
           return (
             <div key={i}>
               <div className="flex justify-center items-center flex-col gap-7   border-black">

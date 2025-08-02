@@ -1,5 +1,4 @@
 import PropertiesToLet from "../components/PropertiesToLet";
-import { useFetchPropertiesTolet } from "../hooks/useProperties";
 
 import styled from "styled-components";
 
@@ -24,9 +23,6 @@ import supabase from "../services/supabaseClients";
 import { data } from "react-router-dom";
 
 export default function Rent() {
-  const { propToLet, isPending: isLoading } = useFetchPropertiesTolet();
-  console.log("RENT", propToLet);
-
   return (
     <>
       <div className="flex">
