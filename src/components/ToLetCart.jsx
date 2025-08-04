@@ -1,10 +1,13 @@
 import { MdDelete, MdDialerSip } from "react-icons/md";
 // import { GridContainer, GridInner } from "./Grid";
-// import { useDeleteMutateToLets } from "../hooks/useDeleteMutate";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
 import { Heading } from "./HeadingText";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useFetchPropertiesToletCurrentUser } from "../hooks/useProperties";
+import { deleteProperty } from "../services/apiForSale";
+import toast from "react-hot-toast";
 
 export const ToLetContainer = styled.div`
   display: flex;
@@ -33,27 +36,41 @@ export const StyledDivProperty = styled.div`
 export const ToLetCart = ({ documents }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const queryClient = useQueryClient();
   const URL = location.pathname;
   const { user } = useUser();
 
-  console.log(user);
+  const deleteCart = location.pathname === "/myaccount/dashboard";
+
+  const { isPending, mutate } = useMutation({
+    mutationFn: (id) => deleteProperty(id),
+
+    onSuccess: () => {
+      toast.success("cabin successfully deleted");
+
+      queryClient.invalidateQueries({
+        queryKey: ["ToLet"],
+      });
+    },
+    onError: () => toast.error("property could not be deleted"),
+  });
 
   return (
     <>
       <ToLetContainer>
         {documents &&
           documents.map((doc) => {
-            console.log(doc.uid);
-
             return (
               <StyledDivProperty
                 key={doc.id}
                 className="border-[#144c6f] flex min-[0px]:flex-col md:flex-row lg:flex-row xl:flex-row "
-                onClick={() => {
-                  navigate(`${URL}/${doc.id}`);
-                }}
               >
                 <div className="">
+                  {deleteCart && (
+                    <button onClick={() => mutate(doc.id)}>
+                      <MdDelete />
+                    </button>
+                  )}
                   <img
                     src={doc.image}
                     height="100px"
@@ -68,7 +85,16 @@ export const ToLetCart = ({ documents }) => {
                   </p>
                   <p>{doc.propertyLocation}</p>
                 </div>
-                <div className="w-[30%] ">{doc.phoneNumber}</div>
+                <div>
+                  <div className="w-[30%] ">{doc.phoneNumber}</div>
+                  <button
+                    onClick={() => {
+                      navigate(`${URL}/${doc.id}`);
+                    }}
+                  >
+                    see more...
+                  </button>
+                </div>
               </StyledDivProperty>
             );
           })}

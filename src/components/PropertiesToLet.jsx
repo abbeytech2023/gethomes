@@ -1,18 +1,14 @@
-import { useLocation } from "react-router-dom";
 import { ToLetCart } from "./ToLetCart";
-import { useMutation } from "@tanstack/react-query";
-import { deleteProperty } from "../services/apiForSale";
+import { QueryClient, useMutation } from "@tanstack/react-query";
 import SpinnerMini from "./SpinnerMini";
 import { Heading } from "./HeadingText";
-import { useEffect, useState } from "react";
-import supabase from "../services/supabaseClients";
+import { MdDelete } from "react-icons/md";
+
 import { useFetchProperties } from "../hooks/useFetchProperties";
+import toast from "react-hot-toast";
+import { deleteProperty } from "../services/apiForSale";
 
 export default function PropertiesToLet() {
-  const { isPending, mutate } = useMutation({
-    mutationFn: deleteProperty,
-  });
-
   const { documents, isLoading, error } = useFetchProperties("ToLet");
 
   if (isLoading) return <SpinnerMini />;

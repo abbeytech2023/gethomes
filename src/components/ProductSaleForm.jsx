@@ -10,6 +10,8 @@ import { addPropertiesForsSale } from "../services/apiForSale";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import FileInput from "./FileInput";
 import styled from "styled-components";
+import SpinnerMini from "./SpinnerMini";
+import { useNavigate } from "react-router-dom";
 
 export const StyledFormDiv = styled.form`
   display: grid;
@@ -24,12 +26,11 @@ export const StyledFormDiv = styled.form`
 
 function ProductSaleForm() {
   const QueryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { user } = useUser();
 
   const uid = user?.id;
-
-  console.log(uid);
 
   const { reset, register, handleSubmit, formState } = useForm();
 
@@ -39,6 +40,7 @@ function ProductSaleForm() {
     mutationFn: (newProperty) => addPropertiesForsSale(newProperty),
     onSuccess: () => {
       toast.success("Property added successfully");
+      navigate("/myaccount/dashboard");
       QueryClient.invalidateQueries({ queryKey: ["Outlets"] });
       reset();
     },
@@ -49,6 +51,7 @@ function ProductSaleForm() {
 
   const onSubmit = (data) => {
     mutate({ ...data, uid, image: data.image[0] });
+    // mutate({ ...data, uid });
     console.log(data);
   };
 
@@ -97,7 +100,6 @@ function ProductSaleForm() {
             </FormRow>
             <FormRow label="Total-Package" error={errors?.price?.message}>
               <StyledInput
-                type="number"
                 placeHolder="pricing"
                 id="price"
                 {...register("price", {
@@ -117,11 +119,8 @@ function ProductSaleForm() {
             </FormRow>
             <FormRow>
               <Button type="primary">
-                <p>Completed</p>
+                {!isPending ? <p>Completed</p> : <SpinnerMini />}
               </Button>
-              {/* <Button type="primary">
-                <p>Cancel</p>
-              </Button> */}
             </FormRow>
           </Form>
         </div>

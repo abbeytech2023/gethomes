@@ -82,7 +82,7 @@ export async function deleteProperty(id) {
 
   if (error) {
     console.error(error);
-    throw new Error("property could not be deleted");
+    throw new Error("propety could not be deleted");
   }
 
   return data;

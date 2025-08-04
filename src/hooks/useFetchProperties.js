@@ -23,13 +23,14 @@ export function useFetchPropertiesWithId(property, id) {
 
       if (data) {
         setDocument(data);
-        console.log(documents);
 
         setIsLoading(false);
       }
     };
     fetchData(id);
-  }, [property, id]);
+  }, [id, property]);
+
+  console.log(documents);
 
   return { documents, isLoading, error };
 }

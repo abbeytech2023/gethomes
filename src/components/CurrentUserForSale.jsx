@@ -1,42 +1,47 @@
-import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
-import supabase from "../services/supabaseClients";
-import { CiMenuKebab } from "react-icons/ci";
 
 import { GridContainer, GridInner } from "./Grid";
-import SpinnerMini from "./SpinnerMini";
 import { Heading } from "./HeadingText";
 import Menus from "./Menus";
+import { MdDelete } from "react-icons/md";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import SpinnerMini from "./SpinnerMini";
+import { deleteProperty } from "../services/apiForSale";
+import toast from "react-hot-toast";
+import { useFetchPropertiesForSaleCurrentUser } from "../hooks/useProperties";
+import { useFetchPropertiesWithId } from "../hooks/useFetchProperties";
+import { useEffect, useState } from "react";
 
 export default function CurrentUserForSale() {
+  const [documentSale, setDocumentSale] = useState();
   const { user } = useUser();
-  const [isLoading, setIsLoading] = useState(false);
-
   const id = user?.id;
-  const [documents, setdocuments] = useState();
+
+  const { data } = useFetchPropertiesForSaleCurrentUser(id);
+  const { documents, isLoading } = useFetchPropertiesWithId("ForSale", id);
+
+  const queryClient = useQueryClient();
+
+  const { isPending, mutate } = useMutation({
+    mutationFn: (id) => deleteProperty(id),
+
+    onSuccess: () => {
+      toast.success("cabin successfully deleted");
+
+      queryClient.invalidateQueries({
+        queryKey: ["ForSale"],
+      });
+    },
+    onError: () => toast.error("property could not be deleted"),
+  });
 
   useEffect(() => {
-    setIsLoading(true);
-    const fetchData = async (id) => {
-      const { data, error } = await supabase
-        .from("ForSale")
-        .select("*")
-        .eq("uid", id);
+    setDocumentSale();
+  }, [documents]);
 
-      if (error) {
-        setIsLoading(false);
-        console.log(error);
-      }
-      if (data) {
-        setdocuments(data);
-        setIsLoading(false);
-      }
-
-      return data;
-    };
-
-    fetchData(id);
-  }, [id]);
+  const handleDelete = (id) => {
+    mutate(id);
+  };
 
   isLoading && <SpinnerMini />;
 
@@ -48,7 +53,7 @@ export default function CurrentUserForSale() {
       <Menus>
         <GridContainer className="mt-32">
           {documents?.length === 0 && (
-            <p className="uppercase text-2xl">
+            <p className="uppercase text-2xl text-center">
               You do not have a property listed to let
             </p>
           )}
@@ -82,20 +87,11 @@ export default function CurrentUserForSale() {
                       </div>
                     </div>
                     <div className="2xl  absolute right-3 top-3">
-                      {/* <button
-              onClick={() => {
-                setIsOpenForm(!isOpenForm);
-                }}
-            >
-            <CiEdit />
-            </button> */}
                       <button
-                      // onClick={() => {
-                      //   mutate(propertyId);
-                      // }}
-                      // disabled={isPending}
+                        onClick={() => handleDelete(doc.id)}
+                        disabled={isPending}
                       >
-                        <CiMenuKebab className="text-black cursor-pointer" />
+                        <MdDelete className="text-[grey] cursor-pointer" />
                       </button>
                     </div>
                   </div>

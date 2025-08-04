@@ -33,6 +33,7 @@ import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./hooks/useAuthContext";
 import AnonymousRoute from "./components/AnonymousRoute";
 import { useEffect } from "react";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,7 +61,7 @@ function App() {
         //Browser router is being comment out here because it has been applied in the main.jsx file
         // <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
           <div className="flex flex-col min-h-screen ">
             <Header />
             <Routes>
