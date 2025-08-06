@@ -97,9 +97,11 @@ function SignUpForm() {
             <select
               name="profession"
               id="profession"
-              onChange={(e) => e.target.value}
               className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
               {...register("profession", {
+                onChange: (e) => {
+                  e.target.value;
+                },
                 required: "This field is required",
                 minLength: {
                   message: "select one profession from the list below",

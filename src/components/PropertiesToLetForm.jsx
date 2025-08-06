@@ -6,27 +6,30 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useUser } from "../hooks/useUser";
 import { StyledFormDiv } from "./ProductSaleForm";
-import { useGetStatesFromApi } from "../hooks/useFetchGetStates";
+import { useGetStatesFromApi } from "../hooks/useFetchStates";
+import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 
 import { addPropertiesToLet } from "../services/apiToLet";
 import FileInput from "./FileInput";
+import { useState } from "react";
 
-// export default function PropertyToLetForm() {}
 export default function PropertyToLetForm() {
   const QueryClient = useQueryClient();
+  const [currentState, setCurrentState] = useState();
+
   const { register, getValues, reset, handleSubmit, formState } = useForm();
+  const { errors } = formState;
+
   const { user } = useUser();
   const { allStates } = useGetStatesFromApi(
     "https://nga-states-lga.onrender.com/fetch"
   );
-
-  // const { localGovt } = useGet;
-
-  console.log(allStates);
+  const { localGovts } = useFetchLocalGovtga(
+    `https://nga-states-lga.onrender.com/?state=${currentState}`
+  );
 
   const uid = user?.id;
   const agentName = user?.user_metadata?.fullName;
-  const { errors } = formState;
   // const agentName = "sola";
   const phoneNumber = "08036400784";
   const { mutate, isPending } = useMutation({
@@ -41,16 +44,22 @@ export default function PropertyToLetForm() {
     },
   });
   const onSubmit = (data) => {
-    mutate({
-      ...data,
-      agentName,
-      phoneNumber,
-      uid,
-      image: data.image[0],
-    });
+    // mutate({
+    //   ...data,
+    //   agentName,
+    //   phoneNumber,
+    //   uid,
+    //   image: data.image[0],
+    // });
     console.log({ ...data, agentName, phoneNumber, image: data.image[0] });
     console.log(data.image);
   };
+
+  const handleOnChange = (e) => {
+    setCurrentState(e.target.value);
+    console.log(currentState);
+  };
+
   return (
     <div className="mb-20 ">
       <div className="h-[70rem] flex  flex-col gap-8  ">
@@ -85,9 +94,11 @@ export default function PropertyToLetForm() {
               <select
                 name="state"
                 id="state"
-                onChange={(e) => e.target.value}
+                value={currentState}
                 className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
                 {...register("state", {
+                  onChange: (e) => handleOnChange(e),
+
                   required: "This field is required",
                   minLength: {
                     message: "select one profession from the list below",
@@ -95,7 +106,6 @@ export default function PropertyToLetForm() {
                 })}
               >
                 {allStates?.map((state, i) => {
-                  console.log(state);
                   return (
                     <option key={i} value={state}>
                       {state}
@@ -111,7 +121,7 @@ export default function PropertyToLetForm() {
               <select
                 name="localGovernment"
                 id="localGovernment"
-                onChange={(e) => e.target.value}
+                onChange={handleOnChange}
                 className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
                 {...register("localGovernment", {
                   required: "This field is required",
@@ -120,14 +130,14 @@ export default function PropertyToLetForm() {
                   },
                 })}
               >
-                {allStates?.map((state, i) => {
-                  console.log(state);
-                  return (
-                    <option key={i} value={state}>
-                      {state}
-                    </option>
-                  );
-                })}
+                {localGovts &&
+                  localGovts.map((lga, i) => {
+                    return (
+                      <option key={i} value={lga}>
+                        {lga}
+                      </option>
+                    );
+                  })}
               </select>
             </FormRow>
             <FormRow label="property photo">

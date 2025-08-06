@@ -34,6 +34,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import AnonymousRoute from "./components/AnonymousRoute";
 import { useEffect } from "react";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Advertisement from "./pages/Advertisement";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -67,6 +68,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Navigate replace to="/homepage" />} />
               <Route path="/homepage" element={<Homepage />} />
+              <Route path="/advertisement" element={<Advertisement />} />
               {/* <Route path="/sell" element={<Sell />} /> */}
               <Route path="/buy" element={<BuyPage />} />
               <Route path="/rent/" element={<Rent />} />

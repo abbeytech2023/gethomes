@@ -1,9 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./Logo";
-import supabase from "../services/supabaseClients";
-import { useState } from "react";
-import MyAccountLinks from "./MyAccountLinks";
+
 import { FaAngleDown } from "react-icons/fa";
 import Logout from "./Logout";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -65,7 +63,7 @@ export default function Navigation() {
           </StyledNavLink>
         )}
 
-        <StyledNavLink to="advertisement">Advertisement</StyledNavLink>
+        <StyledNavLink to="/advertisement">Advertisement</StyledNavLink>
 
         {!user && <StyledNavLink to="signin">Signin</StyledNavLink>}
 

@@ -12,6 +12,9 @@ import FileInput from "./FileInput";
 import styled from "styled-components";
 import SpinnerMini from "./SpinnerMini";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useGetStatesFromApi } from "../hooks/useFetchStates";
+import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 
 export const StyledFormDiv = styled.form`
   display: grid;
@@ -27,6 +30,15 @@ export const StyledFormDiv = styled.form`
 function ProductSaleForm() {
   const QueryClient = useQueryClient();
   const navigate = useNavigate();
+
+  const [currentState, setCurrentState] = useState();
+
+  const { allStates } = useGetStatesFromApi(
+    "https://nga-states-lga.onrender.com/fetch"
+  );
+  // const { localGovts } = useFetchLocalGovtga(
+  //   `https://nga-states-lga.onrender.com/?state=${currentState}`
+  // );
 
   const { user } = useUser();
 
@@ -53,6 +65,11 @@ function ProductSaleForm() {
     mutate({ ...data, uid, image: data.image[0] });
     // mutate({ ...data, uid });
     console.log(data);
+  };
+
+  const handleOnChange = (e) => {
+    setCurrentState(e.target.value);
+    console.log(currentState);
   };
 
   return (
@@ -106,6 +123,53 @@ function ProductSaleForm() {
                   required: "This field is required",
                 })}
               />
+            </FormRow>
+            <FormRow label="State" error={errors?.State?.message}>
+              <select
+                name="state"
+                id="state"
+                // value={currentState}
+                className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+                {...register("state", {
+                  onChange: (e) => handleOnChange(e),
+                  required: "This field is required",
+                  minLength: {
+                    message: "select one profession from the list below",
+                  },
+                })}
+              >
+                {allStates?.map((state, i) => {
+                  return (
+                    <option key={i} value={state}>
+                      {state}
+                    </option>
+                  );
+                })}
+              </select>
+            </FormRow>
+            <FormRow
+              label="Local-Government"
+              error={errors?.localGovernment?.message}
+            >
+              <select
+                name="localGovernment"
+                id="localGovernment"
+                className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+                {...register("localGovernment", {
+                  required: "This field is required",
+                  minLength: {
+                    message: "select one profession from the list below",
+                  },
+                })}
+              >
+                {/* {localGovts?.map((lga, i) => {
+                  return (
+                    <option key={i} value={lga}>
+                      {lga}
+                    </option>
+                  );
+                })} */}
+              </select>
             </FormRow>
             <FormRow label="property photo">
               <FileInput
