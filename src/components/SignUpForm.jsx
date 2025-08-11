@@ -6,6 +6,10 @@ import SpinnerMini from "./SpinnerMini";
 import { useForm } from "react-hook-form";
 import StyledInput from "./StyledInput";
 import { useSignup } from "../hooks/useSignup";
+import { useFetchLocalGovtga } from "../hooks/useFetchLga";
+import { useGetStatesFromApi } from "../hooks/useFetchStates";
+import { useState } from "react";
+import FileInput from "./FileInput";
 
 const options = [
   { value: "", text: "select a profession" },
@@ -20,17 +24,37 @@ const options = [
 ];
 
 function SignUpForm() {
+  const [currentState, setCurrentState] = useState("Select-Your-State ");
   const { signup, isPending } = useSignup();
   const { register, formState, handleSubmit, reset, getValues, watch } =
     useForm();
 
+  const { allStates } = useGetStatesFromApi(
+    "https://nga-states-lga.onrender.com/fetch"
+  );
+
+  // const { localGovts } = useFetchLocalGovtga(
+  //   `https://nga-states-lga.onrender.com/?state=${
+  //     currentState ? currentState : ""
+  //   }`
+  // );
+
+  const { localGovts } = useFetchLocalGovtga(
+    `https://nga-states-lga.onrender.com/?state=Kaduna`
+  );
+
   const { errors } = formState;
 
-  function onSubmit({ email, password, fullName, profession, googleBusiness }) {
-    console.log(email, password, fullName, profession, googleBusiness);
+  function onSubmit(data) {
+    console.log(data);
 
-    signup({ email, fullName, password, profession });
+    // signup({ ...data });
   }
+
+  const handleOnChange = (e) => {
+    setCurrentState(e.target.value);
+    console.log(currentState);
+  };
 
   return (
     <div>
@@ -62,37 +86,54 @@ function SignUpForm() {
               })}
             />
           </FormRow>
-          <FormRow label="password" error={errors?.password?.message}>
-            <StyledInput
-              minLength="8"
-              type="password"
-              id="password"
-              {...register("password", {
+          <FormRow label="State" error={errors?.State?.message}>
+            <select
+              name="state"
+              id="state"
+              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+              {...register("state", {
+                onChange: (e) => handleOnChange(e),
+
                 required: "This field is required",
                 minLength: {
-                  value: 8,
-                  message: "password needs a minimum of 8 characters",
+                  message: "select one profession from the list below",
                 },
               })}
-            />
+            >
+              {allStates?.map((state, i) => {
+                return (
+                  <div key={i}>
+                    <option value={state}>{state}</option>
+                  </div>
+                );
+              })}
+            </select>
           </FormRow>
-          <FormRow
-            label="Repeat password"
-            error={errors?.passwordConfirm?.message}
-          >
-            <StyledInput
-              minLength="8"
-              type="password"
-              id="passwordConfirm"
-              name="password"
-              {...register("passwordConfirm", {
-                validate: (value) => {
-                  const password = getValues().password;
-                  if (value != password) return "password needs to match";
+          <FormRow label="Local-Government">
+            <select
+              name="localGovernment"
+              id="localGovernment"
+              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+              {...register("localGovernment", {
+                required: "This field is required",
+                minLength: {
+                  message: "select one profession from the list below",
                 },
               })}
-            />
+            >
+              {localGovts &&
+                localGovts.map((lga, i) => {
+                  return (
+                    <>
+                      <option key={i} value={lga}>
+                        {lga}
+                      </option>
+                    </>
+                  );
+                })}
+            </select>
           </FormRow>
+
           <FormRow label="Profession" error={errors?.profession?.message}>
             <select
               name="profession"
@@ -129,6 +170,47 @@ function SignUpForm() {
               {...register("googleBusiness", {
                 required:
                   "please enter your business profile page link on google",
+              })}
+            />
+          </FormRow>
+          <FormRow label="Password" error={errors?.password?.message}>
+            <StyledInput
+              minLength="8"
+              type="password"
+              id="password"
+              {...register("password", {
+                required: "This field is required",
+                minLength: {
+                  value: 8,
+                  message: "password needs a minimum of 8 characters",
+                },
+              })}
+            />
+          </FormRow>
+          <FormRow
+            label="Confirm password"
+            error={errors?.passwordConfirm?.message}
+          >
+            <StyledInput
+              minLength="8"
+              type="password"
+              id="passwordConfirm"
+              name="password"
+              {...register("passwordConfirm", {
+                validate: (value) => {
+                  const password = getValues().password;
+                  if (value != password) return "password needs to match";
+                },
+              })}
+            />
+          </FormRow>
+          <FormRow label="Upload-Profile-Picture">
+            <FileInput
+              id="image"
+              accept="image/*"
+              type="file"
+              {...register("image", {
+                required: "This field is required",
               })}
             />
           </FormRow>

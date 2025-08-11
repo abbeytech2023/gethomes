@@ -20,7 +20,7 @@ const HomeEssentialsSection = styled.div`
 `;
 
 const EssentialHeaderBox = styled.div`
-  font-weight: 900;
+  font-weight: 800;
   font-family: "Bebas Neue", sans-serif;
   letter-spacing: 4px;
 `;
@@ -33,10 +33,10 @@ const EssentialHeaderBox = styled.div`
 export default function HomeEssentials() {
   return (
     <>
-      <section className="flex items-center max-[767px]:bg-[#cce1f6] mt-[2rem] h-dvh ">
-        <div className="flex flex-col   xl:items-end justify-end min-[0px]:items-center sm:items-center  sm:w-[100%] ">
+      <section className="flex items-center tracking-tight max-[767px]:bg-[#cce1f6] mt-[2rem] h-dvh ">
+        <div className="flex flex-col xl:items-end justify-end min-[0px]:items-center sm:items-center  sm:w-[100%] ">
           <div className="flex flex-col   gap-[2rem] w-[60%]  ">
-            <EssentialHeaderBox className="uppercase text-5xl  ">
+            <EssentialHeaderBox className="uppercase text-4xl tracking-[-1rem]  ">
               Perfect your home
             </EssentialHeaderBox>
             <div>

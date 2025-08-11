@@ -86,7 +86,7 @@ const Carousel = ({ comments }) => {
 
   return (
     <StyledCarousel>
-      <div className="flex justify-center items-center text-center h-20">
+      <div className="flex justify-center items-center text-center">
         <Heading className="mb-10" as="h2">
           OUR TESTMONALS
         </Heading>

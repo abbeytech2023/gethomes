@@ -124,7 +124,7 @@ export default function Homepage() {
                 for your property decisions.
               </p>
               <StyledLinkButton to="/rent" className="min-[0px]:mx-[2rem]">
-                See your options{" "}
+                See your options
               </StyledLinkButton>
             </div>
           </FlexInnerDiv>

@@ -25,7 +25,7 @@ import SignIn from "./pages/SignIn";
 import Rent from "./pages/Rent";
 import Footer from "./components/Footer";
 import { Spinner } from "./components/Spinner";
-import SingleRent from "./components/SingleRent";
+import SingleProperty from "./pages/SingleProperty";
 import MerchantsPage from "./pages/MerchantsPage";
 
 //hooks
@@ -72,7 +72,7 @@ function App() {
               {/* <Route path="/sell" element={<Sell />} /> */}
               <Route path="/buy" element={<BuyPage />} />
               <Route path="/rent/" element={<Rent />} />
-              <Route path="/rent/:id" element={<SingleRent />} />
+              <Route path="/rent/:id" element={<SingleProperty />} />
               <Route path="merchants/:id" element={<MerchantsPage />} />
               <Route path="/homeessentials" element={<HomeEssentials />} />
               <Route
@@ -85,7 +85,7 @@ function App() {
               >
                 <Route path="profile" element={<Profile />} />
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="dashboard/:id" element={<SingleRent />} />
+                <Route path="dashboard/:id" element={<SingleProperty />} />
 
                 <Route
                   path="addpropertytolet"

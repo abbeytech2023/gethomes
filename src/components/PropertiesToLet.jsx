@@ -2,11 +2,8 @@ import { ToLetCart } from "./ToLetCart";
 import { QueryClient, useMutation } from "@tanstack/react-query";
 import SpinnerMini from "./SpinnerMini";
 import { Heading } from "./HeadingText";
-import { MdDelete } from "react-icons/md";
 
 import { useFetchProperties } from "../hooks/useFetchProperties";
-import toast from "react-hot-toast";
-import { deleteProperty } from "../services/apiForSale";
 
 export default function PropertiesToLet() {
   const { documents, isLoading, error } = useFetchProperties("ToLet");

@@ -23,7 +23,7 @@ export const StyledFormDiv = styled.form`
   align-items: center;
 
   & input {
-    width: 90%;
+    // width: 90%;
   }
 `;
 
@@ -36,9 +36,9 @@ function ProductSaleForm() {
   const { allStates } = useGetStatesFromApi(
     "https://nga-states-lga.onrender.com/fetch"
   );
-  // const { localGovts } = useFetchLocalGovtga(
-  //   `https://nga-states-lga.onrender.com/?state=${currentState}`
-  // );
+  const { localGovts } = useFetchLocalGovtga(
+    `https://nga-states-lga.onrender.com/?state=${currentState}`
+  );
 
   const { user } = useUser();
 
@@ -139,11 +139,7 @@ function ProductSaleForm() {
                 })}
               >
                 {allStates?.map((state, i) => {
-                  return (
-                    <option key={i} value={state}>
-                      {state}
-                    </option>
-                  );
+                  return <option key={i}>{state}</option>;
                 })}
               </select>
             </FormRow>
@@ -162,13 +158,13 @@ function ProductSaleForm() {
                   },
                 })}
               >
-                {/* {localGovts?.map((lga, i) => {
+                {localGovts?.map((lga, i) => {
                   return (
                     <option key={i} value={lga}>
                       {lga}
                     </option>
                   );
-                })} */}
+                })}
               </select>
             </FormRow>
             <FormRow label="property photo">

@@ -3,9 +3,7 @@ import { MdDelete, MdDialerSip } from "react-icons/md";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useUser";
-import { Heading } from "./HeadingText";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useFetchPropertiesToletCurrentUser } from "../hooks/useProperties";
 import { deleteProperty } from "../services/apiForSale";
 import toast from "react-hot-toast";
 
@@ -14,7 +12,8 @@ export const ToLetContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
-  max-width: 70rem;
+  text-align: center;
+  max-width: 80rem;
   margin: 0 auto;
 `;
 
@@ -22,14 +21,17 @@ export const StyledDivProperty = styled.div`
   display: flex;
   justify-content: space-between;
   border-radius: 1rem;
+  background-color: rgba(99, 124, 197, 0.277);
+  text-align: center;
   box-shadow: 3px 3px 8px rgba(85, 85, 85, 0.487);
   margin-bottom: 6rem;
   padding: 2rem;
-  max-width: 25rem;
+  width: 30rem;
+  max-width: 35rem;
 
   > div img {
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
   }
 `;
 
@@ -63,9 +65,9 @@ export const ToLetCart = ({ documents }) => {
             return (
               <StyledDivProperty
                 key={doc.id}
-                className="border-[#144c6f] flex min-[0px]:flex-col md:flex-row lg:flex-row xl:flex-row "
+                className="border-[#144c6f] flex min-[0px]:flex-col max-[600px]:mx-[2.4rem]  md:flex-row items-center lg:flex-row xl:flex-row "
               >
-                <div className="">
+                <div className="flex justify-center md:self-stretch items-center">
                   {deleteCart && (
                     <button onClick={() => mutate(doc.id)}>
                       <MdDelete />
@@ -73,24 +75,25 @@ export const ToLetCart = ({ documents }) => {
                   )}
                   <img
                     src={doc.image}
-                    height="100px"
-                    width="200px"
+                    height="200px"
+                    width="150px"
                     className="property-image"
                     alt=""
                   />
                 </div>
-                <div className="flex gap-3.5 w-[35%]  flex-col  px-2 py-4">
-                  <p className="text-2xl font-medium">
+                <div className="flex gap-3.5 w-[55%] h-[16rem] flex-col justify-center  py-4">
+                  <p className="text-[1.3rem] font-medium ">
                     {doc.propertyDescription}
                   </p>
                   <p>{doc.propertyLocation}</p>
                 </div>
-                <div>
+                <div className="flex flex-col justify-around  h-full">
                   <div className="w-[30%] ">{doc.phoneNumber}</div>
                   <button
                     onClick={() => {
                       navigate(`${URL}/${doc.id}`);
                     }}
+                    className="font-medium text-[17px]"
                   >
                     see more...
                   </button>

@@ -25,7 +25,7 @@ export default function PropertyToLetForm() {
     "https://nga-states-lga.onrender.com/fetch"
   );
   const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState}`
+    `https://nga-states-lga.onrender.com/?state=${currentState || ""} `
   );
 
   const uid = user?.id;
@@ -44,13 +44,13 @@ export default function PropertyToLetForm() {
     },
   });
   const onSubmit = (data) => {
-    // mutate({
-    //   ...data,
-    //   agentName,
-    //   phoneNumber,
-    //   uid,
-    //   image: data.image[0],
-    // });
+    mutate({
+      ...data,
+      agentName,
+      phoneNumber,
+      uid,
+      image: data.image[0],
+    });
     console.log({ ...data, agentName, phoneNumber, image: data.image[0] });
     console.log(data.image);
   };
@@ -63,7 +63,7 @@ export default function PropertyToLetForm() {
   return (
     <div className="mb-20 ">
       <div className="h-[70rem] flex  flex-col gap-8  ">
-        <div className="flex justify-center  items-center">
+        <div className=" flex mt-14 flex-col gap-8">
           <Form onSubmit={onSubmit} handleSubmit={handleSubmit}>
             <FormRow
               label="Property Description"
@@ -107,9 +107,9 @@ export default function PropertyToLetForm() {
               >
                 {allStates?.map((state, i) => {
                   return (
-                    <option key={i} value={state}>
-                      {state}
-                    </option>
+                    <div key={i}>
+                      <option value={state}>{state}</option>
+                    </div>
                   );
                 })}
               </select>
@@ -121,7 +121,6 @@ export default function PropertyToLetForm() {
               <select
                 name="localGovernment"
                 id="localGovernment"
-                onChange={handleOnChange}
                 className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
                 {...register("localGovernment", {
                   required: "This field is required",
@@ -133,9 +132,11 @@ export default function PropertyToLetForm() {
                 {localGovts &&
                   localGovts.map((lga, i) => {
                     return (
-                      <option key={i} value={lga}>
-                        {lga}
-                      </option>
+                      <>
+                        <option key={i} value={lga}>
+                          {lga}
+                        </option>
+                      </>
                     );
                   })}
               </select>
