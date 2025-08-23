@@ -40,7 +40,7 @@ function SignUpForm() {
   // );
 
   const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=Kaduna`
+    `https://nga-states-lga.onrender.com/?state=${currentState}`
   );
 
   const { errors } = formState;
@@ -90,7 +90,7 @@ function SignUpForm() {
             <select
               name="state"
               id="state"
-              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+              className="py-[0.7rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
               {...register("state", {
                 onChange: (e) => handleOnChange(e),
 
@@ -102,9 +102,12 @@ function SignUpForm() {
             >
               {allStates?.map((state, i) => {
                 return (
-                  <div key={i}>
-                    <option value={state}>{state}</option>
-                  </div>
+                  <>
+                    <option key="default">choose your state</option>
+                    <option key={i} value={state}>
+                      {state}
+                    </option>
+                  </>
                 );
               })}
             </select>
@@ -113,7 +116,7 @@ function SignUpForm() {
             <select
               name="localGovernment"
               id="localGovernment"
-              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+              className=" py-[0.7rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
               {...register("localGovernment", {
                 required: "This field is required",
                 minLength: {
@@ -138,7 +141,7 @@ function SignUpForm() {
             <select
               name="profession"
               id="profession"
-              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+              className="py-[0.7rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
               {...register("profession", {
                 onChange: (e) => {
                   e.target.value;
@@ -201,16 +204,6 @@ function SignUpForm() {
                   const password = getValues().password;
                   if (value != password) return "password needs to match";
                 },
-              })}
-            />
-          </FormRow>
-          <FormRow label="Upload-Profile-Picture">
-            <FileInput
-              id="image"
-              accept="image/*"
-              type="file"
-              {...register("image", {
-                required: "This field is required",
               })}
             />
           </FormRow>

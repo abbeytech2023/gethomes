@@ -14,7 +14,7 @@ import FileInput from "./FileInput";
 import { useState } from "react";
 
 export default function PropertyToLetForm() {
-  const QueryClient = useQueryClient();
+  const queryClient = useQueryClient();
   const [currentState, setCurrentState] = useState();
 
   const { register, getValues, reset, handleSubmit, formState } = useForm();
@@ -36,7 +36,7 @@ export default function PropertyToLetForm() {
     mutationFn: addPropertiesToLet,
     onSuccess: () => {
       toast.success("property added successfully");
-      QueryClient.invalidateQueries({ queryKey: ["ToLet"] });
+      queryClient.invalidateQueries({ queryKey: ["ToLet"] });
       reset();
     },
     onError: () => {
