@@ -100,16 +100,16 @@ function SignUpForm() {
                 },
               })}
             >
-              {allStates?.map((state, i) => {
-                return (
-                  <>
-                    <option key="default">choose your state</option>
+              <>
+                <option key="default">choose your state</option>
+                {allStates?.map((state, i) => {
+                  return (
                     <option key={i} value={state}>
                       {state}
                     </option>
-                  </>
-                );
-              })}
+                  );
+                })}
+              </>
             </select>
           </FormRow>
           <FormRow label="Local-Government">
