@@ -9,6 +9,7 @@ const rotate = keyframes`
 
 export const StyledSpinner = styled(BiLoaderAlt)`
   margin: 4.8rem auto;
+  color: #144c6f;
 
   width: 6.4rem;
   height: 100px;
