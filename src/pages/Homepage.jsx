@@ -59,7 +59,7 @@ export default function Homepage() {
         {/* <Heading as="h5">Our Services</Heading> */}
         <FlexDiv className="">
           <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-3">
+            <div className=" flex flex-col items-center justify-center gap-6">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[13rem] lg:h-[11rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconSell}`} />
               </StyledIconDiv>
@@ -77,7 +77,7 @@ export default function Homepage() {
             </div>
           </FlexInnerDiv>
           <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-3">
+            <div className=" flex flex-col items-center justify-center gap-2 py-6">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconBuy}`} />
               </StyledIconDiv>
@@ -95,7 +95,7 @@ export default function Homepage() {
             </div>
           </FlexInnerDiv>
           <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-3">
+            <div className=" flex flex-col items-center justify-center gap-3 py-6">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconRent}`} />
               </StyledIconDiv>
@@ -111,7 +111,7 @@ export default function Homepage() {
             </div>
           </FlexInnerDiv>
           <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-3">
+            <div className=" flex flex-col items-center justify-center gap-3 py-6">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconSurvey}`} />
               </StyledIconDiv>
@@ -132,6 +132,42 @@ export default function Homepage() {
       </section>
       <section className="mt-[12rem]  ">
         <Testimonials />
+      </section>
+      <section className="flex flex-col text-center mt-20 justify-center items-center mx=auto  ">
+        <h3 className="text-2xl mb-7 font-black">
+          About Gethomes Recommendations
+        </h3>
+        <p className="max-w-[40rem] text-[1.3rem] max-[665px]:px-7">
+          Disclaimer: The information provided on this website is for general
+          informational purposes only and should not be considered professional
+          advice. While we strive to provide accurate and up-to-date
+          information, we make no representations or warranties of any kind,
+          express or implied, about the completeness, accuracy, reliability,
+          suitability, or availability of the information contained on this
+          website. <br /> Any reliance you place on such information is strictly
+          at your own risk. We are not responsible for any losses or damages
+          that may arise from your use of this website or the information
+          contained herein.
+        </p>
+        <h3 className="text-2xl mb-7 mt-[8rem] font-black">
+          Investment and Trading Risks
+        </h3>
+        <p className="max-w-[40rem] text-[1.3rem] max-[665px]:px-7">
+          Trading and investing in [specific market or industry] carries
+          significant risks, including the risk of losing principal. Past
+          performance is not indicative of future results. Before making any
+          investment or trading decisions, you should consult with a qualified
+          financial advisor or conduct your own research. Property and Housing:
+          The properties and houses listed on this website are subject to market
+          fluctuations and other factors that may affect their value. We make no
+          guarantees or representations about the accuracy or completeness of
+          the information provided about these properties. Consult
+          Professionals: Before making any decisions based on the information
+          provided on this website, you should consult with qualified
+          professionals, including financial advisors, lawyers, and real estate
+          experts. By using this website, you acknowledge that you have read,
+          understood, and agree to this disclaimer.
+        </p>
       </section>
     </>
   );

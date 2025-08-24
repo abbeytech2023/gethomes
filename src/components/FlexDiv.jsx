@@ -12,6 +12,8 @@ export const FlexDiv = styled.div`
 export const FlexInnerDiv = styled.div`
   border-radius: 1rem;
   background-color: #fff;
+  display: flex;
+  flex-direction: column;
 
   max-width: 18rem;
   position: relative;

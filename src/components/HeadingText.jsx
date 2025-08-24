@@ -24,7 +24,7 @@ export const Heading = styled.h1`
       color: #144c6f;
       text-transform: uppercase;
       text-align: center;
-      margin-bottom: 5rem;
+      margin-bottom: 3rem;
     `}
 
 ${(props) =>

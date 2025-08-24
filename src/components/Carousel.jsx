@@ -8,7 +8,6 @@ import { Heading } from "./HeadingText";
 
 const StyledCarousel = styled.div`
   position: relative;
-
   width: 80%;
   margin: 0 auto;
   /* height: 70vh; */
@@ -86,10 +85,8 @@ const Carousel = ({ comments }) => {
 
   return (
     <StyledCarousel>
-      <div className="flex justify-center items-center text-center">
-        <Heading className="mb-10" as="h2">
-          OUR TESTMONALS
-        </Heading>
+      <div className="">
+        <Heading as="h2">OUR TESTMONALS</Heading>
       </div>
       <CarouselInner
         style={{
