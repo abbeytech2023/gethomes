@@ -59,7 +59,7 @@ export default function SingleProperty() {
         </div>
       </div>
       <div className="mt-[9rem]  mx-auto">
-        <Button to="/rent" type="primary">
+        <Button to="/rent" type="secondary">
           Back
         </Button>
       </div>

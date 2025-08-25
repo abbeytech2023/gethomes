@@ -9,6 +9,7 @@ const StyledFormDivBox = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-template-rows: auto;
+  /* background-color: brown; */
   /* max-width: 65rem; */
   min-width: 20rem;
   grid-gap: 3rem;
@@ -19,7 +20,6 @@ const StyledFormDiv = styled.div`
   display: flex;
 
   align-items: flex-end;
-  position: relative;
 
   & label {
     margin-bottom: 0.4rem;
@@ -30,14 +30,13 @@ const StyledFormDiv = styled.div`
     border: 1px solid black;
 
     text-align: center;
-    width: 90%;
+    /* width: 90%; */
     height: 4rem;
     filter: grayscale();
     opacity: 0.6;
   }
   & select {
     border: 1px solid gray;
-    width: 90%;
 
     height: 4rem;
     font-weight: 400;
@@ -46,8 +45,8 @@ const StyledFormDiv = styled.div`
 
 const StyledContainerEditSave = styled.div`
   display: flex;
-
   flex-direction: column;
+  right: 22px;
   /* gap: 1rem; */
 
   /* align-items: flex-end; */
@@ -57,12 +56,17 @@ const LabelInputDiv = styled.div`
   display: flex;
   font-weight: 600;
   flex-direction: column;
-  width: 90%;
+  width: 14rem;
+  /* background-color: green; */
 
   & input {
     border: 1px solid gray;
     font-weight: 400;
-    /* width: 100%; */
+    /* width: 70%; */
+  }
+
+  & select {
+    /* width: 70%; */
   }
 `;
 
@@ -124,7 +128,7 @@ const ProfileFormEdit = ({ user }) => {
   let onsubmit;
 
   return (
-    <form onSubmit={handleSubmit(onsubmit)} className="w-[100%]">
+    <form onSubmit={handleSubmit(onsubmit)}>
       <StyledFormDivBox>
         <StyledFormDiv>
           <LabelInputDiv className=" flex flex-col">

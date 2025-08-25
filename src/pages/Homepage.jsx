@@ -28,6 +28,41 @@ const Section = styled.section`
   width: 100%;
 `;
 
+const homePageCart = [
+  {
+    icon: `${IconSell}`,
+    heading: "Buy A Home",
+    description:
+      " Find your dream home today! Expert guidance, endless options and  unbeatable prices your perfect haven awaits start searching now  and make it yours",
+    linkButtonValue: ">Homes For Sale",
+    linkButton: "/buy",
+  },
+  {
+    icon: `${IconBuy}`,
+    heading: "Home essentials",
+    description:
+      "Sell a home fast and stress free, get top payment with expert marketing global reach and personalized services, get a quote  today and sell with confidence",
+    linkButtonValue: "See our merchants",
+    linkButton: "/homeessentials",
+  },
+  {
+    icon: `${IconRent}`,
+    heading: "Rent A Home",
+    description:
+      "Sell a home fast and stress free, get top payment with expert marketing global reach and personalized services, get a quote  today and sell with confidence",
+    linkButtonValue: "Find Rentals",
+    linkButton: "/rent",
+  },
+  {
+    icon: `${IconSurvey}`,
+    heading: "Installment-Purchase",
+    description:
+      "Sell a home fast and stress free, get top payment with expert marketing global reach and personalized services, get a quote  today and sell with confidence",
+    linkButtonValue: "See Your Options",
+    linkButton: "",
+  },
+];
+
 export default function Homepage() {
   return (
     <>
@@ -58,28 +93,30 @@ export default function Homepage() {
       <section className="mt-[16rem] flex justify-center text-center py-16 ">
         {/* <Heading as="h5">Our Services</Heading> */}
         <FlexDiv className="">
-          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-6">
-              <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[13rem] lg:h-[11rem] md:h-[8rem] sm:h-[7rem]">
-                <img src={`${IconSell}`} />
-              </StyledIconDiv>
-              <Heading as="h5" className="font-bold text-2xl">
-                Buy A Home
-              </Heading>
-              <p className="text-[18px]  px-5">
-                Find your dream home today! Expert guidance, endless options and
-                unbeatable prices your perfect haven awaits start searching now
-                and make it yours
-              </p>
-              <StyledLinkButton to="/findanagent">
-                Find a local agent
-              </StyledLinkButton>
-            </div>
-          </FlexInnerDiv>
-          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
+          {homePageCart.map((cart) => {
+            return (
+              <>
+                <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
+                  <div className=" flex flex-col items-center justify-center gap-6">
+                    <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[13rem] lg:h-[11rem] md:h-[8rem] sm:h-[7rem]">
+                      <img src={cart.icon} />
+                    </StyledIconDiv>
+                    <Heading as="h5" className="font-bold text-2xl">
+                      {cart.heading}
+                    </Heading>
+                    <p className="text-[18px]  px-5">{cart.description}</p>
+                    <StyledLinkButton to={cart.linkButton}>
+                      {cart.linkButtonValue}
+                    </StyledLinkButton>
+                  </div>
+                </FlexInnerDiv>
+              </>
+            );
+          })}
+          {/* <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
             <div className=" flex flex-col items-center justify-center gap-2 py-6">
-              <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
-                <img src={`${IconBuy}`} />
+            <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
+            <img src={`${IconBuy}`} />
               </StyledIconDiv>
               <Heading as="h5" className="font-bold text-2xl">
                 Home essentials
@@ -127,7 +164,7 @@ export default function Homepage() {
                 See your options
               </StyledLinkButton>
             </div>
-          </FlexInnerDiv>
+          </FlexInnerDiv> */}
         </FlexDiv>
       </section>
       <section className="mt-[12rem]  ">
@@ -137,7 +174,7 @@ export default function Homepage() {
         <h3 className="text-2xl mb-7 font-black">
           About Gethomes Recommendations
         </h3>
-        <p className="max-w-[40rem] text-[1.3rem] max-[665px]:px-7">
+        <p className="max-w-[40rem] text-left text-[1.3rem] max-[665px]:px-7">
           Disclaimer: The information provided on this website is for general
           informational purposes only and should not be considered professional
           advice. While we strive to provide accurate and up-to-date
@@ -152,7 +189,7 @@ export default function Homepage() {
         <h3 className="text-2xl mb-7 mt-[8rem] font-black">
           Investment and Trading Risks
         </h3>
-        <p className="max-w-[40rem] text-[1.3rem] max-[665px]:px-7">
+        <p className="max-w-[40rem] text-[1.3rem] text-left max-[665px]:px-7">
           Trading and investing in [specific market or industry] carries
           significant risks, including the risk of losing principal. Past
           performance is not indicative of future results. Before making any

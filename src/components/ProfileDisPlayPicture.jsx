@@ -62,7 +62,7 @@ export default function ProfileDisPlayPicture({ userDetails }) {
           </label>
         </div>
         <FormRow>
-          <Button type="primary">Upload</Button>
+          <Button type="secondary">Upload</Button>
         </FormRow>
         {/* <Button type="primary">{isPending ? <SpinnerMini /> : "upload"}</Button> */}
       </form>

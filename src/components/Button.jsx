@@ -13,7 +13,7 @@ function Button({ children, type, to, disabled, onClick }) {
     round: base + " px-2.5 py-1 md:px-3.5 md:py-2 text-xs",
     secondary:
       base +
-      "border-2 border-stone-300 text-sm focus:ring-stone-200 px-4  sm:px-6 md:py-3.5  hover:text-white disabled:cursor-not-allowed uppercase font-semibold text-[#fff]  tracking-wide inline-block rounded-full focus:outline-none py-2.5 focus:ring focus:ring-stone-300  focus:ring-offset-2 hover:bg-yellow-600 transition-all duration-300 ",
+      "border-2 border-stone-300 text-sm focus:ring-stone-200 px-4  sm:px-6 md:py-3.5  hover:text-white disabled:cursor-not-allowed uppercase font-semibold text-[#fff]  tracking-wide inline-block rounded-full focus:outline-none py-2.5 focus:ring focus:ring-stone-300  focus:ring-offset-2 hover:bg-[rgba(20, 76, 111, 0.503)]  transition-all duration-300 ",
   };
 
   if (to)

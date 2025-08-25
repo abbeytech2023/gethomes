@@ -17,7 +17,7 @@ export default function MerchantsPage() {
 
   return (
     <>
-      <h2 className="mt-[10rem] uppercase font-bold text-2xl text-center m-7">
+      <h2 className="mt-[10rem] uppercase font-medium text-2xl text-center m-7">
         {`The best ${id} near you`}
       </h2>
       {isLoading && <SpinnerMini />}
@@ -37,8 +37,8 @@ export default function MerchantsPage() {
             </div>
           );
         })}
-      <div className="mt-[9rem]  mx-auto">
-        <Button to="/homeessentials" type="primary">
+      <div className="mt-[9rem]   mx-auto">
+        <Button to="/homeessentials" type="secondary">
           Back
         </Button>
       </div>
