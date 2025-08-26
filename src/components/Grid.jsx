@@ -21,7 +21,7 @@ export const GridInner = styled.div`
   border-radius: 1rem;
   /* background-color: #fff; */
   position: relative;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   box-shadow: 4px 3px 6px rgba(85, 85, 85, 0.487);
   /* width: 70%; */
 

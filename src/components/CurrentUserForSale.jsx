@@ -51,7 +51,7 @@ export default function CurrentUserForSale() {
         your Properties for sale
       </Heading>
       <Menus>
-        <GridContainer className="mt-32">
+        <GridContainer className="mt-32 ">
           {documents?.length === 0 && (
             <p className="uppercase text-2xl text-center">
               You do not have a property listed to let
@@ -61,11 +61,11 @@ export default function CurrentUserForSale() {
           {documents?.map((doc) => {
             return (
               <GridInner key={doc.id}>
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center ">
                   <div className=" text-center  py-8  flex flex-col gap-1 justify-center items-center">
                     <div className=" ">
                       <iframe
-                        width="260"
+                        width="265"
                         height="265"
                         src="https://www.youtube.com/embed/K54Kg-QE1MY?si=t_aLDJyiblJciPwA"
                         title="YouTube video player"

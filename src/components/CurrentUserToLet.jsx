@@ -1,4 +1,3 @@
-import { StyledDivProperty, ToLetCart, ToLetContainer } from "./ToLetCart";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiToLet";
 import SpinnerMini from "./SpinnerMini";
@@ -8,11 +7,20 @@ import { useFetchPropertiesWithId } from "../hooks/useFetchProperties";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useFetchPropertiesToletCurrentUser } from "../hooks/useProperties";
+import {
+  StyledDivProperty,
+  ToLetContainer,
+  StyledImageBox,
+  StyledPropertyDescription,
+  StyledPropertyDetails,
+} from "./ToLetCart";
+import { useNavigate } from "react-router-dom";
 
 const deleteCart = location.pathname === "/myaccount/dashboard";
 
 export default function CurrentUserToLet() {
   const { user } = useUser();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const id = user?.id;
@@ -55,9 +63,9 @@ export default function CurrentUserToLet() {
               return (
                 <StyledDivProperty
                   key={doc.id}
-                  className="border-[#144c6f] flex min-[0px]:flex-col md:flex-row lg:flex-row xl:flex-row "
+                  className="border-[#144c6f]  flex min-[0px]:flex-col min-[600px]:w-[25rem] min-[0]:w-[16rem] xl:w-[30rem] lg:w-[22rem]  md:flex-row items-center lg:flex-row xl:flex-row "
                 >
-                  <div className="">
+                  <StyledImageBox>
                     {deleteCart && (
                       <button onClick={() => mutate(doc.id)}>
                         <MdDelete className="text-black" />
@@ -70,16 +78,24 @@ export default function CurrentUserToLet() {
                       className="property-image"
                       alt=""
                     />
-                  </div>
-                  <div className="flex gap-3.5 w-[35%]  flex-col  px-2 py-4">
-                    <p className="text-2xl font-medium">
+                  </StyledImageBox>
+                  <StyledPropertyDescription>
+                    <p className="text-[1.3rem] font-medium">
                       {doc.propertyDescription}
                     </p>
                     <p>{doc.propertyLocation}</p>
-                  </div>
-                  <div>
+                  </StyledPropertyDescription>
+                  <StyledPropertyDetails>
                     <div className="w-[30%] ">{doc.phoneNumber}</div>
-                  </div>
+                    <button
+                      onClick={() => {
+                        navigate(`${URL}/${doc.id}`);
+                      }}
+                      className="font-medium text-[17px]"
+                    >
+                      see more...
+                    </button>
+                  </StyledPropertyDetails>
                 </StyledDivProperty>
               );
             })}
