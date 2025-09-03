@@ -34,7 +34,7 @@ function ForSaleCart({ document }) {
         return (
           <GridInner key={doc.id}>
             <div className="">
-              <div className=" text-center  py-8  flex flex-col gap-1 justify-center items-center">
+              <div className="flex flex-col items-center justify-center gap-1 py-8 text-center  ">
                 <div className="flex items-center justify-center ">
                   <iframe
                     width="200"
@@ -52,10 +52,10 @@ function ForSaleCart({ document }) {
                     <h1 className="text-[22px] uppercase">{doc.title}</h1>
                   </div>
                   <div>
-                    <p className=" text-lg">{doc.price}</p>
+                    <p className="text-lg ">{doc.price}</p>
                   </div>
                   <div className="">
-                    <p className=" text-lg ">{doc.propertyDetails}</p>
+                    <p className="text-lg ">{doc.propertyDetails}</p>
                   </div>
                 </div>
               </div>

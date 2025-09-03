@@ -20,34 +20,12 @@ import { useFetchProperties } from "../hooks/useFetchProperties";
 function PropertiesForSale() {
   const { documents, isLoading, error } = useFetchProperties("ForSale");
 
-  // const [documents, setDocuments] = useState();
-  // const [isLoading, setIsLoading] = useState(false);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setIsLoading(true);
-  //     const { data, error } = await supabase.from("ForSale").select("*");
-
-  //     if (error) {
-  //       console.error(error);
-  //       setIsLoading(false);
-  //       throw new Error("cabins could not be loaded");
-  //     }
-
-  //     if (data) {
-  //       setDocuments(data);
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, []);
-
   if (isLoading) return <SpinnerMini />;
 
   return (
-    <div className="mb-[8rem] w-[50%] text-center mx-auto ">
+    <div className="mb-[8rem] min-[600px]:w-[50%] max-[600px]:w-[80%]  text-center mx-auto ">
       {/* {error && <p>{error}</p>} */}
-      <Heading as="h2" className=" uppercase text-center mb-16">
+      <Heading as="h2" className="mb-16 text-center uppercase ">
         Properties for sale
       </Heading>
       {!documents && <SpinnerMini />}
