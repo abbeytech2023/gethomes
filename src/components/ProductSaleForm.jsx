@@ -15,6 +15,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useFetchLocalGovtga } from "../hooks/useFetchLga";
+import SelectStateLocalGovt from "./SelectStateLocalGovt";
 
 export const StyledFormDiv = styled.form`
   display: grid;
@@ -63,13 +64,14 @@ function ProductSaleForm() {
 
   const onSubmit = (data) => {
     mutate({ ...data, uid, image: data.image[0] });
+
     // mutate({ ...data, uid });
-    console.log(data);
   };
 
   const handleOnChange = (e) => {
     setCurrentState(e.target.value);
     console.log(currentState);
+    console.log(localGovts);
   };
 
   return (
@@ -124,49 +126,7 @@ function ProductSaleForm() {
                 })}
               />
             </FormRow>
-            <FormRow label="State" error={errors?.State?.message}>
-              <select
-                name="state"
-                id="state"
-                // value={currentState}
-                className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
-                {...register("state", {
-                  onChange: (e) => handleOnChange(e),
-                  required: "This field is required",
-                  minLength: {
-                    message: "select one profession from the list below",
-                  },
-                })}
-              >
-                {allStates?.map((state, i) => {
-                  return <option key={i}>{state}</option>;
-                })}
-              </select>
-            </FormRow>
-            <FormRow
-              label="Local-Government"
-              error={errors?.localGovernment?.message}
-            >
-              <select
-                name="localGovernment"
-                id="localGovernment"
-                className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
-                {...register("localGovernment", {
-                  required: "This field is required",
-                  minLength: {
-                    message: "select one profession from the list below",
-                  },
-                })}
-              >
-                {localGovts?.map((lga, i) => {
-                  return (
-                    <option key={i} value={lga}>
-                      {lga}
-                    </option>
-                  );
-                })}
-              </select>
-            </FormRow>
+            <SelectStateLocalGovt register={register} />
             <FormRow label="property photo">
               <FileInput
                 id="image"

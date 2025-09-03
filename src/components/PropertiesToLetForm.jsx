@@ -51,13 +51,11 @@ export default function PropertyToLetForm() {
       uid,
       image: data.image[0],
     });
-    console.log({ ...data, agentName, phoneNumber, image: data.image[0] });
     console.log(data.image);
   };
 
   const handleOnChange = (e) => {
     setCurrentState(e.target.value);
-    console.log(currentState);
   };
 
   return (

@@ -8,7 +8,7 @@ import { useUser } from "../hooks/useUser";
 export default function MyAccount() {
   const { user } = useUser();
   const userDetails = user?.user_metadata;
-  console.log(userDetails);
+  // console.log(userDetails);
 
   const location = useLocation();
 

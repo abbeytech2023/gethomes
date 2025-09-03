@@ -1,7 +1,6 @@
-// import Form from "../components";
-// import { doc, updateDoc } from "firebase/firestore";
-
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 import ProfileFormEdit from "./ProfileFormEdit";
+import { useUser } from "../hooks/useUser";
 
 // .pizza.sold-out img {
 //   filter: grayscale();
@@ -11,10 +10,16 @@ import ProfileFormEdit from "./ProfileFormEdit";
 // Email regex: /\S+@\S+\.\S+/
 
 function Profile() {
+  const { user } = useUser();
+  console.log(user.id);
+  const id = user?.id;
+
+  const { authenticatedUser } = useFetchUsersWithId(id);
+
   return (
     <>
       <div className="text-lg mb-[10rem] ">
-        <ProfileFormEdit />
+        <ProfileFormEdit user={id && authenticatedUser?.[0]} />
       </div>
     </>
   );

@@ -14,7 +14,6 @@ export default function Dashboard() {
 
   // const { data: documents, isPending } =
   //   useFetchPropertiesForSaleCurrentUser(id);
-  console.log("documents", documents);
 
   return (
     <>

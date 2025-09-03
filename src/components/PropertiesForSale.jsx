@@ -4,7 +4,6 @@ import { GridContainer, GridInner } from "./Grid";
 import { Heading } from "./HeadingText";
 import ForSaleCart from "./ForSaleCart";
 import { FlexDiv, FlexInnerDiv } from "./FlexDiv";
-import { useEffect, useState } from "react";
 import supabase from "../services/supabaseClients";
 import SpinnerMini from "./SpinnerMini";
 import { useFetchProperties } from "../hooks/useFetchProperties";
@@ -20,8 +19,6 @@ import { useFetchProperties } from "../hooks/useFetchProperties";
 
 function PropertiesForSale() {
   const { documents, isLoading, error } = useFetchProperties("ForSale");
-
-  // console.log(documents);
 
   // const [documents, setDocuments] = useState();
   // const [isLoading, setIsLoading] = useState(false);

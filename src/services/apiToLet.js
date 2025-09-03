@@ -62,7 +62,6 @@ export async function addPropertiesToLet(newProperty) {
   const { error: storageEror } = await supabase.storage
     .from("to-lets")
     .upload(imageName, newProperty.image);
-  console.log(newProperty.image);
 
   // 4 delete the cabin if there was an error uploading the corresponding image
   if (storageEror) {

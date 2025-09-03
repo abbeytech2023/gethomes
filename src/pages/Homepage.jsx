@@ -34,7 +34,7 @@ const homePageCart = [
     heading: "Buy A Home",
     description:
       " Find your dream home today! Expert guidance, endless options and  unbeatable prices your perfect haven awaits start searching now  and make it yours",
-    linkButtonValue: ">Homes For Sale",
+    linkButtonValue: "Homes For Sale",
     linkButton: "/buy",
   },
   {

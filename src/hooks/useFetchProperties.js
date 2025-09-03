@@ -15,7 +15,6 @@ export function useFetchPropertiesWithId(property, id) {
         .eq("uid", id);
 
       if (error) {
-        console.log(error.message);
         setError(error.message);
 
         setIsLoading(false);
@@ -29,8 +28,6 @@ export function useFetchPropertiesWithId(property, id) {
     };
     fetchData(id);
   }, [id, property]);
-
-  console.log(documents);
 
   return { documents, isLoading, error };
 }
@@ -52,8 +49,6 @@ export function useFetchProperties(properties) {
       }
 
       if (data) {
-        console.log(data);
-
         setDocuments(data);
         setIsLoading(false);
       }

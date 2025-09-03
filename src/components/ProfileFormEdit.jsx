@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 import { PiNotePencilThin } from "react-icons/pi";
 import { RiSave2Fill } from "react-icons/ri";
+import { useGetStatesFromApi } from "../hooks/useFetchStates";
+import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 
 const StyledFormDivBox = styled.div`
   display: grid;
@@ -71,7 +73,19 @@ const LabelInputDiv = styled.div`
 `;
 
 const ProfileFormEdit = ({ user }) => {
-  const [displayName, setDisplayName] = useState();
+  console.log(user);
+
+  const [currentState, setCurrentState] = useState("");
+
+  const { allStates } = useGetStatesFromApi(
+    "https://nga-states-lga.onrender.com/fetch"
+  );
+
+  const { localGovts } = useFetchLocalGovtga(
+    `https://nga-states-lga.onrender.com/?state=${currentState}`
+  );
+
+  const [displayName, setDisplayName] = useState(user && user.displayName);
   const [email, setEmail] = useState();
   const [NIN, setNin] = useState();
   const [gender, setgender] = useState();
@@ -127,6 +141,12 @@ const ProfileFormEdit = ({ user }) => {
 
   let onsubmit;
 
+  const handleOnChange = (e) => {
+    setCurrentState(e.target.value);
+    // console.log(localGovts);
+    console.log(currentState);
+  };
+
   return (
     <form onSubmit={handleSubmit(onsubmit)}>
       <StyledFormDivBox>
@@ -135,9 +155,26 @@ const ProfileFormEdit = ({ user }) => {
             <label>Full-name</label>
             <input
               disabled
-              value={displayName}
+              defaultValue={displayName}
               className={`${disable === true ? "opacity-50" : "opacity-100"}`}
             />
+            {/* <select
+              name="allState"
+              id="state"
+              // value={currentState}
+              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+              {...register("state", {
+                onChange: (e) => handleOnChange(e),
+                required: "This field is required",
+                minLength: {
+                  message: "select one profession from the list below",
+                },
+              })}
+            >
+              {allStates?.map((state, i) => {
+                return <option key={i}>{state}</option>;
+              })}
+            </select> */}
           </LabelInputDiv>
         </StyledFormDiv>
         <StyledFormDiv>
@@ -262,7 +299,6 @@ const ProfileFormEdit = ({ user }) => {
                 e.preventDefault();
                 inputRefGener.current.focus();
                 inputRefGener.current.disabled = false;
-                // console.log("edit button");
               }}
             >
               <PiNotePencilThin />
@@ -384,9 +420,7 @@ const ProfileFormEdit = ({ user }) => {
               ref={inputRefMobilePhone}
               value={mobilePhone}
               onChange={(e) => {
-                console.log(e.target.value);
                 setMobilePhone(e.target.value);
-                console.log(mobilePhone);
               }}
             />
           </LabelInputDiv>

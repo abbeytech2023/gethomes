@@ -9,29 +9,27 @@ import { useSignup } from "../hooks/useSignup";
 import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useState } from "react";
-import FileInput from "./FileInput";
+import SelectComponent from "./SelectComponent";
+import SelectStateLocalGovt from "./SelectStateLocalGovt";
 
 const options = [
   { value: "", text: "select a profession" },
-  { value: "houseAgents", text: "houseAgents" },
+  { value: "houseAgents", text: "HouseAgents" },
   { value: "welder", text: "welder" },
-  { value: "electrical-engineer", text: "electrical-engineer" },
-  { value: "plumber", text: "plumber" },
-  { value: "furniture", text: "furniture" },
-  { value: "electronic-store", text: "electronic-store" },
-  { value: "solar-engineer", text: "solar-engineer" },
-  { value: "electroni-store", text: "welder" },
+  { value: "electrical-engineer", text: "Electrical-engineer" },
+  { value: "plumber", text: "Plumber" },
+  { value: "furniture", text: "Furniture" },
+  { value: "electronic-store", text: "Electronic-store" },
+  { value: "solar-engineer", text: "Solar-engineer" },
+  { value: "electroni-store", text: "Welder" },
 ];
 
 function SignUpForm() {
-  const [currentState, setCurrentState] = useState("Select-Your-State ");
+  const [selectedValue, setSelectedValue] = useState();
+  // const [currentState, setCurrentState] = useState(())
   const { signup, isPending } = useSignup();
   const { register, formState, handleSubmit, reset, getValues, watch } =
     useForm();
-
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
 
   // const { localGovts } = useFetchLocalGovtga(
   //   `https://nga-states-lga.onrender.com/?state=${
@@ -39,22 +37,12 @@ function SignUpForm() {
   //   }`
   // );
 
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState}`
-  );
-
   const { errors } = formState;
 
   function onSubmit(data) {
+    signup({ ...data });
     console.log(data);
-
-    // signup({ ...data });
   }
-
-  const handleOnChange = (e) => {
-    setCurrentState(e.target.value);
-    console.log(currentState);
-  };
 
   return (
     <div>
@@ -86,80 +74,16 @@ function SignUpForm() {
               })}
             />
           </FormRow>
-          <FormRow label="State" error={errors?.State?.message}>
-            <select
-              name="state"
-              id="state"
-              className="py-[0.7rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
-              {...register("state", {
-                onChange: (e) => handleOnChange(e),
 
-                required: "This field is required",
-                minLength: {
-                  message: "select one profession from the list below",
-                },
-              })}
-            >
-              <>
-                <option key="default">choose your state</option>
-                {allStates?.map((state, i) => {
-                  return (
-                    <option key={i} value={state}>
-                      {state}
-                    </option>
-                  );
-                })}
-              </>
-            </select>
-          </FormRow>
-          <FormRow label="Local-Government">
-            <select
-              name="localGovernment"
-              id="localGovernment"
-              className=" py-[0.7rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
-              {...register("localGovernment", {
-                required: "This field is required",
-                minLength: {
-                  message: "select one profession from the list below",
-                },
-              })}
-            >
-              {localGovts &&
-                localGovts.map((lga, i) => {
-                  return (
-                    <>
-                      <option key={i} value={lga}>
-                        {lga}
-                      </option>
-                    </>
-                  );
-                })}
-            </select>
-          </FormRow>
+          <SelectStateLocalGovt register={register} />
 
           <FormRow label="Profession" error={errors?.profession?.message}>
-            <select
+            <SelectComponent
               name="profession"
-              id="profession"
-              className="py-[0.7rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
-              {...register("profession", {
-                onChange: (e) => {
-                  e.target.value;
-                },
-                required: "This field is required",
-                minLength: {
-                  message: "select one profession from the list below",
-                },
-              })}
-            >
-              {options.map((option, i) => {
-                return (
-                  <option key={i} value={option.value}>
-                    {option.text}
-                  </option>
-                );
-              })}
-            </select>
+              options={options}
+              value={selectedValue}
+              register={register}
+            />
           </FormRow>
           <FormRow
             label="Google business profile"

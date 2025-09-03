@@ -50,6 +50,7 @@ export default function CurrentUserForSale() {
       <Heading as="h2" className=" uppercase text-center ">
         your Properties for sale
       </Heading>
+      {!documents && <SpinnerMini />}
       <Menus>
         <GridContainer className="mt-32 ">
           {documents?.length === 0 && (

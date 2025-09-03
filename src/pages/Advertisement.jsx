@@ -1,50 +1,35 @@
 import { useState } from "react";
 import { Spinner } from "../components/Spinner";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
+import SelectComponent from "../components/SelectComponent";
+import { useForm } from "react-hook-form";
+
+const options = [
+  { value: "", text: "select a profession" },
+  { value: "houseAgents", text: "houseAgents" },
+  { value: "welder", text: "welder" },
+  { value: "electrical-engineer", text: "electrical-engineer" },
+  { value: "plumber", text: "plumber" },
+  { value: "furniture", text: "furniture" },
+  { value: "electronic-store", text: "electronic-store" },
+  { value: "solar-engineer", text: "solar-engineer" },
+  { value: "electroni-store", text: "welder" },
+];
 
 export default function Advertisement() {
-  const [currentState, setCurrentState] = useState();
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
+  const [selectedValue, setSelectedValue] = useState();
+  const { control, handleSubmit } = useForm();
 
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState}`
-  );
-
-  const handleOnChange = (e) => {
-    setCurrentState(e.target.value);
-    console.log(currentState);
-
-    e.target.value;
+  const handleChange = (e) => {
+    setSelectedValue(e.target.value);
   };
-
   return (
     <form className="mt-32 w-[30rem] ml-44  h-20 bg-yellow-300" action="">
-      <select
-        className="w-[9rem]"
-        name=""
-        onChange={(e) => handleOnChange(e)}
-        id=""
-      >
-        {allStates?.map((state, i) => {
-          return (
-            <option key={i} value={state}>
-              {state}
-            </option>
-          );
-        })}
-      </select>
-      <select className="w-[9rem]" name="" id="">
-        {localGovts?.map((state, i) => {
-          return (
-            <option key={i} value={state}>
-              {state}
-            </option>
-          );
-        })}
-      </select>
+      <SelectComponent
+        options={options}
+        control={control}
+        value={selectedValue}
+        onChange={handleChange}
+      />
     </form>
   );
 }

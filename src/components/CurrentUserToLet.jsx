@@ -28,8 +28,6 @@ export default function CurrentUserToLet() {
 
   const { documents, isLoading, error } = useFetchPropertiesWithId("ToLet", id);
 
-  console.log(documents);
-
   const { isPending, mutate } = useMutation({
     mutationFn: (id) => deleteProperty(id),
 
@@ -43,9 +41,9 @@ export default function CurrentUserToLet() {
     onError: () => toast.error("property could not be deleted"),
   });
 
-  const handleDelete = (id) => {
-    mutate(id);
-  };
+  // const handleDelete = (id) => {
+  //   mutate(id);
+  // };
   return (
     <div className="text-center ">
       <Heading as="h2">your properties to let</Heading>

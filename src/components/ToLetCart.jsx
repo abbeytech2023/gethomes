@@ -49,7 +49,8 @@ export const StyledPropertyDescription = styled.div`
   justify-content: center;
   gap: 3.5;
   height: 16rem;
-  width: 55%;
+  width: 9rem;
+  /* width: 55%; */
 `;
 
 //flex flex-col justify-around  h-full
@@ -108,7 +109,7 @@ export const ToLetCart = ({ documents }) => {
                   />
                 </StyledImageBox>
                 <StyledPropertyDescription>
-                  <p className="text-[1.3rem] font-medium">
+                  <p className="text-[1.3rem] font-medium ">
                     {doc.propertyDescription}
                   </p>
                   <p>{doc.propertyLocation}</p>

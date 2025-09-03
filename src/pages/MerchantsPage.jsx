@@ -13,8 +13,6 @@ export default function MerchantsPage() {
 
   const { documents, isLoading, error } = useFetchUsersWithId(id);
 
-  console.log(document);
-
   return (
     <>
       <h2 className="mt-[10rem] uppercase font-medium text-2xl text-center m-7">

@@ -3,19 +3,19 @@ import supabase from "../services/supabaseClients";
 
 export function useFetchUsersWithId(id) {
   const [documents, setDocument] = useState();
+  const [authenticatedUser, setAuthenticatedUser] = useState();
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchData = async (id) => {
+      setIsLoading(true);
       const { data, error } = await supabase
         .from("Users")
         .select()
         .eq("profession", id);
 
       if (error) {
-        console.log(error);
         setIsLoading(false);
       }
 
@@ -25,7 +25,23 @@ export function useFetchUsersWithId(id) {
       }
     };
     fetchData(id);
+
+    const fetchAuthUser = async (id) => {
+      setIsLoading(true);
+      const { data: authUser, error: authError } = await supabase
+        .from("Users")
+        .select()
+        .eq("id", id);
+
+      if (authError) console.log(authError);
+
+      if (authUser) {
+        setIsLoading(false);
+        setAuthenticatedUser(authUser);
+      }
+    };
+    fetchAuthUser(id);
   }, [id]);
 
-  return { documents, isLoading, error };
+  return { documents, isLoading, error, authenticatedUser };
 }

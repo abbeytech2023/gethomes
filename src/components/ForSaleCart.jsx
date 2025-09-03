@@ -37,7 +37,7 @@ function ForSaleCart({ document }) {
               <div className=" text-center  py-8  flex flex-col gap-1 justify-center items-center">
                 <div className="flex items-center justify-center ">
                   <iframe
-                    width="800"
+                    width="200"
                     height="265"
                     src="https://www.youtube.com/embed/K54Kg-QE1MY?si=t_aLDJyiblJciPwA"
                     title="YouTube video player"
