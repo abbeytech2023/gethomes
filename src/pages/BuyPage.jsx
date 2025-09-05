@@ -3,6 +3,7 @@ import { BgOverlay } from "../components/BgOverlay";
 import PropertiesForSale from "../components/PropertiesForSale";
 
 import SpinnerMini from "../components/SpinnerMini";
+import BasicPagination from "../components/Pagination";
 
 const BuySection = styled.section`
   height: 70vh;
@@ -25,7 +26,7 @@ function BuyPage() {
     <>
       <div className="flex items-center md:justify-end min-[0px]:justify-center lg:justify-end xl:justify-end  mt-[2rem] relative h-dvh">
         <div className=" absolute flex  flex-col  gap-[1rem] text-center  justify-center max-w-[80rem] text-[#fff] px-[5%] top-55  h-[19rem] sm:left-0 md:left-0 lg:left-23 xl:left-23 bg-[rgba(32,32,32,0.79)] ">
-          <BuyHeaderBox className="uppercase text-5xl font-extrabold ">
+          <BuyHeaderBox className="text-5xl font-extrabold uppercase ">
             Get Ready to move
           </BuyHeaderBox>
           <p className="text-[#fff] text-center  text-2xl sm:text-3xl mt-5">
@@ -43,6 +44,7 @@ function BuyPage() {
       <section className="mt-[9rem]">
         <PropertiesForSale />
       </section>
+      <BasicPagination />
     </>
   );
 }

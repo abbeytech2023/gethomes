@@ -11,7 +11,6 @@ import { useUser } from "../hooks/useUser";
 
 function Profile() {
   const { user } = useUser();
-  console.log(user.id);
   const id = user?.id;
 
   const { authenticatedUser } = useFetchUsersWithId(id);

@@ -1,10 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import {
   getSingleRent,
   getToLet,
   getToLetCurrentUser,
 } from "../services/apiToLet";
 import { getForSale, getForSaleCurrentUser } from "../services/apiForSale";
+import { UpdateUserData } from "../services/apiUpdateProfile";
+import { useUser } from "./useUser";
+import toast from "react-hot-toast";
 // import supabase from "../services/supabaseClients";
 
 export const useFetchPropertiesTolet = () => {
@@ -51,3 +54,12 @@ export const useFetchSinglePropertiesToLet = (id) => {
 
   return { singleToLet, isPending };
 };
+
+export function useUpdateUserData(id) {
+  const { mutate } = useMutation({
+    mutationFn: (data) => UpdateUserData(data, id),
+    onSuccess: () => toast.success("saved"),
+  });
+
+  return { mutate };
+}

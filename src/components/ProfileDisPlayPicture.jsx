@@ -30,8 +30,8 @@ export default function ProfileDisPlayPicture({ userDetails }) {
 
   return (
     <>
-      <div className="mt-22 mb-12 gap-4 flex flex-col text-black mx-auto items-center">
-        <h2 className="font-medium  md:text-2xl tracking-wider">
+      <div className="flex flex-col items-center gap-4 mx-auto mb-12 text-black mt-22">
+        <h2 className="font-medium tracking-wider md:text-2xl">
           Account Profile
         </h2>
 
@@ -44,7 +44,7 @@ export default function ProfileDisPlayPicture({ userDetails }) {
         </div> */}
 
         <p className="font-[500] text-[1.1rem]   md:text-[1.1rem]">
-          {userDetails?.fullName}
+          Welcome {userDetails?.fullName}
         </p>
         <p className="md:pl-6.5 text-[1.2rem]">{userDetails?.email}</p>
       </div>
