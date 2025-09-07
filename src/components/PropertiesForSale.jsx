@@ -23,7 +23,7 @@ function PropertiesForSale() {
   const filterValue = searchParams.get("state") || "all";
 
   let filteredDocuments = [];
-  if (filterValue === "all") {
+  if (filterValue === "All") {
     filteredDocuments = documents;
     console.log(filteredDocuments);
   } else {
@@ -72,7 +72,7 @@ function PropertiesForSale() {
           </GridContainer>
         )}
       </div>
-      <Pagination count={documents?.length} />
+      <Pagination count={filteredDocuments?.length} />
     </>
   );
 }

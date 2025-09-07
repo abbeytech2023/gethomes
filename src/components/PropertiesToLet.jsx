@@ -64,7 +64,7 @@ export default function PropertiesToLet() {
           <ToLetCart documents={filteredDocuments} isPending={isLoading} />
         )}
       </div>
-      <Pagination />
+      <Pagination count={filteredDocuments?.length} />
     </div>
   );
 }
