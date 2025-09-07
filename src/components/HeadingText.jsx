@@ -12,7 +12,7 @@ export const Heading = styled.h1`
       letter-spacing: 7px;
       font-family: "Bebas Neue", sans-serif;
 
-      color: #dae6ed;
+      color: #c8deeb;
       line-height: 1.1;
     `}
 

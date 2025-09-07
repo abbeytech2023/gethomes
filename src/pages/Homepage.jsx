@@ -49,7 +49,7 @@ const homePageCart = [
     icon: `${IconRent}`,
     heading: "Rent A Home",
     description:
-      "Sell a home fast and stress free, get top payment with expert marketing global reach and personalized services, get a quote  today and sell with confidence",
+      "Fully Furnished and Equipped, Rent our Properties Today! Perfect For Student, Ideal For Professionals, Family Friendly Property For Rent, Ideal For Those with Kids",
     linkButtonValue: "Find Rentals",
     linkButton: "/rent",
   },
@@ -102,7 +102,9 @@ export default function Homepage() {
                     <Heading as="h5" className="text-2xl font-bold">
                       {cart.heading}
                     </Heading>
-                    <p className="text-[18px]  px-5">{cart.description}</p>
+                    <p className="flex  text-[18px] h-[11rem] items-center text-left  px-5">
+                      {cart.description}
+                    </p>
                     <StyledLinkButton to={cart.linkButton}>
                       {cart.linkButtonValue}
                     </StyledLinkButton>

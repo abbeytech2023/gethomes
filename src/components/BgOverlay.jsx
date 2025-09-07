@@ -37,7 +37,7 @@ export const BgOverlay = styled.div`
       /* display: flex;
       align-items: center; */
       /* justify-content: end; */
-      background: linear-gradient(to bottom, rgba(11, 4, 11, 0.302));
+      background: linear-gradient(to bottom, rgb(11, 8, 47));
     `}
 
 

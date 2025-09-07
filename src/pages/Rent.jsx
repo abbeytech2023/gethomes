@@ -31,10 +31,10 @@ export default function Rent() {
           <BgOverlay as="rent" className="relative w-full h-full ">
             <div className=" flex  flex-col gap-[1rem]    justify-center max-w-[80rem] text-[#fff] px-[5%]  h-[19rem] top-20   sm:left-0 md:left-0 lg:left-23 xl:left-23 bg-[rgba(32,32,32,0.79)] ">
               <p className="text-[22px]">Home &gt; property to rent</p>
-              <RentHeaderBox className="uppercase text-4xl min-[0px]:font-light font-extrabold ">
+              <RentHeaderBox className="uppercase text-3xl min-[0px]:font-light font-extrabold ">
                 Property to rent
               </RentHeaderBox>
-              <p className="text-[25px] sm:text-[19px]">
+              <p className="text-[20px] sm:text-[19px]">
                 For our tenants, we have an extensive range of properties
                 available to rent
               </p>

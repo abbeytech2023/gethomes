@@ -64,17 +64,15 @@ export default function HomeEssentials() {
           {merchants.map((merchant, index) => {
             return (
               <FlexInnerDiv key={index} className="">
-                <div className=" flex flex-col items-center justify-center gap-3">
+                <div className="flex flex-col items-center justify-center gap-3 px-5 ">
                   <StyledIconDiv>
                     <img src={merchant.imgLink} />
                   </StyledIconDiv>
-                  <Heading as="h5" className="font-bold text-2xl">
+                  <Heading as="h5" className="text-2xl font-bold">
                     {merchant.craftGroup}
                   </Heading>
-                  <p className="text-[18px] px-5">
-                    Find your dream home today! Expert guidance, endless options
-                    and unbeatable prices your perfect haven awaits start
-                    searching now and make it yours
+                  <p className="flex items-center text-left text-[18px] h-[13rem]">
+                    {merchant.description}
                   </p>
                   <StyledLinkButton to={`/merchants/${merchant.craftsMenLink}`}>
                     {merchant.crafMenButton}
