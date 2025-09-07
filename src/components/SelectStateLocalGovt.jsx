@@ -36,6 +36,7 @@ export default function SelectStateLocalGovt({ register, styles }) {
             },
           })}
         >
+          <option key="default">all</option>
           {allStates?.map((state, i) => {
             return <option key={i}>{state}</option>;
           })}

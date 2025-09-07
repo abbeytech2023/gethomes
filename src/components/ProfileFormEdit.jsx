@@ -10,6 +10,8 @@ import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { useUpdateUserData } from "../hooks/useProperties";
 import { useUser } from "../hooks/useUser";
+import Button from "./Button";
+import FormRow from "./FormRow";
 
 const StyledFormDivBox = styled.div`
   display: grid;
@@ -131,7 +133,8 @@ const ProfileFormEdit = ({ user }) => {
       setOccupation(user && user.occupation);
       setMobilePhone(user && user.mobilePhone);
       setGoogleLink(user && user.googleLink);
-      setFacebookLink(user && user.googleLink);
+      setInstagramLink(user && user.instagramLink);
+      setFacebookLink(user && user.facebookLink);
       setInstagramLink(user && user.googleLink);
     };
     getUserDetails();
@@ -146,12 +149,14 @@ const ProfileFormEdit = ({ user }) => {
     { label: "mobile-phone", value: mobilePhone, ref: inputRefMobilePhone },
     { label: "occupation", value: occupation, ref: inputRefOccupation },
     { label: "facebook-link", value: facebookLink, ref: inputRefFacebook },
+    { label: "Home-Address", value: homeAdress, ref: inputRefHomeAddress },
     { label: "gender", value: gender, ref: inputRefGener },
-    { label: "office-Adress", value: officeAdress, inputRefHomeAddress },
-    { label: "Google-Link", value: googleLink, inputRefGoogleLink },
+    { label: "office-Adress", value: officeAdress, ref: inputRefOfficeAddress },
+    { label: "Google-Link", value: googleLink, ref: inputRefGoogleLink },
+    { label: "Instagram", value: instagramLink, ref: inputRefInstagram },
   ];
 
-  const { handleSubmit } = useForm();
+  const { handleSubmit, register } = useForm();
 
   const [disable, setDisable] = useState(true);
 
@@ -160,33 +165,41 @@ const ProfileFormEdit = ({ user }) => {
   //   console.log(data);
   // };
 
-  let onsubmit;
+  const onSubmit = (data) => {
+    console.log(data);
+
+    // mutate({ ...data });
+  };
 
   const handleOnChange = (e) => {
     setCurrentState(e.target.value);
     // console.log(localGovts);
-    console.log(currentState);
   };
 
   return (
-    <form action="">
+    <form onSubmit={handleSubmit(onSubmit)}>
       <StyledFormDivBox>
         {formObject.map((form) => {
-          const value = form.value;
+          const { value, label, ref } = form;
+          console.log(value);
 
           return (
-            <StyledFormDiv key={form.label}>
+            <StyledFormDiv key={label}>
               <LabelInputDiv className="flex flex-col ">
-                <label>{form.label}</label>
+                <label>{label}</label>
 
-                {form.label === "state" && (
+                {label === "state" && (
                   <select
                     name="allState"
                     id="state"
                     ref={form.ref}
                     defaultValue={state}
                     className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
-                    onChange={(e) => setState(e.target.value)}
+                    // onChange={(e) => setState(e.target.value)}
+                    {...register("state", {
+                      required: "This field is required",
+                      onChange: (e) => setState(e.target.value),
+                    })}
                   >
                     <option key="default">{user?.state}</option>
                     {allStates?.map((state, i) => {
@@ -198,11 +211,15 @@ const ProfileFormEdit = ({ user }) => {
                     })}
                   </select>
                 )}
-                {form.label === "local-govt" && (
+                {label === "local-govt" && (
                   <select
                     disabled
-                    onChange={(e) => setLocalGovt(e.target.value)}
-                    value={localGovt}
+                    // onChange={(e) => setLocalGovt(e.target.value)}
+                    {...register("localGovt", {
+                      required: "This field is required",
+                      onChange: (e) => setLocalGovt(e.target.value),
+                    })}
+                    // value={localGovt}
                     ref={form.ref}
                   >
                     <option key="default">{user?.localGovt}</option>
@@ -215,11 +232,17 @@ const ProfileFormEdit = ({ user }) => {
                     })}
                   </select>
                 )}
-                {form.label !== "state" && form.label !== "local-govt" && (
+                {label !== "state" && label !== "local-govt" && (
                   <input
+                    // onChange={handleOnChange}
                     disabled
-                    defaultValue={form.value}
-                    ref={form.ref}
+                    defaultValue={value}
+                    value={value}
+                    ref={ref}
+                    {...register("state", {
+                      required: "This field is required",
+                      onChange: (e) => setState(e.target.value),
+                    })}
                     className={`${
                       disable === true ? "opacity-50" : "opacity-100"
                     }`}
@@ -230,7 +253,6 @@ const ProfileFormEdit = ({ user }) => {
                 <EditSaaveButton
                   onClick={(e) => {
                     e.preventDefault();
-                    console.log(form.ref);
                     form.ref.current.focus();
                     form.ref.current.disabled = false;
                   }}
@@ -241,9 +263,6 @@ const ProfileFormEdit = ({ user }) => {
                   onClick={(e) => {
                     e.preventDefault();
                     inputRefGener.current.disabled = true;
-                    const value = form.value;
-                    mutate({ value });
-                    console.log(value);
                   }}
                 >
                   <RiSave2Fill />
@@ -252,6 +271,8 @@ const ProfileFormEdit = ({ user }) => {
             </StyledFormDiv>
           );
         })}
+
+        <Button type="secondary">Save</Button>
       </StyledFormDivBox>
     </form>
   );
@@ -669,7 +690,7 @@ function EditSaaveButton({ onClick, children }) {
     <div className="">
       <button
         onClick={onClick}
-        className="text-[0.7rem]  text-[#000]    rounded-lg py-1 px-1"
+        className="text-[0.9rem] cursor-pointer  text-[#000]    rounded-lg py-1 px-1"
       >
         {children}
       </button>
