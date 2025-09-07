@@ -3,7 +3,7 @@ import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import FormRow from "./FormRow";
 
-export default function SelectStateLocalGovt({ register }) {
+export default function SelectStateLocalGovt({ register, styles }) {
   const [currentState, setCurrentState] = useState("");
 
   const { allStates } = useGetStatesFromApi(
@@ -41,8 +41,9 @@ export default function SelectStateLocalGovt({ register }) {
           })}
         </select>
       </FormRow>
-      <FormRow label="local-govt">
+      <FormRow styles={styles} label="local-govt">
         <select
+          style={styles.container}
           name="localGovts"
           id="localGovernment"
           className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"

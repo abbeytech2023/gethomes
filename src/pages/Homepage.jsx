@@ -41,7 +41,7 @@ const homePageCart = [
     icon: `${IconBuy}`,
     heading: "Home essentials",
     description:
-      "Sell a home fast and stress free, get top payment with expert marketing global reach and personalized services, get a quote  today and sell with confidence",
+      "Keep Your Home Running Smoothly With Our Expert Maintainance Services, Your One-Stop Website For All Your Maintainance Needs ",
     linkButtonValue: "See our merchants",
     linkButton: "/homeessentials",
   },
@@ -66,7 +66,7 @@ const homePageCart = [
 export default function Homepage() {
   return (
     <>
-      <div className="flex justify-center items-center text-center ">
+      <div className="flex items-center justify-center text-center ">
         <div className=" w-[30%] sm:w-[100%] px-6    md:w-[100%] min-[0px]:bg-[#1c2535] min-[0px]:w-full gap-5 h-dvh flex flex-col justify-center items-left">
           <Heading
             as="h1"
@@ -74,11 +74,9 @@ export default function Homepage() {
           >
             The Ultimate Neighborhood Guide. <br />
           </Heading>
-          <ul className="text-white flex flex-col gap-4 text-left">
-            <li className="text-2xl"> Discover the Best Places to Live</li>
-            <li className="text-2xl">
-              Discover reliable service providers near you
-            </li>
+          <ul className="flex flex-col gap-4 text-[1.3rem] text-left text-white">
+            <li className=""> Discover the Best Places to Live</li>
+            <li className="">Discover reliable service providers near you</li>
           </ul>
         </div>
 
@@ -97,11 +95,11 @@ export default function Homepage() {
             return (
               <>
                 <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-                  <div className=" flex flex-col items-center justify-center gap-6">
+                  <div className="flex flex-col items-center justify-center gap-6 ">
                     <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[13rem] lg:h-[11rem] md:h-[8rem] sm:h-[7rem]">
                       <img src={cart.icon} />
                     </StyledIconDiv>
-                    <Heading as="h5" className="font-bold text-2xl">
+                    <Heading as="h5" className="text-2xl font-bold">
                       {cart.heading}
                     </Heading>
                     <p className="text-[18px]  px-5">{cart.description}</p>
@@ -114,11 +112,11 @@ export default function Homepage() {
             );
           })}
           {/* <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-2 py-6">
+            <div className="flex flex-col items-center justify-center gap-2 py-6 ">
             <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
             <img src={`${IconBuy}`} />
               </StyledIconDiv>
-              <Heading as="h5" className="font-bold text-2xl">
+              <Heading as="h5" className="text-2xl font-bold">
                 Home essentials
               </Heading>
               <p className="text-[18px]  px-5">
@@ -132,11 +130,11 @@ export default function Homepage() {
             </div>
           </FlexInnerDiv>
           <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-3 py-6">
+            <div className="flex flex-col items-center justify-center gap-3 py-6 ">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconRent}`} />
               </StyledIconDiv>
-              <Heading Heading as="h5" className="font-bold text-2xl">
+              <Heading Heading as="h5" className="text-2xl font-bold">
                 Rent A Home
               </Heading>
               <p className="text-[18px] px-5">
@@ -148,11 +146,11 @@ export default function Homepage() {
             </div>
           </FlexInnerDiv>
           <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className=" flex flex-col items-center justify-center gap-3 py-6">
+            <div className="flex flex-col items-center justify-center gap-3 py-6 ">
               <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
                 <img src={`${IconSurvey}`} />
               </StyledIconDiv>
-              <Heading Heading as="h5" className="font-bold text-2xl">
+              <Heading Heading as="h5" className="text-2xl font-bold">
                 Installment purchase
               </Heading>
               <p className="text-[18px] px-5">
@@ -171,7 +169,7 @@ export default function Homepage() {
         <Testimonials />
       </section>
       <section className="flex flex-col text-center mt-20 justify-center items-center mx=auto  ">
-        <h3 className="text-2xl mb-7 font-black">
+        <h3 className="text-2xl font-black mb-7">
           About Gethomes Recommendations
         </h3>
         <p className="max-w-[40rem] text-left text-[1.3rem] max-[665px]:px-7">

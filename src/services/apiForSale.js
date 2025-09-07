@@ -1,12 +1,16 @@
 import supabase, { supabaseUrl } from "./supabaseClients";
 
 export async function getForSale() {
-  const { data, error } = await supabase.from("ForSale").select("*");
+  let query = supabase.from("ForSale").select("*", { count: "exact" });
+
+  const { data, error, count } = await query;
 
   if (error) {
     console.error(error);
     throw new Error("cabins could not be loaded");
   }
+
+  console.log(data);
 
   return data;
 }

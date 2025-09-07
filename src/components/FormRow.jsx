@@ -1,8 +1,10 @@
 // import Input from "@/app/_components/Input";
 
-function FormRow({ children, label, error }) {
+function FormRow({ children, label, error, styles }) {
   return (
-    <div className="flex flex-col gap-4 mb-4 text-[0.7rem]">
+    <div
+      className={styles ? "hidden" : `flex flex-col gap-4 mb-4 text-[0.7rem]`}
+    >
       {label && <Label htmlFor={children.props?.id}>{label}</Label>}
       {children}
       <p className="w-[9rem] text-center mx-auto">

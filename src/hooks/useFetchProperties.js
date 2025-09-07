@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import supabase from "../services/supabaseClients";
+import { useSearchParams } from "react-router-dom";
 
 export function useFetchPropertiesWithId(property, id) {
   const [documents, setDocument] = useState();
@@ -33,9 +34,13 @@ export function useFetchPropertiesWithId(property, id) {
 }
 
 export function useFetchProperties(properties) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [documents, setDocuments] = useState();
   const [isLoading, setIsLoading] = useState();
   const [error, setError] = useState();
+
+  const page = !searchParams.get("page") ? 1 : Number(searchParams.get("page"));
 
   useEffect(() => {
     const fetchData = async () => {

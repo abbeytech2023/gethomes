@@ -16,9 +16,9 @@ export const BgOverlay = styled.div`
     css`
       display: flex;
       align-items: center;
-      justify-content: end;
+      justify-content: center;
       padding-bottom: 2rem;
-      background: linear-gradient(to bottom, rgba(255, 253, 253, 0.5));
+      /* background: linear-gradient(to bottom, rgba(25, 5, 5, 0.387)); */
     `}
 
 
@@ -34,10 +34,10 @@ export const BgOverlay = styled.div`
   ${(props) =>
     props.as === "buy" &&
     css`
-      display: flex;
-      align-items: center;
-      justify-content: end;
-      /* background: linear-gradient(to bottom, rgba(223, 235, 240, 0.4)); */
+      /* display: flex;
+      align-items: center; */
+      /* justify-content: end; */
+      background: linear-gradient(to bottom, rgba(11, 4, 11, 0.302));
     `}
 
 
