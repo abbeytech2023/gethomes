@@ -66,7 +66,7 @@ function MerchantProfile({ doc }) {
             <span>
               <IoCallOutline className="text-2xl" />
             </span>
-            Lorem, ipsum dolor sit amet consectetur adipisicing.
+            {doc.mobilePhone}
           </li>
           <li className="flex gap-3">
             <span>
