@@ -9,6 +9,7 @@ import {
   StyledLinkButton,
 } from "../components/FlexDiv";
 import { merchants } from "../components/Merchants";
+import { useRef } from "react";
 
 const HomeEssentialsSection = styled.div`
   height: 70vh;
@@ -31,6 +32,11 @@ const EssentialHeaderBox = styled.div`
 //https://images.unsplash.com/photo-1540574163026-643ea20ade25?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 
 export default function HomeEssentials() {
+  const merchantRef = useRef(null);
+
+  const handleScroll = () => {
+    merchantRef.current.scrollIntoView({ behavior: "smooth" });
+  };
   return (
     <>
       <section className="flex items-center tracking-tight max-[767px]:bg-[#cce1f6] mt-[2rem] h-dvh ">
@@ -40,11 +46,16 @@ export default function HomeEssentials() {
               Perfect your home
             </EssentialHeaderBox>
             <div>
-              <p className=" text-[25px] sm:text-[19px] mb-[1rem]">
-                For our tenants, we have an extensive range of properties
-                available to rent
+              <p className=" text-[25px] sm:text-[20px] mb-[1rem]">
+                Don&apos;t let home maintenance issues disrupt your life. Our
+                experienced technicians are here to help. Book now and get a
+                free consultation!
               </p>
-              <Button to="/homepage" type="secondary" className="text-[22px]">
+              <Button
+                onClick={handleScroll}
+                type="secondary"
+                className="text-[22px]"
+              >
                 shop home essentials
               </Button>
             </div>
@@ -59,7 +70,10 @@ export default function HomeEssentials() {
         </HomeEssentialsSection>
       </section>
 
-      <section className="mt-[16rem] flex justify-center text-center py-16 ">
+      <section
+        className="mt-[16rem] flex justify-center text-center py-16 "
+        ref={merchantRef}
+      >
         <FlexDiv>
           {merchants.map((merchant, index) => {
             return (

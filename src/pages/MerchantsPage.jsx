@@ -6,7 +6,6 @@ import { IoCallOutline } from "react-icons/io5";
 import { IoTimeOutline } from "react-icons/io5";
 import { useParams } from "react-router-dom";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
-import { useFetchPropertiesWithId } from "../hooks/useFetchProperties";
 
 export default function MerchantsPage() {
   const { id } = useParams();
@@ -29,7 +28,7 @@ export default function MerchantsPage() {
         documents.map((doc, i) => {
           return (
             <div key={i}>
-              <div className="flex justify-center items-center flex-col gap-7   border-black">
+              <div className="flex flex-col items-center justify-center border-black gap-7">
                 <MerchantProfile doc={doc} />
               </div>
             </div>
@@ -55,7 +54,7 @@ function MerchantProfile({ doc }) {
         />
       </div>
       <div className="">
-        <h3 className="font-medium mb-4">{doc.displayName}</h3>
+        <h3 className="mb-4 font-medium uppercase">{doc.displayName}</h3>
         <ul className="text-gray-800 max-w-[29rem] mb-6">
           <li className="flex gap-3">
             <span>

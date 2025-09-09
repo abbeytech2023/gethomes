@@ -44,7 +44,7 @@ export default function SelectStateLocalGovt({ register, styles }) {
       </FormRow>
       <FormRow styles={styles} label="local-govt">
         <select
-          style={styles.container}
+          style={styles?.container}
           name="localGovts"
           id="localGovernment"
           className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"

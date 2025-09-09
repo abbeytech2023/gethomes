@@ -4,8 +4,6 @@ import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 
 export default function SelectComponent({ options, register, name }) {
   const profession = name === "profession";
-  const allState = name === "allStates";
-  const localGovernment = name === "localGovt";
 
   // const { register, formState, handleSubmit, reset, getValues } = useForm();
   const [selectedValue, setSelectedValue] = useState();

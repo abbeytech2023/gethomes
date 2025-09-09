@@ -20,7 +20,7 @@ function PropertiesForSale() {
   const { documents, isLoading, error } = useFetchProperties("ForSale");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const filterValue = searchParams.get("state") || "all";
+  const filterValue = searchParams.get("state") || "All";
 
   let filteredDocuments = [];
   if (filterValue === "All") {

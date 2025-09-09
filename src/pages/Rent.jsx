@@ -19,6 +19,7 @@ const RentHeaderBox = styled.div`
 
 import { BgOverlay } from "../components/BgOverlay";
 import { useEffect, useState } from "react";
+import { Heading } from "../components/HeadingText";
 
 export default function Rent() {
   return (
@@ -26,12 +27,12 @@ export default function Rent() {
       <div className="flex">
         <RentSection className="w-full h-screen ">
           <BgOverlay as="rent" className="relative w-full h-full ">
-            {/* <div className=" flex  flex-col gap-[1rem]    justify-center max-w-[80rem] text-[#fff] px-[5%]  h-[19rem] top-20   sm:left-0 md:left-0 lg:left-23 xl:left-23 bg-[rgba(32,32,32,0.79)] "> */}
-            {/* <p className="text-[22px]">Home &gt; property to rent</p> */}
-            {/* <RentHeaderBox className="uppercase  text-3xl min-[0px]:font-light font-extrabold ">
-                Property to rent
-              </RentHeaderBox> */}
-            {/* </div> */}
+            <div className=" flex  flex-col gap-[1rem]    justify-center max-w-[80rem] text-[#fff]  px-[15%]  h-[10rem] top-20   sm:left-0 md:left-0 lg:left-23 xl:left-23 bg-[rgba(32,32,32,0.79)] ">
+              {/* <p className="text-[22px]">Home &gt; property to rent</p> */}
+              <RentHeaderBox className="uppercase  text-3xl min-[0px]:font-light font-extrabold ">
+                <Heading as="h1">Properties to rent</Heading>
+              </RentHeaderBox>
+            </div>
           </BgOverlay>
         </RentSection>
       </div>

@@ -11,18 +11,7 @@ import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useState } from "react";
 import SelectComponent from "./SelectComponent";
 import SelectStateLocalGovt from "./SelectStateLocalGovt";
-
-const options = [
-  { value: "", text: "select a profession" },
-  { value: "houseAgents", text: "HouseAgents" },
-  { value: "welder", text: "welder" },
-  { value: "electrical-engineer", text: "Electrical-engineer" },
-  { value: "plumber", text: "Plumber" },
-  { value: "furniture", text: "Furniture" },
-  { value: "electronic-store", text: "Electronic-store" },
-  { value: "solar-engineer", text: "Solar-engineer" },
-  { value: "electroni-store", text: "Welder" },
-];
+import { ProfessionOptions } from "./ProfessionOptions";
 
 function SignUpForm() {
   const [selectedValue, setSelectedValue] = useState();
@@ -80,7 +69,7 @@ function SignUpForm() {
           <FormRow label="Profession" error={errors?.profession?.message}>
             <SelectComponent
               name="profession"
-              options={options}
+              options={ProfessionOptions}
               value={selectedValue}
               register={register}
             />

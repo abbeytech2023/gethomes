@@ -16,6 +16,7 @@ import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import MyAccount from "./pages/MyAccount";
 import Header from "./components/Header";
+import WhatsAppLogo from "./components/WhataAppLogo";
 
 //Pages
 import Homepage from "./pages/Homepage";
@@ -62,7 +63,7 @@ function App() {
         //Browser router is being comment out here because it has been applied in the main.jsx file
         // <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
           <div className="flex flex-col min-h-screen ">
             <Header />
             <Routes>
@@ -101,6 +102,7 @@ function App() {
                 <Route path="/signin" element={<SignIn />} />
               </Route>
             </Routes>
+            <WhatsAppLogo />
           </div>
           <Toaster
             position="top-center"
