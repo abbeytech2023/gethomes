@@ -53,11 +53,13 @@ export default function PropertiesToLet() {
         Properties to let
       </Heading>
       <form
-        className="flex items-center justify-center gap-3"
+        className="flex items-start justify-center gap-3 "
         onSubmit={handleSubmit(onSubmit)}
       >
         <SelectStateLocalGovt styles={style} register={register} />
-        <Button type="secondary">Filter</Button>
+        <Button className="block" type="secondary">
+          Filter
+        </Button>
       </form>
       <div>
         {documents && (

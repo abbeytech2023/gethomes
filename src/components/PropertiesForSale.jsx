@@ -20,10 +20,10 @@ function PropertiesForSale() {
   const { documents, isLoading, error } = useFetchProperties("ForSale");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const filterValue = searchParams.get("state") || "All";
+  const filterValue = searchParams.get("state") || "all";
 
   let filteredDocuments = [];
-  if (filterValue === "All") {
+  if (filterValue === "all") {
     filteredDocuments = documents;
     console.log(filteredDocuments);
   } else {
@@ -60,7 +60,7 @@ function PropertiesForSale() {
         </Heading>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex items-center justify-center gap-3"
+          className="flex items-start justify-center gap-3"
         >
           <SelectStateLocalGovt styles={style} register={register} />
           <Button type="secondary">filter</Button>

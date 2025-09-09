@@ -60,8 +60,7 @@ function MerchantProfile({ doc }) {
             <span>
               <CiLocationOn className="text-2xl" />
             </span>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-            possimus est facere. Vitae, odio reprehenderit!
+            {doc.officeAdress}
           </li>
           <li className="flex gap-3">
             <span>

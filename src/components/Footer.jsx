@@ -1,10 +1,13 @@
 import { CiFacebook, CiInstagram, CiTwitter, CiYoutube } from "react-icons/ci";
+import { GiMailbox } from "react-icons/gi";
 import { PiWhatsappLogo, PiWhatsappLogoBold } from "react-icons/pi";
+import { SiGmail } from "react-icons/si";
+
 import styled from "styled-components";
 
 const IconDiv = styled.div`
   font-size: 32px;
-  background-color: black;
+  /* background-color: black; */
   border-radius: 30%;
   overflow: hidden;
   border: 1px solid white;
@@ -19,21 +22,21 @@ export default function Footer() {
       <div>Urban Oasis: Where City Meets Serenity | Follow us on</div>
 
       <div className="flex items-center justify-center gap-2 cursor-pointer ">
-        <IconDiv className="text-4xl text-blue-500 rounded ">
+        <IconDiv className="text-4xl text-blue-500 bg-black rounded ">
           <CiFacebook />
         </IconDiv>
 
-        <IconDiv className="text-white ">
+        <IconDiv className="text-white bg-black ">
           <CiTwitter />
         </IconDiv>
-        <IconDiv className=" text-[orangered] ">
+        <IconDiv className=" text-[orangered] bg-black ">
           <CiInstagram />
         </IconDiv>
-        <IconDiv className="text-red-500 ">
+        <IconDiv className="text-red-500 bg-black ">
           <CiYoutube />
         </IconDiv>
-        <IconDiv className="text-green-500 ">
-          <PiWhatsappLogoBold />
+        <IconDiv className="text-red-500 bg-white">
+          <SiGmail />
         </IconDiv>
       </div>
     </div>
