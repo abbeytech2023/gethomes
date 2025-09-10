@@ -22,7 +22,7 @@ export default function SingleProperty() {
 
   const StyledHeading = styled.span`
     font-weight: 500;
-    font-size: 22px;
+    font-size: 18px;
   `;
   // const { propToLet, isPending: isLoading } = useFetchPropertiesTolet();
 
@@ -70,12 +70,12 @@ export default function SingleProperty() {
         </div>
 
         <div className="flex flex-col gap-[4rem] xl:basis-[70%]  ">
-          <div className="flex flex-col px-7 gap-[2rem] text-2xl font-bold ">
+          <div className="flex flex-col px-7 gap-[2rem] text-[17px] font-bold ">
             <p>Marketed By</p>
             <p>{businessName}</p>
           </div>
 
-          <ul className="text-2xl px-6   flex flex-col gap-[1.5rem]">
+          <ul className="text-[16px] px-6   flex flex-col gap-[1.5rem]">
             <li className="">
               <StyledHeading>property-Description: </StyledHeading>{" "}
               {propertyDescription}
