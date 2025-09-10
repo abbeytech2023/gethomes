@@ -27,8 +27,8 @@ export default function MerchantsPage() {
       {documents &&
         documents.map((doc, i) => {
           return (
-            <div key={i}>
-              <div className="flex flex-col items-center justify-center border-black gap-7">
+            <div key={i} className="">
+              <div className="flex flex-col items-center justify-center border-black ">
                 <MerchantProfile doc={doc} />
               </div>
             </div>
@@ -45,7 +45,7 @@ export default function MerchantsPage() {
 
 function MerchantProfile({ doc }) {
   return (
-    <div className="border-2 border-gray-500 py-7 px-11 flex sm:flex-row md:flex-row lg:flex-row xl:flex-row min-[0px]:flex-col justify-center items-center gap-9 ">
+    <div className="border-2 border-gray-500  py-7 px-11 flex sm:flex-row md:flex-row lg:flex-row xl:flex-row min-[0px]:flex-col justify-center items-center gap-7">
       <div className="bg-red-700 px-7 py-5 rounded-[50%]">
         <img
           src={`https://media.istockphoto.com/id/2161204802/photo/threatening-revelations-under-the-magnifying-glass.webp?a=1&b=1&s=612x612&w=0&k=20&c=WEhP6EvDBMD0ZLf1YfRxvkiSK9ERTnTLZlxabjMh_VU=`}

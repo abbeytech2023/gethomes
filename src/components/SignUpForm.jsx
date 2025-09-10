@@ -49,6 +49,17 @@ function SignUpForm() {
               })}
             />
           </FormRow>
+          <FormRow>
+            <StyledInput
+              type="text"
+              placeholder="Enter Your Company Name"
+              id="businessName"
+              {...register("businessName", {
+                required:
+                  "please enter your business profile page link on google",
+              })}
+            />
+          </FormRow>
           <FormRow label="Email" error={errors?.email?.message}>
             <StyledInput
               type="email"

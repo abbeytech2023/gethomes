@@ -7,12 +7,12 @@ export async function getForSale() {
 
   if (error) {
     console.error(error);
-    throw new Error("cabins could not be loaded");
+    throw new Error("properties could not be loaded");
   }
 
   console.log(data);
 
-  return data;
+  return { data, count };
 }
 
 export async function addPropertiesForsSale(newProperty) {

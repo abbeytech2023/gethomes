@@ -30,8 +30,14 @@ export default function PropertyToLetForm() {
 
   const uid = user?.id;
   const agentName = user?.user_metadata?.fullName;
+  const businessName = user?.user_metadata?.businessName;
+  const phoneNumber = user?.user_metadata?.mobilePhone;
+  console.log(phoneNumber);
+
+  console.log(businessName);
+
   // const agentName = "sola";
-  const phoneNumber = "08036400784";
+
   const { mutate, isPending } = useMutation({
     mutationFn: addPropertiesToLet,
     onSuccess: () => {
@@ -47,6 +53,7 @@ export default function PropertyToLetForm() {
     mutate({
       ...data,
       agentName,
+      businessName,
       phoneNumber,
       uid,
       image: data.image[0],
@@ -61,7 +68,7 @@ export default function PropertyToLetForm() {
   return (
     <div className="mb-20 ">
       <div className="h-[70rem] flex  flex-col gap-8  ">
-        <div className=" flex mt-14 flex-col gap-8">
+        <div className="flex flex-col gap-8 mt-14">
           <Form onSubmit={onSubmit} handleSubmit={handleSubmit}>
             <FormRow
               label="Property Description"
@@ -76,6 +83,16 @@ export default function PropertyToLetForm() {
                 })}
               />
             </FormRow>
+            <FormRow label="price">
+              <StyledInput
+                type="number"
+                placeholder="pricing"
+                id="price"
+                {...register("price", {
+                  required: "This field is required",
+                })}
+              />
+            </FormRow>
             <FormRow
               label="Property-Location"
               error={errors?.propertyLocation?.message}
@@ -83,6 +100,7 @@ export default function PropertyToLetForm() {
               <StyledInput
                 type="text"
                 id="propertyLocation"
+                placeholder="Location of the property"
                 {...register("propertyLocation", {
                   required: "This field is required",
                 })}

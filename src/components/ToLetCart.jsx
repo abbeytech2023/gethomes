@@ -23,7 +23,7 @@ export const StyledDivProperty = styled.div`
   border-radius: 1rem;
   gap: 1rem;
   background-color: rgba(99, 124, 197, 0.277);
-  text-align: center;
+  text-align: left;
   box-shadow: 3px 3px 8px rgba(85, 85, 85, 0.487);
   margin-bottom: 6rem;
   padding: 2rem;
@@ -108,11 +108,18 @@ export const ToLetCart = ({ documents }) => {
                     alt=""
                   />
                 </StyledImageBox>
+
                 <StyledPropertyDescription>
                   <p className="text-[1.3rem] font-medium ">
-                    {doc.propertyDescription}
+                    {doc.propertyLocation}
                   </p>
-                  <p>{doc.propertyLocation}</p>
+                  <p
+                    onClick={() => {
+                      console.log(doc.propertyDescription);
+                    }}
+                  >
+                    {doc.propertyDescription.slice(0, 85) + "..."}
+                  </p>
                 </StyledPropertyDescription>
                 <StyledPropertyDetails>
                   <div className="w-[30%] ">{doc.phoneNumber}</div>

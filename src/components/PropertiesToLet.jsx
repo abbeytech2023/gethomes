@@ -11,7 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 
 export default function PropertiesToLet() {
-  const { documents, isLoading, error } = useFetchProperties("ToLet");
+  const { documents, isLoading, count } = useFetchProperties("ToLet");
   const [searchParams, setSearchParams] = useSearchParams();
   const { handleSubmit, register } = useForm();
 

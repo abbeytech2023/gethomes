@@ -11,21 +11,29 @@ import toast from "react-hot-toast";
 // import supabase from "../services/supabaseClients";
 
 export const useFetchPropertiesTolet = () => {
-  const { data: propToLet, isPending } = useQuery({
+  const {
+    data: propToLet,
+    isPending,
+    count,
+  } = useQuery({
     queryKey: ["ToLet"],
     queryFn: getToLet,
   });
 
-  return { propToLet, isPending };
+  return { propToLet, isPending, count };
 };
 
 export const useFetchPropertiesForSale = () => {
-  const { data: documents, isPending } = useQuery({
+  const {
+    data: documents,
+    count,
+    isPending,
+  } = useQuery({
     queryKey: ["ForSale"],
     queryFn: getForSale,
   });
 
-  return { documents, isPending };
+  return { documents, isPending, count };
 };
 
 export const useFetchPropertiesForSaleCurrentUser = (id) => {

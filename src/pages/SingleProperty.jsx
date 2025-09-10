@@ -5,6 +5,7 @@ import { Spinner } from "../components/Spinner";
 import { getSingleRent } from "../services/apiToLet";
 import supabase from "../services/supabaseClients";
 import Button from "../components/Button";
+import styled from "styled-components";
 
 export default function SingleProperty() {
   const { id } = useParams();
@@ -12,10 +13,16 @@ export default function SingleProperty() {
   const [propertyLocation, setPropertyLocation] = useState();
   const [PropertyImage, setPropertyImage] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
+  const [state, setState] = useState();
   const [localGovernment, setLocalGovernment] = useState();
+  const [price, setPrice] = useState();
+  const [businessName, setBusinessName] = useState();
 
   const navigate = useNavigate();
 
+  const StyledHeading = styled.span`
+    font-weight: 700;
+  `;
   // const { propToLet, isPending: isLoading } = useFetchPropertiesTolet();
 
   useEffect(() => {
@@ -34,8 +41,11 @@ export default function SingleProperty() {
         setPropertyDescription(data.propertyDescription);
         setPropertyLocation(data.propertyLocation);
         setPropertyImage(data.image);
-        setPhoneNumber(data.setPhoneNumber);
-        setLocalGovernment(data.setLocalGovernment);
+        setPhoneNumber(data.phoneNumber);
+        setState(data.state);
+        setBusinessName(data.businessName);
+        setLocalGovernment(data.localGovernment);
+        setPrice(data.price);
         console.log(data);
       }
 
@@ -47,15 +57,46 @@ export default function SingleProperty() {
 
   return (
     <>
-      <div className="flex  justify-center w-[100%] bg-amber-700 mt-[9rem]">
-        <div className="w-[400px]">
-          <img src={PropertyImage} height="full" width="full" />
+      <div className="flex xl:flex-row flex-col gap-[12rem]    justify-around items-center w-[100%] mt-[9rem]">
+        <div className="flex flex-col gap-5 ">
+          <div className="flex justify-between text-3xl text-[#000000c0] font-bold">
+            <p>{propertyDescription?.slice(0, 10)}</p>
+            <p className="text-red-500 ">₦{price}</p>
+          </div>
+          <div className="w-[400px]">
+            <img src={PropertyImage} />
+          </div>
         </div>
-        <div className="flex flex-col gap-[2rem]">
-          <p className=" text-2xl">{propertyDescription}</p>
-          <p>{propertyLocation}</p>
-          <p>{phoneNumber}</p>
-          <p>{localGovernment}</p>
+
+        <div className="flex flex-col w-[35rem] gap-[4rem] ">
+          <div className="flex flex-col gap-[2rem] text-3xl font-bold ">
+            <p>Marketed By</p>
+            <p>{businessName}</p>
+          </div>
+
+          <ul className="text-2xl  flex flex-col gap-[1.5rem]">
+            <li className="">
+              <StyledHeading>property-Description: </StyledHeading>{" "}
+              {propertyDescription}
+            </li>
+            <li>
+              <StyledHeading>Property-Location:</StyledHeading>{" "}
+              {propertyLocation}
+            </li>
+            <li>
+              <StyledHeading>price:</StyledHeading> ₦{price}
+            </li>
+            <li>
+              <StyledHeading>phone:</StyledHeading> {phoneNumber}
+            </li>
+            <li>
+              <StyledHeading>State:</StyledHeading> {state}
+            </li>
+            <li>
+              <StyledHeading>local-government: </StyledHeading>
+              {localGovernment}
+            </li>
+          </ul>
         </div>
       </div>
       <div className="mt-[9rem]  mx-auto">

@@ -49,7 +49,7 @@ export default function CurrentUserToLet() {
       <Heading as="h2">your properties to let</Heading>
       {!documents && <SpinnerMini />}
       {documents?.length === 0 && (
-        <p className="uppercase text-2xl">
+        <p className="text-2xl uppercase">
           You do not have a property listed to let
         </p>
       )}
@@ -79,9 +79,9 @@ export default function CurrentUserToLet() {
                   </StyledImageBox>
                   <StyledPropertyDescription>
                     <p className="text-[1.3rem] font-medium">
-                      {doc.propertyDescription}
+                      {doc.propertyLocation}
                     </p>
-                    <p>{doc.propertyLocation}</p>
+                    <p>{doc.propertyDescription?.slice(0, 85) + "..."}</p>
                   </StyledPropertyDescription>
                   <StyledPropertyDetails>
                     <div className="w-[30%] ">{doc.phoneNumber}</div>

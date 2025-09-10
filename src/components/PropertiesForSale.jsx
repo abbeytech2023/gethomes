@@ -17,7 +17,7 @@ import { useSearchParams } from "react-router-dom";
 
 function PropertiesForSale() {
   const { register, handleSubmit } = useForm();
-  const { documents, isLoading, error } = useFetchProperties("ForSale");
+  const { documents, isLoading, count } = useFetchProperties("ForSale");
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterValue = searchParams.get("state") || "all";

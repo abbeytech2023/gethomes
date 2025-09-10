@@ -1,7 +1,9 @@
 import supabase, { supabaseUrl } from "./supabaseClients";
 
 export async function getToLet() {
-  const { data, error } = await supabase.from("ToLet").select("*");
+  let query = supabase.from("ToLet").select("*", { count: "exact" });
+
+  const { data, error, count } = await query;
 
   if (error) {
     console.error(error);
@@ -9,7 +11,7 @@ export async function getToLet() {
   }
   console.log(data);
 
-  return data;
+  return { data, count };
 }
 
 export const getToLetCurrentUser = async (id) => {
