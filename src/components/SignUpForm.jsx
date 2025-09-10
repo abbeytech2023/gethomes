@@ -49,7 +49,7 @@ function SignUpForm() {
               })}
             />
           </FormRow>
-          <FormRow>
+          <FormRow label="Company name">
             <StyledInput
               type="text"
               placeholder="Enter Your Company Name"
@@ -128,6 +128,17 @@ function SignUpForm() {
                   const password = getValues().password;
                   if (value != password) return "password needs to match";
                 },
+              })}
+            />
+          </FormRow>
+          <FormRow label="Mobile-Phone">
+            <StyledInput
+              name="phoneNumber"
+              id="phoneNumber"
+              placeholder="mobile phone"
+              {...register("phone", {
+                required:
+                  "please enter your business profile page link on google",
               })}
             />
           </FormRow>

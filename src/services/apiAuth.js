@@ -7,6 +7,7 @@ export async function signup({
   profession,
   googleBusiness,
   businessName,
+  phone,
 }) {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -18,6 +19,7 @@ export async function signup({
         profession,
         googleBusiness,
         businessName,
+        phone,
       },
     },
   });
@@ -41,7 +43,8 @@ export async function signup({
       displayName: user.user_metadata.fullName,
       profession: profession,
       googleBusiness: googleBusiness,
-      businessName: businessName,
+      businessName,
+      phone,
     },
   ]);
 

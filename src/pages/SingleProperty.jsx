@@ -6,6 +6,7 @@ import { getSingleRent } from "../services/apiToLet";
 import supabase from "../services/supabaseClients";
 import Button from "../components/Button";
 import styled from "styled-components";
+import { formatDate, formatPrice } from "../util/utility";
 
 export default function SingleProperty() {
   const { id } = useParams();
@@ -17,12 +18,14 @@ export default function SingleProperty() {
   const [localGovernment, setLocalGovernment] = useState();
   const [price, setPrice] = useState();
   const [businessName, setBusinessName] = useState();
+  const [createdAt, setCreatedAt] = useState();
 
   const navigate = useNavigate();
 
   const StyledHeading = styled.span`
-    font-weight: 500;
+    font-weight: 600;
     font-size: 18px;
+    margin-right: 6px;
   `;
   // const { propToLet, isPending: isLoading } = useFetchPropertiesTolet();
 
@@ -47,11 +50,14 @@ export default function SingleProperty() {
         setBusinessName(data.businessName);
         setLocalGovernment(data.localGovernment);
         setPrice(data.price);
+        setCreatedAt(data.created_at);
         console.log(data);
       }
 
       return data;
     };
+
+    console.log(phoneNumber);
 
     fetchSingleProperty();
   }, [id]);
@@ -62,7 +68,7 @@ export default function SingleProperty() {
         <div className="flex flex-col items-center w-[80%] gap-5 ">
           <div className="flex justify-center  w-[70%] md:w-[50%]  min-[0px]:text-2xl text-3xl text-[#000000c0] font-bold">
             {/* <p>{propertyDescription?.slice(0, 10)}</p> */}
-            <p className="text-red-500 ">₦{price}</p>
+            <p className="text-red-500 ">{formatPrice(price)}</p>
           </div>
           <div className="min-[0px]:w-[100%] px-7 xl:w-[100%] flex justify-center ">
             <img src={PropertyImage} />
@@ -85,7 +91,7 @@ export default function SingleProperty() {
               {propertyLocation}
             </li>
             <li>
-              <StyledHeading>price:</StyledHeading> ₦{price}
+              <StyledHeading>price:</StyledHeading> {formatPrice(price)}
             </li>
             <li>
               <StyledHeading>phone:</StyledHeading> {phoneNumber}
@@ -94,8 +100,11 @@ export default function SingleProperty() {
               <StyledHeading>State:</StyledHeading> {state}
             </li>
             <li>
-              <StyledHeading>local-government: </StyledHeading>
+              <StyledHeading>Local-government: </StyledHeading>
               {localGovernment}
+            </li>
+            <li>
+              <StyledHeading>Date:</StyledHeading> {formatDate(createdAt)}
             </li>
           </ul>
         </div>

@@ -127,7 +127,7 @@ const ProfileFormEdit = ({ user }) => {
       setHomeAdress(user && user.homeAdress);
       setOfficeAdress(user && user.officeAdress);
       setOccupation(user && user.occupation);
-      setMobilePhone(user && user.mobilePhone);
+      setMobilePhone(user && user.phone);
       setGoogleLink(user && user.googleLink);
       setInstagramLink(user && user.instagramLink);
       setFacebookLink(user && user.facebookLink);

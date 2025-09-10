@@ -31,10 +31,10 @@ export default function PropertyToLetForm() {
   const uid = user?.id;
   const agentName = user?.user_metadata?.fullName;
   const businessName = user?.user_metadata?.businessName;
-  const phoneNumber = user?.user_metadata?.mobilePhone;
+  const phoneNumber = user?.user_metadata?.phone;
   console.log(phoneNumber);
 
-  console.log(businessName);
+  console.log(user);
 
   // const agentName = "sola";
 
