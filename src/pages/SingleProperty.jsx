@@ -58,10 +58,10 @@ export default function SingleProperty() {
 
   return (
     <>
-      <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col  justify-around  mt-[9rem]">
+      <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
         <div className="flex flex-col items-center w-[80%] gap-5 ">
-          <div className="flex justify-between w-[70%] md:w-[50%]  min-[0px]:text-2xl text-3xl text-[#000000c0] font-bold">
-            <p>{propertyDescription?.slice(0, 10)}</p>
+          <div className="flex justify-center  w-[70%] md:w-[50%]  min-[0px]:text-2xl text-3xl text-[#000000c0] font-bold">
+            {/* <p>{propertyDescription?.slice(0, 10)}</p> */}
             <p className="text-red-500 ">₦{price}</p>
           </div>
           <div className="min-[0px]:w-[100%] px-7 xl:w-[100%] flex justify-center ">
