@@ -60,22 +60,22 @@ export default function SingleProperty() {
     <>
       <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col  justify-around  mt-[9rem]">
         <div className="flex flex-col items-center w-[80%] gap-5 ">
-          <div className="flex justify-between min-[700px]:w-[25rem] min-[0px]:w-[14rem] min-[540px]:w-[20rem] min-[0px]:text-2xl text-3xl text-[#000000c0] font-bold">
+          <div className="flex justify-between w-[70%] md:w-[50%]  min-[0px]:text-2xl text-3xl text-[#000000c0] font-bold">
             <p>{propertyDescription?.slice(0, 10)}</p>
             <p className="text-red-500 ">₦{price}</p>
           </div>
-          <div className="min-[0px]:w-[70%] xl:w-[100%] flex justify-center ">
+          <div className="min-[0px]:w-[100%] px-7 xl:w-[100%] flex justify-center ">
             <img src={PropertyImage} />
           </div>
         </div>
 
         <div className="flex flex-col gap-[4rem] xl:basis-[70%]  ">
-          <div className="flex flex-col gap-[2rem] text-2xl font-bold ">
+          <div className="flex flex-col px-7 gap-[2rem] text-2xl font-bold ">
             <p>Marketed By</p>
             <p>{businessName}</p>
           </div>
 
-          <ul className="text-2xl   flex flex-col gap-[1.5rem]">
+          <ul className="text-2xl px-6   flex flex-col gap-[1.5rem]">
             <li className="">
               <StyledHeading>property-Description: </StyledHeading>{" "}
               {propertyDescription}
