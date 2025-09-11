@@ -1,8 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
-import { Spinner } from "../components/Spinner";
-import { getSingleRent } from "../services/apiToLet";
+
 import supabase from "../services/supabaseClients";
 import SpinnerMini from "../components/SpinnerMini";
 import Button from "../components/Button";
@@ -60,14 +59,12 @@ export default function SingleProperty() {
       return data;
     };
 
-    console.log(data);
-
     fetchSingleProperty();
   }, [id]);
 
   return (
     <>
-      {!data && <SpinnerMini />}
+      {!price && <SpinnerMini />}
       {data && (
         <>
           <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
