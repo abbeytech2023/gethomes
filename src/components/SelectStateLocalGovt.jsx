@@ -22,7 +22,7 @@ export default function SelectStateLocalGovt({ register, styles }) {
 
   return (
     <div className="flex flex-col">
-      <FormRow>
+      <FormRow label="State">
         <select
           name="allState"
           id="state"

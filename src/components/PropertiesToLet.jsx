@@ -15,10 +15,10 @@ export default function PropertiesToLet() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { handleSubmit, register } = useForm();
 
-  const filterValue = searchParams.get("state") || "all";
+  const filterValue = searchParams.get("state") || "All";
 
   let filteredDocuments = [];
-  if (filterValue === "all") {
+  if (filterValue === "All") {
     filteredDocuments = documents;
     console.log(filteredDocuments);
   } else {
@@ -53,11 +53,11 @@ export default function PropertiesToLet() {
         Properties to let
       </Heading>
       <form
-        className="flex items-start justify-center gap-3 "
+        className="flex items-center justify-center gap-3 "
         onSubmit={handleSubmit(onSubmit)}
       >
         <SelectStateLocalGovt styles={style} register={register} />
-        <Button className="block" type="secondary">
+        <Button className="" type="secondary">
           Filter
         </Button>
       </form>
@@ -66,7 +66,7 @@ export default function PropertiesToLet() {
           <ToLetCart documents={filteredDocuments} isPending={isLoading} />
         )}
       </div>
-      <Pagination count={filteredDocuments?.length} />
+      {/* <Pagination count={filteredDocuments?.length} /> */}
     </div>
   );
 }

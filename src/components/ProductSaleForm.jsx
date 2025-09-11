@@ -44,6 +44,8 @@ function ProductSaleForm() {
   const { user } = useUser();
 
   const uid = user?.id;
+  const businessName = user?.user_metadata?.businessName;
+  const phoneNumber = user?.user_metadata?.phone;
 
   const { reset, register, handleSubmit, formState } = useForm();
 
@@ -63,7 +65,8 @@ function ProductSaleForm() {
   });
 
   const onSubmit = (data) => {
-    mutate({ ...data, uid, image: data.image[0] });
+    mutate({ ...data, uid, image: data.image[0], businessName, phoneNumber });
+    console.log(data);
 
     // mutate({ ...data, uid });
   };
@@ -75,11 +78,11 @@ function ProductSaleForm() {
   };
 
   return (
-    <div className=" ">
+    <div className="">
       <div className="h-[70rem] flex  flex-col gap-8">
-        <div className=" flex mt-14 flex-col gap-8">
+        <div className="flex flex-col gap-8 mt-14">
           <Form
-            // className="flex items-center justify-center flex-col"
+            // className="flex flex-col items-center justify-center"
             onSubmit={onSubmit}
             handleSubmit={handleSubmit}
           >
@@ -119,6 +122,7 @@ function ProductSaleForm() {
             </FormRow>
             <FormRow label="Total-Package" error={errors?.price?.message}>
               <StyledInput
+                type="number"
                 placeHolder="pricing"
                 id="price"
                 {...register("price", {
@@ -126,7 +130,18 @@ function ProductSaleForm() {
                 })}
               />
             </FormRow>
-            <SelectStateLocalGovt register={register} />
+            <div>
+              <SelectStateLocalGovt register={register} />
+            </div>
+            <FormRow label="videoLink">
+              <StyledInput
+                placeHolder="paste your embed youtube video Link"
+                id="videoLink"
+                {...register("videoLink", {
+                  required: "This field is required",
+                })}
+              />
+            </FormRow>
             <FormRow label="property photo">
               <FileInput
                 id="image"
@@ -155,7 +170,7 @@ function Form({ children, handleSubmit, onSubmit }) {
   return (
     <StyledFormDiv
       onSubmit={handleSubmit(onSubmit)}
-      // className="flex gap-4 items-center justify-center flex-col"
+      // className="flex flex-col items-center justify-center gap-4"
       className="grid grid-cols-2 gap-4"
     >
       {children}

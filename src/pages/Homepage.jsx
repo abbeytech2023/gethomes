@@ -113,58 +113,6 @@ export default function Homepage() {
               </>
             );
           })}
-          {/* <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className="flex flex-col items-center justify-center gap-2 py-6 ">
-            <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
-            <img src={`${IconBuy}`} />
-              </StyledIconDiv>
-              <Heading as="h5" className="text-2xl font-bold">
-                Home essentials
-              </Heading>
-              <p className="text-[18px]  px-5">
-                Sell a home fast and stress free, get top payment with expert
-                marketing global reach and personalized services, get a quote
-                today and sell with confidence
-              </p>
-              <StyledLinkButton to="/homeessentials">
-                See our merchants
-              </StyledLinkButton>
-            </div>
-          </FlexInnerDiv>
-          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className="flex flex-col items-center justify-center gap-3 py-6 ">
-              <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
-                <img src={`${IconRent}`} />
-              </StyledIconDiv>
-              <Heading Heading as="h5" className="text-2xl font-bold">
-                Rent A Home
-              </Heading>
-              <p className="text-[18px] px-5">
-                Rent your dream home today! Luxury, comfort, and convenience -
-                explore top listings and find your perfect space with ease and
-                simplicity.
-              </p>
-              <StyledLinkButton to="/rent">Find Rentals</StyledLinkButton>
-            </div>
-          </FlexInnerDiv>
-          <FlexInnerDiv className="min-[0px]:mx-[3rem] xl:mx-0 lg:mx-0 md:mx-0 ">
-            <div className="flex flex-col items-center justify-center gap-3 py-6 ">
-              <StyledIconDiv className="flex items-center min-[0px]:h-[7rem] xl:h-[15rem] lg:h-[12rem] md:h-[8rem] sm:h-[7rem]">
-                <img src={`${IconSurvey}`} />
-              </StyledIconDiv>
-              <Heading Heading as="h5" className="text-2xl font-bold">
-                Installment purchase
-              </Heading>
-              <p className="text-[18px] px-5">
-                Accurate land surveys, precise results. Trust our experts for
-                boundary mapping, topographic surveys, and more. Reliable data
-                for your property decisions.
-              </p>
-              <StyledLinkButton to="/rent" className="min-[0px]:mx-[2rem]">
-                See your options
-              </StyledLinkButton>
-            </div>
-          </FlexInnerDiv> */}
         </FlexDiv>
       </section>
       <section className="mt-[12rem]  ">

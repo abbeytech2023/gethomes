@@ -12,6 +12,8 @@ import { MdDelete } from "react-icons/md";
 
 function ForSaleCart({ document }) {
   const { propertyDetails, price, title, id: propertyId } = document;
+  const location = useLocation();
+  const URL = location.pathname;
 
   const QueryClient = useQueryClient();
 
@@ -26,38 +28,31 @@ function ForSaleCart({ document }) {
     onError: () => toast.error("property could not be deleted"),
   });
 
-  const location = useLocation();
-
   return (
     <>
       {document.map((doc) => {
+        console.log(doc);
+
         return (
           <GridInner key={doc.id}>
             <div className="">
-              <div className="flex flex-col items-center justify-center gap-1 py-8 text-center  ">
+              <div className="flex flex-col items-center justify-center gap-1 py-8 text-center ">
                 <div className="flex items-center justify-center ">
-                  <iframe
-                    width="200"
-                    height="265"
-                    src="https://www.youtube.com/embed/K54Kg-QE1MY?si=t_aLDJyiblJciPwA"
-                    title="YouTube video player"
-                    // frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    // referrerpolicy="strict-origin-when-cross-origin"
-                    // allowfullscreen
-                  ></iframe>
+                  <img src={doc.image} />
                 </div>
-                <div className="w-[16rem] flex flex-col gap-6 py-12 ">
-                  <div>
-                    <h1 className="text-[22px] uppercase">{doc.title}</h1>
+                <a href={`${URL}/${doc.id}`}>
+                  <div className="w-[16rem] flex flex-col gap-6 py-12 ">
+                    <div>
+                      <h1 className="text-[22px] uppercase">{doc.title}</h1>
+                    </div>
+                    <div>
+                      <p className="text-lg ">{doc.price}</p>
+                    </div>
+                    <div className="">
+                      <p className="text-lg ">{doc.propertyDetails}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-lg ">{doc.price}</p>
-                  </div>
-                  <div className="">
-                    <p className="text-lg ">{doc.propertyDetails}</p>
-                  </div>
-                </div>
+                </a>
               </div>
             </div>
           </GridInner>

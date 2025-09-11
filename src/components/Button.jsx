@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 function Button({ children, type, to, disabled, onClick }) {
   const base =
-    "bg-[#144c6f] mt-[1rem] text-sm disabled:cursor-not-allowed text-[#c7e1f2] uppercase font-semibold  tracking-wide inline-block rounded-full focus:outline-none focus:ring focus:ring-[text-[#c7e1f2]]  focus:ring-offset-2 hover:bg-[#144c6f] transition-all duration-300 ";
+    "bg-[#144c6f] mt-[1rem] text-sm cursor-pointer disabled:cursor-not-allowed text-[#c7e1f2] uppercase font-semibold  tracking-wide inline-block rounded-full focus:outline-none focus:ring focus:ring-[text-[#c7e1f2]]  focus:ring-offset-2 hover:bg-[#144c6f] transition-all duration-300 ";
 
   const styles = {
     primary: base + "w-auto  text-center px-[4rem] py-[1rem]  md:py-4",

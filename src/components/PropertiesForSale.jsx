@@ -20,10 +20,10 @@ function PropertiesForSale() {
   const { documents, isLoading, count } = useFetchProperties("ForSale");
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const filterValue = searchParams.get("state") || "all";
+  const filterValue = searchParams.get("state") || "All";
 
   let filteredDocuments = [];
-  if (filterValue === "all") {
+  if (filterValue === "All") {
     filteredDocuments = documents;
     console.log(filteredDocuments);
   } else {
@@ -60,7 +60,7 @@ function PropertiesForSale() {
         </Heading>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex items-start justify-center gap-3"
+          className="flex items-center justify-center gap-3"
         >
           <SelectStateLocalGovt styles={style} register={register} />
           <Button type="secondary">filter</Button>
@@ -68,11 +68,16 @@ function PropertiesForSale() {
         {!documents && <SpinnerMini />}
         {documents && (
           <GridContainer className="mx-auto">
+            {filteredDocuments.length === 0 && (
+              <p className="text-2xl">
+                There are no properties currently available in this region
+              </p>
+            )}
             <ForSaleCart document={filteredDocuments} />
           </GridContainer>
         )}
       </div>
-      <Pagination count={filteredDocuments?.length} />
+      {/* <Pagination count={filteredDocuments?.length} /> */}
     </>
   );
 }
