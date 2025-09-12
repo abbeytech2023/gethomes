@@ -73,7 +73,7 @@ function PropertiesForSale() {
                 There are no properties currently available in this region
               </p>
             )}
-            <ForSaleCart document={filteredDocuments} />
+            {/* <ForSaleCart document={filteredDocuments} /> */}
           </GridContainer>
         )}
       </div>
