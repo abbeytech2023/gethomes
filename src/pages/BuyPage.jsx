@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { BgOverlay } from "../components/BgOverlay";
 import PropertiesForSale from "../components/PropertiesForSale";
 
-import { useFetchPropertiesForSale } from "../hooks/useProperties";
 import { Heading } from "../components/HeadingText";
 const BuySection = styled.section`
   height: 70vh;

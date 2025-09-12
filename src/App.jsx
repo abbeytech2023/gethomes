@@ -27,8 +27,8 @@ import Rent from "./pages/Rent";
 import Footer from "./components/Footer";
 import { Spinner } from "./components/Spinner";
 import SinglePropertyToLet from "./pages/SinglePropertyToLet";
-import SinglePropertyBuy from "./pages/SinglePropertyBuy";
 import MerchantsPage from "./pages/MerchantsPage";
+import SinglepropertyBuy from "./pages/SinglepropertyBuy";
 
 //hooks
 import { Toaster } from "react-hot-toast";
@@ -73,7 +73,7 @@ function App() {
               <Route path="/advertisement" element={<Advertisement />} />
               {/* <Route path="/sell" element={<Sell />} /> */}
               <Route path="/buy" element={<BuyPage />} />
-              <Route path="/buy/:id" element={<SinglePropertyBuy />} />
+              <Route path="/buy/:id" element={<SinglepropertyBuy />} />
               <Route path="/rent/" element={<Rent />} />
               <Route path="/rent/:id" element={<SinglePropertyToLet />} />
               <Route path="merchants/:id" element={<MerchantsPage />} />
@@ -88,7 +88,6 @@ function App() {
               >
                 <Route path="profile" element={<Profile />} />
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="dashboard/:id" element={<SinglePropertyBuy />} />
 
                 <Route
                   path="addpropertytolet"

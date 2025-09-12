@@ -9,7 +9,7 @@ import Button from "../components/Button";
 import styled from "styled-components";
 import { formatDate, formatPrice } from "../util/utility";
 
-export default function SinglePropertyBuy() {
+export default function SinglepropertyBuy() {
   const { id } = useParams();
   const [data, setData] = useState();
   const [propertyDetails, setPropertyDetails] = useState();
