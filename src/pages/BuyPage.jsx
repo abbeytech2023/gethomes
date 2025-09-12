@@ -29,7 +29,7 @@ function BuyPage() {
           <div className="  flex  flex-col  gap-[1rem] text-center  justify-center max-w-[80rem] text-[#021625] px-[5%] top-55  h-[19rem] sm:left-0 md:left-0 lg:left-23 xl:left-23  ">
             <BuyHeaderBox className="text-3xl font-extrabold text-left uppercase ">
               <Heading as="h1" className="text-[#000]">
-                Your Home Awaits, Explore Our Listings Now!!!
+                Your Home Awaits, Explore Our Listings Now
               </Heading>
             </BuyHeaderBox>
             <ul className="flex text-left  flex-col gap-5 text-[1.1rem] text-[#fff]   sm:text-3xl mt-5">
@@ -49,7 +49,9 @@ function BuyPage() {
       </BgOverlay>
       {/* ------------------- BUY RENT SELL SECTION -------------  */}
 
-      <section className="mt-[9rem]">{/* <PropertiesForSale /> */}</section>
+      <section className="mt-[9rem]">
+        <PropertiesForSale />
+      </section>
     </>
   );
 }
