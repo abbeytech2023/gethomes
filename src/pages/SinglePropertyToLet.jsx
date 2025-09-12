@@ -8,7 +8,7 @@ import Button from "../components/Button";
 import styled from "styled-components";
 import { formatDate, formatPrice } from "../util/utility";
 
-export default function SingleProperty() {
+export default function SinglePropertyToLet() {
   const { id } = useParams();
   const [data, setData] = useState();
   const [propertyDescription, setPropertyDescription] = useState();

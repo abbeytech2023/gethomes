@@ -26,8 +26,8 @@ import SignIn from "./pages/SignIn";
 import Rent from "./pages/Rent";
 import Footer from "./components/Footer";
 import { Spinner } from "./components/Spinner";
-import SingleProperty from "./pages/SinglePropertyToLet";
-// import SinglePropertyBuy from "./pages/SinglePropertyBuy";
+import SinglePropertyToLet from "./pages/SinglePropertyToLet";
+import SinglePropertyBuy from "./pages/SinglePropertyBuy";
 import MerchantsPage from "./pages/MerchantsPage";
 
 //hooks
@@ -73,9 +73,9 @@ function App() {
               <Route path="/advertisement" element={<Advertisement />} />
               {/* <Route path="/sell" element={<Sell />} /> */}
               <Route path="/buy" element={<BuyPage />} />
-              {/* <Route path="/buy/:id" element={<SinglePropertyBuy />} /> */}
+              <Route path="/buy/:id" element={<SinglePropertyBuy />} />
               <Route path="/rent/" element={<Rent />} />
-              <Route path="/rent/:id" element={<SingleProperty />} />
+              <Route path="/rent/:id" element={<SinglePropertyToLet />} />
               <Route path="merchants/:id" element={<MerchantsPage />} />
               <Route path="/homeessentials" element={<HomeEssentials />} />
               <Route
