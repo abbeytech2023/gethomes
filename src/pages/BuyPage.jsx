@@ -49,9 +49,7 @@ function BuyPage() {
       </BgOverlay>
       {/* ------------------- BUY RENT SELL SECTION -------------  */}
 
-      <section className="mt-[9rem]">
-        <PropertiesForSale />
-      </section>
+      <section className="mt-[9rem]">{/* <PropertiesForSale /> */}</section>
     </>
   );
 }
