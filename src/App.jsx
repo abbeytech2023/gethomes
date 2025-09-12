@@ -88,7 +88,7 @@ function App() {
               >
                 <Route path="profile" element={<Profile />} />
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="dashboard/:id" element={<SingleProperty />} />
+                <Route path="dashboard/:id" element={<SinglePropertyBuy />} />
 
                 <Route
                   path="addpropertytolet"
