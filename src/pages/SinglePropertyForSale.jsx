@@ -9,7 +9,9 @@ import Button from "../components/Button";
 import styled from "styled-components";
 import { formatDate, formatPrice } from "../util/utility";
 
-export default function SinglepropertyBuy() {
+import React from "react";
+
+export default function SinglePropertyForSale() {
   const { id } = useParams();
   const [data, setData] = useState();
   const [propertyDetails, setPropertyDetails] = useState();
