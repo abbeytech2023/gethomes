@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 
 // Styled components
 const Overlay = styled.div`
@@ -60,18 +61,25 @@ const Button = styled.button`
 `;
 
 export default function CompleteRegistrationPopup({ user }) {
+  const { authenticatedUser } = useFetchUsersWithId(user?.id);
+  const authUser = authenticatedUser?.[0];
+
+  console.log(authUser?.state, authUser?.NIN, authUser?.localGovt);
+
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-  // Example profile completeness check
-  useEffect(() => {
-    if (user) {
-      const requiredFields = ["name", "email", "phone"];
-      const incomplete = requiredFields.some((field) => !user[field]);
-      setShow(incomplete);
-    }
-  }, [user]);
 
-  //   if (!show) return null;
+  // Example profile completeness check
+  const state = authUser?.state !== null;
+  const localGovt = authUser?.localGovt !== null;
+  const NIN = authUser?.NIN !== null;
+
+  useEffect(() => {
+    if (!state || !localGovt || !NIN) setShow(true);
+  }, [NIN, localGovt, state]);
+
+  if (show === false) return null;
+  console.log(show);
 
   return (
     <Overlay>

@@ -112,6 +112,7 @@ function App() {
             toastOptions={{
               success: {
                 duration: 3000,
+                color: "#144c6f",
               },
               error: {
                 duration: 3000,

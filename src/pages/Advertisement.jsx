@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Spinner } from "../components/Spinner";
 import SelectComponent from "../components/SelectComponent";
 import { useForm } from "react-hook-form";
-import CompleteRegistrationPopup from "../components/ProfileCompletePopUp";
+// import CompleteRegistrationPopup from "../components/ProfileCompletePopUp";
 
 const options = [
   { value: "", text: "select a profession" },
@@ -24,14 +24,14 @@ export default function Advertisement() {
     setSelectedValue(e.target.value);
   };
   return (
-    // <form className="mt-32 w-[30rem] ml-44  h-20 bg-yellow-300" action="">
-    //   <SelectComponent
-    //     options={options}
-    //     control={control}
-    //     value={selectedValue}
-    //     onChange={handleChange}
-    //   />
-    // </form>
-    <CompleteRegistrationPopup />
+    <form className="mt-32 w-[30rem] ml-44  h-20 bg-yellow-300" action="">
+      <SelectComponent
+        options={options}
+        control={control}
+        value={selectedValue}
+        onChange={handleChange}
+      />
+    </form>
+    // <CompleteRegistrationPopup />
   );
 }
