@@ -7,6 +7,7 @@ import IconBuy from "../assets/images/illusale.jpg";
 import IconSell from "../assets/images/hand-shake.jpg";
 import IconRent from "../assets/images/see-through.jpg";
 import IconSurvey from "../assets/images/illus.jpg";
+import CompleteRegistrationPopup from "../components/ProfileCompletePopUp";
 import { BgOverlay } from "../components/BgOverlay";
 import {
   FlexDiv,
@@ -14,8 +15,7 @@ import {
   StyledIconDiv,
   StyledLinkButton,
 } from "../components/FlexDiv";
-
-import { Link } from "react-router-dom";
+import { useUser } from "../hooks/useUser";
 
 const Section = styled.section`
   color: blue;
@@ -64,9 +64,12 @@ const homePageCart = [
 ];
 
 export default function Homepage() {
+  const { user } = useUser();
+
   return (
     <>
       <div className="flex items-center justify-center text-center ">
+        <CompleteRegistrationPopup user={user} />
         <div className=" w-[30%] sm:w-[100%] px-6    md:w-[100%] min-[0px]:bg-[#1c2535] min-[0px]:w-full gap-5 h-dvh flex flex-col justify-center items-left">
           <Heading
             as="h1"

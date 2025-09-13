@@ -36,9 +36,9 @@ function ForSaleCart({ document }) {
         return (
           <GridInner key={doc.id}>
             <div className="">
-              <div className="flex flex-col items-center justify-center gap-1 py-8 text-center ">
-                <div className="flex items-center justify-center ">
-                  <img src={doc.image} />
+              <div className="flex flex-col items-center justify-center gap-1 py-8 text-center">
+                <div className=" items-start h-[25rem] overflow-hidden justify-center ">
+                  <img src={doc.image} height="100px" />
                 </div>
                 <a href={`${URL}/${doc.id}`}>
                   <div className="w-[16rem] flex flex-col gap-6 py-12 ">

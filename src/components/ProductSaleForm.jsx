@@ -16,6 +16,7 @@ import { useState } from "react";
 import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 import SelectStateLocalGovt from "./SelectStateLocalGovt";
+import { toYoutubeEmbed } from "../utility/youtubeLinkConverts";
 
 export const StyledFormDiv = styled.form`
   display: grid;
@@ -65,8 +66,16 @@ function ProductSaleForm() {
   });
 
   const onSubmit = (data) => {
-    mutate({ ...data, uid, image: data.image[0], businessName, phoneNumber });
-    console.log(data);
+    const videoLink = toYoutubeEmbed(data.videoLink);
+
+    mutate({
+      ...data,
+      uid,
+      image: data.image[0],
+      videoLink: videoLink,
+      businessName,
+      phoneNumber,
+    });
 
     // mutate({ ...data, uid });
   };

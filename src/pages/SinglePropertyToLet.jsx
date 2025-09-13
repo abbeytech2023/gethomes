@@ -6,7 +6,7 @@ import supabase from "../services/supabaseClients";
 import SpinnerMini from "../components/SpinnerMini";
 import Button from "../components/Button";
 import styled from "styled-components";
-import { formatDate, formatPrice } from "../util/utility";
+import { formatDate, formatPrice } from "../utility/utility";
 
 export default function SinglePropertyToLet() {
   const { id } = useParams();

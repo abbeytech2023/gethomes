@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { CarouselInner, CarouselItem } from "./CarouselStyles";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
 const StyledSliderContainer = styled.div`
@@ -29,6 +28,33 @@ const ButtonControlRight = styled.div`
   border: none;
 `;
 
+const SliderInner = styled.div`
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  width: 100%;
+  align-items: center;
+  /* gap: 2rem; */
+  transition: transform 0.5s ease-in-out;
+  /* position: relative; */
+  /* overflow-x: hidden; */
+`;
+
+const SliderItem = styled.div`
+  display: flex;
+
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+  height: 40vh;
+  /* background-color: red; */
+
+  text-align: center;
+  flex-shrink: 0;
+  /* overflow-x: hidden; */
+`;
+
 export const ImageSlider = ({ images, video }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -42,23 +68,23 @@ export const ImageSlider = ({ images, video }) => {
 
   return (
     <>
-      <img src="" />
-
       <StyledSliderContainer>
-        <CarouselInner
+        <SliderInner
           style={{
             transform: `translateX(${-currentIndex * 100}%)`,
           }}
         >
-          <CarouselItem>
-            <div className="min-[0px]:w-[100%] px-7 xl:w-[100%] flex justify-center ">
-              <img src={images} height="100px" />
+          <SliderItem>
+            <div className="flex flex-col justify-center items-center  text-[#fff] w-[100%] ">
+              {/* <div> */}
+              <img src={images} />
             </div>
-          </CarouselItem>
-          <CarouselItem>
-            <div className="flex items-center justify-center ">
+          </SliderItem>
+          <SliderItem>
+            <div>
+              {/* <div className="flex flex-col justify-center mb-10  items-center bg-[#071a25] text-[#fff] w-[100%] px-[3rem] py-16"> */}
               <iframe
-                width="400"
+                width="300"
                 height="265"
                 src={video}
                 title="YouTube video player"
@@ -68,13 +94,9 @@ export const ImageSlider = ({ images, video }) => {
                 // allowfullscreen
               ></iframe>
             </div>
-          </CarouselItem>
-        </CarouselInner>
-        {/* <img
-        src={images[currentIndex]}
-        alt="Slide"
-        style={{ width: "100%", height: "100%", objectFit: "cover" }}
-      /> */}
+          </SliderItem>
+        </SliderInner>
+
         <ButtonControlLeft onClick={handlePrevClick}>
           <FaAngleLeft />
         </ButtonControlLeft>
