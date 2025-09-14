@@ -83,7 +83,7 @@ export default function CompleteRegistrationPopup({ user }) {
 
   return (
     <Overlay>
-      <Popup>
+      <Popup className="max-[500px]:mx-6.5">
         <Title>Complete Your Registration</Title>
         <Message>
           Your profile is not complete yet. Please finish up your registration
