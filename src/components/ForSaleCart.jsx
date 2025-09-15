@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import { formatPrice } from "../utility/utility";
 // import { useDeleteMutateForSale } from "../hooks/useDeleteMutate";
@@ -8,11 +8,14 @@ import toast from "react-hot-toast";
 
 import { GridInner } from "./Grid";
 import { MdDelete } from "react-icons/md";
+import { useEffect, useRef } from "react";
 
 function ForSaleCart({ document }) {
   const { propertyDetails, price, title, id: propertyId } = document;
   const location = useLocation();
+  const navigate = useNavigate();
   const URL = location.pathname;
+  const productRef = useRef(null);
 
   const QueryClient = useQueryClient();
 
@@ -27,8 +30,12 @@ function ForSaleCart({ document }) {
     onError: () => toast.error("property could not be deleted"),
   });
 
+  useEffect(() => {
+    productRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   return (
-    <>
+    <section ref={productRef}>
       <div className="px-4 py-10 mx-auto max-w-7xl">
         {/* <h1 className="mb-8 text-3xl font-bold text-center">
           Properties For Sale
@@ -53,7 +60,12 @@ function ForSaleCart({ document }) {
                 <p className="mt-2 font-bold text-[#144c6f]">
                   {formatPrice(property.price)}
                 </p>
-                <button className="w-full py-2 mt-4 text-white cursor-pointer transition bg-[#144c6f] rounded-lg hover:bg-[#052031]">
+                <button
+                  onClick={() => {
+                    navigate(`${URL}/${property.id}`);
+                  }}
+                  className="w-full py-2 mt-4 text-white cursor-pointer transition bg-[#144c6f] rounded-lg hover:bg-[#052031]"
+                >
                   View Details
                 </button>
               </div>
@@ -61,7 +73,7 @@ function ForSaleCart({ document }) {
           ))}
         </div>
       </div>
-    </>
+    </section>
   );
 }
 

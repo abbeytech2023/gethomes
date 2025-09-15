@@ -7,6 +7,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiForSale";
 import toast from "react-hot-toast";
 import { formatPrice } from "../utility/utility";
+import { useEffect, useRef } from "react";
 
 export const ToLetContainer = styled.div`
   display: flex;
@@ -69,7 +70,7 @@ export const ToLetCart = ({ documents }) => {
   const queryClient = useQueryClient();
   const URL = location.pathname;
   const { user } = useUser();
-
+  const productRef = useRef(null);
   const deleteCart = location.pathname === "/myaccount/dashboard";
 
   const { isPending, mutate } = useMutation({
@@ -85,8 +86,12 @@ export const ToLetCart = ({ documents }) => {
     onError: () => toast.error("property could not be deleted"),
   });
 
+  useEffect(() => {
+    productRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
+
   return (
-    <>
+    <section ref={productRef}>
       <div className="px-4 py-10 mx-auto max-w-7xl">
         <h1 className="mb-8 text-3xl text-[#144c6f] font-bold text-center">
           Properties To Let
@@ -177,6 +182,6 @@ export const ToLetCart = ({ documents }) => {
             );
           })} */}
       {/* </ToLetContainer> */}
-    </>
+    </section>
   );
 };

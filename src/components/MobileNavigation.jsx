@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoCloseSharp } from "react-icons/io5";
+import { ImProfile } from "react-icons/im";
+
 import Logo from "./Logo";
 import styled from "styled-components";
 import { Link, NavLink, useLocation } from "react-router-dom";
@@ -118,17 +120,17 @@ function MobileNavigation() {
           <div className="md:hidden">
             {myAccount && (
               <Button to="/myaccount">
-                <IoArrowBack className="rounded z-30 text-3xl" />
+                <IoArrowBack className="z-30 text-3xl rounded" />
               </Button>
             )}
           </div>
 
-          <NavLink to="/" className="  top-3 left-4 ">
+          <NavLink to="/" className=" top-3 left-4">
             <Logo type="mobile" className="" />
           </NavLink>
         </div>
         <div>
-          <div className="justify-between xl:hidden text-4xl lg:hidden mr-4 ">
+          <div className="justify-between mr-4 text-4xl xl:hidden lg:hidden ">
             {!isOpen && (
               <GiHamburgerMenu
                 className={" ml-auto xl:text-7xl"}
@@ -170,7 +172,7 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
   const { user } = useAuthContext();
 
   return (
-    <nav className="lg:hidden xl:hidden h-screen ">
+    <nav className="h-screen lg:hidden xl:hidden ">
       <StyledMainNavList>
         {/* {user && ( */}
 
@@ -218,6 +220,13 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
           <div>Advertisement </div>
           <StyledIconDiv>
             <RiAdvertisementLine />
+          </StyledIconDiv>
+        </StyledNavLink>
+
+        <StyledNavLink to="/aboutus">
+          <div>AboutUs </div>
+          <StyledIconDiv>
+            <ImProfile />
           </StyledIconDiv>
         </StyledNavLink>
 
