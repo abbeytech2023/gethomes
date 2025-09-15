@@ -10,6 +10,7 @@ import ProtectedRoutes from "./components/ProtectedRoutes";
 
 //Components
 import HomeEssentials from "./pages/HomeEssentials";
+import AboutUs from "./pages/AboutUs";
 import ProductSaleForm from "./components/ProductSaleForm";
 import PropertyToLetForm from "./components/PropertiesToLetForm";
 import Profile from "./components/Profile";
@@ -77,6 +78,7 @@ function App() {
               <Route path="/rent/" element={<Rent />} />
               <Route path="/rent/:id" element={<SinglePropertyToLet />} />
               <Route path="merchants/:id" element={<MerchantsPage />} />
+              <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/homeessentials" element={<HomeEssentials />} />
               <Route
                 path="/myaccount"

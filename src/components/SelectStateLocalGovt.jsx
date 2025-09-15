@@ -42,7 +42,7 @@ export default function SelectStateLocalGovt({ register, styles }) {
           })}
         </select>
       </FormRow>
-      <FormRow styles={styles} label="local-govt">
+      <FormRow styles={styles} label="Local-govt">
         <select
           name="localGovts"
           id="localGovernment"

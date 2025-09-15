@@ -17,10 +17,11 @@ export default function Footer() {
   return (
     <div className="bg-[#666] mt-12 xl:flex-row  lg:flex-row text-white flex sm:flex-col gap-8 sm:gap-5 min-[0px]:px-[4%] min-[0px]:flex-col text-center text-[1rem] justify-center py-12">
       <div>
-        <p>Fair housing opportunity for everyone | &#169; 2025</p>
+        <p>
+          &copy; {new Date().getFullYear()} Gethomes Real Estate & Artisan
+          Marketing Co. All Rights Reserved.
+        </p>
       </div>
-      <div>Urban Oasis: Where City Meets Serenity | Follow us on</div>
-
       <div className="flex items-center justify-center gap-2 cursor-pointer ">
         <IconDiv className="text-4xl text-blue-500 bg-black rounded ">
           <CiFacebook />

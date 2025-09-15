@@ -42,7 +42,7 @@ export default function Navigation() {
           <Logo />
         </Link>
       </div>
-      <div className="flex justify-around gap-14 items-center ">
+      <div className="flex items-center justify-around gap-14 ">
         <StyledNavLink exact to="/rent">
           Rent
         </StyledNavLink>
@@ -53,17 +53,19 @@ export default function Navigation() {
 
         <StyledNavLink to="/homeessentials">Home essentials</StyledNavLink>
 
-        {/* <div className="flex items-center justify-between  basis-1/3"> */}
+        {/* <div className="flex items-center justify-between basis-1/3"> */}
         {user && (
           <StyledNavLink
             to="/myaccount/dashboard"
-            className=" gap-4 flex  flex-col"
+            className="flex flex-col gap-4 "
           >
             My account
           </StyledNavLink>
         )}
 
-        <StyledNavLink to="/advertisement">Advertisement</StyledNavLink>
+        <StyledNavLink to="aboutus">AboutUs</StyledNavLink>
+
+        {/* <StyledNavLink to="/advertisement">Advertisement</StyledNavLink> */}
 
         {!user && <StyledNavLink to="signin">Signin</StyledNavLink>}
 
