@@ -8,9 +8,9 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="min-h-screen text-gray-800 mt-28 bg-gray-50">
+    <div className="min-h-screen text-gray-800 bg-gray-50">
       {/* Hero Section */}
-      <section className="px-6 py-20 text-center text-white bg-[#144c6f] md:px-20">
+      <section className="px-6 py-20 text-center pt-28 text-white bg-[#144c6f] md:px-20">
         <motion.h1
           initial="hidden"
           animate="visible"

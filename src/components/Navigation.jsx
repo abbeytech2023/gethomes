@@ -65,7 +65,7 @@ export default function Navigation() {
 
         <StyledNavLink to="aboutus">AboutUs</StyledNavLink>
 
-        {/* <StyledNavLink to="/advertisement">Advertisement</StyledNavLink> */}
+        <StyledNavLink to="/advertisement">Advertisement</StyledNavLink>
 
         {!user && <StyledNavLink to="signin">Signin</StyledNavLink>}
 

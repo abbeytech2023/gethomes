@@ -53,9 +53,9 @@ function PropertiesForSale() {
 
   return (
     <>
-      <div className="mb-[8rem] min-[600px]:w-[50%] max-[600px]:w-[80%]  text-center mx-auto ">
+      <div>
         {/* {error && <p>{error}</p>} */}
-        <Heading as="h2" className="mb-16 text-center uppercase ">
+        <Heading as="h2" className="text-center uppercase ">
           Properties for sale
         </Heading>
         <form
@@ -67,14 +67,14 @@ function PropertiesForSale() {
         </form>
         {!documents && <SpinnerMini />}
         {documents && (
-          <GridContainer className="mx-auto">
+          <div className="mx-auto">
             {filteredDocuments.length === 0 && (
               <p className="text-2xl">
                 There are no properties currently available in this region
               </p>
             )}
             <ForSaleCart document={filteredDocuments} />
-          </GridContainer>
+          </div>
         )}
       </div>
       {/* <Pagination count={filteredDocuments?.length} /> */}

@@ -1,7 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-import { CiMenuKebab } from "react-icons/ci";
-
+import { formatPrice } from "../utility/utility";
 // import { useDeleteMutateForSale } from "../hooks/useDeleteMutate";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiForSale";
@@ -30,34 +29,38 @@ function ForSaleCart({ document }) {
 
   return (
     <>
-      {document.map((doc) => {
-        console.log(doc);
+      <div className="px-4 py-10 mx-auto max-w-7xl">
+        {/* <h1 className="mb-8 text-3xl font-bold text-center">
+          Properties For Sale
+        </h1> */}
 
-        return (
-          <GridInner key={doc.id}>
-            <div className="">
-              <div className="flex flex-col items-center justify-center gap-1 py-8 text-center">
-                <div className=" items-start h-[25rem] overflow-hidden justify-center ">
-                  <img src={doc.image} height="100px" />
-                </div>
-                <a href={`${URL}/${doc.id}`}>
-                  <div className="w-[16rem] flex flex-col gap-6 py-12 ">
-                    <div>
-                      <h1 className="text-[22px] uppercase">{doc.title}</h1>
-                    </div>
-                    <div>
-                      <p className="text-lg ">{doc.price}</p>
-                    </div>
-                    <div className="">
-                      <p className="text-lg ">{doc.propertyDetails}</p>
-                    </div>
-                  </div>
-                </a>
+        <div className="grid gap-12 text-center sm:grid-cols-2 lg:grid-cols-3">
+          {document?.map((property) => (
+            <div
+              key={property.id}
+              className="overflow-hidden transition bg-white shadow-md rounded-2xl hover:shadow-xl"
+            >
+              <img
+                src={property.image}
+                alt={property.title}
+                className="object-cover w-full h-52"
+              />
+              <div className="p-4">
+                <h2 className="text-xl font-semibold">{property.title}</h2>
+                <p className="text-gray-600">
+                  {property.address.slice(0, 30) + "..."}
+                </p>
+                <p className="mt-2 font-bold text-[#144c6f]">
+                  {formatPrice(property.price)}
+                </p>
+                <button className="w-full py-2 mt-4 text-white cursor-pointer transition bg-[#144c6f] rounded-lg hover:bg-[#052031]">
+                  View Details
+                </button>
               </div>
             </div>
-          </GridInner>
-        );
-      })}
+          ))}
+        </div>
+      </div>
     </>
   );
 }

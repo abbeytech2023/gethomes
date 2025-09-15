@@ -27,11 +27,17 @@ export default function Rent() {
       <div className="flex">
         <RentSection className="w-full h-screen ">
           <BgOverlay as="rent" className="relative w-full h-full ">
-            <div className=" flex  flex-col gap-[1rem]    justify-center max-w-[80rem] text-[#fff]  px-[15%]  h-[10rem] top-20   sm:left-0 md:left-0 lg:left-23 xl:left-23 bg-[rgba(32,32,32,0.79)] ">
-              {/* <p className="text-[22px]">Home &gt; property to rent</p> */}
-              <RentHeaderBox className="uppercase  text-3xl min-[0px]:font-light font-extrabold ">
-                <Heading as="h1">Properties to rent</Heading>
-              </RentHeaderBox>
+            <div>
+              <Heading
+                as="rent"
+                className="mb-4 text-4xl font-bold   md:text-6xl"
+              >
+                Find the Best Homes for Rent
+              </Heading>
+              <p className="mb-8 text-lg font-medium md:text-xl bg-black py-2.5 text-[#cde3f0]">
+                Discover apartments, duplexes, and luxury homes available in
+                your favorite locations.
+              </p>
             </div>
           </BgOverlay>
         </RentSection>

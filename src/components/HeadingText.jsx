@@ -43,6 +43,8 @@ ${(props) =>
       color: #144c6f;
     `}
 
+
+
 ${(props) =>
     props.as === "h5" &&
     css`
@@ -51,6 +53,19 @@ ${(props) =>
       font-weight: 600;
       text-align: center;
       color: #144c6f;
+    `}
+
+
+    ${(props) =>
+    props.as === "rent" &&
+    css`
+      font-size: 2.6rem;
+      font-weight: 700;
+      letter-spacing: 7px;
+      font-family: "Bebas Neue", sans-serif;
+
+      color: #031a29;
+      line-height: 1.1;
     `}
 
 line-height: 1.4
