@@ -72,7 +72,7 @@ export default function HomeEssentials() {
 
             <Button
               onClick={handleScroll}
-              type="primary"
+              type="secondary"
               className="text-[22px] block mr-12"
             >
               shop home essentials

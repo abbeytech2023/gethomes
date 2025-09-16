@@ -28,14 +28,14 @@ export default function Rent() {
       <div className="flex">
         <RentSection className="w-full h-screen ">
           <BgOverlay as="rent" className="relative w-full h-full ">
-            <div>
+            <div className="max-[600px]:px-4">
               <Heading
                 as="rent"
                 className="mb-4 text-4xl font-bold md:text-6xl"
               >
                 Find the Best Homes for Rent
               </Heading>
-              <p className="mb-8 text-lg font-medium md:text-xl bg-black py-2.5 text-[#cde3f0]">
+              <p className="mb-8 text-lg  font-medium md:text-xl bg-black py-2.5 text-[#cde3f0]">
                 Discover apartments, duplexes, and luxury homes available in
                 your favorite locations.
               </p>

@@ -61,7 +61,7 @@ ${(props) =>
     css`
       font-size: 2.6rem;
       font-weight: 700;
-      letter-spacing: 7px;
+      letter-spacing: 3px;
       font-family: "Bebas Neue", sans-serif;
 
       color: #031a29;
