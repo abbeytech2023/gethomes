@@ -60,7 +60,7 @@ function PropertiesForSale() {
         </Heading>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex items-center justify-center gap-3"
+          className="flex items-center justify-center gap-3 text-center"
         >
           <SelectStateLocalGovt styles={style} register={register} />
           <Button type="secondary">filter</Button>

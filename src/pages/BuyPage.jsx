@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { BgOverlay } from "../components/BgOverlay";
 import PropertiesForSale from "../components/PropertiesForSale";
+import { motion } from "framer-motion";
 
 import { Heading } from "../components/HeadingText";
 const BuySection = styled.section`
@@ -19,32 +20,42 @@ const BuyHeaderBox = styled.div`
 `;
 
 function BuyPage() {
-  // const [forSale, setForSale] = useState();
-
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
   return (
     <>
       <BgOverlay as="buy">
-        <div className="flex items-center md:justify-end min-[0px]:justify-center lg:justify-end xl:justify-end  mt-[2rem] h-dvh">
-          <div className="  flex  flex-col  gap-[1rem] text-center  justify-center max-w-[80rem] text-[#021625] px-[5%] top-55  h-[19rem] sm:left-0 md:left-0 lg:left-23 xl:left-23  ">
-            <BuyHeaderBox className="text-3xl font-extrabold text-left uppercase ">
-              <Heading as="h1" className="text-[#000]">
-                Your Home Awaits, Explore Our Listings Now
-              </Heading>
-            </BuyHeaderBox>
-            <ul className="flex text-left  flex-col gap-5 text-[1.1rem] text-[#fff]   sm:text-3xl mt-5">
-              <li className="text-[1.5rem]">
-                Modern Luxuries, Timeless Charm, Explore Our Luxury Homes
-              </li>
-              <li className="text-[1.5rem]">
-                A place To Call Your Own, Find Your Dream Home
-              </li>
-            </ul>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="flex items-center md:justify-end min-[0px]:justify-center lg:justify-end xl:justify-end  mt-[2rem] h-dvh">
+            <div className="  flex  flex-col  gap-[1rem] text-center  justify-center max-w-[80rem] text-[#021625] px-[5%] top-55  h-[19rem] sm:left-0 md:left-0 lg:left-23 xl:left-23  ">
+              <BuyHeaderBox className="text-3xl font-extrabold text-left uppercase ">
+                <Heading as="h1" className="text-[#000]">
+                  Your Home Awaits, Explore Our Listings Now
+                </Heading>
+              </BuyHeaderBox>
+              <ul className="flex text-left  flex-col gap-5 text-[1.1rem] text-[#fff]   sm:text-3xl mt-5">
+                <li className="text-[1.5rem]">
+                  Modern Luxuries, Timeless Charm, Explore Our Luxury Homes
+                </li>
+                <li className="text-[1.5rem]">
+                  A place To Call Your Own, Find Your Dream Home
+                </li>
+              </ul>
+            </div>
+            <div className="   md:w-[70%] lg:w-[60%] xl:w-[60%] max-[767px]:hidden mx-auto">
+              <BuySection />
+              {/* <BgOverlay as="buy" className="relative w-full h-full"></BgOverlay> */}
+            </div>
           </div>
-          <div className="   md:w-[70%] lg:w-[60%] xl:w-[60%] max-[767px]:hidden mx-auto">
-            <BuySection className=""></BuySection>
-            {/* <BgOverlay as="buy" className="relative w-full h-full"></BgOverlay> */}
-          </div>
-        </div>
+        </motion.div>
       </BgOverlay>
       {/* ------------------- BUY RENT SELL SECTION -------------  */}
 

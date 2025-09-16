@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 import { BgOverlay } from "../components/BgOverlay";
 import { Heading } from "../components/HeadingText";
 import Button from "../components/Button";
@@ -34,6 +35,11 @@ const EssentialHeaderBox = styled.div`
 export default function HomeEssentials() {
   const merchantRef = useRef(null);
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   const handleScroll = () => {
     merchantRef.current.scrollIntoView({ behavior: "smooth" });
   };
@@ -41,25 +47,37 @@ export default function HomeEssentials() {
     <>
       <section className="flex items-center tracking-tight max-[767px]:bg-[#cce1f6] mt-[2rem] h-dvh ">
         <div className="flex flex-col xl:items-end justify-end min-[0px]:items-center sm:items-center  sm:w-[100%] ">
-          <div className="flex flex-col   gap-[2rem] w-[60%]  ">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeInUp}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col mr-3  gap-[2rem] w-[60%]  "
+          >
             <EssentialHeaderBox className="uppercase text-4xl tracking-[-1rem]  ">
               Perfect your home
             </EssentialHeaderBox>
-            <div>
-              <p className=" text-[25px] sm:text-[20px] mb-[1rem]">
-                Don&apos;t let home maintenance issues disrupt your life. Our
-                experienced technicians are here to help. Book now and get a
-                free consultation!
-              </p>
-              <Button
-                onClick={handleScroll}
-                type="secondary"
-                className="text-[22px]"
-              >
-                shop home essentials
-              </Button>
-            </div>
-          </div>
+            <motion.p
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              transition={{ duration: 1, delay: 0.2 }}
+              className=" text-[25px] sm:text-[20px]  mb-[1rem]"
+            >
+              Don&apos;t let home maintenance issues disrupt your life. Our
+              experienced technicians are here to help. Book now and get a free
+              consultation!
+            </motion.p>
+
+            <Button
+              onClick={handleScroll}
+              type="primary"
+              className="text-[22px] block mr-12"
+            >
+              shop home essentials
+            </Button>
+          </motion.div>
         </div>
 
         <HomeEssentialsSection className="sm:hidden md:block  min-[0px]:hidden xl:block lg:block w-[80%]">

@@ -1,4 +1,5 @@
 import PropertiesToLet from "../components/PropertiesToLet";
+import { motion } from "framer-motion";
 
 import styled from "styled-components";
 
@@ -30,7 +31,7 @@ export default function Rent() {
             <div>
               <Heading
                 as="rent"
-                className="mb-4 text-4xl font-bold   md:text-6xl"
+                className="mb-4 text-4xl font-bold md:text-6xl"
               >
                 Find the Best Homes for Rent
               </Heading>

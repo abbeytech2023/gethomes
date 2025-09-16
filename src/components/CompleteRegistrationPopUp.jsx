@@ -49,9 +49,9 @@ const Button = styled.button`
   ${({ primary }) =>
     primary
       ? `
-    background: #2563eb;
+    background: #144c6f;
     color: white;
-    &:hover { background: #1d4ed8; }
+    &:hover { background: #052031; }
   `
       : `
     background: #e5e7eb;

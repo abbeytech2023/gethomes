@@ -1,4 +1,4 @@
-import { MdDelete, MdDialerSip } from "react-icons/md";
+import { motion } from "framer-motion";
 // import { GridContainer, GridInner } from "./Grid";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -72,6 +72,10 @@ export const ToLetCart = ({ documents }) => {
   const { user } = useUser();
   const productRef = useRef(null);
   const deleteCart = location.pathname === "/myaccount/dashboard";
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   const { isPending, mutate } = useMutation({
     mutationFn: (id) => deleteProperty(id),
@@ -93,43 +97,47 @@ export const ToLetCart = ({ documents }) => {
   return (
     <section ref={productRef}>
       <div className="px-4 py-10 mx-auto max-w-7xl">
-        <h1 className="mb-8 text-3xl text-[#144c6f] font-bold text-center">
-          Properties To Let
-        </h1>
-
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
-          {documents?.map((doc) => {
-            return (
-              <div
-                key={doc.id}
-                className="overflow-hidden transition bg-white shadow-md rounded-2xl hover:shadow-xl"
-              >
-                <img
-                  src={doc.image}
-                  alt={doc.title}
-                  className="object-cover w-full h-48"
-                />
-                <div className="p-4">
-                  <h2 className="text-xl font-semibold">
-                    {doc.propertyDescription.slice(0, 45)}
-                  </h2>
-                  <p className="text-gray-600">{doc.state}</p>
-                  <p className="mt-2 font-bold text-[#144c6f]">
-                    {formatPrice(doc.price)}
-                  </p>
-                  <button
-                    onClick={() => {
-                      navigate(`${URL}/${doc.id}`);
-                    }}
-                    className="w-full py-2 mt-4 text-white cursor-pointer transition bg-[#144c6f] rounded-lg hover:bg-[#052031]"
-                  >
-                    View Details
-                  </button>
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+            {documents?.map((doc) => {
+              return (
+                <div
+                  key={doc.id}
+                  className="overflow-hidden transition bg-white shadow-md rounded-2xl hover:shadow-xl"
+                >
+                  <img
+                    src={doc.image}
+                    alt={doc.title}
+                    className="object-cover w-full h-48"
+                  />
+                  <div className="p-4">
+                    <h2 className="text-xl font-semibold">
+                      {doc.propertyDescription.slice(0, 45)}
+                    </h2>
+                    <p className="text-gray-600">{doc.state}</p>
+                    <p className="mt-2 font-bold text-[#144c6f]">
+                      {formatPrice(doc.price)}
+                    </p>
+                    <button
+                      onClick={() => {
+                        navigate(`${URL}/${doc.id}`);
+                      }}
+                      className="w-full py-2 mt-4 text-white cursor-pointer transition bg-[#144c6f] rounded-lg hover:bg-[#052031]"
+                    >
+                      View Details
+                    </button>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </motion.div>
       </div>
 
       {/* <ToLetContainer> */}

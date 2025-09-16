@@ -9,6 +9,8 @@ import IconRent from "../assets/images/see-through.jpg";
 import IconSurvey from "../assets/images/illus.jpg";
 import CompleteRegistrationPopup from "../components/CompleteRegistrationPopUp";
 import { BgOverlay } from "../components/BgOverlay";
+import { motion } from "framer-motion";
+
 import {
   FlexDiv,
   FlexInnerDiv,
@@ -66,20 +68,60 @@ const homePageCart = [
 export default function Homepage() {
   const { user } = useUser();
 
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
     <>
-      <div className="flex items-center justify-center text-center ">
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        transition={{ duration: 0.8 }}
+        className="flex items-center justify-center text-center "
+      >
         {user && <CompleteRegistrationPopup user={user} />}
         <div className=" w-[30%] sm:w-[100%] px-6    md:w-[100%] min-[0px]:bg-[#1c2535] min-[0px]:w-full gap-5 h-dvh flex flex-col justify-center items-left">
           <Heading
             as="h1"
             className="text-left font-extrabold  text-white    sm:text-white tracking-[4px] text-3xl "
           >
-            The Ultimate Neighborhood Guide. <br />
+            <motion.h1
+              initial="hidden"
+              animate="visible"
+              variants={fadeInUp}
+              transition={{ duration: 0.8 }}
+              className="mb-6 text-4xl font-bold md:text-6xl"
+            >
+              The Ultimate Neighborhood Guide. <br />
+            </motion.h1>
           </Heading>
           <ul className="flex flex-col gap-4 text-[1.3rem] text-left text-white">
-            <li className=""> Discover the Best Places to Live</li>
-            <li className="">Discover reliable service providers near you</li>
+            <li className="">
+              <motion.p
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                transition={{ duration: 1, delay: 0.2 }}
+                // className="max-w-3xl mx-auto text-lg md:text-xl"
+              >
+                Discover the Best Places to Live
+              </motion.p>
+            </li>
+            <li className="">
+              <motion.p
+                initial="hidden"
+                animate="visible"
+                variants={fadeInUp}
+                transition={{ duration: 1, delay: 0.2 }}
+                // className="max-w-3xl mx-auto text-lg md:text-xl"
+              >
+                Discover reliable service providers near you
+              </motion.p>
+            </li>
           </ul>
         </div>
 
@@ -89,7 +131,7 @@ export default function Homepage() {
             className="w-full h-full text-center"
           ></BgOverlay>
         </BackgroundImage>
-      </div>
+      </motion.div>
 
       <section className="mt-[16rem] flex justify-center text-center py-16 ">
         {/* <Heading as="h5">Our Services</Heading> */}
