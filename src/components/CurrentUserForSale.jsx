@@ -1,8 +1,6 @@
 import { useUser } from "../hooks/useUser";
-
-import { GridContainer, GridInner } from "./Grid";
+import { motion } from "framer-motion";
 import { Heading } from "./HeadingText";
-import Menus from "./Menus";
 import { MdDelete } from "react-icons/md";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import SpinnerMini from "./SpinnerMini";
@@ -11,11 +9,18 @@ import toast from "react-hot-toast";
 import { useFetchPropertiesForSaleCurrentUser } from "../hooks/useProperties";
 import { useFetchPropertiesWithId } from "../hooks/useFetchProperties";
 import { useEffect, useState } from "react";
+import { formatPrice } from "../utility/utility";
 
 export default function CurrentUserForSale() {
   const [documentSale, setDocumentSale] = useState();
   const { user } = useUser();
   const id = user?.id;
+
+  // Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   const { data } = useFetchPropertiesForSaleCurrentUser(id);
   const { documents, isLoading } = useFetchPropertiesWithId("ForSale", id);
@@ -36,11 +41,14 @@ export default function CurrentUserForSale() {
   });
 
   useEffect(() => {
-    setDocumentSale();
+    setDocumentSale(documents);
   }, [documents]);
+
+  console.log(documentSale);
 
   const handleDelete = (id) => {
     mutate(id);
+    // setDocumentSale((doc) => doc?.id !== id);
   };
 
   isLoading && <SpinnerMini />;
@@ -50,50 +58,50 @@ export default function CurrentUserForSale() {
       <Heading as="h2" className="text-center uppercase ">
         your Properties for sale
       </Heading>
-      {!documents && <SpinnerMini />}
-      <Menus>
-        <GridContainer className="mt-32 ">
-          {documents?.length === 0 && (
-            <p className="text-2xl text-center uppercase">
-              You do not have a property listed to let
-            </p>
-          )}
-
-          {documents?.map((doc) => {
-            return (
-              <GridInner key={doc.id}>
-                <div className="flex items-center justify-center ">
-                  <div className="flex flex-col items-center justify-center gap-1 py-8 text-center ">
-                    <div className="flex items-center justify-center ">
-                      <img src={doc.image} alt="" />
-                    </div>
-
-                    <div className="w-[16rem] flex flex-col gap-11 py-12 ">
-                      <div>
-                        <h1 className="text-[22px] uppercase">{doc.title}</h1>
-                      </div>
-                      <div>
-                        <p className="text-lg ">{doc.price}</p>
-                      </div>
-                      <div className="">
-                        <p className="text-lg ">{doc.propertyDetails}</p>
-                      </div>
-                    </div>
-                    <div className="absolute 2xl right-3 top-3">
-                      <button
-                        onClick={() => handleDelete(doc.id)}
-                        disabled={isPending}
-                      >
-                        <MdDelete className="text-[grey] cursor-pointer" />
-                      </button>
-                    </div>
-                  </div>
+      {!documentSale && <SpinnerMini />}
+      {documents?.length === 0 && (
+        <p className="text-2xl text-center uppercase">
+          You do not have a property listed to let
+        </p>
+      )}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={fadeInUp}
+        transition={{ duration: 0.8 }}
+      >
+        <div className="grid items-center justify-center gap-12 text-center sm:grid-cols-2 lg:grid-cols-3">
+          {documentSale &&
+            documentSale.map((property) => (
+              <div
+                key={property.id}
+                className="overflow-hidden transition bg-white shadow-md rounded-2xl hover:shadow-xl"
+              >
+                <img
+                  src={property.image}
+                  alt={property.title}
+                  className="object-cover w-full h-52"
+                />
+                <div className="p-4">
+                  <h2 className="text-xl font-semibold">{property.title}</h2>
+                  <p className="text-gray-600">
+                    {property.address.slice(0, 30) + "..."}
+                  </p>
+                  <p className="mt-2 font-bold text-[#144c6f]">
+                    {formatPrice(property.price)}
+                  </p>
+                  <button
+                    onClick={() => handleDelete(property.id)}
+                    className="w-full py-2 mt-4 text-white cursor-pointer transition bg-[#144c6f] rounded-lg hover:bg-[#052031]"
+                  >
+                    Delete
+                  </button>
                 </div>
-              </GridInner>
-            );
-          })}
-        </GridContainer>
-      </Menus>
+              </div>
+            ))}
+        </div>
+      </motion.div>
     </>
   );
 }

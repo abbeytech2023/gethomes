@@ -2,33 +2,60 @@ import { useRevalidator } from "react-router-dom";
 import supabase, { supabaseUrl } from "./supabaseClients";
 import { useUser } from "../hooks/useUser";
 
-export default async function uploadProfilePicture(newImage, userId) {
-  console.log(newImage.name, userId);
+export default async function uploadProfilePicture(userId, newImage) {
+  // console.log(newImage.name, userId);
 
-  const imageName = `${Math.random()}-${newImage.name}`.replace("/", "");
+  try {
+    if (!newImage) {
+      throw new Error("No file provided");
+    }
 
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/to-lets/${imageName}`;
+    //create unique filepath
+    const filePath = `profile_pictures/${userId}-${Date.now()}-${
+      newImage.name
+    }`;
 
-  //upload Image
-  const { error: storageEror } = await supabase.storage
-    .from("display-picture")
-    .upload(imageName, newImage);
-  if (storageEror) console.log(storageEror);
+    // const imageName = `${Math.random()}-${newImage.name}`.replace("/", "");
+    // const imagePath = `${supabaseUrl}/storage/v1/object/public/display-picture/${imageName}`;
 
-  console.log(newImage);
+    //upload Image
+    const { error: storageError } = await supabase.storage
+      .from("display-picture")
+      .upload(filePath, newImage, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+    if (storageError) {
+      console.log(storageError);
+      throw storageError;
+    }
 
-  const { data, error } = await supabase
-    .from("Users")
-    .update({ image: imagePath })
-    .eq("id", userId);
+    // console.log(newImage);
 
-  if (error) {
-    console.log("Error uploading User", error.message);
+    //generate public URL
+    const { data, error } = supabase.storage
+      .from("display-picture")
+      .getPublicUrl(filePath);
+
+    const publicUrl = data.publicUrl;
+
+    //Update user row in db
+    const { error: updateError } = await supabase
+      .from("Users")
+      .update({ image: publicUrl })
+      .eq("id", userId);
+
+    if (updateError) {
+      console.log("Error uploading User", updateError.message);
+    }
+
+    console.log(data);
+
+    return { success: true, url: publicUrl };
+  } catch (error) {
+    console.error("upload error:", error.message);
+    return { success: false, error: error.message };
   }
-
-  console.log(data);
-
-  return data;
 }
 
 export async function UpdateUserData(data, id) {

@@ -1,10 +1,7 @@
-import { FaWhatsapp } from "react-icons/fa";
-import { FaWhatsappSquare } from "react-icons/fa";
-
 const WhatsAppLogo = () => {
   return (
     <div className="whatsapp-logo">
-      <div className="flex items-center gap-2.5  ">
+      <div className="flex items-center gap-2.5 ">
         <p className="text-[#4499ce]">chat with us</p>
         <a href="https://wa.me/2348162010121">
           <img

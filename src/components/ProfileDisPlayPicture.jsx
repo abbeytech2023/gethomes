@@ -1,32 +1,18 @@
 import { useForm } from "react-hook-form";
-import FormRow from "./FormRow";
-import FileInput from "./FileInput";
-import Button from "./Button";
-import SpinnerMini from "./SpinnerMini";
-import UploadIcon from "../assets/images/upload-icon.webp";
-import toast from "react-hot-toast";
+
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import ImageUpload from "./ImageUploadContainer";
 
 export default function ProfileDisPlayPicture({ userDetails }) {
+  console.log(userDetails);
+
   const queryClient = useQueryClient();
 
   const { register, formState, handleSubmit, reset, getValues, watch } =
     useForm();
 
   const { errors } = formState;
-
-  const [selectedFile, setSelectedFile] = useState();
-
-  function onSubmited(data) {
-    // console.log(data.image[0]);
-  }
-
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files);
-    console.log(selectedFile);
-  };
 
   return (
     <>
@@ -35,16 +21,18 @@ export default function ProfileDisPlayPicture({ userDetails }) {
           Account Profile
         </h2>
 
-        <div>
-          <ImageUpload />
-        </div>
-
-        {/* <div className="flex justify-center items-center text-amber-50 w-[10rem] h-[9rem] bg-blue-700">
-          OA
-        </div> */}
+        {userDetails && userDetails.image === null ? (
+          <div>
+            <ImageUpload />
+          </div>
+        ) : (
+          <div className="flex justify-center items-center text-amber-50 w-[10rem] h-[9rem]">
+            <img src={userDetails?.image} alt="" />
+          </div>
+        )}
 
         <p className="font-[500] text-[1.1rem]   md:text-[1.1rem]">
-          Welcome {userDetails?.fullName}
+          Welcome {userDetails?.displayName}
         </p>
         <p className="md:pl-6.5 text-[1.2rem]">{userDetails?.email}</p>
       </div>

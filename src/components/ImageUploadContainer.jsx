@@ -52,15 +52,19 @@ const ImageUploadForm = () => {
 
   const userId = user?.id;
 
-  const { mutate, isPending } = useProfilePictures(selectedFile, userId);
+  // const { mutate, isPending } = useProfilePictures(userId, selectedFile);
 
-  const handleFileChange = (event) => {
+  const handleFileChange = async (event) => {
     const file = event.target.files?.[0];
+    console.log(file);
 
     if (file && file.type.startsWith("image/")) {
       setSelectedFile(file);
-      console.log(selectedFile);
-      mutate({ image: selectedFile });
+      // console.log(selectedFile);
+      const result = await uploadProfilePicture(userId, file);
+      // mutate({ image: selectedFile });
+      if (result.success) console.log("profile updated:", result.url);
+      if (result.error) console.error("Error:", result.error);
 
       const previewUrl = URL.createObjectURL(file);
       setPreview(previewUrl);

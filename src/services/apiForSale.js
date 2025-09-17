@@ -21,7 +21,7 @@ export async function addPropertiesForsSale(newProperty) {
     ""
   );
 
-  const imagePath = `${supabaseUrl}/storage/v1/object/public/to-lets/${imageName}`;
+  const imagePath = `${supabaseUrl}/storage/v1/object/public/for-sale/${imageName}`;
   // https://eluekkplzzlsspmxmoky.supabase.co/storage/v1/object/public/to-lets//download%20(1).jpg
 
   const { data, error } = await supabase
@@ -38,13 +38,13 @@ export async function addPropertiesForsSale(newProperty) {
 
   //3 upload image
   const { error: storageEror } = await supabase.storage
-    .from("to-lets")
+    .from("for-sale")
     .upload(imageName, newProperty.image);
   console.log(newProperty.image);
 
   //4 delete the cabin if there was an error uploading the corresponding image
   if (storageEror) {
-    await supabase.from("ToLet").delete().eq("id", newProperty.id);
+    await supabase.from("ForSale").delete().eq("id", newProperty.id);
     console.error(storageEror);
     throw new Error(
       "property image could not be added and the property was not added"

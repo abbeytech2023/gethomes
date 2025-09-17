@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiToLet";
 import SpinnerMini from "./SpinnerMini";
@@ -15,6 +16,7 @@ import {
   StyledPropertyDetails,
 } from "./ToLetCart";
 import { useNavigate } from "react-router-dom";
+import { formatPrice } from "../utility/utility";
 
 const deleteCart = location.pathname === "/myaccount/dashboard";
 
@@ -22,6 +24,12 @@ export default function CurrentUserToLet() {
   const { user } = useUser();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+
+  // Animation Variants
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0 },
+  };
 
   const id = user?.id;
   const { data } = useFetchPropertiesToletCurrentUser(id);
@@ -41,9 +49,9 @@ export default function CurrentUserToLet() {
     onError: () => toast.error("property could not be deleted"),
   });
 
-  // const handleDelete = (id) => {
-  //   mutate(id);
-  // };
+  const handleDelete = (id) => {
+    mutate(id);
+  };
   return (
     <div className="text-center ">
       <Heading as="h2">your properties to let</Heading>
@@ -55,49 +63,47 @@ export default function CurrentUserToLet() {
       )}
       {/* <div>{documents && <ToLetCart documents={documents} />}</div> */}
       <>
-        <ToLetContainer>
-          {documents &&
-            documents.map((doc) => {
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={fadeInUp}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+            {documents?.map((doc) => {
               return (
-                <StyledDivProperty
+                <div
                   key={doc.id}
-                  className="border-[#144c6f]  flex min-[0px]:flex-col min-[600px]:w-[25rem] min-[0]:w-[16rem] xl:w-[30rem] lg:w-[22rem]  md:flex-row items-center lg:flex-row xl:flex-row "
+                  className="overflow-hidden transition bg-white shadow-md rounded-2xl hover:shadow-xl"
                 >
-                  <StyledImageBox>
-                    {deleteCart && (
-                      <button onClick={() => mutate(doc.id)}>
-                        <MdDelete className="text-black" />
-                      </button>
-                    )}
-                    <img
-                      src={doc.image}
-                      height="100px"
-                      width="200px"
-                      className="property-image"
-                      alt=""
-                    />
-                  </StyledImageBox>
-                  <StyledPropertyDescription>
-                    <p className="text-[1.3rem] font-medium">
-                      {doc.propertyLocation}
+                  <img
+                    src={doc.image}
+                    alt={doc.title}
+                    className="object-cover w-full h-48"
+                  />
+                  <div className="p-4">
+                    <h2 className="text-xl font-semibold">
+                      {doc.propertyDescription.slice(0, 45)}
+                    </h2>
+                    <p className="text-gray-600">{doc.state}</p>
+                    <p className="mt-2 font-bold text-[#144c6f]">
+                      {formatPrice(doc.price)}
                     </p>
-                    <p>{doc.propertyDescription?.slice(0, 85) + "..."}</p>
-                  </StyledPropertyDescription>
-                  <StyledPropertyDetails>
-                    <div className="w-[30%] ">{doc.phoneNumber}</div>
                     <button
                       onClick={() => {
-                        navigate(`${URL}/${doc.id}`);
+                        handleDelete(doc.id);
                       }}
-                      className="font-medium text-[17px]"
+                      className="w-full py-2 mt-4 text-white cursor-pointer transition bg-[#144c6f] rounded-lg hover:bg-[#052031]"
                     >
-                      see more...
+                      Delete
                     </button>
-                  </StyledPropertyDetails>
-                </StyledDivProperty>
+                  </div>
+                </div>
               );
             })}
-        </ToLetContainer>
+          </div>
+        </motion.div>
       </>
     </div>
   );

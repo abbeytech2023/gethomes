@@ -139,57 +139,6 @@ export const ToLetCart = ({ documents }) => {
           </div>
         </motion.div>
       </div>
-
-      {/* <ToLetContainer> */}
-      {/* {documents &&
-          documents.map((doc) => {
-            return (
-              <StyledDivProperty
-                key={doc.id}
-                className="border-[#144c6f]  flex min-[0px]:flex-col max-[600px]:mx-[1.4rem]  md:flex-row items-center lg:flex-row xl:flex-row "
-              >
-                <StyledImageBox>
-                  {deleteCart && (
-                    <button onClick={() => mutate(doc.id)}>
-                      <MdDelete />
-                    </button>
-                  )}
-                  <img
-                    src={doc.image}
-                    height="200px"
-                    width="150px"
-                    className="property-image"
-                    alt=""
-                  />
-                </StyledImageBox>
-
-                <StyledPropertyDescription>
-                  <p className="text-[1.3rem] font-medium ">
-                    {doc.propertyLocation}
-                  </p>
-                  <p
-                    onClick={() => {
-                      console.log(doc.propertyDescription);
-                    }}
-                  >
-                    {doc.propertyDescription.slice(0, 85) + "..."}
-                  </p>
-                </StyledPropertyDescription>
-                <StyledPropertyDetails>
-                  <div className="w-[30%] ">{doc.phoneNumber}</div>
-                  <button
-                    onClick={() => {
-                      navigate(`${URL}/${doc.id}`);
-                    }}
-                    className="font-medium text-[17px]"
-                  >
-                    see more...
-                  </button>
-                </StyledPropertyDetails>
-              </StyledDivProperty>
-            );
-          })} */}
-      {/* </ToLetContainer> */}
     </section>
   );
 };

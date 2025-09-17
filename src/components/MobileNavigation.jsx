@@ -130,7 +130,7 @@ function MobileNavigation() {
           </NavLink>
         </div>
         <div>
-          <div className="justify-between mr-4 text-4xl xl:hidden lg:hidden ">
+          <div className="mr-4 text-4xl cursor-pointer xl:hidden lg:hidden ">
             {!isOpen && (
               <GiHamburgerMenu
                 className={" ml-auto xl:text-7xl"}

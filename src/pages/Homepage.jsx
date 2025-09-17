@@ -18,6 +18,7 @@ import {
   StyledLinkButton,
 } from "../components/FlexDiv";
 import { useUser } from "../hooks/useUser";
+import { Link } from "react-router-dom";
 
 const Section = styled.section`
   color: blue;
@@ -94,9 +95,9 @@ export default function Homepage() {
               animate="visible"
               variants={fadeInUp}
               transition={{ duration: 0.8 }}
-              className="mb-6 text-4xl font-bold md:text-6xl"
+              className="mb-6 text-4xl font-bold leading-relaxed md:text-5xl"
             >
-              The Ultimate Neighborhood Guide. <br />
+              Connecting You to Properties, Artisans & Technicians . <br />
             </motion.h1>
           </Heading>
           <ul className="flex flex-col gap-4 text-[1.3rem] text-left text-white">
@@ -108,7 +109,8 @@ export default function Homepage() {
                 transition={{ duration: 1, delay: 0.2 }}
                 // className="max-w-3xl mx-auto text-lg md:text-xl"
               >
-                Discover the Best Places to Live
+                Your trusted marketplace for real estate and skilled
+                professionals.
               </motion.p>
             </li>
             <li className="">
@@ -160,10 +162,26 @@ export default function Homepage() {
           })}
         </FlexDiv>
       </section>
+
       <section className="mt-[12rem]  ">
         <Testimonials />
       </section>
-      <section className="flex flex-col text-center mt-20 justify-center items-center mx=auto  ">
+
+      <section className="px-6 py-16 bg-gray-100">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="mb-4 text-3xl font-bold">Why Choose Us?</h2>
+          <p className="mb-6 text-lg text-gray-800">
+            We make it easy to access verified professionals and trusted
+            property deals. Our platform brings transparency, trust, and
+            convenience to your doorstep.
+          </p>
+          <button className="px-6 py-3 cursor-pointer text-white transition bg-[#144c6f] rounded-full shadow hover:bg-[#052031]">
+            <Link to="/aboutus">Learn More</Link>
+          </button>
+        </div>
+      </section>
+
+      {/* <section className="flex flex-col text-center mt-16 justify-center items-center mx=auto  ">
         <h3 className="text-2xl font-black mb-7">
           About Gethomes Recommendations
         </h3>
@@ -198,7 +216,7 @@ export default function Homepage() {
           experts. By using this website, you acknowledge that you have read,
           understood, and agree to this disclaimer.
         </p>
-      </section>
+      </section> */}
     </>
   );
 }
