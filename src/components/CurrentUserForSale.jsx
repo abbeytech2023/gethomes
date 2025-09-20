@@ -60,7 +60,7 @@ export default function CurrentUserForSale() {
       </Heading>
       {!documentSale && <SpinnerMini />}
       {documents?.length === 0 && (
-        <p className="text-2xl text-center uppercase">
+        <p className="text-[1.16rem] text-center uppercase">
           You do not have a property listed to let
         </p>
       )}

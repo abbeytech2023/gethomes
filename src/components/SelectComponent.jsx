@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
+import React, { useState } from "react";
 
 export default function SelectComponent({ options, register, name }) {
   const profession = name === "profession";

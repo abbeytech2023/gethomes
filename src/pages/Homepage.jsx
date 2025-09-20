@@ -88,7 +88,7 @@ export default function Homepage() {
         <div className=" w-[30%] sm:w-[100%] px-6    md:w-[100%] min-[0px]:bg-[#1c2535] min-[0px]:w-full gap-5 h-dvh flex flex-col justify-center items-left">
           <Heading
             as="h1"
-            className="text-left font-extrabold  text-white    sm:text-white tracking-[4px] text-3xl "
+            className="text-left font-extrabold  text-white mt-10    sm:text-white tracking-[4px] text-3xl "
           >
             <motion.h1
               initial="hidden"
@@ -97,7 +97,7 @@ export default function Homepage() {
               transition={{ duration: 0.8 }}
               className="mb-6 text-4xl font-bold leading-relaxed md:text-5xl"
             >
-              Connecting You to Properties, Artisans & Technicians . <br />
+              Connecting You to Properties, Artisans & Technicians. <br />
             </motion.h1>
           </Heading>
           <ul className="flex flex-col gap-4 text-[1.3rem] text-left text-white">

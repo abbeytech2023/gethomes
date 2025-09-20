@@ -1,6 +1,6 @@
 export const ProfessionOptions = [
   { value: "", text: "select a profession" },
-  { value: "Real Estate", text: "Real Estate" },
+  { value: "RealEstate", text: "Real Estate" },
   { value: "welder", text: "welder" },
   { value: "electrical-engineer", text: "Electrical-engineer" },
   { value: "plumber", text: "Plumber" },

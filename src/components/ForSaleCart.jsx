@@ -7,8 +7,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProperty } from "../services/apiForSale";
 import toast from "react-hot-toast";
 
-import { GridInner } from "./Grid";
-import { MdDelete } from "react-icons/md";
 import { useEffect, useRef } from "react";
 
 function ForSaleCart({ document }) {

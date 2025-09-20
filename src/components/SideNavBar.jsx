@@ -24,9 +24,11 @@ const StyledMyAccountLink = styled(NavLink)`
   }
 `;
 
-function SideNavBar() {
+function SideNavBar({ userDetails }) {
+  console.log(userDetails);
+
   return (
-    <div className="flex bg-[#dfebef]  px-1   border-[rgba(20,76,111)]   flex-col   font-semibold cursor-pointer justify-center items-center  ">
+    <div className="flex bg-[#dfebef]  px-1    border-[rgba(20,76,111)]   flex-col   font-semibold cursor-pointer justify-center items-center  ">
       <StyledMyAccountLink to="dashboard">
         <p>Dashboard</p>
         <FaAngleRight />
@@ -34,12 +36,16 @@ function SideNavBar() {
       <StyledMyAccountLink to="profile">
         <p>Edit Profile</p> <FaAngleRight />
       </StyledMyAccountLink>
-      <StyledMyAccountLink to="addpropertyforsale">
-        <p>Add property for sale</p> <FaAngleRight />
-      </StyledMyAccountLink>
-      <StyledMyAccountLink to="addpropertytolet">
-        <p>Add property to let</p> <FaAngleRight />
-      </StyledMyAccountLink>
+      {userDetails?.profession === "RealEstate" ? (
+        <>
+          <StyledMyAccountLink to="addpropertyforsale">
+            <p>Add property for sale</p> <FaAngleRight />
+          </StyledMyAccountLink>
+          <StyledMyAccountLink to="addpropertytolet">
+            <p>Add property to let</p> <FaAngleRight />
+          </StyledMyAccountLink>
+        </>
+      ) : null}
     </div>
   );
 }

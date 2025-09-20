@@ -32,11 +32,11 @@ export default function MyAccount() {
           <div className=" w-[30%] fixed top-0 left-0  h-[65%]">
             <ProfileDisPlayPicture userDetails={authUser} />
           </div>
-          <div className="fixed h-[35%] bottom-0 w-[30%] overflow-y-scroll ">
-            <SideNavBar />
+          <div className="fixed h-[30%] bg-[#dfebef] bottom-0 w-[30%] overflow-y-scroll ">
+            <SideNavBar userDetails={authUser} />
           </div>
         </div>
-        <div className="mt-32">
+        <div className="w-full mt-32 mx-7 ml-[5rem]">
           <Outlet />
         </div>
       </div>

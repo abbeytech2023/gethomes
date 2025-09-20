@@ -57,7 +57,7 @@ export default function CurrentUserToLet() {
       <Heading as="h2">your properties to let</Heading>
       {!documents && <SpinnerMini />}
       {documents?.length === 0 && (
-        <p className="text-2xl uppercase">
+        <p className="text-[1.16rem] uppercase">
           You do not have a property listed to let
         </p>
       )}

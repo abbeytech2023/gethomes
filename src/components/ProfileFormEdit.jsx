@@ -13,9 +13,11 @@ import { ProfessionOptions } from "./ProfessionOptions";
 
 const StyledFormDivBox = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  background-color: #eae8e8d0;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   grid-template-rows: auto;
-  /* background-color: brown; */
+  justify-content: center;
+  align-items: center;
   /* max-width: 65rem; */
   min-width: 20rem;
   grid-gap: 3rem;
@@ -24,6 +26,7 @@ const StyledFormDivBox = styled.div`
 const StyledFormDiv = styled.div`
   /* width: 100%; */
   display: flex;
+  width: 16rem;
 
   align-items: flex-end;
 
