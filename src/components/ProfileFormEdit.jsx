@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUser } from "../hooks/useUser";
 import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useFetchLocalGovtga } from "../hooks/useFetchLga";
@@ -6,8 +6,7 @@ import { useUpdateUserData } from "../hooks/useProperties";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 import { ProfessionOptions } from "../components/ProfessionOptions";
 
-export default function EditProfileForm() {
-  const { user } = useUser();
+export default function EditProfileForm({ user }) {
   const id = user?.id;
   const { authenticatedUser } = useFetchUsersWithId(id);
   const authUser = authenticatedUser?.[0];
@@ -67,26 +66,26 @@ export default function EditProfileForm() {
 
   useEffect(() => {
     const getUserDetails = () => {
-      setDisplayName(authUser && authUser.displayName);
-      setState(authUser && authUser.state);
-      setEmail(authUser && authUser.email);
-      setNin(authUser && authUser.NIN);
-      setgender(authUser && authUser.gender);
-      setLocalGovt(authUser && authUser.localGovt);
-      setHomeAdress(authUser && authUser.homeAdress);
-      setOfficeAdress(authUser && authUser.officeAdress);
-      setOccupation(authUser && authUser.profession);
-      setMobilePhone(authUser && authUser.phone);
-      setGoogleLink(authUser && authUser.googleLink);
-      setInstagramLink(authUser && authUser.instagramLink);
-      setFacebookLink(authUser && authUser.facebookLink);
-      setInstagramLink(authUser && authUser.googleLink);
+      setDisplayName(user && user.displayName);
+      setState(user && user.state);
+      setEmail(user && user.email);
+      setNin(user && user.NIN);
+      setgender(user && user.gender);
+      setLocalGovt(user && user.localGovt);
+      setHomeAdress(user && user.homeAdress);
+      setOfficeAdress(user && user.officeAdress);
+      setOccupation(user && user.profession);
+      setMobilePhone(user && user.phone);
+      setGoogleLink(user && user.googleLink);
+      setInstagramLink(user && user.instagramLink);
+      setFacebookLink(user && user.facebookLink);
+      setInstagramLink(user && user.googleLink);
     };
     getUserDetails();
-  }, [authUser]);
+  }, [user]);
 
   return (
-    <div className="max-w-4xl p-6 mx-auto mt-32 bg-white shadow-md rounded-xl">
+    <div className="max-w-4xl p-6 bg-white shadow-md rounded-xl">
       <h2 className="mb-6 text-2xl font-semibold text-gray-800">
         Edit Profile
       </h2>
@@ -94,7 +93,7 @@ export default function EditProfileForm() {
         {/* First Name */}
         <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">DisplayName</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
               value={displayName}
@@ -120,7 +119,7 @@ export default function EditProfileForm() {
                 onClick={() => {
                   handleEdit("displayName");
                 }}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -133,13 +132,13 @@ export default function EditProfileForm() {
           <label className="mb-2 font-medium text-gray-700">
             Email Address
           </label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="email"
               value={email}
               disabled={!editMode.email}
               onChange={(e) => handleChange("email", e.target.value)}
-              className={`p-3 border rounded-lg flex-1 ${
+              className={`p-3 border rounded-lg w-full flex-1 ${
                 editMode.email
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
@@ -155,7 +154,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("email")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -166,7 +165,7 @@ export default function EditProfileForm() {
         {/* State */}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">State</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <select
               onChange={(e) => setState(e.target.value)}
               // value={state}
@@ -203,7 +202,7 @@ export default function EditProfileForm() {
                   // inputRefState.current.focus();
                   handleEdit("state");
                 }}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -214,7 +213,7 @@ export default function EditProfileForm() {
         {/* local govt*/}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">local govt</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <select
               onChange={(e) => setLocalGovt(e.target.value)}
               value={localGovt}
@@ -247,7 +246,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("localGovt")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -258,7 +257,7 @@ export default function EditProfileForm() {
         {/* Occupation*/}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">Occupation</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <select
               onChange={(e) => setOccupation(e.target.value)}
               value={occupation}
@@ -291,7 +290,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("occupation")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -302,7 +301,7 @@ export default function EditProfileForm() {
         {/* Gender */}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">Gender</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <select
               onChange={(e) => setgender(e.target.value)}
               value={gender}
@@ -318,7 +317,10 @@ export default function EditProfileForm() {
             </select>
             {editMode.gender ? (
               <button
-                onClick={() => handleSave("gender")}
+                onClick={() => {
+                  mutate({ gender });
+                  handleSave("gender");
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
@@ -327,9 +329,8 @@ export default function EditProfileForm() {
               <button
                 onClick={() => {
                   handleEdit("gender");
-                  mutate({ gender });
                 }}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -340,7 +341,7 @@ export default function EditProfileForm() {
         {/* MobilePhone */}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">mobilePhone</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
               value={mobilePhone}
@@ -365,7 +366,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("mobilePhone")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -376,7 +377,7 @@ export default function EditProfileForm() {
         {/* Facebook */}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">FacebookLink</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
               value={facebookLink}
@@ -401,7 +402,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("facebookLink")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -414,7 +415,7 @@ export default function EditProfileForm() {
           <label className="mb-2 font-medium text-gray-700">
             InstagramLink
           </label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
               value={fields.email}
@@ -436,7 +437,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("instagram")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -447,7 +448,7 @@ export default function EditProfileForm() {
         {/* Google*/}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">Google Link</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
               value={googleLink}
@@ -472,7 +473,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("google")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -483,7 +484,7 @@ export default function EditProfileForm() {
         {/*NiN*/}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">NIN</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="tel"
               value={fields.phone}
@@ -508,7 +509,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("phone")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>
@@ -519,7 +520,7 @@ export default function EditProfileForm() {
         {/* Address */}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">Address</label>
-          <div className="flex gap-2">
+          <div className="flex flex-col gap-2 sm:flex-row">
             <textarea
               rows="3"
               value={officeAdress}
@@ -541,7 +542,7 @@ export default function EditProfileForm() {
             ) : (
               <button
                 onClick={() => handleEdit("address")}
-                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
               </button>

@@ -36,7 +36,7 @@ export default function MyAccount() {
             <SideNavBar userDetails={authUser} />
           </div>
         </div>
-        <div className="w-full mt-32 mx-7 ml-[5rem]">
+        <div className="w-full mx-5 mt-32 ">
           <Outlet />
         </div>
       </div>
