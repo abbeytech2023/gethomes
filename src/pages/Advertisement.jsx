@@ -3,8 +3,17 @@ import { useUser } from "../hooks/useUser";
 import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 import { useUpdateUserData } from "../hooks/useProperties";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
+import { ProfessionOptions } from "../components/ProfessionOptions";
 
 export default function EditProfileForm() {
+  const { user } = useUser();
+  const id = user?.id;
+  const { authenticatedUser } = useFetchUsersWithId(id);
+  const authUser = authenticatedUser?.[0];
+
+  console.log(authUser);
+
   const [fields, setFields] = useState({
     firstName: "John",
     lastName: "Doe",
@@ -30,11 +39,8 @@ export default function EditProfileForm() {
     setFields({ ...fields, [field]: value });
   };
 
-  const { user } = useUser();
+  console.log(authenticatedUser);
 
-  console.log(user);
-
-  const id = user?.id;
   const { mutate } = useUpdateUserData(id);
 
   const [displayName, setDisplayName] = useState(user && user.displayName);
@@ -51,18 +57,6 @@ export default function EditProfileForm() {
   const [instagramLink, setInstagramLink] = useState();
   const [facebookLink, setFacebookLink] = useState();
 
-  const inputRefState = useRef(null);
-  const inputRefLocalGovt = useRef(null);
-  const inputRefNIN = useRef(null);
-  const inputRefOfficeAddress = useRef(null);
-  const inputRefHomeAddress = useRef(null);
-  const inputRefGener = useRef(null);
-  const inputRefOccupation = useRef(null);
-  const inputRefMobilePhone = useRef(null);
-  const inputRefGoogleLink = useRef(null);
-  const inputRefInstagram = useRef(null);
-  const inputRefFacebook = useRef(null);
-
   const { allStates } = useGetStatesFromApi(
     "https://nga-states-lga.onrender.com/fetch"
   );
@@ -73,23 +67,23 @@ export default function EditProfileForm() {
 
   useEffect(() => {
     const getUserDetails = () => {
-      setDisplayName(user && user.displayName);
-      setState(user && user.State);
-      setEmail(user && user.email);
-      setNin(user && user.NIN);
-      setgender(user && user.gender);
-      setLocalGovt(user && user.localGovt);
-      setHomeAdress(user && user.homeAdress);
-      setOfficeAdress(user && user.officeAdress);
-      setOccupation(user && user.occupation);
-      setMobilePhone(user && user.phone);
-      setGoogleLink(user && user.googleLink);
-      setInstagramLink(user && user.instagramLink);
-      setFacebookLink(user && user.facebookLink);
-      setInstagramLink(user && user.googleLink);
+      setDisplayName(authUser && authUser.displayName);
+      setState(authUser && authUser.state);
+      setEmail(authUser && authUser.email);
+      setNin(authUser && authUser.NIN);
+      setgender(authUser && authUser.gender);
+      setLocalGovt(authUser && authUser.localGovt);
+      setHomeAdress(authUser && authUser.homeAdress);
+      setOfficeAdress(authUser && authUser.officeAdress);
+      setOccupation(authUser && authUser.profession);
+      setMobilePhone(authUser && authUser.phone);
+      setGoogleLink(authUser && authUser.googleLink);
+      setInstagramLink(authUser && authUser.instagramLink);
+      setFacebookLink(authUser && authUser.facebookLink);
+      setInstagramLink(authUser && authUser.googleLink);
     };
     getUserDetails();
-  }, [user]);
+  }, [authUser]);
 
   return (
     <div className="max-w-4xl p-6 mx-auto mt-32 bg-white shadow-md rounded-xl">
@@ -104,25 +98,28 @@ export default function EditProfileForm() {
             <input
               type="text"
               value={displayName}
-              // ref={}
-              disabled
+              disabled={!editMode.displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
-                editMode.firstName
+                editMode
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {editMode.firstName ? (
+            {editMode.displayName ? (
               <button
-                onClick={() => handleSave("firstName")}
+                onClick={() => {
+                  handleSave("displayName");
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
               </button>
             ) : (
               <button
-                onClick={() => handleEdit("firstName")}
+                onClick={() => {
+                  handleEdit("displayName");
+                }}
                 className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
               >
                 Edit
@@ -171,17 +168,18 @@ export default function EditProfileForm() {
           <label className="mb-2 font-medium text-gray-700">State</label>
           <div className="flex gap-2">
             <select
-              onChange={(e) => setLocalGovt(e.target.value)}
-              value={localGovt}
-              ref={inputRefLocalGovt}
+              onChange={(e) => setState(e.target.value)}
+              // value={state}
+              defaultValue={state}
+              disabled={!editMode.state}
               className={`p-3 border rounded-lg flex-1 ${
-                editMode.email
+                editMode.state
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
               }`}
             >
-              <option key="default">{user?.localGovt}</option>
-              {localGovts?.map((lga, i) => {
+              <option key="default">{authUser?.state}</option>
+              {allStates?.map((lga, i) => {
                 return (
                   <option key={i} value={lga}>
                     {lga}
@@ -189,16 +187,22 @@ export default function EditProfileForm() {
                 );
               })}
             </select>
-            {editMode.email ? (
+            {editMode.state ? (
               <button
-                onClick={() => {}}
+                onClick={() => {
+                  handleSave("state");
+                  mutate({ state });
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
               </button>
             ) : (
               <button
-                onClick={() => handleEdit("localGovt")}
+                onClick={() => {
+                  // inputRefState.current.focus();
+                  handleEdit("state");
+                }}
                 className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
               >
                 Edit
@@ -214,9 +218,9 @@ export default function EditProfileForm() {
             <select
               onChange={(e) => setLocalGovt(e.target.value)}
               value={localGovt}
-              ref={inputRefLocalGovt}
+              disabled={!editMode.localGovt}
               className={`p-3 border rounded-lg flex-1 ${
-                editMode.email
+                editMode.localGovt
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
               }`}
@@ -230,10 +234,11 @@ export default function EditProfileForm() {
                 );
               })}
             </select>
-            {editMode.phone ? (
+            {editMode.localGovt ? (
               <button
                 onClick={() => {
-                  inputRefLocalGovt.current.disabled = true;
+                  handleSave("localGovt");
+                  mutate({ localGovt });
                 }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
@@ -241,7 +246,7 @@ export default function EditProfileForm() {
               </button>
             ) : (
               <button
-                onClick={() => (inputRefLocalGovt.current.disabled = false)}
+                onClick={() => handleEdit("localGovt")}
                 className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
               >
                 Edit
@@ -250,7 +255,125 @@ export default function EditProfileForm() {
           </div>
         </div>
 
-        {/* Email */}
+        {/* Occupation*/}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">Occupation</label>
+          <div className="flex gap-2">
+            <select
+              onChange={(e) => setOccupation(e.target.value)}
+              value={occupation}
+              disabled={!editMode.occupation}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.state
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              <option key="default">{user?.profession}</option>
+              {ProfessionOptions.map((opt) => {
+                return (
+                  <option key={opt.text} value={opt.value}>
+                    {opt.text}
+                  </option>
+                );
+              })}
+            </select>
+            {editMode.occupation ? (
+              <button
+                onClick={() => {
+                  mutate({ profession: occupation });
+                  handleSave("occupation");
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("occupation")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Gender */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">Gender</label>
+          <div className="flex gap-2">
+            <select
+              onChange={(e) => setgender(e.target.value)}
+              value={gender}
+              disabled={!editMode.gender}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.localGovt
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            >
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+            </select>
+            {editMode.gender ? (
+              <button
+                onClick={() => handleSave("gender")}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  handleEdit("gender");
+                  mutate({ gender });
+                }}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* MobilePhone */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">mobilePhone</label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={mobilePhone}
+              disabled={!editMode.mobilePhone}
+              onChange={(e) => handleChange("mpbilePhone", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.mobilePhone
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            />
+            {editMode.mobilePhone ? (
+              <button
+                onClick={() => {
+                  handleSave("mobilePhone");
+                  mutate({ mobilePhone: mobilePhone });
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("mobilePhone")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Facebook */}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">FacebookLink</label>
           <div className="flex gap-2">
@@ -267,7 +390,10 @@ export default function EditProfileForm() {
             />
             {editMode.facebookLink ? (
               <button
-                onClick={() => handleSave("facebookLink")}
+                onClick={() => {
+                  handleSave("facebookLink");
+                  mutate({ facebookLink });
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
@@ -283,7 +409,7 @@ export default function EditProfileForm() {
           </div>
         </div>
 
-        {/* Email */}
+        {/* Instagram */}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">
             InstagramLink
@@ -292,24 +418,24 @@ export default function EditProfileForm() {
             <input
               type="text"
               value={fields.email}
-              disabled={!editMode.email}
-              onChange={(e) => handleChange("email", e.target.value)}
+              disabled={!editMode.instagram}
+              onChange={(e) => handleChange("instagram", e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
-                editMode.email
+                editMode.instagram
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {editMode.email ? (
+            {editMode.instagram ? (
               <button
-                onClick={() => handleSave("email")}
+                onClick={() => handleSave("instagram")}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
               </button>
             ) : (
               <button
-                onClick={() => handleEdit("email")}
+                onClick={() => handleEdit("instagram")}
                 className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
               >
                 Edit
@@ -318,31 +444,34 @@ export default function EditProfileForm() {
           </div>
         </div>
 
-        {/* Email */}
+        {/* Google*/}
         <div className="flex flex-col md:col-span-2">
           <label className="mb-2 font-medium text-gray-700">Google Link</label>
           <div className="flex gap-2">
             <input
               type="text"
-              value={fields.email}
-              disabled={!editMode.email}
-              onChange={(e) => handleChange("email", e.target.value)}
+              value={googleLink}
+              disabled={!editMode.google}
+              onChange={(e) => handleChange("google", e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
-                editMode.email
+                editMode.google
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {editMode.email ? (
+            {editMode.google ? (
               <button
-                onClick={() => handleSave("email")}
+                onClick={() => {
+                  handleSave("google");
+                  mutate({ googleBusiness: googleLink });
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
               </button>
             ) : (
               <button
-                onClick={() => handleEdit("email")}
+                onClick={() => handleEdit("google")}
                 className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
               >
                 Edit
@@ -368,7 +497,10 @@ export default function EditProfileForm() {
             />
             {editMode.phone ? (
               <button
-                onClick={() => handleSave("phone")}
+                onClick={() => {
+                  handleSave("phone");
+                  mutate({ NIN });
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
@@ -390,7 +522,7 @@ export default function EditProfileForm() {
           <div className="flex gap-2">
             <textarea
               rows="3"
-              value={fields.address}
+              value={officeAdress}
               disabled={!editMode.address}
               onChange={(e) => handleChange("address", e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${

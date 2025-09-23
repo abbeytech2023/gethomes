@@ -1,88 +1,46 @@
-import { useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import styled from "styled-components";
-
-import { PiNotePencilThin } from "react-icons/pi";
-import { RiSave2Fill } from "react-icons/ri";
+import React, { useEffect, useRef, useState } from "react";
+import { useUser } from "../hooks/useUser";
 import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useFetchLocalGovtga } from "../hooks/useFetchLga";
-import { useMutation } from "@tanstack/react-query";
-import toast from "react-hot-toast";
 import { useUpdateUserData } from "../hooks/useProperties";
-import { ProfessionOptions } from "./ProfessionOptions";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
+import { ProfessionOptions } from "../components/ProfessionOptions";
 
-const StyledFormDivBox = styled.div`
-  display: grid;
-  background-color: #eae8e8d0;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-  grid-template-rows: auto;
-  justify-content: center;
-  align-items: center;
-  /* max-width: 65rem; */
-  min-width: 20rem;
-  grid-gap: 3rem;
-`;
-
-const StyledFormDiv = styled.div`
-  /* width: 100%; */
-  display: flex;
-  width: 16rem;
-
-  align-items: flex-end;
-
-  & label {
-    margin-bottom: 0.4rem;
-    font-size: 0.9rem;
-  }
-
-  & input {
-    border: 1px solid black;
-
-    text-align: center;
-    /* width: 90%; */
-    height: 4rem;
-    filter: grayscale();
-    opacity: 0.6;
-  }
-  & select {
-    border: 1px solid gray;
-
-    height: 4rem;
-    font-weight: 400;
-  }
-`;
-
-const StyledContainerEditSave = styled.div`
-  display: flex;
-  flex-direction: column;
-  right: 22px;
-  /* gap: 1rem; */
-
-  /* align-items: flex-end; */
-`;
-
-const LabelInputDiv = styled.div`
-  display: flex;
-  font-weight: 600;
-  flex-direction: column;
-  width: 14rem;
-  /* background-color: green; */
-
-  & input {
-    border: 1px solid gray;
-    font-weight: 400;
-    /* width: 70%; */
-  }
-
-  & select {
-    /* width: 70%; */
-  }
-`;
-
-const ProfileFormEdit = ({ user }) => {
-  console.log(user);
-
+export default function EditProfileForm() {
+  const { user } = useUser();
   const id = user?.id;
+  const { authenticatedUser } = useFetchUsersWithId(id);
+  const authUser = authenticatedUser?.[0];
+
+  console.log(authUser);
+
+  const [fields, setFields] = useState({
+    firstName: "John",
+    lastName: "Doe",
+    email: "john.doe@email.com",
+    phone: "+1234567890",
+    address: "123 Main Street, City",
+  });
+
+  const [editMode, setEditMode] = useState({});
+
+  const handleEdit = (field) => {
+    setEditMode({ ...editMode, [field]: true });
+  };
+
+  const handleSave = (field) => {
+    setEditMode({ ...editMode, [field]: false });
+    console.log(editMode);
+
+    // You could also trigger an API call here to save the field
+  };
+
+  const handleChange = (field, value) => {
+    setFields({ ...fields, [field]: value });
+  };
+
+  console.log(authenticatedUser);
+
   const { mutate } = useUpdateUserData(id);
 
   const [displayName, setDisplayName] = useState(user && user.displayName);
@@ -99,18 +57,6 @@ const ProfileFormEdit = ({ user }) => {
   const [instagramLink, setInstagramLink] = useState();
   const [facebookLink, setFacebookLink] = useState();
 
-  const inputRefState = useRef(null);
-  const inputRefLocalGovt = useRef(null);
-  const inputRefNIN = useRef(null);
-  const inputRefOfficeAddress = useRef(null);
-  const inputRefHomeAddress = useRef(null);
-  const inputRefGener = useRef(null);
-  const inputRefOccupation = useRef(null);
-  const inputRefMobilePhone = useRef(null);
-  const inputRefGoogleLink = useRef(null);
-  const inputRefInstagram = useRef(null);
-  const inputRefFacebook = useRef(null);
-
   const { allStates } = useGetStatesFromApi(
     "https://nga-states-lga.onrender.com/fetch"
   );
@@ -121,208 +67,163 @@ const ProfileFormEdit = ({ user }) => {
 
   useEffect(() => {
     const getUserDetails = () => {
-      setDisplayName(user && user.displayName);
-      setState(user && user.State);
-      setEmail(user && user.email);
-      setNin(user && user.NIN);
-      setgender(user && user.gender);
-      setLocalGovt(user && user.localGovt);
-      setHomeAdress(user && user.homeAdress);
-      setOfficeAdress(user && user.officeAdress);
-      setOccupation(user && user.occupation);
-      setMobilePhone(user && user.phone);
-      setGoogleLink(user && user.googleLink);
-      setInstagramLink(user && user.instagramLink);
-      setFacebookLink(user && user.facebookLink);
-      setInstagramLink(user && user.googleLink);
+      setDisplayName(authUser && authUser.displayName);
+      setState(authUser && authUser.state);
+      setEmail(authUser && authUser.email);
+      setNin(authUser && authUser.NIN);
+      setgender(authUser && authUser.gender);
+      setLocalGovt(authUser && authUser.localGovt);
+      setHomeAdress(authUser && authUser.homeAdress);
+      setOfficeAdress(authUser && authUser.officeAdress);
+      setOccupation(authUser && authUser.profession);
+      setMobilePhone(authUser && authUser.phone);
+      setGoogleLink(authUser && authUser.googleLink);
+      setInstagramLink(authUser && authUser.instagramLink);
+      setFacebookLink(authUser && authUser.facebookLink);
+      setInstagramLink(authUser && authUser.googleLink);
     };
     getUserDetails();
-  }, [user]);
-
-  const [disable, setDisable] = useState(true);
-
-  // const onsubmit = ({ data }) => {
-  //   // mutate({ data });
-  //   console.log(data);
-  // };
-
-  // const handleOnChange = (e) => {
-  //   (e.target.value);
-  //   // console.log(localGovts);
-  // };
-
-  // return (
-  //   <form onSubmit={handleSubmit}>
-  //     <StyledFormDivBox>
-  //       {formObject.map((form) => {
-  //         const { value, label, ref } = form;
-  //         console.log(value);
-
-  //         return (
-  //           <StyledFormDiv key={label}>
-  //             <LabelInputDiv className="flex flex-col ">
-  //               <label>{label}</label>
-
-  //               {label === "state" && (
-  //                 <select
-  //                   name="state"
-  //                   id="state"
-  //                   ref={ref}
-  //                   defaultValue={state}
-  //                   className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
-  //                   onChange={(e) => setState(e.target.value)}
-  //                 >
-  //                   <option key="default">{user?.state}</option>
-  //                   {allStates?.map((state, i) => {
-  //                     return (
-  //                       <option key={i} value={state}>
-  //                         {state}
-  //                       </option>
-  //                     );
-  //                   })}
-  //                 </select>
-  //               )}
-  //               {label === "local-govt" && (
-  //                 <select
-  //                   disabled
-  //                   onChange={(e) => setLocalGovt(e.target.value)}
-  //                   value={localGovt}
-  //                   ref={form.ref}
-  //                 >
-  //                   <option key="default">{user?.localGovt}</option>
-  //                   {localGovts?.map((lga, i) => {
-  //                     return (
-  //                       <option key={i} value={lga}>
-  //                         {lga}
-  //                       </option>
-  //                     );
-  //                   })}
-  //                 </select>
-  //               )}
-  //               {label !== "state" && label !== "local-govt" && (
-  //                 <input
-  //                   onChange={(e) => {
-  //                     setNin(e.target.value);
-
-  //                   }}
-  //                   disabled
-  //                   defaultValue={value}
-  //                   ref={ref}
-  //                   className={`${
-  //                     disable === true ? "opacity-50" : "opacity-100"
-  //                   }`}
-  //                 />
-  //               )}
-  //             </LabelInputDiv>
-  //             <StyledContainerEditSave>
-  //               <EditSaaveButton
-  //                 onClick={(e) => {
-  //                   e.preventDefault();
-  //                   console.log(form.ref);
-
-  //                   form.ref.current.focus();
-  //                   form.ref.current.disabled = false;
-  //                 }}
-  //               >
-  //                 <PiNotePencilThin />
-  //               </EditSaaveButton>
-  //               <EditSaaveButton
-  //                 onClick={(e) => {
-  //                   e.preventDefault();
-  //                   inputRefGener.current.disabled = true;
-  //                 }}
-  //               >
-  //                 <RiSave2Fill />
-  //               </EditSaaveButton>
-  //             </StyledContainerEditSave>
-  //           </StyledFormDiv>
-  //         );
-  //       })}
-
-  //       <Button type="secondary">Save</Button>
-  //     </StyledFormDivBox>
-  //   </form>
-  // );
+  }, [authUser]);
 
   return (
-    <form>
-      <StyledFormDivBox>
-        <StyledFormDiv>
-          <LabelInputDiv className="flex flex-col ">
-            <label>Full-name</label>
+    <div className="max-w-4xl p-6 mx-auto mt-32 bg-white shadow-md rounded-xl">
+      <h2 className="mb-6 text-2xl font-semibold text-gray-800">
+        Edit Profile
+      </h2>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        {/* First Name */}
+        <div className="flex flex-col">
+          <label className="mb-2 font-medium text-gray-700">DisplayName</label>
+          <div className="flex gap-2">
             <input
-              disabled
-              defaultValue={displayName}
-              className={`${disable === true ? "opacity-50" : "opacity-100"}`}
-            />
-          </LabelInputDiv>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Email</label>
-            <input
-              disabled
-              value={email}
-              className={` border-none ${
-                disable === true ? "opacity-50" : "opacity-100"
+              type="text"
+              value={displayName}
+              disabled={!editMode.displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
               }`}
             />
-          </LabelInputDiv>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>State</label>
+            {editMode.displayName ? (
+              <button
+                onClick={() => {
+                  handleSave("displayName");
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  handleEdit("displayName");
+                }}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Email */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">
+            Email Address
+          </label>
+          <div className="flex gap-2">
+            <input
+              type="email"
+              value={email}
+              disabled={!editMode.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.email
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            />
+            {editMode.email ? (
+              <button
+                onClick={() => handleSave("email")}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("email")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* State */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">State</label>
+          <div className="flex gap-2">
             <select
-              name="allState"
-              id="state"
-              ref={inputRefState}
-              defaultValue={state}
-              className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
               onChange={(e) => setState(e.target.value)}
+              // value={state}
+              defaultValue={state}
+              disabled={!editMode.state}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.state
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
             >
-              <option key="default">{user?.state}</option>
-              {allStates?.map((state, i) => {
+              <option key="default">{authUser?.state}</option>
+              {allStates?.map((lga, i) => {
                 return (
-                  <option key={i} value={state}>
-                    {state}
+                  <option key={i} value={lga}>
+                    {lga}
                   </option>
                 );
               })}
             </select>
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            {
-              <EditSaaveButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  inputRefState.current.focus();
-                  inputRefState.current.disabled = false;
-                }}
-              >
-                <PiNotePencilThin />
-              </EditSaaveButton>
-            }
-            {
-              <EditSaaveButton
-                onClick={(e) => {
-                  e.preventDefault();
-                  inputRefState.current.disabled = true;
+            {editMode.state ? (
+              <button
+                onClick={() => {
+                  handleSave("state");
                   mutate({ state });
                 }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
-                <RiSave2Fill />
-              </EditSaaveButton>
-            }
-          </StyledContainerEditSave>
-        </StyledFormDiv>
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  // inputRefState.current.focus();
+                  handleEdit("state");
+                }}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
 
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Local-Govt</label>
+        {/* local govt*/}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">local govt</label>
+          <div className="flex gap-2">
             <select
               onChange={(e) => setLocalGovt(e.target.value)}
               value={localGovt}
-              ref={inputRefLocalGovt}
+              disabled={!editMode.localGovt}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.localGovt
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
             >
               <option key="default">{user?.localGovt}</option>
               {localGovts?.map((lga, i) => {
@@ -333,167 +234,40 @@ const ProfileFormEdit = ({ user }) => {
                 );
               })}
             </select>
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefLocalGovt.current.focus();
-                inputRefLocalGovt.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefLocalGovt.current.disabled = true;
-                mutate({ localGovt });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>NIN</label>
-            <input
-              disabled={disable}
-              ref={inputRefNIN}
-              onChange={(e) => setNin(e.target.value)}
-              value={NIN}
-            />
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefNIN.current.focus();
-                inputRefNIN.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefNIN.current.disabled = true;
-                mutate({ NIN });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Gender</label>
-            <select
-              onChange={(e) => setgender(e.target.value)}
-              value={gender}
-              ref={inputRefGener}
-            >
-              <option value="MALE">MALE</option>
-              <option value="FEMALE">FEMALE</option>
-            </select>
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefGener.current.focus();
-                inputRefGener.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefGener.current.disabled = true;
-                mutate({ gender });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
+            {editMode.localGovt ? (
+              <button
+                onClick={() => {
+                  handleSave("localGovt");
+                  mutate({ localGovt });
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("localGovt")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
 
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label className="">Home-Address</label>
-
-            <input
-              height="80px"
-              disabled={disable}
-              ref={inputRefHomeAddress}
-              onChange={(e) => setHomeAdress(e.target.value)}
-              value={homeAdress}
-            />
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefHomeAddress.current.disabled = false;
-                inputRefHomeAddress.current.focus();
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefHomeAddress.current.disable = true;
-                mutate({ homeAdress });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Office-Address</label>
-            <input
-              disabled={disable}
-              ref={inputRefOfficeAddress}
-              value={officeAdress}
-              onChange={(e) => setOfficeAdress(e.target.value)}
-            />
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefOfficeAddress.current.focus();
-                inputRefOfficeAddress.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefOfficeAddress.current.focus();
-                inputRefOfficeAddress.current.disabled = true;
-                mutate({ officeAdress });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Occupation</label>
+        {/* Occupation*/}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">Occupation</label>
+          <div className="flex gap-2">
             <select
-              className="text-[1.18rem] border-[1px] border-[#666] px-[2rem] py-[0.6rem]"
               onChange={(e) => setOccupation(e.target.value)}
               value={occupation}
-              disabled={disable}
-              ref={inputRefOccupation}
+              disabled={!editMode.occupation}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.state
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
             >
               <option key="default">{user?.profession}</option>
               {ProfessionOptions.map((opt) => {
@@ -504,175 +278,277 @@ const ProfileFormEdit = ({ user }) => {
                 );
               })}
             </select>
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefOccupation.current.focus();
-                inputRefOccupation.current.disabled = false;
-              }}
+            {editMode.occupation ? (
+              <button
+                onClick={() => {
+                  mutate({ profession: occupation });
+                  handleSave("occupation");
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("occupation")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Gender */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">Gender</label>
+          <div className="flex gap-2">
+            <select
+              onChange={(e) => setgender(e.target.value)}
+              value={gender}
+              disabled={!editMode.gender}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.localGovt
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
             >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefOccupation.current.disabled = true;
-                mutate({ profession: occupation });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Mobile</label>
+              <option value="MALE">MALE</option>
+              <option value="FEMALE">FEMALE</option>
+            </select>
+            {editMode.gender ? (
+              <button
+                onClick={() => handleSave("gender")}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  handleEdit("gender");
+                  mutate({ gender });
+                }}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* MobilePhone */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">mobilePhone</label>
+          <div className="flex gap-2">
             <input
-              disabled={disable}
-              ref={inputRefMobilePhone}
+              type="text"
               value={mobilePhone}
-              onChange={(e) => {
-                setMobilePhone(e.target.value);
-              }}
+              disabled={!editMode.mobilePhone}
+              onChange={(e) => handleChange("mpbilePhone", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.mobilePhone
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
             />
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefMobilePhone.current.focus();
-                inputRefMobilePhone.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefMobilePhone.current.disabled = true;
-                mutate({ mobilePhone: mobilePhone });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Google business</label>
+            {editMode.mobilePhone ? (
+              <button
+                onClick={() => {
+                  handleSave("mobilePhone");
+                  mutate({ mobilePhone: mobilePhone });
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("mobilePhone")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Facebook */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">FacebookLink</label>
+          <div className="flex gap-2">
             <input
-              disabled={disable}
-              ref={inputRefGoogleLink}
-              value={user?.googleBusiness}
-              onChange={(e) => {
-                setGoogleLink(e.target.value);
-              }}
-            />
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefGoogleLink.current.focus();
-                inputRefGoogleLink.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefGoogleLink.current.disabled = true;
-                mutate({ googleBusiness: googleLink });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Facebook profile</label>
-            <input
-              disabled={disable}
-              ref={inputRefFacebook}
+              type="text"
               value={facebookLink}
-              onChange={(e) => {
-                setFacebookLink(e.target.value);
-              }}
+              disabled={!editMode.facebookLink}
+              onChange={(e) => handleChange("facebookLink", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.facebookLink
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
             />
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefFacebook.current.focus();
-                inputRefFacebook.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefFacebook.current.disabled = true;
-                mutate({ facebookLink });
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-        <StyledFormDiv>
-          <LabelInputDiv>
-            <label>Instagram</label>
+            {editMode.facebookLink ? (
+              <button
+                onClick={() => {
+                  handleSave("facebookLink");
+                  mutate({ facebookLink });
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("facebookLink")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Instagram */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">
+            InstagramLink
+          </label>
+          <div className="flex gap-2">
             <input
-              disabled={disable}
-              ref={inputRefInstagram}
-              value={instagramLink}
-              onChange={(e) => {
-                setInstagramLink(e.target.value);
-              }}
+              type="text"
+              value={fields.email}
+              disabled={!editMode.instagram}
+              onChange={(e) => handleChange("instagram", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.instagram
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
             />
-          </LabelInputDiv>
-          <StyledContainerEditSave>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefInstagram.current.focus();
-                inputRefInstagram.current.disabled = false;
-              }}
-            >
-              <PiNotePencilThin />
-            </EditSaaveButton>
-            <EditSaaveButton
-              onClick={(e) => {
-                e.preventDefault();
-                inputRefInstagram.current.disabled = true;
-              }}
-            >
-              <RiSave2Fill />
-            </EditSaaveButton>
-          </StyledContainerEditSave>
-        </StyledFormDiv>
-      </StyledFormDivBox>
-    </form>
-  );
-};
+            {editMode.instagram ? (
+              <button
+                onClick={() => handleSave("instagram")}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("instagram")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
 
-export default ProfileFormEdit;
+        {/* Google*/}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">Google Link</label>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={googleLink}
+              disabled={!editMode.google}
+              onChange={(e) => handleChange("google", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.google
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            />
+            {editMode.google ? (
+              <button
+                onClick={() => {
+                  handleSave("google");
+                  mutate({ googleBusiness: googleLink });
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("google")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
 
-function EditSaaveButton({ onClick, children }) {
-  return (
-    <div className="">
-      <button
-        onClick={onClick}
-        className="text-[0.9rem] cursor-pointer  text-[#000]    rounded-lg py-1 px-1"
-      >
-        {children}
-      </button>
+        {/*NiN*/}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">NIN</label>
+          <div className="flex gap-2">
+            <input
+              type="tel"
+              value={fields.phone}
+              disabled={!editMode.phone}
+              onChange={(e) => handleChange("phone", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.phone
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            />
+            {editMode.phone ? (
+              <button
+                onClick={() => {
+                  handleSave("phone");
+                  mutate({ NIN });
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("phone")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+
+        {/* Address */}
+        <div className="flex flex-col md:col-span-2">
+          <label className="mb-2 font-medium text-gray-700">Address</label>
+          <div className="flex gap-2">
+            <textarea
+              rows="3"
+              value={officeAdress}
+              disabled={!editMode.address}
+              onChange={(e) => handleChange("address", e.target.value)}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.address
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            ></textarea>
+            {editMode.address ? (
+              <button
+                onClick={() => handleSave("address")}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("address")}
+                className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
