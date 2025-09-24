@@ -7,41 +7,6 @@ import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 import { ProfessionOptions } from "../components/ProfessionOptions";
 
 export default function EditProfileForm({ user }) {
-  const id = user?.id;
-  const { authenticatedUser } = useFetchUsersWithId(id);
-  const authUser = authenticatedUser?.[0];
-
-  console.log(authUser);
-
-  const [fields, setFields] = useState({
-    firstName: "John",
-    lastName: "Doe",
-    email: "john.doe@email.com",
-    phone: "+1234567890",
-    address: "123 Main Street, City",
-  });
-
-  const [editMode, setEditMode] = useState({});
-
-  const handleEdit = (field) => {
-    setEditMode({ ...editMode, [field]: true });
-  };
-
-  const handleSave = (field) => {
-    setEditMode({ ...editMode, [field]: false });
-    console.log(editMode);
-
-    // You could also trigger an API call here to save the field
-  };
-
-  const handleChange = (field, value) => {
-    setFields({ ...fields, [field]: value });
-  };
-
-  console.log(authenticatedUser);
-
-  const { mutate } = useUpdateUserData(id);
-
   const [displayName, setDisplayName] = useState(user && user.displayName);
   const [email, setEmail] = useState();
   const [NIN, setNin] = useState();
@@ -55,6 +20,37 @@ export default function EditProfileForm({ user }) {
   const [googleLink, setGoogleLink] = useState();
   const [instagramLink, setInstagramLink] = useState();
   const [facebookLink, setFacebookLink] = useState();
+
+  const id = user?.id;
+  const { authenticatedUser } = useFetchUsersWithId(id);
+  const authUser = authenticatedUser?.[0];
+
+  const [fields, setFields] = useState({
+    firstName: displayName,
+    email: email,
+    mobilePhone: mobilePhone,
+    address: homeAdress,
+    NIN,
+  });
+
+  const [editMode, setEditMode] = useState({});
+
+  const handleEdit = (field) => {
+    setEditMode({ ...editMode, [field]: true });
+  };
+
+  const handleSave = (field) => {
+    setEditMode({ ...editMode, [field]: false });
+
+    // You could also trigger an API call here to save the field
+  };
+
+  const handleChange = (field, value) => {
+    setFields({ ...fields, [field]: value });
+    console.log(field, value);
+  };
+
+  const { mutate } = useUpdateUserData(id);
 
   const { allStates } = useGetStatesFromApi(
     "https://nga-states-lga.onrender.com/fetch"
@@ -76,7 +72,7 @@ export default function EditProfileForm({ user }) {
       setOfficeAdress(user && user.officeAdress);
       setOccupation(user && user.profession);
       setMobilePhone(user && user.phone);
-      setGoogleLink(user && user.googleLink);
+      setGoogleLink(user && user.googleBusiness);
       setInstagramLink(user && user.instagramLink);
       setFacebookLink(user && user.facebookLink);
       setInstagramLink(user && user.googleLink);
@@ -199,7 +195,6 @@ export default function EditProfileForm({ user }) {
             ) : (
               <button
                 onClick={() => {
-                  // inputRefState.current.focus();
                   handleEdit("state");
                 }}
                 className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
@@ -346,7 +341,9 @@ export default function EditProfileForm({ user }) {
               type="text"
               value={mobilePhone}
               disabled={!editMode.mobilePhone}
-              onChange={(e) => handleChange("mpbilePhone", e.target.value)}
+              onChange={(e) => {
+                setMobilePhone(e.target.value);
+              }}
               className={`p-3 border rounded-lg flex-1 ${
                 editMode.mobilePhone
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -357,7 +354,7 @@ export default function EditProfileForm({ user }) {
               <button
                 onClick={() => {
                   handleSave("mobilePhone");
-                  mutate({ mobilePhone: mobilePhone });
+                  mutate({ phone: mobilePhone });
                 }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
@@ -382,7 +379,7 @@ export default function EditProfileForm({ user }) {
               type="text"
               value={facebookLink}
               disabled={!editMode.facebookLink}
-              onChange={(e) => handleChange("facebookLink", e.target.value)}
+              onChange={(e) => setFacebookLink(e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
                 editMode.facebookLink
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -411,7 +408,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Instagram */}
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">
             InstagramLink
           </label>
@@ -420,7 +417,7 @@ export default function EditProfileForm({ user }) {
               type="text"
               value={instagramLink}
               disabled={!editMode.instagram}
-              onChange={(e) => handleChange("instagram", e.target.value)}
+              onChange={(e) => setInstagramLink(e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
                 editMode.instagram
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -429,7 +426,10 @@ export default function EditProfileForm({ user }) {
             />
             {editMode.instagram ? (
               <button
-                onClick={() => handleSave("instagram")}
+                onClick={() => {
+                  handleSave("instagram");
+                  mutate({});
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save
@@ -443,7 +443,7 @@ export default function EditProfileForm({ user }) {
               </button>
             )}
           </div>
-        </div>
+        </div> */}
 
         {/* Google*/}
         <div className="flex flex-col">
@@ -453,7 +453,7 @@ export default function EditProfileForm({ user }) {
               type="text"
               value={googleLink}
               disabled={!editMode.google}
-              onChange={(e) => handleChange("google", e.target.value)}
+              onChange={(e) => setGoogleLink(e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
                 editMode.google
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -488,18 +488,20 @@ export default function EditProfileForm({ user }) {
             <input
               type="text"
               value={NIN}
-              disabled={!editMode.phone}
-              onChange={(e) => handleChange("phone", e.target.value)}
+              disabled={!editMode.NIN}
+              onChange={(e) => {
+                setNin(e.target.value);
+              }}
               className={`p-3 border rounded-lg flex-1 ${
-                editMode.phone
+                editMode.NIN
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {editMode.phone ? (
+            {editMode.NIN ? (
               <button
                 onClick={() => {
-                  handleSave("phone");
+                  handleSave("NIN");
                   mutate({ NIN });
                 }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
@@ -508,7 +510,7 @@ export default function EditProfileForm({ user }) {
               </button>
             ) : (
               <button
-                onClick={() => handleEdit("phone")}
+                onClick={() => handleEdit("NIN")}
                 className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >
                 Edit
@@ -525,7 +527,7 @@ export default function EditProfileForm({ user }) {
               rows="3"
               value={officeAdress}
               disabled={!editMode.address}
-              onChange={(e) => handleChange("address", e.target.value)}
+              onChange={(e) => setOfficeAdress(e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
                 editMode.address
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -534,7 +536,10 @@ export default function EditProfileForm({ user }) {
             ></textarea>
             {editMode.address ? (
               <button
-                onClick={() => handleSave("address")}
+                onClick={() => {
+                  handleSave("address");
+                  mutate({ officeAdress });
+                }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
                 Save

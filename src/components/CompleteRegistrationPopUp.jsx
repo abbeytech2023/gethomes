@@ -64,8 +64,6 @@ export default function CompleteRegistrationPopup({ user }) {
   const { authenticatedUser } = useFetchUsersWithId(user?.id);
   const authUser = authenticatedUser?.[0];
 
-  console.log(authUser?.state, authUser?.NIN, authUser?.localGovt);
-
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
 
@@ -73,10 +71,11 @@ export default function CompleteRegistrationPopup({ user }) {
   const state = authUser?.state !== null;
   const localGovt = authUser?.localGovt !== null;
   const NIN = authUser?.NIN !== null;
+  const officeAdress = authUser?.officeAdress !== null;
 
   useEffect(() => {
-    if (!state || !localGovt || !NIN) setShow(true);
-  }, [NIN, localGovt, state]);
+    if (!state || !localGovt || !NIN || !officeAdress) setShow(true);
+  }, [NIN, localGovt, state, officeAdress]);
 
   if (show === false) return null;
   console.log(show);
