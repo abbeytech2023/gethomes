@@ -1,109 +1,68 @@
 import { useState } from "react";
-import styled from "styled-components";
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 
-const StyledSliderContainer = styled.div`
-  position: relative;
-  width: 70%;
-  overflow: hidden;
-`;
-
-const ButtonControlLeft = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  transform: translateY(-50%);
-  font-size: 24px;
-  cursor: pointer;
-  border: none;
-`;
-
-const ButtonControlRight = styled.div`
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 24px;
-  cursor: pointer;
-  border: none;
-`;
-
-const SliderInner = styled.div`
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-  width: 100%;
-  align-items: center;
-  /* gap: 2rem; */
-  transition: transform 0.5s ease-in-out;
-  /* position: relative; */
-  /* overflow-x: hidden; */
-`;
-
-const SliderItem = styled.div`
-  display: flex;
-
-  align-items: start;
-  justify-content: center;
-  width: 100%;
-  height: 40vh;
-  /* background-color: red; */
-
-  text-align: center;
-  flex-shrink: 0;
-  /* overflow-x: hidden; */
-`;
-
-export const ImageSlider = ({ images, video }) => {
+export default function ImageSlider({ slides }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handlePrevClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + 2) % 2);
+  const handlePrev = () => {
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
   };
 
-  const handleNextClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % 2);
+  const handleNext = () => {
+    if (currentIndex < slides.length - 1) setCurrentIndex(currentIndex + 1);
   };
 
   return (
-    <>
-      <StyledSliderContainer>
-        <SliderInner
-          style={{
-            transform: `translateX(${-currentIndex * 100}%)`,
-          }}
-        >
-          <SliderItem>
-            <div className="flex flex-col justify-center items-center  text-[#fff] w-[100%] ">
-              {/* <div> */}
-              <img src={images} />
-            </div>
-          </SliderItem>
-          <SliderItem>
-            <div>
-              {/* <div className="flex flex-col justify-center mb-10  items-center bg-[#071a25] text-[#fff] w-[100%] px-[3rem] py-16"> */}
-              <iframe
-                width="300"
-                height="265"
-                src={video}
-                title="YouTube video player"
-                // frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                // referrerpolicy="strict-origin-when-cross-origin"
-                // allowfullscreen
-              ></iframe>
-            </div>
-          </SliderItem>
-        </SliderInner>
+    <div className="flex flex-col items-center w-full px-2">
+      <div className="relative w-full max-w-4xl overflow-hidden shadow-lg aspect-video rounded-2xl">
+        {slides[currentIndex].type === "image" ? (
+          <img
+            src={slides[currentIndex].src}
+            alt="slider"
+            className="object-cover w-full h-full transition-all duration-700"
+          />
+        ) : (
+          <iframe
+            src={slides[currentIndex].src}
+            title="YouTube video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full"
+          ></iframe>
+        )}
 
-        <ButtonControlLeft onClick={handlePrevClick}>
-          <FaAngleLeft />
-        </ButtonControlLeft>
-        <ButtonControlRight onClick={handleNextClick}>
-          <FaAngleRight />
-        </ButtonControlRight>
-      </StyledSliderContainer>
-    </>
+        {/* Prev Button */}
+        {currentIndex > 0 && (
+          <button
+            onClick={handlePrev}
+            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full left-2 sm:left-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
+          >
+            ❮
+          </button>
+        )}
+
+        {/* Next Button */}
+        {currentIndex < slides.length - 1 && (
+          <button
+            onClick={handleNext}
+            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full right-2 sm:right-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
+          >
+            ❯
+          </button>
+        )}
+      </div>
+
+      {/* Dots */}
+      <div className="flex gap-2 mt-3">
+        {slides.map((_, index) => (
+          <span
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer ${
+              currentIndex === index ? "bg-green-500" : "bg-gray-400"
+            }`}
+          ></span>
+        ))}
+      </div>
+    </div>
   );
-};
+}

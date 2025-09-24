@@ -12,6 +12,7 @@ import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 import { addPropertiesToLet } from "../services/apiToLet";
 import FileInput from "./FileInput";
 import { useState } from "react";
+import { toYoutubeEmbed } from "../utility/youtubeLinkConverts";
 
 export default function PropertyToLetForm() {
   const queryClient = useQueryClient();
@@ -32,9 +33,6 @@ export default function PropertyToLetForm() {
   const agentName = user?.user_metadata?.fullName;
   const businessName = user?.user_metadata?.businessName;
   const phoneNumber = user?.user_metadata?.phone;
-  console.log(phoneNumber);
-
-  console.log(user);
 
   // const agentName = "sola";
 
@@ -50,6 +48,8 @@ export default function PropertyToLetForm() {
     },
   });
   const onSubmit = (data) => {
+    const videoUrl = toYoutubeEmbed(data.videoUrl);
+
     mutate({
       ...data,
       agentName,
@@ -57,8 +57,9 @@ export default function PropertyToLetForm() {
       phoneNumber,
       uid,
       image: data.image[0],
+      videoUrl,
     });
-    console.log(data.image);
+    console.log({ ...data }, videoUrl);
   };
 
   const handleOnChange = (e) => {
@@ -66,8 +67,8 @@ export default function PropertyToLetForm() {
   };
 
   return (
-    <div className="mb-20 ">
-      <div className="h-[70rem] flex  flex-col gap-8  ">
+    <div className="">
+      <div className="flex flex-col gap-8 ">
         <div className="flex flex-col gap-8 mt-14">
           <Form onSubmit={onSubmit} handleSubmit={handleSubmit}>
             <FormRow
@@ -156,6 +157,15 @@ export default function PropertyToLetForm() {
                     );
                   })}
               </select>
+            </FormRow>
+            <FormRow label="videoLink">
+              <StyledInput
+                placeHolder=" youtube video Link of the property"
+                id="videoLink"
+                {...register("videoUrl", {
+                  required: "This field is required",
+                })}
+              />
             </FormRow>
             <FormRow label="property photo">
               <FileInput

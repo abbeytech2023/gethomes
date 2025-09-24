@@ -11,7 +11,7 @@ export default function MyAccountMobile({ userDetails }) {
         <ProfileDisPlayPicture userDetails={userDetails} />
       </div>
       <div className="absolute bottom-[-15px] left-0 right-0 bg-amber-600">
-        <SideNavBar />
+        <SideNavBar userDetails={userDetails} />
       </div>
     </div>
   );

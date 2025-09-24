@@ -91,7 +91,7 @@ export default function EditProfileForm({ user }) {
       </h2>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {/* First Name */}
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <label className="mb-2 font-medium text-gray-700">DisplayName</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
@@ -99,7 +99,7 @@ export default function EditProfileForm({ user }) {
               value={displayName}
               disabled={!editMode.displayName}
               onChange={(e) => setDisplayName(e.target.value)}
-              className={`p-3 border rounded-lg flex-1 ${
+              className={`p-3 border rounded-lg w-full flex-1 ${
                 editMode
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
@@ -128,7 +128,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Email */}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">
             Email Address
           </label>
@@ -163,7 +163,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* State */}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col ">
           <label className="mb-2 font-medium text-gray-700">State</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <select
@@ -211,7 +211,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* local govt*/}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col ">
           <label className="mb-2 font-medium text-gray-700">local govt</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <select
@@ -255,7 +255,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Occupation*/}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col ">
           <label className="mb-2 font-medium text-gray-700">Occupation</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <select
@@ -299,7 +299,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Gender */}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">Gender</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <select
@@ -339,7 +339,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* MobilePhone */}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col ">
           <label className="mb-2 font-medium text-gray-700">mobilePhone</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
@@ -375,7 +375,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Facebook */}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">FacebookLink</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
@@ -411,14 +411,14 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Instagram */}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">
             InstagramLink
           </label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
-              value={fields.email}
+              value={instagramLink}
               disabled={!editMode.instagram}
               onChange={(e) => handleChange("instagram", e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
@@ -446,7 +446,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Google*/}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">Google Link</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
@@ -482,12 +482,12 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/*NiN*/}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">NIN</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
-              type="tel"
-              value={fields.phone}
+              type="text"
+              value={NIN}
               disabled={!editMode.phone}
               onChange={(e) => handleChange("phone", e.target.value)}
               className={`p-3 border rounded-lg flex-1 ${
@@ -518,7 +518,7 @@ export default function EditProfileForm({ user }) {
         </div>
 
         {/* Address */}
-        <div className="flex flex-col md:col-span-2">
+        <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">Address</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <textarea

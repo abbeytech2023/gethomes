@@ -7,6 +7,8 @@ import SpinnerMini from "../components/SpinnerMini";
 import Button from "../components/Button";
 import styled from "styled-components";
 import { formatDate, formatPrice } from "../utility/utility";
+import ImageSlider from "../components/ImageSlider";
+// import ImageSlider from "../components/ImageSlider";
 
 export default function SinglePropertyToLet() {
   const { id } = useParams();
@@ -14,6 +16,7 @@ export default function SinglePropertyToLet() {
   const [propertyDescription, setPropertyDescription] = useState();
   const [propertyLocation, setPropertyLocation] = useState();
   const [PropertyImage, setPropertyImage] = useState();
+  const [propertyVideo, setPropertyVideo] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [state, setState] = useState();
   const [localGovernment, setLocalGovernment] = useState();
@@ -42,11 +45,14 @@ export default function SinglePropertyToLet() {
         console.log(error);
       }
 
+      console.log(data.propertyVideo);
+
       if (data) {
         setData(data);
         setPropertyDescription(data.propertyDescription);
         setPropertyLocation(data.propertyLocation);
         setPropertyImage(data.image);
+        setPropertyVideo(data.videoUrl);
         setPhoneNumber(data.phoneNumber);
         setState(data.state);
         setBusinessName(data.businessName);
@@ -62,23 +68,27 @@ export default function SinglePropertyToLet() {
     fetchSingleProperty();
   }, [id]);
 
+  const slides = [
+    {
+      type: "image",
+      src: PropertyImage,
+    },
+    {
+      type: "video",
+      src: propertyVideo, // Replace with your YouTube link
+    },
+  ];
   return (
     <>
       {!price && <SpinnerMini />}
       {data && (
         <>
           <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
-            <div className="flex flex-col items-center w-[80%] gap-5 ">
-              <div className="flex justify-center  w-[70%] md:w-[50%]  min-[0px]:text-2xl text-3xl text-[#000000c0] font-bold">
-                {/* <p>{propertyDescription?.slice(0, 10)}</p> */}
-                <p className="text-red-500 ">{formatPrice(price)}</p>
-              </div>
-              <div className="min-[0px]:w-[100%] px-7 xl:w-[100%] flex justify-center ">
-                <img src={PropertyImage} />
-              </div>
+            <div className="flex flex-col items-center w-[60%] gap-5 ">
+              <ImageSlider slides={slides} />
             </div>
 
-            <div className="flex flex-col gap-[4rem] xl:basis-[70%]  ">
+            <div className="flex flex-col gap-[4rem]  px-auto xl:basis-[50%]  ">
               <div className="flex flex-col px-7 gap-[2rem] text-[17px] font-bold ">
                 <p>Marketed By</p>
                 <p>{businessName}</p>

@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { ImageSlider } from "../components/ImageSlider";
 
 import { useEffect, useState } from "react";
 
@@ -8,6 +7,7 @@ import SpinnerMini from "../components/SpinnerMini";
 import Button from "../components/Button";
 import styled from "styled-components";
 import { formatDate, formatPrice } from "../utility/utility";
+import ImageSlider from "../components/ImageSlider";
 
 import React from "react";
 
@@ -67,34 +67,24 @@ export default function SinglePropertyForSale() {
     fetchSingleProperty();
   }, [id]);
 
+  const slides = [
+    {
+      type: "image",
+      src: PropertyImage,
+    },
+    {
+      type: "video",
+      src: videoLink, // Replace with your YouTube link
+    },
+  ];
+
   return (
     <>
       <>
         {!data && <SpinnerMini />}
         <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
           <div className="flex flex-col items-center w-[75%] gap-5 ">
-            <div className="flex justify-center  w-[60%] md:w-[50%]  min-[0px]:text-2xl text-3xl text-[#000000c0] font-bold">
-              {/* <p>{propertyDescription?.slice(0, 10)}</p> */}
-              <p className="text-red-500 ">{formatPrice(price)}</p>
-            </div>
-            <div className="flex xl:flex-row flex-col gap-[2rem] ">
-              <div className=" overflow-hidden h-[260px] w-[350px]">
-                <img src={PropertyImage} height="350px" width="360px" />
-              </div>
-              <div className="">
-                {/* <div className="flex flex-col justify-center mb-10  items-center bg-[#071a25] text-[#fff] w-[100%] px-[3rem] py-16"> */}
-                <iframe
-                  width="350"
-                  height="265"
-                  src={videoLink}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  // referrerpolicy="strict-origin-when-cross-origin"
-                  // allowfullscreen
-                ></iframe>
-              </div>
-            </div>
+            <ImageSlider slides={slides} />
           </div>
 
           <div className="flex flex-col gap-[4rem] xl:basis-[70%]  ">

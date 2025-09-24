@@ -25,8 +25,6 @@ const StyledMyAccountLink = styled(NavLink)`
 `;
 
 function SideNavBar({ userDetails }) {
-  console.log(userDetails);
-
   return (
     <div className="flex bg-[#dfebef]  px-1    border-[rgba(20,76,111)]   flex-col   font-semibold cursor-pointer justify-center items-center  ">
       <StyledMyAccountLink to="dashboard">

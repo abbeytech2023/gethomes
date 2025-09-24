@@ -35,12 +35,9 @@ function ProductSaleForm() {
 
   const [currentState, setCurrentState] = useState();
 
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState}`
-  );
+  // const { localGovts } = useFetchLocalGovtga(
+  //   `https://nga-states-lga.onrender.com/?state=${currentState}`
+  // );
 
   const { user } = useUser();
 
@@ -72,7 +69,7 @@ function ProductSaleForm() {
       ...data,
       uid,
       image: data.image[0],
-      videoLink: videoLink,
+      videoLink,
       businessName,
       phoneNumber,
     });
@@ -83,12 +80,11 @@ function ProductSaleForm() {
   const handleOnChange = (e) => {
     setCurrentState(e.target.value);
     console.log(currentState);
-    console.log(localGovts);
   };
 
   return (
     <div className="">
-      <div className="h-[70rem] flex  flex-col gap-8">
+      <div className="flex flex-col gap-8 mx-20 ">
         <div className="flex flex-col gap-8 mt-14">
           <Form
             // className="flex flex-col items-center justify-center"
@@ -100,8 +96,8 @@ function ProductSaleForm() {
               error={errors?.propertyDetails?.message}
             >
               <StyledInput
-                minLength="10"
-                placeholder="About the property"
+                minLength="15"
+                placeholder="Describe the property"
                 id="propertyDetails"
                 {...register("propertyDetails", {
                   required: "This field is required",
@@ -112,14 +108,14 @@ function ProductSaleForm() {
               <StyledInput
                 minLength="15"
                 className="h-[50px]"
-                placeHolder="The location of property"
+                placeHolder="The location of the property"
                 id="address"
                 {...register("address", {
                   required: "This field is required",
                 })}
               />
             </FormRow>
-            <FormRow label="Title" error={errors?.state?.message}>
+            {/* <FormRow label="Title" error={errors?.state?.message}>
               <StyledInput
                 minLength="7"
                 placeHolder=" The name of the property owner"
@@ -128,7 +124,7 @@ function ProductSaleForm() {
                   required: "This field is required",
                 })}
               />
-            </FormRow>
+            </FormRow> */}
             <FormRow label="Total-Package" error={errors?.price?.message}>
               <StyledInput
                 type="number"
@@ -139,12 +135,12 @@ function ProductSaleForm() {
                 })}
               />
             </FormRow>
-            <div>
-              <SelectStateLocalGovt register={register} />
-            </div>
+            {/* <div> */}
+            <SelectStateLocalGovt register={register} />
+            {/* </div> */}
             <FormRow label="videoLink">
               <StyledInput
-                placeHolder="paste your embed youtube video Link"
+                placeHolder=" youtube video Link of the property"
                 id="videoLink"
                 {...register("videoLink", {
                   required: "This field is required",
