@@ -84,7 +84,7 @@ function ProductSaleForm() {
 
   return (
     <div className="">
-      <div className="flex flex-col gap-8 mx-20 ">
+      <div className="flex flex-col gap-8 ">
         <div className="flex flex-col gap-8 mt-14">
           <Form
             // className="flex flex-col items-center justify-center"
