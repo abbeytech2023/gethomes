@@ -34,7 +34,7 @@ export default function Navigation() {
   return (
     <nav
       className={
-        "flex justify-around text-[#fff] items-center h-28 px-6 bg-[#144c6f]"
+        "flex justify-around text-[#fff] items-center h-21 px-6 bg-[#144c6f]"
       }
     >
       <div>
