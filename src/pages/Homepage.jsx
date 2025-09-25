@@ -95,7 +95,7 @@ export default function Homepage() {
               animate="visible"
               variants={fadeInUp}
               transition={{ duration: 0.8 }}
-              className="mb-6 text-4xl font-bold leading-relaxed md:text-5xl"
+              className="mb-6 text-3xl font-bold leading-relaxed md:text-5xl"
             >
               Connecting You to Properties, Artisans & Technicians. <br />
             </motion.h1>
