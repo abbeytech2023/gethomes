@@ -1,3 +1,4 @@
+import { useState } from "react";
 import supabase from "./supabaseClients";
 
 export async function signup({
@@ -5,7 +6,6 @@ export async function signup({
   password,
   fullName,
   profession,
-  googleBusiness,
   businessName,
   phone,
 }) {
@@ -17,7 +17,6 @@ export async function signup({
         fullName,
         avatar: "",
         profession,
-        googleBusiness,
         businessName,
         phone,
       },
@@ -42,7 +41,6 @@ export async function signup({
       email: email,
       displayName: user.user_metadata.fullName,
       profession: profession,
-      googleBusiness: googleBusiness,
       businessName,
       phone,
     },

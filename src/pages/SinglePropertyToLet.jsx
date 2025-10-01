@@ -50,7 +50,7 @@ export default function SinglePropertyToLet() {
       if (data) {
         setData(data);
         setPropertyDescription(data.propertyDescription);
-        setPropertyLocation(data.propertyLocation);
+        setPropertyLocation(data.address);
         setPropertyImage(data.image);
         setPropertyVideo(data.videoUrl);
         setPhoneNumber(data.phoneNumber);

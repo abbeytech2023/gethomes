@@ -1,70 +1,122 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
-const ImageSlider = () => {
-  const images = [
-    "https://via.placeholder.com/1200x600?text=Image+1",
-    "https://via.placeholder.com/1200x600?text=Image+2",
+export default function PropertyPage() {
+  // Sample property data
+  const properties = [
+    {
+      id: 1,
+      address: "12 Allen Avenue",
+      city: "Ikeja",
+      state: "Lagos",
+      price: 25000000,
+    },
+    {
+      id: 2,
+      address: "5 Garki Road",
+      city: "Garki",
+      state: "Abuja",
+      price: 32000000,
+    },
+    {
+      id: 3,
+      address: "23 Oke Mosan Street",
+      city: "Abeokuta",
+      state: "Ogun",
+      price: 18000000,
+    },
+    {
+      id: 4,
+      address: "45 Victoria Island",
+      city: "Lagos Island",
+      state: "Lagos",
+      price: 42000000,
+    },
+    {
+      id: 5,
+      address: "10 Airport Road",
+      city: "Maitama",
+      state: "Abuja",
+      price: 35000000,
+    },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedState, setSelectedState] = useState("");
+  const [filtered, setFiltered] = useState(properties);
 
-  // Auto switch every 3 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
-    }, 3000);
+    let results = properties;
 
-    return () => clearInterval(interval);
-  }, []);
+    // State filter
+    if (selectedState) {
+      results = results.filter(
+        (p) => p.state.toLowerCase() === selectedState.toLowerCase()
+      );
+    }
 
-  const handlePrev = () => {
-    setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
-  };
+    // Search filter (address or city)
+    if (searchQuery) {
+      results = results.filter(
+        (p) =>
+          p.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.city.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
 
-  const handleNext = () => {
-    setCurrentIndex((prev) => (prev === 0 ? 1 : 0));
-  };
+    setFiltered(results);
+  }, [searchQuery, selectedState, properties]);
 
   return (
-    <div className="flex flex-col items-center w-full px-2 mt-32">
-      <div className="relative w-full max-w-4xl overflow-hidden shadow-lg aspect-video rounded-2xl">
-        <img
-          src={images[currentIndex]}
-          alt="slider"
-          className="object-cover w-full h-full transition-all duration-700"
+    <div className="min-h-screen p-6 bg-gray-100">
+      <h1 className="mb-6 text-2xl font-bold">Property Listings</h1>
+
+      {/* Filters Row */}
+      <div className="flex flex-col gap-4 mb-6 md:flex-row">
+        {/* Search */}
+        <input
+          type="text"
+          placeholder="Search by address or city..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="flex-1 p-3 border border-gray-300 rounded-lg shadow-sm"
         />
 
-        {/* Prev Button */}
-        <button
-          onClick={handlePrev}
-          className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full left-2 sm:left-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
+        {/* State Dropdown */}
+        <select
+          value={selectedState}
+          onChange={(e) => setSelectedState(e.target.value)}
+          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm md:w-60"
         >
-          ❮
-        </button>
-
-        {/* Next Button */}
-        <button
-          onClick={handleNext}
-          className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full right-2 sm:right-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
-        >
-          ❯
-        </button>
+          <option value="">All States</option>
+          <option value="Lagos">Lagos</option>
+          <option value="Abuja">Abuja</option>
+          <option value="Ogun">Ogun</option>
+        </select>
       </div>
 
-      {/* Dots */}
-      <div className="flex gap-2 mt-3">
-        {images.map((_, index) => (
-          <span
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer ${
-              currentIndex === index ? "bg-green-500" : "bg-gray-400"
-            }`}
-          ></span>
-        ))}
+      {/* Properties List */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {filtered.length > 0 ? (
+          filtered.map((p) => (
+            <div
+              key={p.id}
+              className="p-4 transition bg-white shadow rounded-xl hover:shadow-lg"
+            >
+              <h2 className="text-lg font-semibold">{p.address}</h2>
+              <p className="text-gray-600">
+                {p.city}, {p.state}
+              </p>
+              <p className="mt-2 font-bold text-green-600">
+                ₦{p.price.toLocaleString()}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-500 col-span-full">
+            No properties found
+          </p>
+        )}
       </div>
     </div>
   );
-};
-
-export default ImageSlider;
+}

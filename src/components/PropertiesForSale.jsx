@@ -12,12 +12,14 @@ import { useFetchProperties } from "../hooks/useFetchProperties";
 import Pagination from "./Pagination";
 import Button from "./Button";
 import { useSearchParams } from "react-router-dom";
+import { useSearchContext } from "../hooks/useSearchContext";
 
 //HOOKS
 
 function PropertiesForSale() {
   const { register, handleSubmit } = useForm();
-  const { documents, isLoading, count } = useFetchProperties("ForSale");
+  const { documents, isLoading } = useFetchProperties("ForSale");
+  const { query, setquery } = useSearchContext();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const filterValue = searchParams.get("state") || "All";

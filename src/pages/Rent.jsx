@@ -1,6 +1,11 @@
 import PropertiesToLet from "../components/PropertiesToLet";
 import { motion } from "framer-motion";
 
+import { BgOverlay } from "../components/BgOverlay";
+import { Heading } from "../components/HeadingText";
+// import PropertySearch from "../components/SearchComponent";
+import SearchInput from "../components/SearchComponent";
+
 import styled from "styled-components";
 
 const RentSection = styled.section`
@@ -18,17 +23,13 @@ const RentHeaderBox = styled.div`
   letter-spacing: 4px;
 `;
 
-import { BgOverlay } from "../components/BgOverlay";
-import { useEffect, useState } from "react";
-import { Heading } from "../components/HeadingText";
-
 export default function Rent() {
   return (
     <>
       <div className="flex">
         <RentSection className="w-full h-screen ">
           <BgOverlay as="rent" className="relative w-full h-full ">
-            <div className="max-[600px]:px-4">
+            <div className=" max-[600px]:px-4 ">
               <Heading
                 as="rent"
                 className="mb-4 text-4xl font-bold md:text-6xl"

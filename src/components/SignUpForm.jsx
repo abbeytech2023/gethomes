@@ -6,19 +6,25 @@ import SpinnerMini from "./SpinnerMini";
 import { useForm } from "react-hook-form";
 import StyledInput from "./StyledInput";
 import { useSignup } from "../hooks/useSignup";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import { useState } from "react";
 import SelectComponent from "./SelectComponent";
 import SelectStateLocalGovt from "./SelectStateLocalGovt";
 import { ProfessionOptions } from "./ProfessionOptions";
+import { useGetAccessCodes } from "../hooks/useGetAccessCode";
+import supabase from "../services/supabaseClients";
 
 function SignUpForm() {
   const [selectedValue, setSelectedValue] = useState();
-  // const [currentState, setCurrentState] = useState(())
   const { signup, isPending } = useSignup();
-  const { register, formState, handleSubmit, reset, getValues, watch } =
-    useForm();
+  const {
+    register,
+    formState,
+    handleSubmit,
+    reset,
+    getValues,
+    watch,
+    setError,
+  } = useForm();
 
   // const { localGovts } = useFetchLocalGovtga(
   //   `https://nga-states-lga.onrender.com/?state=${
@@ -28,9 +34,39 @@ function SignUpForm() {
 
   const { errors } = formState;
 
-  function onSubmit(data) {
+  async function onSubmit(data) {
+    // Step 1: Look up the code
+    const { data: codes, error: codesError } = await supabase
+      .from("AccessCode")
+      .select("*")
+      .eq("code", data.accessCode)
+      .eq("active", true)
+      .single(); // expect only one match
+
+    console.log(codes);
+    if (codesError || !codes) {
+      console.log(codesError.message);
+      setError("accessCode", { message: "Invalid or already used code." });
+      alert(codesError.message);
+
+      return;
+    }
+
+    //2. Mark the code as used
+    const { error: updateError } = await supabase
+      .from("AccessCode")
+      .update({ active: false, used_at: new Date() })
+      .eq("id", codes.id);
+
+    if (updateError) {
+      setError("accessCode", { message: "Error marking code as used." });
+      console.log(updateError);
+
+      return;
+    }
+
     signup({ ...data });
-    console.log(data);
+    // console.log(data);
   }
 
   return (
@@ -49,14 +85,13 @@ function SignUpForm() {
               })}
             />
           </FormRow>
-          <FormRow label="Company name">
+          <FormRow label="Company name" error={errors.businessName?.message}>
             <StyledInput
               type="text"
               placeholder="Enter Your Company Name"
               id="businessName"
               {...register("businessName", {
-                required:
-                  "please enter your business profile page link on google",
+                required: "Your business name is required",
               })}
             />
           </FormRow>
@@ -85,21 +120,7 @@ function SignUpForm() {
               register={register}
             />
           </FormRow>
-          <FormRow
-            label="Google business profile"
-            error={errors?.googleBusiness?.message}
-          >
-            <StyledInput
-              minLength="48"
-              type="Google-business-profile"
-              id="Google-business-profile"
-              name="Google-business-profile"
-              {...register("googleBusiness", {
-                required:
-                  "please enter your business profile page link on google",
-              })}
-            />
-          </FormRow>
+
           <FormRow label="Password" error={errors?.password?.message}>
             <StyledInput
               minLength="8"
@@ -131,14 +152,23 @@ function SignUpForm() {
               })}
             />
           </FormRow>
-          <FormRow label="Mobile-Phone">
+          <FormRow label="Mobile" error={errors.phone?.message}>
             <StyledInput
               name="phoneNumber"
               id="phoneNumber"
               placeholder="mobile phone"
               {...register("phone", {
-                required:
-                  "please enter your business profile page link on google",
+                required: "please enter your phone number to continue",
+              })}
+            />
+          </FormRow>
+          <FormRow label="Validation Code" error={errors?.accessCode?.message}>
+            <StyledInput
+              name="access_code"
+              id="access_code"
+              placeholder="paste the code here"
+              {...register("accessCode", {
+                required: "you need an access code to continue",
               })}
             />
           </FormRow>

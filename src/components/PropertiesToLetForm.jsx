@@ -94,15 +94,12 @@ export default function PropertyToLetForm() {
                 })}
               />
             </FormRow>
-            <FormRow
-              label="Property-Location"
-              error={errors?.propertyLocation?.message}
-            >
+            <FormRow label="Address" error={errors?.propertyLocation?.message}>
               <StyledInput
                 type="text"
                 id="propertyLocation"
                 placeholder="Location of the property"
-                {...register("propertyLocation", {
+                {...register("address", {
                   required: "This field is required",
                 })}
               />

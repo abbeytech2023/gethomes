@@ -5,33 +5,44 @@ import { Heading } from "./HeadingText";
 import SelectStateLocalGovt from "./SelectStateLocalGovt";
 import { useForm } from "react-hook-form";
 import Button from "./Button";
+import { useSearchContext } from "../hooks/useSearchContext";
 
 import { useFetchProperties } from "../hooks/useFetchProperties";
 import { useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
+import SearchInput from "./SearchComponent";
+import { useEffect, useState } from "react";
+import FormRow from "./FormRow";
 
 export default function PropertiesToLet() {
-  const { documents, isLoading, count } = useFetchProperties("ToLet");
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { documents, isLoading } = useFetchProperties("ToLet");
+  const { query, setQuery } = useSearchContext();
   const { handleSubmit, register } = useForm();
+  const [filteredDocuments, setFilteredDocuments] = useState();
+  const [state, setState] = useState();
 
-  const filterValue = searchParams.get("state") || "All";
+  useEffect(() => {
+    let results = documents;
 
-  let filteredDocuments = [];
-  if (filterValue === "All") {
-    filteredDocuments = documents;
-    console.log(filteredDocuments);
-  } else {
-    filteredDocuments = documents?.filter((doc) => {
-      // console.log(doc.state);
+    if (query) {
+      setState("");
+      results = results?.filter(
+        (docs) =>
+          docs.state.toLowerCase().includes(query.toLowerCase()) ||
+          docs.address.toLowerCase().includes(query.toLowerCase())
+      );
+    }
 
-      return (filteredDocuments = doc.state === filterValue);
-      // console.log(filteredDocuments);
-    });
-  }
+    if (state) {
+      setQuery("");
+      results = results.filter((docs) =>
+        docs.state.toLowerCase().includes(state.toLowerCase())
+      );
+    }
+    setFilteredDocuments(results);
+  }, [documents, query, state, setQuery]);
 
-  // console.log(filterValue);
-  console.log(filteredDocuments);
+  console.log(state);
 
   const style = {
     container: {
@@ -40,27 +51,27 @@ export default function PropertiesToLet() {
   };
 
   const onSubmit = (data) => {
-    searchParams.set("state", data.state), setSearchParams(searchParams);
-    console.log(data);
+    setState(data.state.toLowerCase());
   };
 
   if (isLoading) return <SpinnerMini />;
 
   return (
-    <div className="text-center ">
-      {/* {error && <p>{error}</p>} */}
-      <Heading as="h2" className=" uppercase text-center mb-[6rem]">
-        Properties to let
-      </Heading>
-      <form
-        className="flex items-center justify-center gap-3 "
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <SelectStateLocalGovt styles={style} register={register} />
-        <Button className="" type="secondary">
-          Filter
-        </Button>
-      </form>
+    <div>
+      <div className="w-[80%] flex items-center max-[736px]:flex-col  gap-9 mx-auto px-6 text-center ">
+        <form
+          className="flex items-center justify-center gap-3 h-7 "
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <SelectStateLocalGovt styles={style} register={register} />
+          <Button className="" type="secondary">
+            Filter
+          </Button>
+        </form>
+        <SearchInput />
+      </div>
+
+      <div className="flex flex-col items-center justify-center text-center mt-14 bg-amber-900"></div>
       <div>
         {filteredDocuments?.length === 0 && (
           <p className="text-[1.16rem] text-center max-[450px]:px-7">
