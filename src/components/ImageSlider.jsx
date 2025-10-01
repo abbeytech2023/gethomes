@@ -34,7 +34,7 @@ export default function ImageSlider({ slides }) {
         {currentIndex > 0 && (
           <button
             onClick={handlePrev}
-            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full left-2 sm:left-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
+            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full cursor-pointer left-2 sm:left-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
           >
             ❮
           </button>
@@ -44,7 +44,7 @@ export default function ImageSlider({ slides }) {
         {currentIndex < slides.length - 1 && (
           <button
             onClick={handleNext}
-            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full right-2 sm:right-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
+            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full cursor-pointer right-2 sm:right-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
           >
             ❯
           </button>
@@ -58,7 +58,7 @@ export default function ImageSlider({ slides }) {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full cursor-pointer ${
-              currentIndex === index ? "bg-green-500" : "bg-gray-400"
+              currentIndex === index ? "bg-[#144c6f]" : "bg-gray-400"
             }`}
           ></span>
         ))}

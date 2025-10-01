@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { useEffect, useRef } from "react";
 
 function ForSaleCart({ document }) {
-  const { propertyDetails, price, title, id: propertyId } = document;
+  // const { propertyDetails, price, title, id: propertyId } = document;
   const location = useLocation();
   const navigate = useNavigate();
   const URL = location.pathname;

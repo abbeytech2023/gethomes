@@ -80,53 +80,57 @@ export default function SinglePropertyForSale() {
 
   return (
     <>
-      <>
-        {!data && <SpinnerMini />}
-        <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
-          <div className="flex flex-col items-center w-[75%] gap-5 ">
-            <ImageSlider slides={slides} />
-          </div>
+      {!data && <SpinnerMini />}
+      {data && (
+        <>
+          <div>
+            <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
+              <div className="flex flex-col items-center w-[75%] gap-5 ">
+                <ImageSlider slides={slides} />
+              </div>
 
-          <div className="flex flex-col gap-[4rem] xl:basis-[70%]  ">
-            <div className="flex flex-col px-7 gap-[2rem] text-[17px] font-bold ">
-              <p>Marketed By</p>
-              <p>{businessName}</p>
+              <div className="flex flex-col gap-[4rem] xl:basis-[70%]  ">
+                <div className="flex flex-col px-7 gap-[2rem] text-[17px] font-bold ">
+                  <p>Marketed By</p>
+                  <p>{businessName}</p>
+                </div>
+
+                <ul className="text-[16px] px-6 flex flex-col gap-[1.5rem]">
+                  <li className="">
+                    <StyledHeading>property-Description: </StyledHeading>
+                    {propertyDetails}
+                  </li>
+                  <li>
+                    <StyledHeading>Property-Location:</StyledHeading>
+                    {propertyAddress}
+                  </li>
+                  <li>
+                    <StyledHeading>price:</StyledHeading> {formatPrice(price)}
+                  </li>
+                  <li>
+                    <StyledHeading>phone:</StyledHeading> {phoneNumber}
+                  </li>
+                  <li>
+                    <StyledHeading>State:</StyledHeading> {state}
+                  </li>
+                  <li>
+                    <StyledHeading>Local-government: </StyledHeading>
+                    {localGovernment}
+                  </li>
+                  <li>
+                    <StyledHeading>Date:</StyledHeading> {formatDate(createdAt)}
+                  </li>
+                </ul>
+              </div>
             </div>
-
-            <ul className="text-[16px] px-6 flex flex-col gap-[1.5rem]">
-              <li className="">
-                <StyledHeading>property-Description: </StyledHeading>
-                {propertyDetails}
-              </li>
-              <li>
-                <StyledHeading>Property-Location:</StyledHeading>
-                {propertyAddress}
-              </li>
-              <li>
-                <StyledHeading>price:</StyledHeading> {formatPrice(price)}
-              </li>
-              <li>
-                <StyledHeading>phone:</StyledHeading> {phoneNumber}
-              </li>
-              <li>
-                <StyledHeading>State:</StyledHeading> {state}
-              </li>
-              <li>
-                <StyledHeading>Local-government: </StyledHeading>
-                {localGovernment}
-              </li>
-              <li>
-                <StyledHeading>Date:</StyledHeading> {formatDate(createdAt)}
-              </li>
-            </ul>
           </div>
-        </div>
-        <div className="mt-[9rem]  mx-auto">
-          <Button to="/buy" type="secondary">
-            Back
-          </Button>
-        </div>
-      </>
+          <div className="mt-[9rem]  mx-auto">
+            <Button to="/buy" type="secondary">
+              Back
+            </Button>
+          </div>
+        </>
+      )}
 
       {/* <ImageSlider images={PropertyImage} video={videoLink} /> */}
     </>

@@ -1,44 +1,43 @@
-// import CartCard from "./CartCard";
-import { GridContainer, GridInner } from "./Grid";
-
 import { Heading } from "./HeadingText";
 import ForSaleCart from "./ForSaleCart";
 import SelectStateLocalGovt from "./SelectStateLocalGovt";
-import { FlexDiv, FlexInnerDiv } from "./FlexDiv";
-import supabase from "../services/supabaseClients";
 import SpinnerMini from "./SpinnerMini";
 import { useForm } from "react-hook-form";
 import { useFetchProperties } from "../hooks/useFetchProperties";
-import Pagination from "./Pagination";
 import Button from "./Button";
-import { useSearchParams } from "react-router-dom";
 import { useSearchContext } from "../hooks/useSearchContext";
+import { useEffect, useState } from "react";
+import SearchInput from "./SearchComponent";
 
 //HOOKS
 
 function PropertiesForSale() {
   const { register, handleSubmit } = useForm();
   const { documents, isLoading } = useFetchProperties("ForSale");
-  const { query, setquery } = useSearchContext();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { query, setQuery } = useSearchContext();
+  const [filteredDocuments, setFilteredDocuments] = useState();
+  const [state, setState] = useState();
 
-  const filterValue = searchParams.get("state") || "All";
+  useEffect(() => {
+    let results = documents;
 
-  let filteredDocuments = [];
-  if (filterValue === "All") {
-    filteredDocuments = documents;
-    console.log(filteredDocuments);
-  } else {
-    filteredDocuments = documents?.filter((doc) => {
-      // console.log(doc.state);
+    if (query) {
+      setState("");
+      results = results?.filter(
+        (docs) =>
+          docs.state.toLowerCase().includes(query.toLowerCase()) ||
+          docs.address.toLowerCase().includes(query.toLowerCase())
+      );
+    }
 
-      return (filteredDocuments = doc.state === filterValue);
-      // console.log(filteredDocuments);
-    });
-  }
-
-  // console.log(filterValue);
-  console.log(filteredDocuments);
+    if (state) {
+      setQuery("");
+      results = results.filter((docs) =>
+        docs.state.toLowerCase().includes(state.toLowerCase())
+      );
+    }
+    setFilteredDocuments(results);
+  }, [documents, query, state, setQuery]);
 
   const style = {
     container: {
@@ -47,8 +46,7 @@ function PropertiesForSale() {
   };
 
   const onSubmit = (data) => {
-    searchParams.set("state", data.state), setSearchParams(searchParams);
-    console.log(data);
+    data.state === "all" ? setState("") : setState(data.state.toLowerCase());
   };
 
   if (isLoading) return <SpinnerMini />;
@@ -56,26 +54,30 @@ function PropertiesForSale() {
   return (
     <>
       <div>
-        {/* {error && <p>{error}</p>} */}
-        <Heading as="h2" className="text-center uppercase ">
-          Properties for sale
-        </Heading>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="flex items-center justify-center gap-3 text-center"
-        >
-          <SelectStateLocalGovt styles={style} register={register} />
-          <Button type="secondary">filter</Button>
-        </form>
+        <div className="w-[80%] flex  max-[736px]:flex-col max-[736px]:items-start gap-9 mx-auto px-6 text-center ">
+          <form
+            className="flex items-center gap-3 h-7 "
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <div className="w-28">
+              <SelectStateLocalGovt styles={style} register={register} />
+            </div>
+            <Button className="" type="secondary">
+              Filter
+            </Button>
+          </form>
+          <SearchInput />
+        </div>
+
         {!documents && <SpinnerMini />}
         {documents && (
           <div className="mx-auto">
-            {filteredDocuments.length === 0 && (
+            {filteredDocuments?.length === 0 && (
               <p className="text-[1.16rem] text-center max-[450px]:px-7">
                 There are no properties currently available in this region
               </p>
             )}
-            <ForSaleCart document={filteredDocuments} />
+            {documents && <ForSaleCart document={filteredDocuments} />}
           </div>
         )}
       </div>
