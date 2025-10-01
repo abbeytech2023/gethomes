@@ -3,7 +3,7 @@ import FormRow from "./FormRow";
 import Form from "./Form";
 import SpinnerMini from "./SpinnerMini";
 
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import StyledInput from "./StyledInput";
 import { useSignup } from "../hooks/useSignup";
 import { useState } from "react";
@@ -16,6 +16,7 @@ import supabase from "../services/supabaseClients";
 function SignUpForm() {
   const [selectedValue, setSelectedValue] = useState();
   const { signup, isPending } = useSignup();
+  const [codeError, setCodeError] = useState();
   const {
     register,
     formState,
@@ -46,8 +47,9 @@ function SignUpForm() {
     console.log(codes);
     if (codesError || !codes) {
       console.log(codesError.message);
+      setCodeError("invalid or already used code");
       setError("accessCode", { message: "Invalid or already used code." });
-      alert(codesError.message);
+      alert(codeError);
 
       return;
     }
