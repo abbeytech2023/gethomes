@@ -27,7 +27,7 @@ export default function SelectStateLocalGovt({ register, styles }) {
           name="allState"
           id="state"
           // value={currentState}
-          className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+          className="px-[2rem] py-[1rem] rounded-[0.5rem]  border-[0.1rem] text-[1rem]"
           {...register("state", {
             onChange: (e) => handleOnChange(e),
             required: "This field is required",

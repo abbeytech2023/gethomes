@@ -71,7 +71,7 @@ function PropertiesForSale() {
 
         {!documents && <SpinnerMini />}
         {documents && (
-          <div className="mx-auto">
+          <div className="mx-auto mt-14">
             {filteredDocuments?.length === 0 && (
               <p className="text-[1.16rem] text-center max-[450px]:px-7">
                 There are no properties currently available in this region

@@ -72,7 +72,7 @@ export default function PropertiesToLet() {
         <SearchInput />
       </div>
 
-      <div className="flex flex-col items-center justify-center text-center mt-14 bg-amber-900"></div>
+      <div className="flex flex-col items-center justify-center text-center mt-14"></div>
       <div>
         {filteredDocuments?.length === 0 && (
           <p className="text-[1.16rem] text-center max-[450px]:px-7">
