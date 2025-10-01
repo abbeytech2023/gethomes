@@ -6,7 +6,7 @@ function SearchInput() {
   const { query, setQuery } = useSearchContext();
 
   return (
-    <div className="w-[60%]  mx-auto  rounded-2xl backdrop-blur-md">
+    <div className="w-[60%]  rounded-2xl backdrop-blur-md">
       <div className="flex items-center gap-2">
         <input
           type="text"

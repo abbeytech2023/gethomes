@@ -12,7 +12,6 @@ import { useSearchParams } from "react-router-dom";
 import Pagination from "./Pagination";
 import SearchInput from "./SearchComponent";
 import { useEffect, useState } from "react";
-import FormRow from "./FormRow";
 
 export default function PropertiesToLet() {
   const { documents, isLoading } = useFetchProperties("ToLet");
@@ -51,19 +50,21 @@ export default function PropertiesToLet() {
   };
 
   const onSubmit = (data) => {
-    setState(data.state.toLowerCase());
+    data.state === "all" ? setState("") : setState(data.state.toLowerCase());
   };
 
   if (isLoading) return <SpinnerMini />;
 
   return (
     <div>
-      <div className="w-[80%] flex items-center max-[736px]:flex-col  gap-9 mx-auto px-6 text-center ">
+      <div className="w-[80%] flex  max-[736px]:flex-col max-[736px]:items-start gap-9 mx-auto px-6 text-center ">
         <form
-          className="flex items-center justify-center gap-3 h-7 "
+          className="flex items-center gap-3 h-7 "
           onSubmit={handleSubmit(onSubmit)}
         >
-          <SelectStateLocalGovt styles={style} register={register} />
+          <div className="w-28">
+            <SelectStateLocalGovt styles={style} register={register} />
+          </div>
           <Button className="" type="secondary">
             Filter
           </Button>

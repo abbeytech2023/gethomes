@@ -36,8 +36,15 @@ export default function SelectStateLocalGovt({ register, styles }) {
             },
           })}
         >
+          <option key="default" value="all">
+            All
+          </option>
           {allStates?.map((state, i) => {
-            return <option key={i}>{state}</option>;
+            return (
+              <option value={state} key={i}>
+                {state}
+              </option>
+            );
           })}
         </select>
       </FormRow>
