@@ -6,6 +6,7 @@ import Form from "./Form";
 import StyledInput from "./StyledInput";
 import { useLogin } from "../hooks/useLogin";
 import SpinnerMini from "./SpinnerMini";
+import { Link } from "react-router-dom";
 
 function LoginForm() {
   const { login, isPending } = useLogin();
@@ -21,7 +22,7 @@ function LoginForm() {
   return (
     <div>
       <div>
-        <Form onSubmit={onSubmit} handleSubmit={handleSubmit}>
+        <Form className="" onSubmit={onSubmit} handleSubmit={handleSubmit}>
           <FormRow label="Email" error={errors?.email?.message}>
             <StyledInput
               type="email"
@@ -59,8 +60,14 @@ function LoginForm() {
               {isPending ? <SpinnerMini /> : "login"}
               {/* <SpinnerMini /> */}
             </Button>
+            <Link
+              to="/forgot-password"
+              className="w-full  mb-6 top-[-14px] right-0 absolute text-center text-[0.9rem] cursor-pointer text-[#144c6f]  ml-auto"
+            >
+              forgot password ?
+            </Link>
 
-            {/* \<p className="text-red-700 text-2xl">{error}</p> */}
+            {/* \<p className="text-2xl text-red-700">{error}</p> */}
           </FormRow>
         </Form>
       </div>

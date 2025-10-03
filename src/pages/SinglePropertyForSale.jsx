@@ -85,7 +85,7 @@ export default function SinglePropertyForSale() {
         <>
           <div>
             <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
-              <div className="flex flex-col items-center w-[75%] gap-5 ">
+              <div className=" ">
                 <ImageSlider slides={slides} />
               </div>
 

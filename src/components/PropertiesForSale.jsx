@@ -49,8 +49,6 @@ function PropertiesForSale() {
     data.state === "all" ? setState("") : setState(data.state.toLowerCase());
   };
 
-  if (isLoading) return <SpinnerMini />;
-
   return (
     <>
       <div>
@@ -68,8 +66,7 @@ function PropertiesForSale() {
           </form>
           <SearchInput />
         </div>
-
-        {!documents && <SpinnerMini />}
+        <div className="mb-32 mt-18">{!documents && <SpinnerMini />}</div>
         {documents && (
           <div className="mx-auto mt-14">
             {filteredDocuments?.length === 0 && (

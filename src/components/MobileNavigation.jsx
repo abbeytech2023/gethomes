@@ -95,9 +95,14 @@ function MobileNavigation() {
   const { isAuthenticated } = useUser();
 
   const location = useLocation();
-
+  console.log(location.pathname);
   const myAccount = location.pathname.startsWith("/myaccount/");
-  const merchants = location.pathname.startsWith("/merchants/");
+  const backArrow =
+    location.pathname.startsWith("/merchants/") ||
+    location.pathname.startsWith("/myaccount/") ||
+    location.pathname.startsWith("/rent/");
+
+  const rent = location.pathname.startsWith("/rent");
 
   let numref = useRef();
 
@@ -118,7 +123,7 @@ function MobileNavigation() {
       <StyledMainNav className="xl:hidden z-[99]  lg:hidden px-2 py-4 flex items-center justify-between relative  xl:text-4xl sm:text-2xl bg-[#144c6f]  text-[#fff]">
         <div className="flex gap-2 ">
           <div className="md:hidden">
-            {myAccount && (
+            {backArrow && (
               <Button to="/myaccount">
                 <IoArrowBack className="z-30 text-3xl rounded" />
               </Button>

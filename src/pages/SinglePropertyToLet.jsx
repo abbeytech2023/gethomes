@@ -84,7 +84,7 @@ export default function SinglePropertyToLet() {
       {data && (
         <>
           <div className="flex xl:flex-row xl:gap-0 min-[0px]:gap-[5rem] flex-col items-center  justify-around  mt-[9rem]">
-            <div className="flex flex-col items-center w-[60%] gap-5 ">
+            <div className="px-2">
               <ImageSlider slides={slides} />
             </div>
 
@@ -94,7 +94,7 @@ export default function SinglePropertyToLet() {
                 <p>{businessName}</p>
               </div>
 
-              <ul className="text-[16px] px-6   flex flex-col gap-[1.5rem]">
+              <ul className="text-[16px] px-6   flex flex-col gap-[0.6rem]">
                 <li className="">
                   <StyledHeading>property-Description: </StyledHeading>{" "}
                   {propertyDescription}
@@ -122,7 +122,7 @@ export default function SinglePropertyToLet() {
               </ul>
             </div>
           </div>
-          <div className="mt-[9rem]  mx-auto">
+          <div className="mt-[7rem]  mx-auto">
             <Button to="/rent" type="secondary">
               Back
             </Button>

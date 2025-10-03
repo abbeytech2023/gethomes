@@ -1,10 +1,4 @@
-import {
-  BrowserRouter,
-  Route,
-  Navigate,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Route, Navigate, Routes, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProtectedRoutes from "./components/ProtectedRoutes";
 
@@ -16,12 +10,12 @@ import PropertyToLetForm from "./components/PropertiesToLetForm";
 import Profile from "./components/Profile";
 import Dashboard from "./components/Dashboard";
 import MyAccount from "./pages/MyAccount";
+import ResetPasswordPage from "./pages/ResetPassword";
 import Header from "./components/Header";
 import WhatsAppLogo from "./components/WhataAppLogo";
 
 //Pages
 import Homepage from "./pages/Homepage";
-import Sell from "./pages/Sell";
 import BuyPage from "./pages/BuyPage";
 import SignIn from "./pages/SignIn";
 import Rent from "./pages/Rent";
@@ -30,14 +24,15 @@ import { Spinner } from "./components/Spinner";
 import SinglePropertyToLet from "./pages/SinglePropertyToLet";
 import SinglePropertyForSale from "./pages/SinglePropertyForSale";
 import MerchantsPage from "./pages/MerchantsPage";
+import ForgotPasswordPage from "./pages/ResetPasswordEmail";
 
 //hooks
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "./hooks/useAuthContext";
 import AnonymousRoute from "./components/AnonymousRoute";
 import { useEffect } from "react";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Advertisement from "./pages/Advertisement";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -79,6 +74,8 @@ function App() {
               <Route path="/rent/:id" element={<SinglePropertyToLet />} />
               <Route path="merchants/:id" element={<MerchantsPage />} />
               <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="reset-password" element={<ResetPasswordPage />} />
+              <Route path="forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/homeessentials" element={<HomeEssentials />} />
               <Route
                 path="/myaccount"
@@ -104,6 +101,7 @@ function App() {
               <Route element={<AnonymousRoute />}>
                 <Route path="/signin" element={<SignIn />} />
               </Route>
+              <Route path="*" element={<NotFound />} />
             </Routes>
             <WhatsAppLogo />
           </div>
