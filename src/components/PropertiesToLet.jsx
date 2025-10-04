@@ -73,7 +73,7 @@ export default function PropertiesToLet() {
       </div>
 
       <div className="flex flex-col items-center justify-center text-center mt-14"></div>
-      <div>
+      <div className="mt-24">
         {filteredDocuments?.length === 0 && (
           <p className="text-[1.16rem] text-center max-[450px]:px-7">
             There are no properties currently available in this region

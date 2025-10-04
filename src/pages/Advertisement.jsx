@@ -1,122 +1,74 @@
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
+import { useUser } from "../hooks/useUser";
+import uploadProfilePicture from "../services/apiUpdateProfile";
 
-export default function PropertyPage() {
-  // Sample property data
-  const properties = [
-    {
-      id: 1,
-      address: "12 Allen Avenue",
-      city: "Ikeja",
-      state: "Lagos",
-      price: 25000000,
-    },
-    {
-      id: 2,
-      address: "5 Garki Road",
-      city: "Garki",
-      state: "Abuja",
-      price: 32000000,
-    },
-    {
-      id: 3,
-      address: "23 Oke Mosan Street",
-      city: "Abeokuta",
-      state: "Ogun",
-      price: 18000000,
-    },
-    {
-      id: 4,
-      address: "45 Victoria Island",
-      city: "Lagos Island",
-      state: "Lagos",
-      price: 42000000,
-    },
-    {
-      id: 5,
-      address: "10 Airport Road",
-      city: "Maitama",
-      state: "Abuja",
-      price: 35000000,
-    },
-  ];
+const ProfileCard = ({ user }) => {
+  const userId = user?.id;
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [selectedState, setSelectedState] = useState("");
-  const [filtered, setFiltered] = useState(properties);
+  const [avatar, setAvatar] = useState(user?.image);
+  const [preview, setPreview] = useState(null);
 
   useEffect(() => {
-    let results = properties;
-
-    // State filter
-    if (selectedState) {
-      results = results.filter(
-        (p) => p.state.toLowerCase() === selectedState.toLowerCase()
-      );
+    if (preview) {
+      setAvatar(preview);
     }
+  }, [preview]);
 
-    // Search filter (address or city)
-    if (searchQuery) {
-      results = results.filter(
-        (p) =>
-          p.address.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          p.city.toLowerCase().includes(searchQuery.toLowerCase())
-      );
+  // Handle file change
+  const handleImageChange = async (e) => {
+    const file = e.target.files[0];
+    if (file && file.type.startsWith("image/")) {
+      const imageUrl = URL.createObjectURL(file); // preview image
+      setPreview(imageUrl);
+      const result = await uploadProfilePicture(userId, file);
+      // mutate({ image: selectedFile });
+      if (result.success) console.log("profile updated:", result.url);
+      if (result.error) console.error("Error:", result.error);
+    } else {
+      setAvatar(null);
+      alert("Please select a valid image file");
     }
-
-    setFiltered(results);
-  }, [searchQuery, selectedState, properties]);
+  };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="mb-6 text-2xl font-bold">Property Listings</h1>
-
-      {/* Filters Row */}
-      <div className="flex flex-col gap-4 mb-6 md:flex-row">
-        {/* Search */}
-        <input
-          type="text"
-          placeholder="Search by address or city..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 p-3 border border-gray-300 rounded-lg shadow-sm"
+    <div className="max-w-sm p-6 mx-auto mt-10 text-center bg-white shadow-lg rounded-2xl">
+      {/* Profile Picture */}
+      <div className="relative inline-block">
+        <img
+          src={avatar}
+          alt={user?.name}
+          className="object-cover w-32 h-32 border-4 border-blue-500 rounded-full"
         />
 
-        {/* State Dropdown */}
-        <select
-          value={selectedState}
-          onChange={(e) => setSelectedState(e.target.value)}
-          className="w-full p-3 border border-gray-300 rounded-lg shadow-sm md:w-60"
-        >
-          <option value="">All States</option>
-          <option value="Lagos">Lagos</option>
-          <option value="Abuja">Abuja</option>
-          <option value="Ogun">Ogun</option>
-        </select>
+        {/* Upload Form */}
+        <label className="absolute bottom-0 right-0 px-2 py-1 text-xs text-white bg-blue-600 rounded cursor-pointer hover:bg-blue-700">
+          Change
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+        </label>
       </div>
 
-      {/* Properties List */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filtered.length > 0 ? (
-          filtered.map((p) => (
-            <div
-              key={p.id}
-              className="p-4 transition bg-white shadow rounded-xl hover:shadow-lg"
-            >
-              <h2 className="text-lg font-semibold">{p.address}</h2>
-              <p className="text-gray-600">
-                {p.city}, {p.state}
-              </p>
-              <p className="mt-2 font-bold text-green-600">
-                ₦{p.price.toLocaleString()}
-              </p>
-            </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-500 col-span-full">
-            No properties found
-          </p>
-        )}
-      </div>
+      {/* User Info */}
+      <h2 className="mt-4 text-2xl font-bold">{user?.displayName}</h2>
+      <p className="text-gray-600">{user?.email}</p>
+    </div>
+  );
+};
+
+export default function App() {
+  const { user } = useUser();
+  const { authenticatedUser } = useFetchUsersWithId(user?.id);
+
+  const authUser = authenticatedUser?.[0];
+
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      {authUser && <ProfileCard user={authUser} />}
     </div>
   );
 }

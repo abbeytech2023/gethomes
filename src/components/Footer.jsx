@@ -2,10 +2,11 @@ import { CiFacebook, CiInstagram, CiTwitter, CiYoutube } from "react-icons/ci";
 import { GiMailbox } from "react-icons/gi";
 import { PiWhatsappLogo, PiWhatsappLogoBold } from "react-icons/pi";
 import { SiGmail } from "react-icons/si";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
-const IconDiv = styled.div`
+const IconDiv = styled(Link)`
   font-size: 32px;
   /* background-color: black; */
   border-radius: 30%;
@@ -23,14 +24,17 @@ export default function Footer() {
         </p>
       </div>
       <div className="flex items-center justify-center gap-2 cursor-pointer ">
-        <IconDiv className="text-4xl text-blue-500 bg-black rounded ">
+        <IconDiv to="" className="text-4xl text-blue-500 bg-black rounded ">
           <CiFacebook />
         </IconDiv>
 
         <IconDiv className="text-white bg-black ">
           <CiTwitter />
         </IconDiv>
-        <IconDiv className=" text-[orangered] bg-black ">
+        <IconDiv
+          to="https://www.instagram.com/gethomes.ng?igsh=MWloNzlzN3BncThrMw=="
+          className=" text-[orangered] bg-black "
+        >
           <CiInstagram />
         </IconDiv>
         <IconDiv className="text-red-500 bg-black ">

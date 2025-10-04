@@ -25,14 +25,14 @@ export default function MyAccount() {
           <MyAccountMobile userDetails={authUser} />
         </div>
       )}
-      <div className="relative flex min-[0px]:mx-auto  xl:mx-0 lg:mx-0 sm:mx-auto md:mx-0 ">
+      <div className="relative  flex min-[0px]:mx-auto  xl:mx-0 lg:mx-0 sm:mx-auto md:mx-0 ">
         <div
-          className={`flex flex-col  min-[0px]:hidden md:flex  xl:flex lg:flex sm:hidden  sm:w-[45%] lg:w-[35%] xl:w-[38%]   `}
+          className={`flex flex-col max-[900px]:hidden  min-[0px]:hidden bg-blue-800 md:flex  xl:flex lg:flex sm:hidden  sm:w-[45%]    `}
         >
-          <div className=" w-[30%] fixed top-0 left-0  h-[65%]">
+          <div className=" w-[30%]  fixed top-0 left-0  h-[60%]">
             <ProfileDisPlayPicture userDetails={authUser} />
           </div>
-          <div className="fixed h-[30%] bg-[#dfebef] bottom-0 w-[30%] overflow-y-scroll ">
+          <div className="fixed h-[40%] bg-[#dfebef] bottom-0 w-[30%] overflow-y-scroll ">
             <SideNavBar userDetails={authUser} />
           </div>
         </div>

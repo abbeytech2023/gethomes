@@ -68,7 +68,7 @@ function PropertiesForSale() {
         </div>
         <div className="mb-32 mt-18">{!documents && <SpinnerMini />}</div>
         {documents && (
-          <div className="mx-auto mt-14">
+          <div className="mx-auto mt-24">
             {filteredDocuments?.length === 0 && (
               <p className="text-[1.16rem] text-center max-[450px]:px-7">
                 There are no properties currently available in this region
