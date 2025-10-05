@@ -61,6 +61,10 @@ const ProfileCard = ({ user }) => {
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file && file.type.startsWith("image/")) {
+      if (file.size > 2 * 1024 * 1024) {
+        alert("image too large, please select a smaller size");
+        return;
+      }
       const imageUrl = URL.createObjectURL(file); // preview image
       setPreview(imageUrl);
       const result = await uploadProfilePicture(userId, file);
