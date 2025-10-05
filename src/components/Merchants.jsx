@@ -2,10 +2,10 @@ export const merchants = [
   {
     imgLink:
       "https://plus.unsplash.com/premium_vector-1719962818520-5ab45beb05e6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8aG91c2UlMjBhZ2VudHN8ZW58MHx8MHx8fDA%3D",
-    craftGroup: "House Agents",
+    craftGroup: "Estate Agents",
     description:
       "Our team of experienced agents will guide you through the process of buying selling or renting your home, we priortize your needs and provide personalized service to ensure your satisfaction.",
-    craftsMenLink: "house-agents",
+    craftsMenLink: "RealEstate",
     crafMenButton: "Find an Agent",
   },
   {

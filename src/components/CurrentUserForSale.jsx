@@ -61,7 +61,7 @@ export default function CurrentUserForSale() {
       {!documentSale && <SpinnerMini />}
       {documents?.length === 0 && (
         <p className="text-[1.16rem] text-center uppercase">
-          You do not have a property listed to let
+          You do not have a property listed for sale
         </p>
       )}
       <motion.div

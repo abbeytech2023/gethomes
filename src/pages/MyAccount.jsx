@@ -27,7 +27,7 @@ export default function MyAccount() {
       )}
       <div className="relative  flex min-[0px]:mx-auto  xl:mx-0 lg:mx-0 sm:mx-auto md:mx-0 ">
         <div
-          className={`flex flex-col max-[900px]:hidden  min-[0px]:hidden  md:flex  xl:flex lg:flex sm:hidden  sm:w-[45%]    `}
+          className={`flex flex-col   min-[0px]:hidden  md:hidden  xl:flex lg:flex sm:hidden  sm:w-[45%]    `}
         >
           <div className=" w-[30%]  fixed top-0 left-0  h-[60%]">
             <ProfileDisPlayPicture userDetails={authUser} />
@@ -36,7 +36,7 @@ export default function MyAccount() {
             <SideNavBar userDetails={authUser} />
           </div>
         </div>
-        <div className="w-full min-[760px]:ml-[6rem] mx-5 mt-32 ">
+        <div className="w-full min-[950px]:ml-[6rem] mx-5 mt-32 ">
           <Outlet />
         </div>
       </div>

@@ -10,7 +10,7 @@ export default function MyAccountMobile({ userDetails }) {
       <div className="border-2">
         <ProfileDisPlayPicture userDetails={userDetails} />
       </div>
-      <div className="absolute bottom-[-15px] left-0 right-0 bg-amber-600">
+      <div className="absolute bottom-[-15px] left-0 right-0 bg-[#dfebef]">
         <SideNavBar userDetails={userDetails} />
       </div>
     </div>

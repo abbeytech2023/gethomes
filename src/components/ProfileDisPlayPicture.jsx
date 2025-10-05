@@ -4,6 +4,7 @@ import { useUser } from "../hooks/useUser";
 import uploadProfilePicture from "../services/apiUpdateProfile";
 import imageCompression from "browser-image-compression";
 
+
 const ProfileCard = ({ user }) => {
   const userId = user?.id;
 
@@ -90,3 +91,5 @@ export default function ProfileDisplayPicture() {
     </div>
   );
 }
+
+

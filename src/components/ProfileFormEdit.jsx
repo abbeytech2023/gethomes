@@ -7,6 +7,9 @@ import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 import { ProfessionOptions } from "../components/ProfessionOptions";
 
 export default function EditProfileForm({ user }) {
+  const [facebookError, setFacebookError] = useState("");
+  const [instagramError, setInstagramError] = useState("");
+  const [googleError, setGoogleError] = useState("");
   const [displayName, setDisplayName] = useState(user && user.displayName);
   const [email, setEmail] = useState();
   const [NIN, setNin] = useState();
@@ -101,7 +104,7 @@ export default function EditProfileForm({ user }) {
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {editMode.displayName ? (
+            {/* {editMode.displayName ? (
               <button
                 onClick={() => {
                   handleSave("displayName");
@@ -119,7 +122,7 @@ export default function EditProfileForm({ user }) {
               >
                 Edit
               </button>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -140,7 +143,7 @@ export default function EditProfileForm({ user }) {
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {editMode.email ? (
+            {/* {editMode.email ? (
               <button
                 onClick={() => handleSave("email")}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
@@ -154,7 +157,7 @@ export default function EditProfileForm({ user }) {
               >
                 Edit
               </button>
-            )}
+            )} */}
           </div>
         </div>
 
@@ -207,7 +210,7 @@ export default function EditProfileForm({ user }) {
 
         {/* local govt*/}
         <div className="flex flex-col ">
-          <label className="mb-2 font-medium text-gray-700">local govt</label>
+          <label className="mb-2 font-medium text-gray-700">Local govt</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <select
               onChange={(e) => setLocalGovt(e.target.value)}
@@ -251,7 +254,7 @@ export default function EditProfileForm({ user }) {
 
         {/* Occupation*/}
         <div className="flex flex-col ">
-          <label className="mb-2 font-medium text-gray-700">Occupation</label>
+          <label className="mb-2 font-medium text-gray-700">Profession</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <select
               onChange={(e) => setOccupation(e.target.value)}
@@ -335,7 +338,7 @@ export default function EditProfileForm({ user }) {
 
         {/* MobilePhone */}
         <div className="flex flex-col ">
-          <label className="mb-2 font-medium text-gray-700">mobilePhone</label>
+          <label className="mb-2 font-medium text-gray-700">Mobile Phone</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
@@ -373,7 +376,9 @@ export default function EditProfileForm({ user }) {
 
         {/* Facebook */}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">FacebookLink</label>
+          <label className="mb-2 font-medium text-gray-700">
+            Facebook Profile
+          </label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
@@ -389,6 +394,14 @@ export default function EditProfileForm({ user }) {
             {editMode.facebookLink ? (
               <button
                 onClick={() => {
+                  if (!facebookLink.startsWith("https://")) {
+                    setFacebookError(
+                      "error!!! copy and paste the link on your facebook profile page"
+                    );
+
+                    return;
+                  }
+
                   handleSave("facebookLink");
                   mutate({ facebookLink });
                 }}
@@ -405,49 +418,14 @@ export default function EditProfileForm({ user }) {
               </button>
             )}
           </div>
+          {facebookError && <p className="text-red-600">{facebookError}</p>}
         </div>
-
-        {/* Instagram */}
-        {/* <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">
-            InstagramLink
-          </label>
-          <div className="flex flex-col gap-2 sm:flex-row">
-            <input
-              type="text"
-              value={instagramLink}
-              disabled={!editMode.instagram}
-              onChange={(e) => setInstagramLink(e.target.value)}
-              className={`p-3 border rounded-lg flex-1 ${
-                editMode.instagram
-                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  : "bg-gray-100 text-gray-600"
-              }`}
-            />
-            {editMode.instagram ? (
-              <button
-                onClick={() => {
-                  handleSave("instagram");
-                  mutate({});
-                }}
-                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                onClick={() => handleEdit("instagram")}
-                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
-              >
-                Edit
-              </button>
-            )}
-          </div>
-        </div> */}
 
         {/* Google*/}
         <div className="flex flex-col">
-          <label className="mb-2 font-medium text-gray-700">Google Link</label>
+          <label className="mb-2 font-medium text-gray-700">
+            Google Profile
+          </label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
               type="text"
@@ -463,6 +441,12 @@ export default function EditProfileForm({ user }) {
             {editMode.google ? (
               <button
                 onClick={() => {
+                  if (!googleLink.startsWith("https://")) {
+                    setGoogleError(
+                      "error! paste the link to your business profile on google"
+                    );
+                    return;
+                  }
                   handleSave("google");
                   mutate({ googleBusiness: googleLink });
                 }}
@@ -479,9 +463,60 @@ export default function EditProfileForm({ user }) {
               </button>
             )}
           </div>
+          <p className="text-red-500">{googleError}</p>
         </div>
 
-        {/*NiN*/}
+        {/* INSTAGRAM */}
+        <div className="flex flex-col">
+          <label className="mb-2 font-medium text-gray-700">
+            Instagram Profile
+          </label>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <input
+              type="text"
+              value={instagramLink}
+              disabled={!editMode.instagramLink}
+              onChange={(e) => {
+                console.log(instagramLink);
+
+                setInstagramLink(e.target.value);
+              }}
+              className={`p-3 border rounded-lg flex-1 ${
+                editMode.instagramLink
+                  ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  : "bg-gray-100 text-gray-600"
+              }`}
+            />
+            {editMode.instagramLink ? (
+              <button
+                onClick={() => {
+                  if (!instagramLink.startsWith("https://")) {
+                    setInstagramError(
+                      "error!!! copy and paste the link from your instagram profile page"
+                    );
+                    return;
+                  }
+
+                  handleSave("instagramLink");
+                  mutate({ instagramLink });
+                }}
+                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
+              >
+                Save
+              </button>
+            ) : (
+              <button
+                onClick={() => handleEdit("instagramLink")}
+                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
+              >
+                Edit
+              </button>
+            )}
+          </div>
+          <p className="text-red-600">{instagramError}</p>
+        </div>
+
+        {/*NIN*/}
         <div className="flex flex-col">
           <label className="mb-2 font-medium text-gray-700">NIN</label>
           <div className="flex flex-col gap-2 sm:flex-row">
