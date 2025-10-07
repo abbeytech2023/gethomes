@@ -40,7 +40,7 @@ function SignUpForm() {
     const { data: codes, error: codesError } = await supabase
       .from("AccessCode")
       .select("*")
-      .eq("code", data.accessCode)
+      .ilike("code", data.accessCode)
       .eq("active", true)
       .single(); // expect only one match
 

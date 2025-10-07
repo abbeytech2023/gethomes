@@ -53,8 +53,6 @@ export default function PropertiesToLet() {
     data.state === "all" ? setState("") : setState(data.state.toLowerCase());
   };
 
-  if (isLoading) return <SpinnerMini />;
-
   return (
     <div>
       <div className="w-[80%] flex  max-[736px]:flex-col max-[736px]:items-start gap-9 mx-auto px-6 text-center ">
@@ -73,6 +71,7 @@ export default function PropertiesToLet() {
       </div>
 
       <div className="flex flex-col items-center justify-center text-center mt-14"></div>
+      <div className="mt-32">{!documents && <SpinnerMini />}</div>
       <div className="mt-24">
         {filteredDocuments?.length === 0 && (
           <p className="text-[1.16rem] text-center max-[450px]:px-7">

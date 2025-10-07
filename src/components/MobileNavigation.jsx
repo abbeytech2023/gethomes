@@ -98,7 +98,7 @@ function MobileNavigation() {
   console.log(location.pathname);
   const myAccount = location.pathname.startsWith("/myaccount/");
   const backArrow =
-    location.pathname.startsWith("/merchants/") ||
+    // location.pathname.startsWith("/merchants/") ||
     location.pathname.startsWith("/myaccount/") ||
     location.pathname.startsWith("/rent/");
 

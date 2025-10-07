@@ -33,6 +33,7 @@ import AnonymousRoute from "./components/AnonymousRoute";
 import { useEffect } from "react";
 import Advertisement from "./pages/Advertisement";
 import NotFound from "./pages/NotFound";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -74,6 +75,7 @@ function App() {
               <Route path="/rent/:id" element={<SinglePropertyToLet />} />
               <Route path="merchants/:id" element={<MerchantsPage />} />
               <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="admin131" element={<AdminDashboard />} />
               <Route path="reset-password" element={<ResetPasswordPage />} />
               <Route path="forgot-password" element={<ForgotPasswordPage />} />
               <Route path="/homeessentials" element={<HomeEssentials />} />

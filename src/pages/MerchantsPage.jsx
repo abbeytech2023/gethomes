@@ -6,8 +6,6 @@ import SpinnerMini from "../components/SpinnerMini";
 const TechnicianCard = ({ technician }) => {
   console.log(technician);
 
-  !technician && <SpinnerMini />;
-
   return (
     <>
       <div className="flex flex-col mt-32 overflow-hidden bg-white shadow-lg rounded-2xl sm:flex-row">
@@ -70,15 +68,23 @@ const TechnicianGrid = () => {
 
   return (
     <>
+      <div className="mt-32">
+        {!documents && <SpinnerMini className="mt-32" />}
+      </div>
+      ;
       <div className="grid max-w-6xl gap-6 p-4 px-12 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3">
-        {documents?.map((tech, index) => (
-          <TechnicianCard key={index} technician={tech} />
-        ))}
+        <>
+          {documents?.map((tech, index) => (
+            <TechnicianCard key={index} technician={tech} />
+          ))}
+        </>
       </div>
       <div className="mt-[9rem]   mx-auto">
-        <Button to="/homeessentials" type="secondary">
-          Back
-        </Button>
+        {documents && (
+          <Button to="/homeessentials" type="secondary">
+            Back
+          </Button>
+        )}
       </div>
     </>
   );
