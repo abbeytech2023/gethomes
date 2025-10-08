@@ -68,7 +68,6 @@ function App() {
               <Route path="/" element={<Navigate replace to="/homepage" />} />
               <Route path="/homepage" element={<Homepage />} />
               <Route path="/advertisement" element={<Advertisement />} />
-              {/* <Route path="/sell" element={<Sell />} /> */}
               <Route path="/buy" element={<BuyPage />} />
               <Route path="/buy/:id" element={<SinglePropertyForSale />} />
               <Route path="/rent/" element={<Rent />} />

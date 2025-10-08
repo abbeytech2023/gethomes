@@ -1,218 +1,43 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropertiesForSale from "../components/PropertiesForSale";
+import PropertiesToLet from "../components/PropertiesToLet";
+import PropertyToLetForm from "../components/PropertiesToLetForm";
+import ProductSaleForm from "../components/ProductSaleForm";
+import { useFetchAllUsers } from "../hooks/useFetchUsers";
 
 const AdminDashboard = () => {
   const [tab, setTab] = useState("sale");
-
-  const [propertiesForSale, setPropertiesForSale] = useState([
-    { id: 1, title: "Luxury Villa", price: "$250,000", location: "Lagos" },
-    { id: 2, title: "Modern Duplex", price: "$180,000", location: "Abuja" },
-  ]);
-
-  const [propertiesToLet, setPropertiesToLet] = useState([
-    {
-      id: 1,
-      title: "2 Bedroom Apartment",
-      price: "$700/mo",
-      location: "Ibadan",
-    },
-    { id: 2, title: "Studio Flat", price: "$500/mo", location: "Lagos" },
-  ]);
-
-  const [registeredUsers] = useState([
-    { id: 1, name: "John Doe", email: "john@example.com", role: "Agent" },
-    { id: 2, name: "Jane Smith", email: "jane@example.com", role: "Buyer" },
-  ]);
-
-  // Form States
-  const [saleForm, setSaleForm] = useState({
-    title: "",
-    price: "",
-    location: "",
-    description: "",
-  });
-
-  const [letForm, setLetForm] = useState({
-    title: "",
-    price: "",
-    location: "",
-    description: "",
-  });
+  const { allUser } = useFetchAllUsers();
+  console.log(allUser);
 
   // Handlers
-  const handleSaleChange = (e) => {
-    const { name, value } = e.target;
-    setSaleForm({ ...saleForm, [name]: value });
-  };
-
-  const handleLetChange = (e) => {
-    const { name, value } = e.target;
-    setLetForm({ ...letForm, [name]: value });
-  };
-
-  const handleAddSaleProperty = (e) => {
-    e.preventDefault();
-    if (!saleForm.title || !saleForm.price || !saleForm.location) return;
-    const newProperty = { id: Date.now(), ...saleForm };
-    setPropertiesForSale([newProperty, ...propertiesForSale]);
-    setSaleForm({ title: "", price: "", location: "", description: "" });
-  };
-
-  const handleAddLetProperty = (e) => {
-    e.preventDefault();
-    if (!letForm.title || !letForm.price || !letForm.location) return;
-    const newProperty = { id: Date.now(), ...letForm };
-    setPropertiesToLet([newProperty, ...propertiesToLet]);
-    setLetForm({ title: "", price: "", location: "", description: "" });
-  };
 
   const renderSaleSection = () => (
-    <div>
+    <div className="mb-18">
       {/* Add Sale Form */}
-      <form
-        onSubmit={handleAddSaleProperty}
-        className="p-5 mb-6 bg-white border shadow-sm rounded-2xl"
-      >
-        <h2 className="mb-3 text-xl font-semibold text-green-700">
-          Add Property For Sale
-        </h2>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          <input
-            type="text"
-            name="title"
-            value={saleForm.title}
-            onChange={handleSaleChange}
-            placeholder="Property Title"
-            className="w-full p-3 border rounded-lg"
-            required
-          />
-          <input
-            type="text"
-            name="price"
-            value={saleForm.price}
-            onChange={handleSaleChange}
-            placeholder="Price (e.g. $200,000)"
-            className="w-full p-3 border rounded-lg"
-            required
-          />
-          <input
-            type="text"
-            name="location"
-            value={saleForm.location}
-            onChange={handleSaleChange}
-            placeholder="Location"
-            className="w-full p-3 border rounded-lg"
-            required
-          />
-          <input
-            type="text"
-            name="description"
-            value={saleForm.description}
-            onChange={handleSaleChange}
-            placeholder="Description"
-            className="w-full p-3 border rounded-lg"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full px-5 py-3 mt-5 text-white transition bg-green-600 rounded-lg sm:w-auto hover:bg-green-700"
-        >
-          Add Property
-        </button>
-      </form>
+      <div className="w-full bg-[#fffbfb]">
+        <ProductSaleForm />
+      </div>
 
       {/* Sale List */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {propertiesForSale.map((p) => (
-          <div
-            key={p.id}
-            className="p-4 transition border shadow-sm rounded-xl hover:shadow-md bg-gray-50"
-          >
-            <h3 className="text-lg font-semibold">{p.title}</h3>
-            <p className="text-gray-500">{p.location}</p>
-            <p className="font-medium text-green-600">{p.price}</p>
-            {p.description && (
-              <p className="mt-1 text-sm text-gray-600">{p.description}</p>
-            )}
-          </div>
-        ))}
+
+      <div className="mt-35 ">
+        <PropertiesForSale />
       </div>
     </div>
   );
 
   const renderToLetSection = () => (
-    <div>
+    <div className="mb-32">
       {/* Add To-Let Form */}
-      <form
-        onSubmit={handleAddLetProperty}
-        className="p-5 mb-6 bg-white border shadow-sm rounded-2xl"
-      >
-        <h2 className="mb-3 text-xl font-semibold text-blue-700">
-          Add Property To-Let
-        </h2>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          <input
-            type="text"
-            name="title"
-            value={letForm.title}
-            onChange={handleLetChange}
-            placeholder="Property Title"
-            className="w-full p-3 border rounded-lg"
-            required
-          />
-          <input
-            type="text"
-            name="price"
-            value={letForm.price}
-            onChange={handleLetChange}
-            placeholder="Rent (e.g. $800/mo)"
-            className="w-full p-3 border rounded-lg"
-            required
-          />
-          <input
-            type="text"
-            name="location"
-            value={letForm.location}
-            onChange={handleLetChange}
-            placeholder="Location"
-            className="w-full p-3 border rounded-lg"
-            required
-          />
-          <input
-            type="text"
-            name="description"
-            value={letForm.description}
-            onChange={handleLetChange}
-            placeholder="Description"
-            className="w-full p-3 border rounded-lg"
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full px-5 py-3 mt-5 text-white transition bg-blue-600 rounded-lg sm:w-auto hover:bg-blue-700"
-        >
-          Add Property
-        </button>
-      </form>
+      <div className="border-[1px] w-full  px-7">
+        <PropertyToLetForm />
+      </div>
 
       {/* To-Let List */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {propertiesToLet.map((p) => (
-          <div
-            key={p.id}
-            className="p-4 transition border shadow-sm rounded-xl hover:shadow-md bg-gray-50"
-          >
-            <h3 className="text-lg font-semibold">{p.title}</h3>
-            <p className="text-gray-500">{p.location}</p>
-            <p className="font-medium text-blue-600">{p.price}</p>
-            {p.description && (
-              <p className="mt-1 text-sm text-gray-600">{p.description}</p>
-            )}
-          </div>
-        ))}
+      <div className="mt-35">
+        <PropertiesToLet />
       </div>
     </div>
   );
@@ -225,14 +50,16 @@ const AdminDashboard = () => {
             <th className="p-3 text-left border">Name</th>
             <th className="p-3 text-left border">Email</th>
             <th className="p-3 text-left border">Role</th>
+            <th className="p-3 text-left border">Profession</th>
           </tr>
         </thead>
         <tbody>
-          {registeredUsers.map((u) => (
+          {allUser.map((u) => (
             <tr key={u.id} className="hover:bg-gray-50">
-              <td className="p-3 border">{u.name}</td>
+              <td className="p-3 border">{u.displayName}</td>
               <td className="p-3 border">{u.email}</td>
-              <td className="p-3 border">{u.role}</td>
+              <td className="p-3 border">{u.is_admin}</td>
+              <td className="p-3 border">{u.profession}</td>
             </tr>
           ))}
         </tbody>
@@ -252,7 +79,7 @@ const AdminDashboard = () => {
           onClick={() => setTab("sale")}
           className={`px-4 py-2 rounded-full text-sm sm:text-base ${
             tab === "sale"
-              ? "bg-green-600 text-white"
+              ? "bg-[#144c6f] text-white"
               : "bg-gray-200 hover:bg-gray-300"
           }`}
         >
@@ -262,7 +89,7 @@ const AdminDashboard = () => {
           onClick={() => setTab("tolet")}
           className={`px-4 py-2 rounded-full text-sm sm:text-base ${
             tab === "tolet"
-              ? "bg-blue-600 text-white"
+              ? "bg-[#144c6f] text-white"
               : "bg-gray-200 hover:bg-gray-300"
           }`}
         >
@@ -272,7 +99,7 @@ const AdminDashboard = () => {
           onClick={() => setTab("users")}
           className={`px-4 py-2 rounded-full text-sm sm:text-base ${
             tab === "users"
-              ? "bg-purple-600 text-white"
+              ? "bg-[#144c6f] text-white"
               : "bg-gray-200 hover:bg-gray-300"
           }`}
         >

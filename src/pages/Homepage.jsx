@@ -19,6 +19,7 @@ import {
 } from "../components/FlexDiv";
 import { useUser } from "../hooks/useUser";
 import { Link } from "react-router-dom";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 
 const Section = styled.section`
   color: blue;
@@ -68,6 +69,9 @@ const homePageCart = [
 
 export default function Homepage() {
   const { user } = useUser();
+  const id = user?.id;
+  const { authenticatedUser } = useFetchUsersWithId(id);
+  // console.log(authenticatedUser);
 
   const fadeInUp = {
     hidden: { opacity: 0, y: 40 },

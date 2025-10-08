@@ -1,15 +1,12 @@
 import { ToLetCart } from "./ToLetCart";
-import { QueryClient, useMutation } from "@tanstack/react-query";
 import SpinnerMini from "./SpinnerMini";
-import { Heading } from "./HeadingText";
 import SelectStateLocalGovt from "./SelectStateLocalGovt";
 import { useForm } from "react-hook-form";
 import Button from "./Button";
 import { useSearchContext } from "../hooks/useSearchContext";
 
 import { useFetchProperties } from "../hooks/useFetchProperties";
-import { useSearchParams } from "react-router-dom";
-import Pagination from "./Pagination";
+
 import SearchInput from "./SearchComponent";
 import { useEffect, useState } from "react";
 
@@ -70,7 +67,7 @@ export default function PropertiesToLet() {
         <SearchInput />
       </div>
 
-      <div className="flex flex-col items-center justify-center text-center mt-14"></div>
+      <div className="flex flex-col items-center justify-center text-center "></div>
       <div className="mt-32">{!documents && <SpinnerMini />}</div>
       <div className="mt-24">
         {filteredDocuments?.length === 0 && (

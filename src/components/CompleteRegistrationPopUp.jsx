@@ -78,7 +78,6 @@ export default function CompleteRegistrationPopup({ user }) {
   }, [NIN, localGovt, state, officeAdress]);
 
   if (show === false) return null;
-  console.log(show);
 
   return (
     <Overlay>

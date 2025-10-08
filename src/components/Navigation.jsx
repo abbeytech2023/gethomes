@@ -2,9 +2,9 @@ import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 import Logo from "./Logo";
 
-import { FaAngleDown } from "react-icons/fa";
 import Logout from "./Logout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 
 export const StyledNavLink = styled(NavLink)`
   padding: 0.4rem 0.2rem;
@@ -30,6 +30,13 @@ export const StyledNavLink = styled(NavLink)`
 
 export default function Navigation() {
   const { user } = useAuthContext();
+  const { authenticatedUser } = useFetchUsersWithId(user?.id);
+
+  const isAdmin = authenticatedUser?.[0]?.is_admin;
+
+  console.log(isAdmin);
+
+  // console.log(isAdmin);
 
   return (
     <nav
@@ -43,6 +50,11 @@ export default function Navigation() {
         </Link>
       </div>
       <div className="flex items-center justify-around gap-14 ">
+        {isAdmin && (
+          <StyledNavLink exact to="/admin131">
+            Admin
+          </StyledNavLink>
+        )}
         <StyledNavLink exact to="/rent">
           Rent
         </StyledNavLink>
@@ -53,7 +65,6 @@ export default function Navigation() {
 
         <StyledNavLink to="/homeessentials">Home essentials</StyledNavLink>
 
-        {/* <div className="flex items-center justify-between basis-1/3"> */}
         {user && (
           <StyledNavLink
             to="/myaccount/dashboard"
@@ -65,7 +76,7 @@ export default function Navigation() {
 
         <StyledNavLink to="aboutus">AboutUs</StyledNavLink>
 
-        <StyledNavLink to="/advertisement">Advertisement</StyledNavLink>
+        {/* <StyledNavLink to="/advertisement">Advertisement</StyledNavLink> */}
 
         {!user && <StyledNavLink to="signin">Signin</StyledNavLink>}
 

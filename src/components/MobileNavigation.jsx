@@ -12,7 +12,6 @@ import { RiAdvertisementLine, RiLogoutBoxRLine } from "react-icons/ri";
 import { BiHomeSmile } from "react-icons/bi";
 import { MdOutlineSell } from "react-icons/md";
 import { TbHomeSearch } from "react-icons/tb";
-import MyAccountLinks from "./MyAccountLinks";
 
 // Hooks
 import { useUser } from "../hooks/useUser";
@@ -20,6 +19,7 @@ import useLogout from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import Button from "./Button";
 import { IoArrowBack } from "react-icons/io5";
+import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 
 const StyledMainNav = styled.nav`
   .main-nav {
@@ -92,10 +92,12 @@ const StyledIconDiv = styled.div`
 function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAcct, setIsOpenAcct] = useState(false);
-  const { isAuthenticated } = useUser();
+  const { isAuthenticated, user } = useUser();
+  const { authenticatedUser } = useFetchUsersWithId(user?.id);
+
+  const isAdmin = authenticatedUser?.[0]?.is_admin === true;
 
   const location = useLocation();
-  console.log(location.pathname);
   const myAccount = location.pathname.startsWith("/myaccount/");
   const backArrow =
     // location.pathname.startsWith("/merchants/") ||
@@ -163,6 +165,7 @@ function MobileNavigation() {
             isAuthenticated={isAuthenticated}
             isOpenAcct={isOpenAcct}
             setIsOpenAcct={setIsOpenAcct}
+            isAdmin={isAdmin}
           />
         )}
       </div>
@@ -172,7 +175,7 @@ function MobileNavigation() {
 
 export default MobileNavigation;
 
-function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
+function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated, isAdmin }) {
   const { logout, isPending } = useLogout();
   const { user } = useAuthContext();
 
@@ -180,6 +183,15 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
     <nav className="h-screen lg:hidden xl:hidden ">
       <StyledMainNavList>
         {/* {user && ( */}
+
+        {isAdmin && (
+          <StyledNavLink to="/admin131">
+            <div>Admin</div>
+            <StyledIconDiv>
+              <MdOutlineSell />
+            </StyledIconDiv>
+          </StyledNavLink>
+        )}
 
         {user && (
           <StyledNavLink to="/myaccount" onClick={() => setIsOpenAcct(false)}>
@@ -199,13 +211,6 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated }) {
             <TbHomeSearch />
           </StyledIconDiv>
         </StyledNavLink>
-
-        {/* <StyledNavLink to="/sell">
-          <div>Sell</div>
-          <StyledIconDiv>
-            <MdOutlineSell />
-          </StyledIconDiv>
-        </StyledNavLink> */}
 
         <StyledNavLink to="/buy">
           <div> Buy</div>

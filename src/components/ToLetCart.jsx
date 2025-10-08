@@ -69,7 +69,6 @@ export const ToLetCart = ({ documents }) => {
   const location = useLocation();
   const queryClient = useQueryClient();
   const URL = location.pathname;
-  const { user } = useUser();
   const productRef = useRef(null);
   const deleteCart = location.pathname === "/myaccount/dashboard";
   const fadeInUp = {
