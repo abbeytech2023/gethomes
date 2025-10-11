@@ -55,6 +55,7 @@ function ForSaleCart({ document }) {
                 <img
                   src={property.image}
                   alt={property.title}
+                  loading="lazy"
                   className="object-cover w-full h-52"
                 />
                 <div className="p-4">

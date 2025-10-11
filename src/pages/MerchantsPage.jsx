@@ -68,11 +68,8 @@ const TechnicianGrid = () => {
 
   return (
     <>
-      <div className="mt-32">
-        {!documents && <SpinnerMini className="mt-32" />}
-      </div>
-      ;
-      <div className="grid max-w-6xl gap-6 p-4 px-12 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="">{!documents && <SpinnerMini className="mt-32" />}</div>;
+      <div className="grid max-w-6xl p-4 px-12 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3">
         <>
           {documents?.map((tech, index) => (
             <TechnicianCard key={index} technician={tech} />

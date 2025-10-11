@@ -113,6 +113,7 @@ export const ToLetCart = ({ documents }) => {
                   <img
                     src={doc.image}
                     alt={doc.title}
+                    loading="lazy"
                     className="object-cover w-full h-48"
                   />
                   <div className="p-4">
