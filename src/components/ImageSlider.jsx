@@ -21,12 +21,12 @@ export default function ImageSlider({ slides }) {
             className="object-cover w-full h-full transition-all duration-700"
           />
         ) : (
-          <div className="xl:w-[35rem] md:w-[40rem] min-[0px]:w-[17rem]  flex justify-center">
+          <div className="xl:w-[35rem] md:w-[40rem] min-[0px]:max-w-[30rem]  flex justify-center">
             <iframe
               src={slides[currentIndex].src}
               // className="max-[900px]:px-[40px]"
               width="100%"
-              height="160"
+              height="400"
               title="YouTube video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -38,7 +38,7 @@ export default function ImageSlider({ slides }) {
         {currentIndex > 0 && (
           <button
             onClick={handlePrev}
-            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full cursor-pointer left-2 sm:left-16 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
+            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full cursor-pointer left-2 sm:left-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
           >
             ❮
           </button>
