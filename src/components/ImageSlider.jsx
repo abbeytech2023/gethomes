@@ -21,12 +21,12 @@ export default function ImageSlider({ slides }) {
             className="object-cover w-full h-full transition-all duration-700"
           />
         ) : (
-          <div className="xl:w-[35rem] md:w-[40rem] min-[0px]:w-[20rem]  flex justify-center">
+          <div className="xl:w-[35rem] md:w-[40rem] min-[0px]:w-[17rem]  flex justify-center">
             <iframe
               src={slides[currentIndex].src}
               // className="max-[900px]:px-[40px]"
               width="100%"
-              height="300"
+              height="160"
               title="YouTube video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen

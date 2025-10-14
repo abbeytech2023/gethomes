@@ -72,7 +72,8 @@ const TechnicianGrid = () => {
       <div className="mt-32 text-center">
         {documents?.length === 0 && (
           <p className="text-lg">
-            we dont have available professionals right now, please check later
+            we do not have available professionals right now, please check back
+            later
           </p>
         )}
       </div>
