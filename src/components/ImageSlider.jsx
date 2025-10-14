@@ -12,7 +12,7 @@ export default function ImageSlider({ slides }) {
   };
 
   return (
-    <div className="flex flex-col items-center w-full px-2 bg-amber-600">
+    <div className="flex flex-col items-center w-full px-2 ">
       <div className="relative w-full max-w-4xl overflow-hidden shadow-lg aspect-video rounded-2xl">
         {slides[currentIndex].type === "image" ? (
           <img
@@ -25,7 +25,7 @@ export default function ImageSlider({ slides }) {
             <iframe
               src={slides[currentIndex].src}
               // className="max-[900px]:px-[40px]"
-              width="500"
+              width="400"
               height="400"
               title="YouTube video"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
