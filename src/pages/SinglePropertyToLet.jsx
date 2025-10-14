@@ -97,11 +97,11 @@ export default function SinglePropertyToLet() {
               <ul className="text-[16px] px-6   flex flex-col gap-[0.6rem]">
                 <li className="">
                   <StyledHeading>property-Description: </StyledHeading>{" "}
-                  {propertyDescription}
+                  {propertyDescription.toLowerCase()}
                 </li>
                 <li>
                   <StyledHeading>Property-Location:</StyledHeading>{" "}
-                  {propertyLocation}
+                  {propertyLocation.toLowerCase()}
                 </li>
                 <li>
                   <StyledHeading>price:</StyledHeading> {formatPrice(price)}

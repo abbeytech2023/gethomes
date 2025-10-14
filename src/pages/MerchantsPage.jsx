@@ -69,6 +69,13 @@ const TechnicianGrid = () => {
   return (
     <>
       <div className="">{!documents && <SpinnerMini className="mt-32" />}</div>;
+      <div className="mt-32 text-center">
+        {documents?.length === 0 && (
+          <p className="text-lg">
+            we dont have available professionals right now, please check later
+          </p>
+        )}
+      </div>
       <div className="grid max-w-6xl p-4 px-12 mx-auto mt-10 sm:grid-cols-2 lg:grid-cols-3">
         <>
           {documents?.map((tech, index) => (

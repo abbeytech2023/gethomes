@@ -98,11 +98,11 @@ export default function SinglePropertyForSale() {
                 <ul className="text-[16px] px-6 flex flex-col gap-[1.5rem]">
                   <li className="">
                     <StyledHeading>property-Description: </StyledHeading>
-                    {propertyDetails}
+                    {propertyDetails.toLowerCase()}
                   </li>
                   <li>
                     <StyledHeading>Property-Location:</StyledHeading>
-                    {propertyAddress}
+                    {propertyAddress.toLowerCase()}
                   </li>
                   <li>
                     <StyledHeading>price:</StyledHeading> {formatPrice(price)}

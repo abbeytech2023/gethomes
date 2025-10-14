@@ -18,7 +18,7 @@ export default function PropertiesToLet() {
   const [state, setState] = useState();
 
   useEffect(() => {
-    let results = documents;
+    let results = documents?.reverse();
 
     if (query) {
       setState("");

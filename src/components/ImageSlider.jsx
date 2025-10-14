@@ -12,7 +12,7 @@ export default function ImageSlider({ slides }) {
   };
 
   return (
-    <div className="flex flex-col items-center w-full px-2">
+    <div className="flex flex-col items-center w-full px-2 bg-amber-600">
       <div className="relative w-full max-w-4xl overflow-hidden shadow-lg aspect-video rounded-2xl">
         {slides[currentIndex].type === "image" ? (
           <img
@@ -21,20 +21,24 @@ export default function ImageSlider({ slides }) {
             className="object-cover w-full h-full transition-all duration-700"
           />
         ) : (
-          <iframe
-            src={slides[currentIndex].src}
-            title="YouTube video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="w-full h-full"
-          ></iframe>
+          <div>
+            <iframe
+              src={slides[currentIndex].src}
+              // className="max-[900px]:px-[40px]"
+              width="500"
+              height="400"
+              title="YouTube video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
         )}
 
         {/* Prev Button */}
         {currentIndex > 0 && (
           <button
             onClick={handlePrev}
-            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full cursor-pointer left-2 sm:left-4 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
+            className="absolute px-2 py-1 text-sm text-white -translate-y-1/2 rounded-full cursor-pointer left-2 sm:left-16 top-1/2 bg-black/50 sm:px-3 sm:text-lg"
           >
             ❮
           </button>

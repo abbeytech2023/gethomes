@@ -61,7 +61,7 @@ function ForSaleCart({ document }) {
                 <div className="p-4">
                   <h2 className="text-xl font-semibold">{property.title}</h2>
                   <p className="text-gray-600">
-                    {property.address.slice(0, 30) + "..."}
+                    {property.address.toLowerCase().slice(0, 30) + "..."}
                   </p>
                   <p className="mt-2 font-bold text-[#144c6f]">
                     {formatPrice(property.price)}
