@@ -1,7 +1,7 @@
 import { Route, Navigate, Routes, useLocation } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ProtectedRoutes from "./components/ProtectedRoutes";
-
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 //Components
 import HomeEssentials from "./pages/HomeEssentials";
 import AboutUs from "./pages/AboutUs";
@@ -24,6 +24,7 @@ import { Spinner } from "./components/Spinner";
 import SinglePropertyToLet from "./pages/SinglePropertyToLet";
 import SinglePropertyForSale from "./pages/SinglePropertyForSale";
 import MerchantsPage from "./pages/MerchantsPage";
+import VenuesPage from "./pages/Venues";
 import ForgotPasswordPage from "./pages/ResetPasswordEmail";
 
 //hooks
@@ -34,6 +35,7 @@ import { useEffect } from "react";
 import Advertisement from "./pages/Advertisement";
 import NotFound from "./pages/NotFound";
 import AdminDashboard from "./pages/AdminDashboard";
+import VenuesForm from "./components/VenuesForm";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -61,13 +63,14 @@ function App() {
         //Browser router is being comment out here because it has been applied in the main.jsx file
         // <BrowserRouter>
         <QueryClientProvider client={queryClient}>
-          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+          <ReactQueryDevtools initialIsOpen={false} />
           <div className="flex flex-col min-h-screen ">
             <Header />
             <Routes>
               <Route path="/" element={<Navigate replace to="/homepage" />} />
               <Route path="/homepage" element={<Homepage />} />
               <Route path="/advertisement" element={<Advertisement />} />
+              <Route path="/venuespage" element={<VenuesPage />} />
               <Route path="/buy" element={<BuyPage />} />
               <Route path="/buy/:id" element={<SinglePropertyForSale />} />
               <Route path="/rent/" element={<Rent />} />
@@ -98,6 +101,7 @@ function App() {
                   path="addpropertyforsale"
                   element={<ProductSaleForm />}
                 />
+                <Route path="addvenues" element={<VenuesForm />} />
               </Route>
               <Route element={<AnonymousRoute />}>
                 <Route path="/signin" element={<SignIn />} />

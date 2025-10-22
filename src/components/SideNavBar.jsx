@@ -34,6 +34,9 @@ function SideNavBar({ userDetails }) {
       <StyledMyAccountLink to="profile">
         <p>Edit Profile</p> <FaAngleRight />
       </StyledMyAccountLink>
+      <StyledMyAccountLink to="addvenues">
+        <p>Add Venues</p> <FaAngleRight />
+      </StyledMyAccountLink>
       {userDetails?.profession === "RealEstate" ? (
         <>
           <StyledMyAccountLink to="addpropertyforsale">

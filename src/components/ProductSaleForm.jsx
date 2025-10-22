@@ -35,9 +35,13 @@ function ProductSaleForm() {
 
   const [currentState, setCurrentState] = useState();
 
-  // const { localGovts } = useFetchLocalGovtga(
-  //   `https://nga-states-lga.onrender.com/?state=${currentState}`
-  // );
+  const { allStates } = useGetStatesFromApi(
+    "https://nga-states-lga.onrender.com/fetch"
+  );
+
+  const { localGovts } = useFetchLocalGovtga(
+    `https://nga-states-lga.onrender.com/?state=${currentState}`
+  );
 
   const { user } = useUser();
 
@@ -135,9 +139,57 @@ function ProductSaleForm() {
                 })}
               />
             </FormRow>
-            {/* <div> */}
-            <SelectStateLocalGovt register={register} />
-            {/* </div> */}
+            <FormRow label="State" error={errors?.State?.message}>
+              <select
+                name="state"
+                id="state"
+                value={currentState}
+                className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+                {...register("state", {
+                  onChange: (e) => handleOnChange(e),
+
+                  required: "This field is required",
+                  minLength: {
+                    message: "select one profession from the list below",
+                  },
+                })}
+              >
+                {allStates?.map((state, i) => {
+                  return (
+                    <div key={i}>
+                      <option value={state}>{state}</option>
+                    </div>
+                  );
+                })}
+              </select>
+            </FormRow>
+            <FormRow
+              label="Local-Government"
+              error={errors?.localGovernment?.message}
+            >
+              <select
+                name="localGovernment"
+                id="localGovernment"
+                className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
+                {...register("localGovernment", {
+                  required: "This field is required",
+                  minLength: {
+                    message: "select one profession from the list below",
+                  },
+                })}
+              >
+                {localGovts &&
+                  localGovts.map((lga, i) => {
+                    return (
+                      <>
+                        <option key={i} value={lga}>
+                          {lga}
+                        </option>
+                      </>
+                    );
+                  })}
+              </select>
+            </FormRow>
             <FormRow label="videoLink">
               <StyledInput
                 placeHolder=" youtube video Link of the property"

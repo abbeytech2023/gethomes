@@ -5,6 +5,7 @@ import Logo from "./Logo";
 import Logout from "./Logout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
+import HospitalityButton from "./Hospitality";
 
 export const StyledNavLink = styled(NavLink)`
   padding: 0.4rem 0.2rem;
@@ -27,6 +28,16 @@ export const StyledNavLink = styled(NavLink)`
     color: #fff;
   }
 `;
+
+const hospitalityItems = [
+  { name: "Hotels", link: "/hotels" },
+  { name: "Event Spaces", link: "/event-spaces" },
+];
+
+const realEstateItems = [
+  { name: "Buy", link: "/buy" },
+  { name: "Rent", link: "/rent" },
+];
 
 export default function Navigation() {
   const { user } = useAuthContext();
@@ -55,13 +66,15 @@ export default function Navigation() {
             Admin
           </StyledNavLink>
         )}
-        <StyledNavLink exact to="/rent">
-          Rent
+        <StyledNavLink>
+          <HospitalityButton items={realEstateItems}>
+            Real estate
+          </HospitalityButton>
         </StyledNavLink>
 
         {/* <StyledNavLink to="/sell">Sell</StyledNavLink> */}
 
-        <StyledNavLink to="/buy">Buy</StyledNavLink>
+        {/* <StyledNavLink to="/buy">Buy</StyledNavLink> */}
 
         <StyledNavLink to="/homeessentials">Home essentials</StyledNavLink>
 
@@ -75,8 +88,13 @@ export default function Navigation() {
         )}
 
         <StyledNavLink to="aboutus">AboutUs</StyledNavLink>
+        <StyledNavLink>
+          <HospitalityButton items={hospitalityItems}>
+            Hospitality
+          </HospitalityButton>
+        </StyledNavLink>
 
-        {/* <StyledNavLink to="/advertisement">Advertisement</StyledNavLink> */}
+        <StyledNavLink to="/advertisement">Advertisement</StyledNavLink>
 
         {!user && <StyledNavLink to="signin">Signin</StyledNavLink>}
 

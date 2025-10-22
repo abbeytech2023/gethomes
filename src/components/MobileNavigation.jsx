@@ -20,6 +20,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import Button from "./Button";
 import { IoArrowBack } from "react-icons/io5";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
+import HospitalityButton from "./Hospitality";
 
 const StyledMainNav = styled.nav`
   .main-nav {
@@ -226,12 +227,16 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated, isAdmin }) {
           </StyledIconDiv>
         </StyledNavLink>
 
-        <StyledNavLink to="/">
+        <StyledNavLink to="/advertisement">
           <div>Advertisement </div>
           <StyledIconDiv>
             <RiAdvertisementLine />
           </StyledIconDiv>
         </StyledNavLink>
+
+        {/* <StyledNavLink>
+          <HospitalityButton />
+        </StyledNavLink> */}
 
         <StyledNavLink to="/aboutus">
           <div>AboutUs </div>

@@ -19,6 +19,7 @@
     "@tanstack/react-query-devtools": "^5.77.0",
     "browser-image-compression": "^2.0.2",
     "framer-motion": "^12.23.12",
+    "lucide-react": "^0.546.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.56.4",
