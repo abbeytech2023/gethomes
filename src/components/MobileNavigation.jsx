@@ -20,7 +20,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import Button from "./Button";
 import { IoArrowBack } from "react-icons/io5";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
-import HospitalityButton from "./Hospitality";
+import { MobileDropDownMenu } from "./DropDownMenu";
 
 const StyledMainNav = styled.nav`
   .main-nav {
@@ -89,6 +89,16 @@ const StyledIconDiv = styled.div`
     color: goldenrod;
   }
 `;
+
+const hospitalityItems = [
+  { name: "Hotels", link: "/hotels" },
+  { name: "Event", link: "/venuespage" },
+];
+
+const realEstateItems = [
+  { name: "Buy", link: "/buy" },
+  { name: "Rent", link: "/rent" },
+];
 
 function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -235,8 +245,22 @@ function Navigation({ isOpenAcct, setIsOpenAcct, isAuthenticated, isAdmin }) {
         </StyledNavLink>
 
         {/* <StyledNavLink>
-          <HospitalityButton />
+          <DropDownMenu />
         </StyledNavLink> */}
+
+        <StyledNavLink to="/hotel">
+          <div>Hotels </div>
+          <StyledIconDiv>
+            <ImProfile />
+          </StyledIconDiv>
+        </StyledNavLink>
+
+        <StyledNavLink to="/venuespage">
+          <div>Venues </div>
+          <StyledIconDiv>
+            <ImProfile />
+          </StyledIconDiv>
+        </StyledNavLink>
 
         <StyledNavLink to="/aboutus">
           <div>AboutUs </div>

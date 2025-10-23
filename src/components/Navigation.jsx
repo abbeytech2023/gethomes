@@ -5,7 +5,7 @@ import Logo from "./Logo";
 import Logout from "./Logout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
-import HospitalityButton from "./Hospitality";
+import { DropDownMenu } from "./DropDownMenu";
 
 export const StyledNavLink = styled(NavLink)`
   padding: 0.4rem 0.2rem;
@@ -30,13 +30,13 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 const hospitalityItems = [
-  { name: "Hotels", link: "/hotels" },
-  { name: "Event Spaces", link: "/event-spaces" },
+  // { name: "Hotels", link: "/hotels" },
+  { name: "Event-Spaces", link: "/venuespage" },
 ];
 
 const realEstateItems = [
-  { name: "Buy", link: "/buy" },
-  { name: "Rent", link: "/rent" },
+  { name: "Buy Properties", link: "/buy" },
+  { name: "Rent Properties", link: "/rent" },
 ];
 
 export default function Navigation() {
@@ -67,9 +67,7 @@ export default function Navigation() {
           </StyledNavLink>
         )}
         <StyledNavLink>
-          <HospitalityButton items={realEstateItems}>
-            Real estate
-          </HospitalityButton>
+          <DropDownMenu items={realEstateItems}>Real estate</DropDownMenu>
         </StyledNavLink>
 
         {/* <StyledNavLink to="/sell">Sell</StyledNavLink> */}
@@ -89,9 +87,7 @@ export default function Navigation() {
 
         <StyledNavLink to="aboutus">AboutUs</StyledNavLink>
         <StyledNavLink>
-          <HospitalityButton items={hospitalityItems}>
-            Hospitality
-          </HospitalityButton>
+          <DropDownMenu items={hospitalityItems}>Hospitality</DropDownMenu>
         </StyledNavLink>
 
         <StyledNavLink to="/advertisement">Advertisement</StyledNavLink>

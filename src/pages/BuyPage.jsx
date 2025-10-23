@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import { Heading } from "../components/HeadingText";
 const BuySection = styled.section`
-  height: 70vh;
+  height: 50vh;
   padding-top: 9rem;
   background-image: url(${"https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG91c2luZ3xlbnwwfHwwfHx8MA%3D%3D"});
   /* background-image: url(${"https://media.istockphoto.com/id/1333447841/photo/rearview-shot-of-a-young-couple-standing-outside-their-new-home.webp?a=1&b=1&s=612x612&w=0&k=20&c=_hcSwYn0vwCu4PPv1CQXAA5AhHgA-td3PRaJooL2bIM="}); */
@@ -59,7 +59,7 @@ function BuyPage() {
       </BgOverlay>
       {/* ------------------- BUY RENT SELL SECTION -------------  */}
 
-      <section className="mt-[9rem]">
+      <section className="mt-64">
         <PropertiesForSale />
       </section>
     </>

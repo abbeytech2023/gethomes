@@ -25,6 +25,7 @@ import SinglePropertyToLet from "./pages/SinglePropertyToLet";
 import SinglePropertyForSale from "./pages/SinglePropertyForSale";
 import MerchantsPage from "./pages/MerchantsPage";
 import VenuesPage from "./pages/Venues";
+import VenueDetailsPage from "./pages/VenueDetailsPage";
 import ForgotPasswordPage from "./pages/ResetPasswordEmail";
 
 //hooks
@@ -71,6 +72,7 @@ function App() {
               <Route path="/homepage" element={<Homepage />} />
               <Route path="/advertisement" element={<Advertisement />} />
               <Route path="/venuespage" element={<VenuesPage />} />
+              <Route path="/venuespage/:id" element={<VenueDetailsPage />} />
               <Route path="/buy" element={<BuyPage />} />
               <Route path="/buy/:id" element={<SinglePropertyForSale />} />
               <Route path="/rent/" element={<Rent />} />

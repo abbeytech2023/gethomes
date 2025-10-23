@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import supabase from "../services/supabaseClients";
+import { Link } from "react-router-dom";
 
 export default function VenuesList() {
   const [venues, setVenues] = useState([]);
@@ -8,6 +9,7 @@ export default function VenuesList() {
   const [selectedState, setSelectedState] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(false);
+  const URL = location.pathname;
 
   const itemsPerPage = 5;
 
@@ -108,7 +110,8 @@ export default function VenuesList() {
       {!loading && venues.length > 0 && (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {venues.map((venue) => (
-            <div
+            <Link
+              to={`${URL}/${venue.id}`}
               key={venue.id}
               className="overflow-hidden transition bg-white shadow-md rounded-xl hover:shadow-lg"
             >
@@ -126,7 +129,7 @@ export default function VenuesList() {
                   📍 {venue.state}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       )}

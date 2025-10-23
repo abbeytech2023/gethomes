@@ -5,6 +5,7 @@ import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addVenues } from "../services/apiVenues";
+import { toYoutubeEmbed } from "../utility/youtubeLinkConverts";
 
 export default function VenueForm() {
   const [currentState, setCurrentState] = useState();
@@ -40,12 +41,10 @@ export default function VenueForm() {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    mutate({ ...data, image: data.image[0], image1: data.image1[0] });
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
+    const videoUrl = toYoutubeEmbed(data.videoUrl);
 
-    // alert("Venue submitted successfully!");
-    // reset();
+    console.log(data);
+    mutate({ ...data, videoUrl, image: data.image[0], image1: data.image1[0] });
   };
 
   const handleOnChange = (e) => {
