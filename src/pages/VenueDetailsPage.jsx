@@ -130,7 +130,7 @@ export default function VenueDetails() {
       {/* Footer / CTA */}
       <div className="w-full max-w-5xl mt-12 mb-8 text-center">
         <p className="mb-4 text-gray-600">
-          Ready to host your next event at {venue.name}
+          Ready to host your next event at {venue?.name}
         </p>
         <button className="px-8 py-3 text-lg font-medium text-white transition bg-blue-600 rounded-lg hover:bg-blue-700">
           Book Now
