@@ -50,7 +50,7 @@ export default function VenueDetails() {
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-gray-600">
               <MapPin className="w-5 h-5 text-blue-600" />
-              <span>{venue.address}</span>
+              <span>{venue?.address}</span>
             </div>
             <div className="flex items-center gap-2 text-gray-600">
               <Globe className="w-5 h-5 text-blue-600" />
