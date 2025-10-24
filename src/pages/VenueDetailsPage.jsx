@@ -132,7 +132,7 @@ export default function VenueDetails() {
         <p className="mb-4 text-gray-600">
           Ready to host your next event at {venue?.name}
         </p>
-        <button className="px-8 py-3 text-lg font-medium text-white transition bg-blue-600 rounded-lg hover:bg-blue-700">
+        <button className="px-8 py-3 text-lg font-medium text-white transition bg-[#144c6f] rounded-lg hover:bg-[#144c5f]">
           Book Now
         </button>
       </div>
