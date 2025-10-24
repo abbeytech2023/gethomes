@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addVenues } from "../services/apiVenues";
 import { toYoutubeEmbed } from "../utility/youtubeLinkConverts";
+import SpinnerMini from "./SpinnerMini";
 
 export default function VenueForm() {
   const [currentState, setCurrentState] = useState();
@@ -177,6 +178,29 @@ export default function VenueForm() {
         {/* Video URL */}
         <div>
           <label className="block mb-1 font-medium text-gray-700">
+            Google URL
+          </label>
+          <input
+            type="url"
+            placeholder="Enter a YouTube or Vimeo video link"
+            {...register("googleUrl", {
+              required: "Google URL is required",
+              pattern: {
+                message: "Enter a valid Google  URL",
+              },
+            })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+          {errors.googleUrl && (
+            <p className="mt-1 text-sm text-red-500">
+              {errors.googleUrl.message}
+            </p>
+          )}
+        </div>
+
+        {/* Video URL */}
+        <div>
+          <label className="block mb-1 font-medium text-gray-700">
             Video URL
           </label>
           <input
@@ -187,7 +211,7 @@ export default function VenueForm() {
               pattern: {
                 value:
                   /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/,
-                message: "Enter a valid YouTube or Vimeo URL",
+                message: "Enter a valid YouTube URL",
               },
             })}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg outline-none focus:ring-2 focus:ring-indigo-400"
@@ -233,10 +257,10 @@ export default function VenueForm() {
         {/* Submit Button */}
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isPending}
           className="w-full py-2 font-semibold text-white transition bg-indigo-600 rounded-lg hover:bg-indigo-700 disabled:opacity-70"
         >
-          {isSubmitting ? "Submitting..." : "Submit Venue"}
+          {isPending ? <SpinnerMini /> : "Submit Venue"}
         </button>
       </form>
     </div>

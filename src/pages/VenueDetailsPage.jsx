@@ -28,7 +28,7 @@ export default function VenueDetails() {
   console.log(id);
 
   return (
-    <div className="flex flex-col items-center w-full ">
+    <div className="flex flex-col items-center w-full mt-12">
       {/* Hero Section */}
       <div className="relative w-full h-[60vh] sm:h-[70vh]">
         <img
@@ -55,7 +55,7 @@ export default function VenueDetails() {
             <div className="flex items-center gap-2 text-gray-600">
               <Globe className="w-5 h-5 text-blue-600" />
               <a
-                href="https://maps.google.com/?q=Lekki+Phase+1+Lagos"
+                href={venue?.googleUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="transition hover:text-blue-700"
@@ -76,7 +76,7 @@ export default function VenueDetails() {
               Visit Website
             </a>
 
-            <a
+            {/* <a
               href="https://www.youtube.com/watch?v=ysz5S6PUM-U"
               target="_blank"
               rel="noopener noreferrer"
@@ -84,20 +84,13 @@ export default function VenueDetails() {
             >
               <Youtube className="w-5 h-5" />
               Watch Video
-            </a>
+            </a> */}
           </div>
         </div>
 
         <p className="text-base leading-relaxed text-gray-700 sm:text-lg">
-          The Skyline Banquet Hall is a luxury event space designed to host
-          weddings, corporate gatherings, and private celebrations. With
-          breathtaking city views, premium lighting, and modern architecture, it
-          provides the perfect ambience for memorable experiences.
+          {venue?.description}
           <br />
-          <br />
-          Our dedicated staff ensures every event is perfectly tailored — from
-          decor and catering to audio-visual setups. Experience elegance and
-          sophistication like never before at Skyline Banquet Hall.
         </p>
       </div>
 
