@@ -207,7 +207,7 @@ export default function VenueForm() {
             type="url"
             placeholder="Enter a YouTube or Vimeo video link"
             {...register("videoUrl", {
-              required: "Video URL is required",
+              // required: "Video URL is required",
               pattern: {
                 value:
                   /^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.be|vimeo\.com)\/.+$/,
