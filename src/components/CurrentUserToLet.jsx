@@ -8,13 +8,7 @@ import { useFetchPropertiesWithId } from "../hooks/useFetchProperties";
 import { MdDelete } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useFetchPropertiesToletCurrentUser } from "../hooks/useProperties";
-import {
-  StyledDivProperty,
-  ToLetContainer,
-  StyledImageBox,
-  StyledPropertyDescription,
-  StyledPropertyDetails,
-} from "./ToLetCart";
+
 import { useNavigate } from "react-router-dom";
 import { formatPrice } from "../utility/utility";
 
@@ -32,9 +26,10 @@ export default function CurrentUserToLet() {
   };
 
   const id = user?.id;
-  const { data } = useFetchPropertiesToletCurrentUser(id);
 
   const { documents, isLoading, error } = useFetchPropertiesWithId("ToLet", id);
+
+  const documentReversed = documents?.reverse() || [];
 
   const { isPending, mutate } = useMutation({
     mutationFn: (id) => deleteProperty(id),
@@ -55,8 +50,8 @@ export default function CurrentUserToLet() {
   return (
     <div className="text-center ">
       <Heading as="h2">your properties to let</Heading>
-      {!documents && <SpinnerMini />}
-      {documents?.length === 0 && (
+      {!documentReversed && <SpinnerMini />}
+      {documentReversed?.length === 0 && (
         <p className="text-[1.16rem] uppercase">
           You do not have a property listed to let
         </p>
