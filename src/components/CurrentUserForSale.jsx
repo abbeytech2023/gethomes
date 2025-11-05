@@ -73,7 +73,7 @@ export default function CurrentUserForSale() {
       >
         <div className="grid items-center justify-center gap-12 text-center sm:grid-cols-2 lg:grid-cols-3">
           {documentSale &&
-            documentSale.map((property) => (
+            documentSale.reverse().map((property) => (
               <div
                 key={property.id}
                 className="overflow-hidden transition bg-white shadow-md rounded-2xl hover:shadow-xl"

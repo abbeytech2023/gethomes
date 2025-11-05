@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useUser } from "../hooks/useUser";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
+
 import { useUpdateUserData } from "../hooks/useProperties";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 import { ProfessionOptions } from "../components/ProfessionOptions";
+import { nigeriaData } from "../utility/stateLocalGovt";
 
 export default function EditProfileForm({ user }) {
   const [facebookError, setFacebookError] = useState("");
@@ -14,8 +13,12 @@ export default function EditProfileForm({ user }) {
   const [email, setEmail] = useState();
   const [NIN, setNin] = useState();
   const [gender, setgender] = useState();
-  const [state, setState] = useState();
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedLga, setSelectedLga] = useState("");
+  // const [state, setState] = useState();
   const [localGovt, setLocalGovt] = useState();
+  // const [selectedLga, setSelectedLga] = useState("");
+
   const [homeAdress, setHomeAdress] = useState();
   const [officeAdress, setOfficeAdress] = useState();
   const [occupation, setOccupation] = useState();
@@ -55,22 +58,19 @@ export default function EditProfileForm({ user }) {
 
   const { mutate } = useUpdateUserData(id);
 
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
+  const allStates = Object.keys(nigeriaData);
 
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${state}`
-  );
+  const localGovts = selectedState ? nigeriaData[selectedState] : [];
+  console.log(localGovts);
 
   useEffect(() => {
     const getUserDetails = () => {
       setDisplayName(user && user.displayName);
-      setState(user && user.state);
+      setSelectedState(user && user.state);
       setEmail(user && user.email);
       setNin(user && user.NIN);
       setgender(user && user.gender);
-      setLocalGovt(user && user.localGovt);
+      setSelectedLga(user && user.localGovt);
       setHomeAdress(user && user.homeAdress);
       setOfficeAdress(user && user.officeAdress);
       setOccupation(user && user.profession);
@@ -104,25 +104,6 @@ export default function EditProfileForm({ user }) {
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {/* {editMode.displayName ? (
-              <button
-                onClick={() => {
-                  handleSave("displayName");
-                }}
-                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  handleEdit("displayName");
-                }}
-                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
-              >
-                Edit
-              </button>
-            )} */}
           </div>
         </div>
 
@@ -143,21 +124,6 @@ export default function EditProfileForm({ user }) {
                   : "bg-gray-100 text-gray-600"
               }`}
             />
-            {/* {editMode.email ? (
-              <button
-                onClick={() => handleSave("email")}
-                className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
-              >
-                Save
-              </button>
-            ) : (
-              <button
-                onClick={() => handleEdit("email")}
-                className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
-              >
-                Edit
-              </button>
-            )} */}
           </div>
         </div>
 
@@ -166,12 +132,11 @@ export default function EditProfileForm({ user }) {
           <label className="mb-2 font-medium text-gray-700">State</label>
           <div className="flex flex-col gap-2 sm:flex-row">
             <select
-              onChange={(e) => setState(e.target.value)}
-              // value={state}
-              defaultValue={state}
-              disabled={!editMode.state}
+              onChange={(e) => setSelectedState(e.target.value)}
+              value={selectedState}
+              disabled={!editMode.selectedState}
               className={`p-3 border rounded-lg flex-1 ${
-                editMode.state
+                editMode.selectedState
                   ? "focus:outline-none focus:ring-2 focus:ring-blue-500"
                   : "bg-gray-100 text-gray-600"
               }`}
@@ -185,11 +150,11 @@ export default function EditProfileForm({ user }) {
                 );
               })}
             </select>
-            {editMode.state ? (
+            {editMode.selectedState ? (
               <button
                 onClick={() => {
-                  handleSave("state");
-                  mutate({ state });
+                  handleSave("selectedState");
+                  mutate({ selectedState });
                 }}
                 className="px-4 py-2 text-white bg-green-600 rounded-lg hover:bg-green-700"
               >
@@ -198,7 +163,7 @@ export default function EditProfileForm({ user }) {
             ) : (
               <button
                 onClick={() => {
-                  handleEdit("state");
+                  handleEdit("selectedState");
                 }}
                 className="px-4 py-2 text-white bg-[#144c6f] rounded-lg hover:bg-[#052031]"
               >

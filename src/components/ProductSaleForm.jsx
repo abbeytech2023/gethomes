@@ -4,7 +4,6 @@ import StyledInput from "./StyledInput";
 import toast from "react-hot-toast";
 import { useUser } from "../hooks/useUser";
 import { useForm } from "react-hook-form";
-import { Heading } from "./HeadingText";
 
 import { addPropertiesForsSale } from "../services/apiForSale";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -13,10 +12,8 @@ import styled from "styled-components";
 import SpinnerMini from "./SpinnerMini";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
-import SelectStateLocalGovt from "./SelectStateLocalGovt";
 import { toYoutubeEmbed } from "../utility/youtubeLinkConverts";
+import { nigeriaData } from "../utility/stateLocalGovt";
 
 export const StyledFormDiv = styled.form`
   display: grid;
@@ -33,16 +30,12 @@ function ProductSaleForm() {
   const QueryClient = useQueryClient();
   const navigate = useNavigate();
 
-  const [currentState, setCurrentState] = useState();
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedLga, setSelectedLga] = useState("");
 
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
+  const allStates = Object.keys(nigeriaData);
 
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState}`
-  );
-
+  const localGovts = selectedState ? nigeriaData[selectedState] : [];
   const { user } = useUser();
 
   const uid = user?.id;
@@ -82,8 +75,8 @@ function ProductSaleForm() {
   };
 
   const handleOnChange = (e) => {
-    setCurrentState(e.target.value);
-    console.log(currentState);
+    setSelectedState(e.target.value);
+    console.log(selectedState);
   };
 
   return (
@@ -119,16 +112,7 @@ function ProductSaleForm() {
                 })}
               />
             </FormRow>
-            {/* <FormRow label="Title" error={errors?.state?.message}>
-              <StyledInput
-                minLength="7"
-                placeHolder=" The name of the property owner"
-                id="title"
-                {...register("title", {
-                  required: "This field is required",
-                })}
-              />
-            </FormRow> */}
+
             <FormRow label="Total-Package" error={errors?.price?.message}>
               <StyledInput
                 type="number"
@@ -143,7 +127,7 @@ function ProductSaleForm() {
               <select
                 name="state"
                 id="state"
-                value={currentState}
+                value={selectedState}
                 className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
                 {...register("state", {
                   onChange: (e) => handleOnChange(e),
@@ -154,6 +138,7 @@ function ProductSaleForm() {
                   },
                 })}
               >
+                <option>choose state</option>
                 {allStates?.map((state, i) => {
                   return (
                     <div key={i}>
@@ -178,6 +163,7 @@ function ProductSaleForm() {
                   },
                 })}
               >
+                <option>choose lga</option>
                 {localGovts &&
                   localGovts.map((lga, i) => {
                     return (

@@ -6,7 +6,6 @@ import {
 } from "../services/apiToLet";
 import { getForSale, getForSaleCurrentUser } from "../services/apiForSale";
 import { UpdateUserData } from "../services/apiUpdateProfile";
-import { useUser } from "./useUser";
 import toast from "react-hot-toast";
 // import supabase from "../services/supabaseClients";
 

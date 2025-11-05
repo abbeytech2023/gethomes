@@ -1,24 +1,20 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 import toast from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addVenues } from "../services/apiVenues";
 import { toYoutubeEmbed } from "../utility/youtubeLinkConverts";
 import SpinnerMini from "./SpinnerMini";
+import { nigeriaData } from "../utility/stateLocalGovt";
 
 export default function VenueForm() {
-  const [currentState, setCurrentState] = useState();
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedLga, setSelectedLga] = useState("");
 
   const queryClient = useQueryClient();
 
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState || ""} `
-  );
+  const allStates = Object.keys(nigeriaData);
+  const localGovts = selectedState ? nigeriaData[selectedState] : [];
 
   const {
     register,
@@ -45,11 +41,11 @@ export default function VenueForm() {
     const videoUrl = toYoutubeEmbed(data.videoUrl);
 
     console.log(data);
-    mutate({ ...data, videoUrl, image: data.image[0], image1: data.image1[0] });
+    // mutate({ ...data, videoUrl, image: data.image[0], image1: data.image1[0] });
   };
 
   const handleOnChange = (e) => {
-    setCurrentState(e.target.value);
+    setSelectedState(e.target.value);
     // console.log(localGovts);
   };
 

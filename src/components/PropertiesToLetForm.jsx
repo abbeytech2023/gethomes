@@ -6,29 +6,24 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { useUser } from "../hooks/useUser";
 import { StyledFormDiv } from "./ProductSaleForm";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
 
 import { addPropertiesToLet } from "../services/apiToLet";
 import FileInput from "./FileInput";
 import { useState } from "react";
 import { toYoutubeEmbed } from "../utility/youtubeLinkConverts";
+import { nigeriaData } from "../utility/stateLocalGovt";
 
 export default function PropertyToLetForm() {
   const queryClient = useQueryClient();
-  const [currentState, setCurrentState] = useState();
+  const [selectedState, setSelectedState] = useState();
+  const [selectedLga, setSelectedLga] = useState();
 
   const { register, getValues, reset, handleSubmit, formState } = useForm();
   const { errors } = formState;
 
   const { user } = useUser();
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState || ""} `
-  );
-
+  const allStates = Object.keys(nigeriaData);
+  const localGovts = selectedState ? nigeriaData[selectedState] : [];
   const uid = user?.id;
   const agentName = user?.user_metadata?.fullName;
   const businessName = user?.user_metadata?.businessName;
@@ -63,7 +58,7 @@ export default function PropertyToLetForm() {
   };
 
   const handleOnChange = (e) => {
-    setCurrentState(e.target.value);
+    setSelectedState(e.target.value);
   };
 
   return (
@@ -108,7 +103,7 @@ export default function PropertyToLetForm() {
               <select
                 name="state"
                 id="state"
-                value={currentState}
+                value={selectedState}
                 className="px-[2rem] py-[1rem] rounded-[0.5rem] border-black border-2 text-[1rem]"
                 {...register("state", {
                   onChange: (e) => handleOnChange(e),
@@ -119,6 +114,7 @@ export default function PropertyToLetForm() {
                   },
                 })}
               >
+                <option>choose state</option>
                 {allStates?.map((state, i) => {
                   return (
                     <div key={i}>
@@ -143,6 +139,7 @@ export default function PropertyToLetForm() {
                   },
                 })}
               >
+                <option>choose lga</option>;
                 {localGovts &&
                   localGovts.map((lga, i) => {
                     return (

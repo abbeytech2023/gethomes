@@ -1,23 +1,14 @@
-import React, { useState } from "react";
-import { useFetchLocalGovtga } from "../hooks/useFetchLga";
-import { useGetStatesFromApi } from "../hooks/useFetchStates";
 import FormRow from "./FormRow";
+import { nigeriaData } from "../utility/stateLocalGovt";
+import { useState } from "react";
 
 export default function SelectStateLocalGovt({ register, styles }) {
-  const [currentState, setCurrentState] = useState("");
+  const [selectedState, setSelectedState] = useState("");
 
-  const { allStates } = useGetStatesFromApi(
-    "https://nga-states-lga.onrender.com/fetch"
-  );
-
-  const { localGovts } = useFetchLocalGovtga(
-    `https://nga-states-lga.onrender.com/?state=${currentState}`
-  );
-
+  const allStates = Object.keys(nigeriaData);
+  const localGovts = selectedState ? nigeriaData[selectedState] : [];
   const handleOnChange = (e) => {
-    setCurrentState(e.target.value);
-    // console.log(localGovts);
-    console.log(currentState);
+    setSelectedState(e.target.value);
   };
 
   return (
