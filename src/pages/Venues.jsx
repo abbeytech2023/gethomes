@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useFetchVenues } from "../hooks/useVenues";
 import VenuesList from "../components/PaginatedVenue";
 
 export default function VenuesPage() {
+  const productRef = useRef(null);
   const { venues } = useFetchVenues();
   // console.log(data);
 
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("All");
 
-  const filteredVenues = venues?.filter((venue) => {
-    const matchesSearch =
-      venue.name.toLowerCase().includes(search.toLowerCase()) ||
-      venue.location.toLowerCase().includes(search.toLowerCase());
-    const matchesFilter = filter === "All" || venue.location === filter;
-    return matchesSearch && matchesFilter;
-  });
+  useEffect(() => {
+    productRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   return (
     <>
-      <section className="relative h-[70vh] mt-16 flex items-center justify-center text-center text-white overflow-hidden rounded-b-2xl mb-10">
+      <section
+        ref={productRef}
+        className="relative h-[70vh] mt-16 flex items-center justify-center text-center text-white overflow-hidden rounded-b-2xl mb-10"
+      >
         {/* Background Image */}
         <img
           src="https://images.unsplash.com/photo-1620735692151-26a7e0748429?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGV2ZW50JTIwdmVudWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=500"
