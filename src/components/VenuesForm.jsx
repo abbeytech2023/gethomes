@@ -40,8 +40,8 @@ export default function VenueForm() {
   const onSubmit = async (data) => {
     const videoUrl = toYoutubeEmbed(data.videoUrl);
 
-    console.log(data);
-    // mutate({ ...data, videoUrl, image: data.image[0], image1: data.image1[0] });
+    // console.log(data);
+    mutate({ ...data, videoUrl, image: data.image[0], image1: data.image1[0] });
   };
 
   const handleOnChange = (e) => {
