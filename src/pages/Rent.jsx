@@ -7,6 +7,7 @@ import { Heading } from "../components/HeadingText";
 import SearchInput from "../components/SearchComponent";
 
 import styled from "styled-components";
+import { Helmet } from "react-helmet-async";
 
 const RentSection = styled.section`
   height: 100vh;
@@ -26,6 +27,9 @@ const RentHeaderBox = styled.div`
 export default function Rent() {
   return (
     <>
+      <Helmet>
+        <title>GetHomes || House for Rent</title>
+      </Helmet>
       <div className="flex">
         <RentSection className="w-full h-screen ">
           <BgOverlay as="rent" className="relative w-full h-full ">

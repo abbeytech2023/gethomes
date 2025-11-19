@@ -1,6 +1,7 @@
 import SellImage from "../assets/images/bg5.jpg";
 import styled from "styled-components";
 import { BgOverlay } from "../components/BgOverlay";
+import { Helmet } from "react-helmet-async";
 // import { useQuery } from "@tanstack/react-query";
 
 const SellSection = styled.section`
@@ -15,9 +16,12 @@ const SellSection = styled.section`
 export default function Sell() {
   return (
     <>
+      <Helmet>
+        <title>GetHomes || Housing for sell</title>
+      </Helmet>
       <SellSection>
         <BgOverlay as="sell">
-          <div className="w-full h-screen flex justify-center text-5xl text-center items-center gap-6 tracking-wider flex-col   /">
+          <div className="flex flex-col items-center justify-center w-full h-screen gap-6 text-5xl tracking-wider text-center /">
             <h2 className="font-extrabold text-[#dce4fb] tracking-[2px]   text-4xl xl:text-6xl lg:text-5xl md:text-5xl">
               Sell your home with confidence
             </h2>
@@ -29,8 +33,8 @@ export default function Sell() {
       </SellSection>
 
       <section>
-        <div className="flex basis-2/3 gap-10 px-10  items-center">
-          <div className=" flex flex-col py-24 gap-12  ">
+        <div className="flex items-center gap-10 px-10 basis-2/3">
+          <div className="flex flex-col gap-12 py-24 ">
             <h2 className="text-2xl font-bold">
               Sell with Our partner agent <br />
               or get a cash offer

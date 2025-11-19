@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import Button from "../components/Button";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 import SpinnerMini from "../components/SpinnerMini";
+import { Helmet } from "react-helmet-async";
 
 const TechnicianCard = ({ technician }) => {
   console.log(technician);
@@ -68,6 +69,9 @@ const TechnicianGrid = () => {
 
   return (
     <>
+      <Helmet>
+        <title>GetHomes | merchants | artisans</title>
+      </Helmet>
       <div className="">{!documents && <SpinnerMini className="mt-32" />}</div>;
       <div className="mt-32 text-center">
         {documents?.length === 0 && (

@@ -4,6 +4,7 @@ import PropertiesForSale from "../components/PropertiesForSale";
 import { motion } from "framer-motion";
 
 import { Heading } from "../components/HeadingText";
+import { Helmet } from "react-helmet-async";
 const BuySection = styled.section`
   height: 50vh;
   padding-top: 9rem;
@@ -26,6 +27,9 @@ function BuyPage() {
   };
   return (
     <>
+      <Helmet>
+        <title>GetHomes || HomePage</title>
+      </Helmet>
       <BgOverlay as="buy">
         <motion.div
           initial="hidden"

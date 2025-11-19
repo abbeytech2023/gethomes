@@ -10,6 +10,7 @@ import IconSurvey from "../assets/images/illus.jpg";
 import CompleteRegistrationPopup from "../components/CompleteRegistrationPopUp";
 import { BgOverlay } from "../components/BgOverlay";
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 
 import {
   FlexDiv,
@@ -80,6 +81,9 @@ export default function Homepage() {
 
   return (
     <>
+      <Helmet>
+        <title>GetHomes || HomePage</title>
+      </Helmet>
       <motion.div
         initial="hidden"
         whileInView="visible"
@@ -101,7 +105,8 @@ export default function Homepage() {
               transition={{ duration: 0.8 }}
               className="mb-6 text-3xl font-bold leading-relaxed md:text-5xl"
             >
-              Connecting You to Properties, Artisans & Technicians. <br />
+              Connecting You to Properties, Artisans & premium Hospitality.{" "}
+              <br />
             </motion.h1>
           </Heading>
           <ul className="flex flex-col gap-4 text-[1.3rem] text-left text-white">
@@ -125,7 +130,7 @@ export default function Homepage() {
                 transition={{ duration: 1, delay: 0.2 }}
                 // className="max-w-3xl mx-auto text-lg md:text-xl"
               >
-                Discover reliable service providers near you
+                Explore Trusted Hospitality Options Tailored for You
               </motion.p>
             </li>
           </ul>
