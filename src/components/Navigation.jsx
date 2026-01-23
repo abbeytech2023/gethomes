@@ -6,6 +6,7 @@ import Logout from "./Logout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
 import { DropDownMenu } from "./DropDownMenu";
+import InstallButton from "./InstallAndroid";
 
 export const StyledNavLink = styled(NavLink)`
   padding: 0.4rem 0.2rem;

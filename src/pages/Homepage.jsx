@@ -21,6 +21,7 @@ import {
 import { useUser } from "../hooks/useUser";
 import { Link } from "react-router-dom";
 import { useFetchUsersWithId } from "../hooks/useFetchUsers";
+import InstallButton from "../components/InstallAndroid";
 
 const Section = styled.section`
   color: blue;
@@ -188,6 +189,7 @@ export default function Homepage() {
             <Link to="/aboutus">Learn More</Link>
           </button>
         </div>
+        <InstallButton />
       </section>
 
       {/* <section className="flex flex-col text-center mt-16 justify-center items-center mx=auto  ">
