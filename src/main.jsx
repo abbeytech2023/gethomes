@@ -6,6 +6,9 @@ import { HelmetProvider } from "react-helmet-async";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext.jsx";
 import { SearchProvider } from "./context/SearchInputContext.jsx";
+import { registerSW } from "virtual:pwa-register";
+
+registerSW();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -18,5 +21,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </SearchProvider>
       </AuthContextProvider>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

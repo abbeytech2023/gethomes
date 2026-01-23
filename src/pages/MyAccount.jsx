@@ -10,6 +10,7 @@ export default function MyAccount() {
   const { authenticatedUser } = useFetchUsersWithId(user?.id);
 
   const authUser = authenticatedUser?.[0];
+  console.log(authUser);
 
   const location = useLocation();
 

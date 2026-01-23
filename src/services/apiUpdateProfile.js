@@ -1,4 +1,3 @@
-import { useRevalidator } from "react-router-dom";
 import supabase, { supabaseUrl } from "./supabaseClients";
 import { useUser } from "../hooks/useUser";
 

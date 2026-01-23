@@ -90,7 +90,7 @@ export default function Navigation() {
           <DropDownMenu items={hospitalityItems}>Hospitality</DropDownMenu>
         </StyledNavLink>
 
-        <StyledNavLink to="/advertisement">Advertisement</StyledNavLink>
+        {/* <StyledNavLink to="/advertisement">Advertisement</StyledNavLink> */}
 
         {!user && <StyledNavLink to="signin">Signin</StyledNavLink>}
 

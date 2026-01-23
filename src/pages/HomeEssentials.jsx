@@ -55,7 +55,7 @@ export default function HomeEssentials() {
             transition={{ duration: 0.8 }}
             className="flex flex-col mr-3  gap-[2rem] w-[60%]  "
           >
-            <EssentialHeaderBox className="uppercase text-4xl tracking-[-1rem]  ">
+            <EssentialHeaderBox className="uppercase text-4xl text-center tracking-[-1rem]  ">
               Perfect your home
             </EssentialHeaderBox>
             <motion.p
