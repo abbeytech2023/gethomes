@@ -53,15 +53,6 @@ function App() {
 
   const URL = location.pathname;
 
-  // useEffect(() => {
-  //   window.addEventListener("beforeinstallprompt", (e) => {
-  //     e.preventDefault();
-  //     console.log("✅ beforeinstallprompt fired");
-  //     alert("PWA INSTALL AVAILABLE");
-  //     window.deferredPrompt = e;
-  //   });
-  // }, []);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [URL]);
